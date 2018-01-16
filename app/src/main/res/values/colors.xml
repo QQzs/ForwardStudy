@@ -7,4 +7,11 @@
     <color name="cutline">#c0c0c0</color>
     <color name="titlecolor">#f8f8f8</color>
 
+    <color name="lineColor">#b9b9b9</color>
+
+    <color name="defaultText">#333333</color>
+
+    <color name="colorBar">#e86060</color>
+
+
 </resources>

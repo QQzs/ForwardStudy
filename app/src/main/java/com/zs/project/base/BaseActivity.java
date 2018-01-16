@@ -3,6 +3,7 @@ package com.zs.project.base;
 import android.app.Activity;
 import android.view.View;
 
+import com.google.gson.Gson;
 import com.zs.project.request.RequestApi;
 
 import io.reactivex.Observable;
@@ -17,8 +18,9 @@ import io.reactivex.Observable;
  */
 public abstract class BaseActivity extends BaseRxActivity implements View.OnClickListener{
 
-    protected RequestApi mRequestApi = null;
     protected Activity mActivity;
+    protected RequestApi mRequestApi = null;
+    protected Gson mGson = new Gson();
 
     protected void initContentView(int layoutResID){
         setContentView(layoutResID);

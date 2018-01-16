@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.gson.Gson;
 import com.zs.project.request.RequestApi;
 
 import java.lang.reflect.Field;
@@ -18,6 +19,7 @@ public class BaseFragment extends BaseRxFragment {
 	private ViewGroup container;
 	protected LayoutInflater inflater;
 	protected RequestApi mRequestApi = null;
+	protected Gson mGson = new Gson();
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -36,6 +38,15 @@ public class BaseFragment extends BaseRxFragment {
 	}
 
 	protected void onCreateView(Bundle savedInstanceState) {
+
+	}
+
+
+	protected void initView() {
+
+	}
+
+	protected void initData() {
 
 	}
 

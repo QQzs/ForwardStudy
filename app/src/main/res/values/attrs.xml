@@ -7,4 +7,54 @@
         <attr name="lineColor" format="color"/>
         <attr name="dashOrientation" format="integer"/>
     </declare-styleable>
+
+    <!-- 多状态切换view -->
+    <declare-styleable name="MultiStateView">
+        <attr name="msv_loadingView" format="reference"/>
+        <attr name="msv_emptyView" format="reference"/>
+        <attr name="msv_errorView" format="reference"/>
+        <attr name="msv_centerView" format="reference"/>
+        <attr name="msv_viewState" format="enum">
+            <enum name="content" value="0"/>
+            <enum name="error" value="1"/>
+            <enum name="empty" value="2"/>
+            <enum name="loading" value="3"/>
+            <enum name="center" value="4"/>
+        </attr>
+    </declare-styleable>
+
+    <string-array name="category_name">
+        <item>头条</item>
+        <item>新闻</item>
+        <item>财经</item>
+        <item>体育</item>
+        <item>娱乐</item>
+        <item>军事</item>
+        <item>教育</item>
+        <item>科技</item>
+        <item>NBA</item>
+        <item>股票</item>
+        <item>星座</item>
+        <item>女性</item>
+        <item>健康</item>
+        <item>育儿</item>
+
+    </string-array>
+
+    <string-array name="category_type">
+        <item>__all__</item>
+        <item>video</item>
+        <item>news_hot</item>
+        <item>news_society</item>
+        <item>news_entertainment</item>
+        <item>news_tech</item>
+        <item>news_car</item>
+        <item>news_sports</item>
+        <item>news_finance</item>
+        <item>news_military</item>
+        <item>news_world</item>
+        <item>news_fashion</item>
+        <item>news_game</item>
+        <item>news_travel</item>
+    </string-array>
 </resources>

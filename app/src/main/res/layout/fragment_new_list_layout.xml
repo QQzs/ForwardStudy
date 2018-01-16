@@ -4,20 +4,10 @@
     android:layout_height="match_parent">
 
 
-    <com.zs.project.view.topscorllview.indicator.ScrollIndicatorView
-        android:id="@+id/top_scroll_view"
-        android:layout_width="match_parent"
-        android:layout_height="40dp">
-
-    </com.zs.project.view.topscorllview.indicator.ScrollIndicatorView>
-
-    <android.support.v4.view.ViewPager
-        android:id="@+id/vp_new_list"
+    <TextView
+        android:id="@+id/tv_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
-    </android.support.v4.view.ViewPager>
+        android:text="ssssss"/>
 
 </RelativeLayout>

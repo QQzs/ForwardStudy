@@ -6,4 +6,10 @@
     android:layout_height="match_parent"
     tools:context="com.zs.project.ui.activity.TestActivity">
 
+    <com.jcodecraeer.xrecyclerview.XRecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </com.jcodecraeer.xrecyclerview.XRecyclerView>
+
 </android.support.constraint.ConstraintLayout>

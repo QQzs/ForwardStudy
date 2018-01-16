@@ -3,10 +3,47 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="2"
-        android:layout_centerInParent="true"/>
+
+    <RelativeLayout
+        android:id="@+id/rl_tab_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.zs.project.view.topscorllview.indicator.ScrollIndicatorView
+            android:id="@+id/indicator_layout"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:divider="#fff"
+            android:dividerHeight="0dip"
+            android:layout_toLeftOf="@+id/iv_add_tab">
+
+        </com.zs.project.view.topscorllview.indicator.ScrollIndicatorView>
+
+        <ImageView
+            android:id="@+id/iv_add_tab"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@mipmap/iv_add_tab"
+            android:layout_alignParentRight="true"
+            android:scaleType="centerInside"/>
+
+        <TextView
+            android:id="@+id/line"
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_below="@+id/indicator_layout"
+            android:background="@color/lineColor"/>
+
+    </RelativeLayout>
+
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_more_tab"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/rl_tab_layout"
+        >
+
+    </android.support.v4.view.ViewPager>
 
 </RelativeLayout>

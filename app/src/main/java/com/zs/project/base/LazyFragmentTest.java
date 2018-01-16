@@ -1,4 +1,4 @@
-package com.zs.project.ui.fragment;
+package com.zs.project.base;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -7,8 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.FrameLayout;
-
-import com.zs.project.base.BaseFragment;
 
 /**
  * <h1>懒加载Fragment</h1> 只有创建并显示的时候才会调用onCreateViewLazy方法<br>
@@ -25,7 +23,7 @@ import com.zs.project.base.BaseFragment;
  * <p>
  * LuckyJayce
  */
-public class LazyFragment extends BaseFragment {
+public class LazyFragmentTest extends BaseFragment {
     private boolean isInit = false;
     private Bundle savedInstanceState;
     public static final String INTENT_BOOLEAN_LAZYLOAD = "intent_boolean_lazyLoad";
