@@ -26,7 +26,7 @@ import android.widget.FrameLayout
  *
  * LuckyJayce
  */
-open class LazyFragment : BaseFragment() {
+open class LazyFragmentKotlin : BaseFragment() {
     private var isInit = false
     private var savedInstanceState: Bundle? = null
     private var isLazyLoad = true

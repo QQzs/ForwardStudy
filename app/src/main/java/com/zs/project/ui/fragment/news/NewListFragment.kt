@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import com.zs.project.R
-import com.zs.project.base.LazyFragment
+import com.zs.project.base.LazyFragmentKotlin
 import kotlinx.android.synthetic.main.fragment_new_list_layout.*
 
 /**
@@ -16,7 +16,7 @@ Time：14:49
 About:
 —————————————————————————————————————
  */
-class NewListFragment : LazyFragment(){
+class NewListFragment : LazyFragmentKotlin(){
 
     var mTitleName : String ?= null
     var mTitleCode : String ?= null
