@@ -18,6 +18,7 @@ About:
  */
 class NewListFragment : LazyFragmentKotlin(){
 
+    var mIndex : Int = -1
     var mTitleName : String ?= null
     var mTitleCode : String ?= null
 
@@ -27,10 +28,13 @@ class NewListFragment : LazyFragmentKotlin(){
             if (arg.size != 0){
                 var bundle = Bundle()
                 if (arg.size > 0){
-                   bundle.putString("name",arg[0])
+                    bundle.putString("index",arg[0])
                 }
                 if (arg.size > 1){
-                    bundle.putString("code",arg[1])
+                   bundle.putString("name",arg[1])
+                }
+                if (arg.size > 2){
+                    bundle.putString("code",arg[2])
                 }
                 fragment.arguments = bundle
             }
@@ -42,19 +46,25 @@ class NewListFragment : LazyFragmentKotlin(){
         super.onCreateViewLazy(savedInstanceState)
         setContentView(R.layout.fragment_new_list_layout)
         initData()
-        initView()
+        if (mIndex > 0){
+            initView()
+            Log.d("My_Log","onCreateViewLazy  name = " + mTitleName)
+        }
     }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        if (mIndex == 0){
+            initView()
+            Log.d("My_Log","Created name = " + mTitleName)
+        }
     }
 
     override fun initData() {
         super.initData()
+        mIndex = arguments.getString("index").toInt()
         mTitleName = arguments.getString("name")
         mTitleCode = arguments.getString("code")
-
-        Log.d("My_Log","onCreateViewLazy  name = " + mTitleName)
     }
 
     override fun initView() {

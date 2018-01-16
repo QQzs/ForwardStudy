@@ -101,7 +101,7 @@ class NewsFragment : BaseFragment() {
         override fun getFragmentForPage(position: Int): Fragment {
 
             var title = mSelectTitles[position]
-            return NewListFragment.getInstance(title.titleName,title.titleCode)
+            return NewListFragment.getInstance(position.toString(),title.titleName,title.titleCode)
 //            var bundle = Bundle()
 //            bundle.putString("name",title.titleName)
 //            bundle.putString("code",title.titleCode)

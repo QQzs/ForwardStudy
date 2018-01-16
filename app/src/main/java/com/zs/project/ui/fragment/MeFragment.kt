@@ -30,7 +30,7 @@ class MeFragment : BaseFragment() {
 
     override fun initData() {
         super.initData()
-        tv_test.text = "fffffffffffff"
+        tv_test?.text = "fffffffffffff"
     }
 
 }
