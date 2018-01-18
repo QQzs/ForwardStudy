@@ -4,10 +4,12 @@
     android:layout_height="match_parent">
 
 
-    <TextView
-        android:id="@+id/tv_content"
+    <com.jcodecraeer.xrecyclerview.XRecyclerView
+        android:id="@+id/recyclerview_newlist"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="ssssss"/>
+        android:layout_height="match_parent">
+
+    </com.jcodecraeer.xrecyclerview.XRecyclerView>
+
 
 </RelativeLayout>

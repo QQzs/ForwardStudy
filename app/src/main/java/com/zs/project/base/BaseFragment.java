@@ -11,6 +11,8 @@ import com.zs.project.request.RequestApi;
 
 import java.lang.reflect.Field;
 
+import io.reactivex.Observable;
+
 /**
  * @author Administrator
  */
@@ -50,6 +52,18 @@ public class BaseFragment extends BaseRxFragment {
 
 	}
 
+	protected void getData() {
+
+	}
+
+	/**
+	 * requestData
+	 * @param request
+	 * @param type
+	 */
+	protected  void requestData(Observable request, int type){
+
+	}
 	@Override
 	public void onDestroyView() {
 		super.onDestroyView();

@@ -22,11 +22,11 @@ public class RequestApi {
     private final static int CONNECT_TIMEOUT = 30;
     private final static int READ_TIMEOUT = 30;
 
-    public static final String BASE_URL = "http://gank.io/api/data/";
-    public static final String BASE_NEW_URL = "https://s.ibaodian.com/app/group/live/";
+    public static final String BASE_DOUBAN_URL = "https://api.douban.com/";
+    public static final String BASE_NEW_URL = "https://way.jd.com/";
 
-    public static final int REQUEST_URL1 = 1001;
-    public static final int REQUEST_URL2 = 1002;
+    public static final int REQUEST_DOUBAN = 1001;
+    public static final int REQUEST_NEWS = 1002;
     public static final int REQUEST_URL3 = 1003;
 
 
@@ -52,7 +52,7 @@ public class RequestApi {
     public Retrofit getRetrofit(String baseurl){
 
         if (TextUtils.isEmpty(baseurl)) {
-            baseurl = BASE_URL;
+            baseurl = BASE_DOUBAN_URL;
         }
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(baseurl)
@@ -71,17 +71,17 @@ public class RequestApi {
     public RequestService getRequestService(int type) {
         String baseUrl;
         switch (type){
-            case REQUEST_URL1:
-                baseUrl = BASE_NEW_URL;
+            case REQUEST_DOUBAN:
+                baseUrl = BASE_DOUBAN_URL;
                 break;
-            case REQUEST_URL2:
+            case REQUEST_NEWS:
                 baseUrl = BASE_NEW_URL;
                 break;
             case REQUEST_URL3:
                 baseUrl = BASE_NEW_URL;
                 break;
             default:
-                baseUrl = BASE_URL;
+                baseUrl = BASE_DOUBAN_URL;
         }
         return getRetrofit(baseUrl).create(RequestService.class);
     }

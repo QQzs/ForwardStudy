@@ -1,6 +1,9 @@
 package com.zs.project.request;
 
+import com.zs.project.bean.News.NewListData;
 import com.zs.project.request.bean.BaseResponse;
+
+import java.util.Map;
 
 import io.reactivex.Observable;
 import okhttp3.ResponseBody;
@@ -9,6 +12,9 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
+import retrofit2.http.Query;
+import retrofit2.http.QueryMap;
 
 /**
  * Created by zs
@@ -21,8 +27,11 @@ import retrofit2.http.POST;
 
 public interface RequestService {
 
-    @GET("福利/10/1")
-    Call<ResponseBody> getMzDatas();
+    @GET("v2/movie/in_theaters")
+    Call<ResponseBody> getMovieListData(@Query("start") String start , @Query("count") String count);
+
+    @GET("v2/movie/subject/{movieId}")
+    Call<ResponseBody> getMovieDetailData(@Path("movieId") String movieId);
 
     @FormUrlEncoded
     @POST("android")
@@ -41,5 +50,8 @@ public interface RequestService {
     @POST("android")
     Observable<BaseResponse> getRequestData(@Field("optioncode") String optioncode,
                                             @Field("option") String option);
+
+    @GET("jisuapi/get")
+    Observable<NewListData> newListDataRxjava(@QueryMap Map<String, String> params);
 
 }

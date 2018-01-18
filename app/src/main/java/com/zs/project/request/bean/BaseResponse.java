@@ -11,7 +11,7 @@ package com.zs.project.request.bean;
 
 public class BaseResponse {
 
-    private int status = -1;
+    private int status = 0;
     private String error;
     private String message;
 

@@ -16,6 +16,11 @@ import com.zs.project.base.BaseFragment
 
 class HomeFragment : BaseFragment() {
 
+
+    /**
+     * Bundle 后面不加 ？ 会报错误
+     * Parameter specified as non-null is null
+     */
     override fun onCreateView(savedInstanceState: Bundle?) {
         super.onCreateView(savedInstanceState)
         setContentView(R.layout.fragment_home_layout)

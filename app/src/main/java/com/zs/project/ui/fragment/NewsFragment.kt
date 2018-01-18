@@ -10,10 +10,10 @@ import android.view.ViewGroup
 import android.widget.TextView
 import com.google.gson.reflect.TypeToken
 import com.zs.project.R
+import com.zs.project.R.id.indicator_layout
 import com.zs.project.base.BaseFragment
 import com.zs.project.bean.Channel
 import com.zs.project.ui.fragment.news.NewListFragment
-import com.zs.project.util.DensityUtil
 import com.zs.project.util.PublicFieldUtil
 import com.zs.project.util.SharedPreferencesUtil
 import com.zs.project.util.StringUtils
@@ -22,6 +22,7 @@ import com.zs.project.view.topscorllview.indicator.slidebar.ColorBar
 import com.zs.project.view.topscorllview.indicator.slidebar.ScrollBar
 import com.zs.project.view.topscorllview.indicator.transition.OnTransitionTextListener
 import kotlinx.android.synthetic.main.fragment_news_layout.*
+import org.jetbrains.anko.dip
 
 /**
  * Created by zs
@@ -39,6 +40,10 @@ class NewsFragment : BaseFragment() {
     var mAdapter : MyAdapter ?= null
     var mIndicatorViewPager : IndicatorViewPager ?= null
 
+    /**
+     * Bundle 后面不加 ？ 会报错误
+     * Parameter specified as non-null is null
+     */
     override fun onCreateView(savedInstanceState: Bundle?) {
         super.onCreateView(savedInstanceState)
         setContentView(R.layout.fragment_news_layout)
@@ -71,7 +76,7 @@ class NewsFragment : BaseFragment() {
 
         indicator_layout?.isSplitAuto = false
         indicator_layout?.setPinnedTabView(false)
-        var colorBar = ColorBar(activity,R.color.colorBar, DensityUtil.dip2px(activity,2f), ScrollBar.Gravity.BOTTOM)
+        var colorBar = ColorBar(activity,R.color.colorBar, activity.dip(2f), ScrollBar.Gravity.BOTTOM)
         indicator_layout?.setScrollBar(colorBar)
         indicator_layout?.onTransitionListener = OnTransitionTextListener().setColor(activity.resources.getColor(R.color.colorBar)
         , activity.resources.getColor(R.color.defaultText))
@@ -102,12 +107,6 @@ class NewsFragment : BaseFragment() {
 
             var title = mSelectTitles[position]
             return NewListFragment.getInstance(position.toString(),title.titleName,title.titleCode)
-//            var bundle = Bundle()
-//            bundle.putString("name",title.titleName)
-//            bundle.putString("code",title.titleCode)
-//            var fragment = NewListFragment()
-//            fragment.arguments = bundle
-//            return fragment
         }
 
         override fun getItemPosition(obj : Any?): Int {

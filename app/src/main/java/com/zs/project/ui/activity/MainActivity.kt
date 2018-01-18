@@ -8,13 +8,11 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentTransaction
 import android.view.View
 import android.widget.ImageView
-
 import com.zs.project.R
 import com.zs.project.base.BaseActivity
 import com.zs.project.ui.fragment.HomeFragment
 import com.zs.project.ui.fragment.MeFragment
 import com.zs.project.ui.fragment.NewsFragment
-
 import io.reactivex.Observable
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -25,8 +23,8 @@ class MainActivity : BaseActivity() {
 
     private var mTransaction: FragmentTransaction? = null
     private var mCurrentFragment: Fragment? = null
-    private var mHomeFragment: HomeFragment? = null
     private var mNewsFragment: NewsFragment? = null
+    private var mDouBanFragment: HomeFragment? = null
     private var mMeFragment: MeFragment? = null
     private var mFragments : ArrayList<Fragment> ?= null
 
@@ -38,19 +36,19 @@ class MainActivity : BaseActivity() {
     override fun init() {
 
         mTransaction = supportFragmentManager.beginTransaction()
-        mHomeFragment = HomeFragment()
         mNewsFragment = NewsFragment()
+        mDouBanFragment = HomeFragment()
         mMeFragment = MeFragment()
 
         mFragments = ArrayList()
-        mFragments?.add(mHomeFragment!!)
         mFragments?.add(mNewsFragment!!)
+        mFragments?.add(mDouBanFragment!!)
         mFragments?.add(mMeFragment!!)
 
         changePage(0)
 
-        fragment_home?.setOnClickListener(this)
         fragment_news?.setOnClickListener(this)
+        fragment_douban?.setOnClickListener(this)
         fragment_me?.setOnClickListener(this)
 
     }
@@ -90,23 +88,23 @@ class MainActivity : BaseActivity() {
     private fun changeTab(index : Int){
         when(index){
             0 ->{
-                iv_home_product.setBackgroundResource(R.mipmap.home_bar_home_sel)
-                tv_product.setTextColor(Color.parseColor("#7365f0"))
-                iv_home_news.setBackgroundResource(R.mipmap.home_bar_news_nor)
-                tv_news.setTextColor(Color.parseColor("#929292"))
-                iv_home_me.setBackgroundResource(R.mipmap.home_bar_user_nor)
-                tv_me.setTextColor(Color.parseColor("#929292"))
-            }
-            1 ->{
-                iv_home_product.setBackgroundResource(R.mipmap.home_bar_home_nor)
+                iv_home_product.setBackgroundResource(R.mipmap.home_bar_dou_nor)
                 tv_product.setTextColor(Color.parseColor("#929292"))
                 iv_home_news.setBackgroundResource(R.mipmap.home_bar_news_sel)
                 tv_news.setTextColor(Color.parseColor("#7365f0"))
                 iv_home_me.setBackgroundResource(R.mipmap.home_bar_user_nor)
                 tv_me.setTextColor(Color.parseColor("#929292"))
             }
+            1 ->{
+                iv_home_product.setBackgroundResource(R.mipmap.home_bar_dou_sel)
+                tv_product.setTextColor(Color.parseColor("#7365f0"))
+                iv_home_news.setBackgroundResource(R.mipmap.home_bar_news_nor)
+                tv_news.setTextColor(Color.parseColor("#929292"))
+                iv_home_me.setBackgroundResource(R.mipmap.home_bar_user_nor)
+                tv_me.setTextColor(Color.parseColor("#929292"))
+            }
             2 ->{
-                iv_home_product.setBackgroundResource(R.mipmap.home_bar_home_nor)
+                iv_home_product.setBackgroundResource(R.mipmap.home_bar_dou_nor)
                 tv_product.setTextColor(Color.parseColor("#929292"))
                 iv_home_news.setBackgroundResource(R.mipmap.home_bar_news_nor)
                 tv_news.setTextColor(Color.parseColor("#929292"))
@@ -139,14 +137,15 @@ class MainActivity : BaseActivity() {
     override fun onClick(view: View) {
 
         when(view.id){
-            R.id.fragment_home ->{
-                changePage(0)
-                startAnimation(iv_home_product)
-            }
             R.id.fragment_news ->{
-                changePage(1)
+                changePage(0)
                 startAnimation(iv_home_news)
             }
+            R.id.fragment_douban ->{
+                changePage(1)
+                startAnimation(iv_home_product)
+            }
+            
             R.id.fragment_me ->{
                 changePage(2)
                 startAnimation(iv_home_me)
