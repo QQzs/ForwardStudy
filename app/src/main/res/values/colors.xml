@@ -4,6 +4,9 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
+    <color name="main_color_red">#d81e06</color>
+    <color name="main_color_gray">#bfbfbf</color>
+
     <color name="cutline">#c0c0c0</color>
     <color name="titlecolor">#f8f8f8</color>
 

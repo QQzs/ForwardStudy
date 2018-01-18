@@ -8,4 +8,7 @@
     <string name="unknown_error">未知错误</string>
     <string name="response_return_error">服务器返回数据失败</string>
 
+    <string name="main_color_red">#d81e06</string>
+    <string name="main_color_gray">#bfbfbf</string>
+
 </resources>

@@ -88,28 +88,28 @@ class MainActivity : BaseActivity() {
     private fun changeTab(index : Int){
         when(index){
             0 ->{
-                iv_home_product.setBackgroundResource(R.mipmap.home_bar_dou_nor)
-                tv_product.setTextColor(Color.parseColor("#929292"))
                 iv_home_news.setBackgroundResource(R.mipmap.home_bar_news_sel)
-                tv_news.setTextColor(Color.parseColor("#7365f0"))
+                tv_news.setTextColor(Color.parseColor(getString(R.string.main_color_red)))
+                iv_home_product.setBackgroundResource(R.mipmap.home_bar_dou_nor)
+                tv_product.setTextColor(Color.parseColor(getString(R.string.main_color_gray)))
                 iv_home_me.setBackgroundResource(R.mipmap.home_bar_user_nor)
-                tv_me.setTextColor(Color.parseColor("#929292"))
+                tv_me.setTextColor(Color.parseColor(getString(R.string.main_color_gray)))
             }
             1 ->{
-                iv_home_product.setBackgroundResource(R.mipmap.home_bar_dou_sel)
-                tv_product.setTextColor(Color.parseColor("#7365f0"))
                 iv_home_news.setBackgroundResource(R.mipmap.home_bar_news_nor)
-                tv_news.setTextColor(Color.parseColor("#929292"))
+                tv_news.setTextColor(Color.parseColor(getString(R.string.main_color_gray)))
+                iv_home_product.setBackgroundResource(R.mipmap.home_bar_dou_sel)
+                tv_product.setTextColor(Color.parseColor(getString(R.string.main_color_red)))
                 iv_home_me.setBackgroundResource(R.mipmap.home_bar_user_nor)
-                tv_me.setTextColor(Color.parseColor("#929292"))
+                tv_me.setTextColor(Color.parseColor(getString(R.string.main_color_gray)))
             }
             2 ->{
-                iv_home_product.setBackgroundResource(R.mipmap.home_bar_dou_nor)
-                tv_product.setTextColor(Color.parseColor("#929292"))
                 iv_home_news.setBackgroundResource(R.mipmap.home_bar_news_nor)
-                tv_news.setTextColor(Color.parseColor("#929292"))
+                tv_news.setTextColor(Color.parseColor(getString(R.string.main_color_gray)))
+                iv_home_product.setBackgroundResource(R.mipmap.home_bar_dou_nor)
+                tv_product.setTextColor(Color.parseColor(getString(R.string.main_color_gray)))
                 iv_home_me.setBackgroundResource(R.mipmap.home_bar_user_sel)
-                tv_me.setTextColor(Color.parseColor("#7365f0"))
+                tv_me.setTextColor(Color.parseColor(getString(R.string.main_color_red)))
             }
         }
     }
