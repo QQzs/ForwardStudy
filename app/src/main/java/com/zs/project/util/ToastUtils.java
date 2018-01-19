@@ -12,7 +12,7 @@ import com.zs.project.app.MyApplication;
 
 public class ToastUtils {
 
-    private static Context context = MyApplication.getInstance();
+    private static Context context = MyApplication.getAppContext();
     private static Toast toast;
 
     public static void show(int resId) {

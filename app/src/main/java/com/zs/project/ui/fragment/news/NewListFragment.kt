@@ -10,7 +10,10 @@ import com.zs.project.bean.News.NewListData
 import com.zs.project.request.DefaultObserver
 import com.zs.project.request.RequestApi
 import com.zs.project.request.RequestUtil
+import com.zs.project.ui.adapter.NewListAdapter
+import com.zs.project.util.RecyclerViewUtil
 import io.reactivex.Observable
+import kotlinx.android.synthetic.main.fragment_new_list_layout.*
 import java.util.*
 
 /**
@@ -28,6 +31,8 @@ class NewListFragment : LazyFragmentKotlin(){
     var mTitleName : String ?= null
     var mTitleCode : String ?= null
     var mFragment : NewListFragment ?= null
+
+    var mAdapter : NewListAdapter ?= null
 
     companion object {
         fun getInstance(vararg arg: String) : NewListFragment{
@@ -97,6 +102,10 @@ class NewListFragment : LazyFragmentKotlin(){
         observable.subscribe(object : DefaultObserver<NewListData>(mFragment){
             override fun onSuccess(response: NewListData?) {
                 Log.d("My_Log",response.toString())
+                mAdapter = NewListAdapter(response?.result?.result!!.list)
+                RecyclerViewUtil.init(activity,recyclerview_newlist,mAdapter)
+
+
             }
         })
 

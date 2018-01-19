@@ -24,7 +24,7 @@ public class MyApplication extends Application {
         SharedPreferencesUtil.init(this,"zs_data");
     }
 
-    public static MyApplication getInstance(){
+    public static MyApplication getAppContext(){
         return mApplication;
     }
 

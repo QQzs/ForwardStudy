@@ -10,7 +10,7 @@ import android.view.View
 import android.widget.ImageView
 import com.zs.project.R
 import com.zs.project.base.BaseActivity
-import com.zs.project.ui.fragment.HomeFragment
+import com.zs.project.ui.fragment.DouBanFragment
 import com.zs.project.ui.fragment.MeFragment
 import com.zs.project.ui.fragment.NewsFragment
 import io.reactivex.Observable
@@ -24,7 +24,7 @@ class MainActivity : BaseActivity() {
     private var mTransaction: FragmentTransaction? = null
     private var mCurrentFragment: Fragment? = null
     private var mNewsFragment: NewsFragment? = null
-    private var mDouBanFragment: HomeFragment? = null
+    private var mDouBanFragment: DouBanFragment? = null
     private var mMeFragment: MeFragment? = null
     private var mFragments : ArrayList<Fragment> ?= null
 
@@ -37,7 +37,7 @@ class MainActivity : BaseActivity() {
 
         mTransaction = supportFragmentManager.beginTransaction()
         mNewsFragment = NewsFragment()
-        mDouBanFragment = HomeFragment()
+        mDouBanFragment = DouBanFragment()
         mMeFragment = MeFragment()
 
         mFragments = ArrayList()

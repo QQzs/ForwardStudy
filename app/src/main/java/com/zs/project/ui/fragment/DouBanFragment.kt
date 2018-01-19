@@ -14,7 +14,7 @@ import com.zs.project.base.BaseFragment
  * —————————————————————————————————————
  */
 
-class HomeFragment : BaseFragment() {
+class DouBanFragment : BaseFragment() {
 
 
     /**
