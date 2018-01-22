@@ -19,8 +19,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class RequestApi {
 
-    private final static int CONNECT_TIMEOUT = 30;
-    private final static int READ_TIMEOUT = 30;
+    private final static int CONNECT_TIMEOUT = 15 * 1000;
+    private final static int READ_TIMEOUT = 15 * 1000;
 
     public static final String BASE_DOUBAN_URL = "https://api.douban.com/";
     public static final String BASE_NEW_URL = "https://way.jd.com/";

@@ -18,7 +18,7 @@ Time：17:43
 About:
 —————————————————————————————————————
  */
-class NewListAdapter(private var mData :List<NewListBean>): RecyclerView.Adapter<NewListAdapter.NewListHoler>(){
+class NewListAdapter(private var mData :MutableList<NewListBean>): RecyclerView.Adapter<NewListAdapter.NewListHoler>(){
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): NewListHoler {
         var itemView = LayoutInflater.from(parent?.context)?.inflate(R.layout.new_list_item_layout,null)
@@ -33,6 +33,16 @@ class NewListAdapter(private var mData :List<NewListBean>): RecyclerView.Adapter
         return mData.size
     }
 
+    fun updateData(data :MutableList<NewListBean>){
+        this.mData.clear()
+        this.mData = data
+        notifyDataSetChanged()
+    }
+
+    fun appendData(data : MutableList<NewListBean>){
+        this.mData.addAll(data)
+        notifyDataSetChanged()
+    }
 
     inner class NewListHoler(itemView : View?) : RecyclerView.ViewHolder(itemView){
 
