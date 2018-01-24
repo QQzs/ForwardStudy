@@ -13,7 +13,6 @@ import com.zs.project.base.BaseActivity
 import com.zs.project.ui.fragment.DouBanFragment
 import com.zs.project.ui.fragment.MeFragment
 import com.zs.project.ui.fragment.NewsFragment
-import io.reactivex.Observable
 import kotlinx.android.synthetic.main.activity_main.*
 
 /**
@@ -127,11 +126,6 @@ class MainActivity : BaseActivity() {
         set.duration = 300
         set.startDelay = 100
         set.start()
-    }
-
-
-    override fun requestData(request: Observable<*>, type: Int) {
-
     }
 
     override fun onClick(view: View) {

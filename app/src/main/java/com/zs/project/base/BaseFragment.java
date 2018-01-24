@@ -32,8 +32,8 @@ public class BaseFragment extends BaseRxFragment {
 	public final View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		this.inflater = inflater;
 		this.container = container;
-		onCreateView(savedInstanceState);
 		mRequestApi = RequestApi.getInstance();
+		onCreateView(savedInstanceState);
 		if (contentView == null)
 			return super.onCreateView(inflater, container, savedInstanceState);
 		return contentView;
@@ -61,7 +61,7 @@ public class BaseFragment extends BaseRxFragment {
 	 * @param request
 	 * @param type
 	 */
-	protected  void requestData(Observable request, int type){
+	protected void requestData(Observable request, int type){
 
 	}
 	@Override
@@ -84,9 +84,16 @@ public class BaseFragment extends BaseRxFragment {
 		return contentView;
 	}
 
-	public View findViewById(int id) {
+//	public View findViewById(int id) {
+//		if (contentView != null)
+//			return contentView.findViewById(id);
+//		return null;
+//	}
+
+	//获得fragment中的控件
+	public <T extends View> T findViewById(int id) {
 		if (contentView != null)
-			return contentView.findViewById(id);
+		 return (T) getContentView().findViewById(id);
 		return null;
 	}
 

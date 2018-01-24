@@ -28,6 +28,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.activity.TestActivity"></activity>
+        <activity android:name=".ui.activity.news.ChooseTagActivity"></activity>
     </application>
 
 </manifest>

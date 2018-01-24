@@ -23,7 +23,17 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
     public DividerItemDecoration(Context context, int orientation) {
         mDividerOrientation = orientation;
 
-        mDividerSize = dp2px(context, 1);
+        mDividerSize = 1;
+
+        mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        mPaint.setColor(0xFFE3E3E3);
+        mPaint.setStyle(Paint.Style.FILL);
+    }
+
+    public DividerItemDecoration(Context context, int orientation , int dividerSize) {
+        mDividerOrientation = orientation;
+
+        mDividerSize = dp2px(context, dividerSize);
 
         mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mPaint.setColor(0xFFE3E3E3);

@@ -13,6 +13,12 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
  */
 public class RecyclerViewUtil {
 
+    /**
+     * 竖向分割线
+     * @param context
+     * @param recyclerView
+     * @param adapter
+     */
     public static  void init(Context context, RecyclerView recyclerView, RecyclerView.Adapter adapter) {
         LinearLayoutManager layoutManager = new LinearLayoutManager(context);
         recyclerView.setLayoutManager(layoutManager);
@@ -21,6 +27,12 @@ public class RecyclerViewUtil {
         recyclerView.setAdapter(adapter);
     }
 
+    /**
+     * 没有分割线
+     * @param context
+     * @param recyclerView
+     * @param adapter
+     */
     public static  void initNoDecoration(Context context, RecyclerView recyclerView, RecyclerView.Adapter adapter) {
         LinearLayoutManager layoutManager = new LinearLayoutManager(context);
         recyclerView.setLayoutManager(layoutManager);
@@ -28,6 +40,12 @@ public class RecyclerViewUtil {
         recyclerView.setAdapter(adapter);
     }
 
+    /**
+     * 横向分割线
+     * @param context
+     * @param recyclerView
+     * @param adapter
+     */
     public static  void initHorizontal(Context context, RecyclerView recyclerView, RecyclerView.Adapter adapter) {
         LinearLayoutManager layoutManager = new LinearLayoutManager(context);
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
@@ -36,7 +54,13 @@ public class RecyclerViewUtil {
         recyclerView.addItemDecoration(new DividerItemDecoration(context, LinearLayoutManager.HORIZONTAL));
         recyclerView.setAdapter(adapter);
     }
-//当 RecyclerView 外围嵌套 ScrollView 时，将滚动事件交予上层处理
+
+    /**
+     * 当 RecyclerView 外围嵌套 ScrollView 时，将滚动事件交予上层处理
+     * @param context
+     * @param recyclerView
+     * @param adapter
+     */
     public static  void ScrollInit(Context context, RecyclerView recyclerView, RecyclerView.Adapter adapter) {
         LinearLayoutManager layoutManager = new LinearLayoutManager(context);
         layoutManager.setSmoothScrollbarEnabled(true);
@@ -47,11 +71,24 @@ public class RecyclerViewUtil {
         recyclerView.setNestedScrollingEnabled(false);
     }
 
+    /**
+     * GridLayout布局
+     * @param context
+     * @param recyclerView
+     * @param adapter
+     * @param i
+     */
     public static  void Gridinit(Context context, RecyclerView recyclerView, RecyclerView.Adapter adapter, int i) {
         recyclerView.setLayoutManager(new GridLayoutManager(context, i));
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
     }
+
+    /**
+     * 瀑布流布局
+     * @param recyclerView
+     * @param adapter
+     */
     public static void StaggeredGridinit(RecyclerView recyclerView, RecyclerView.Adapter adapter){
         StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);

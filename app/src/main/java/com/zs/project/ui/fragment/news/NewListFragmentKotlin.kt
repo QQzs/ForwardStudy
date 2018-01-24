@@ -3,6 +3,7 @@ package com.zs.project.ui.fragment.news
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.RelativeLayout
 import com.jcodecraeer.xrecyclerview.ProgressStyle
 import com.jcodecraeer.xrecyclerview.XRecyclerView
 import com.zs.project.R
@@ -17,10 +18,7 @@ import com.zs.project.ui.adapter.NewListAdapter
 import com.zs.project.util.RecyclerViewUtil
 import com.zs.project.view.MultiStateView
 import io.reactivex.Observable
-import kotlinx.android.synthetic.main.layout_fail.*
-import kotlinx.android.synthetic.main.public_list_layout.*
 import java.util.*
-import kotlin.collections.ArrayList
 
 /**
  *
@@ -28,24 +26,33 @@ Created by zs
 Date：2018年 01月 05日
 Time：14:49
 —————————————————————————————————————
-About:
+About: 资讯列表界面
 —————————————————————————————————————
  */
-class NewListFragment : LazyFragmentKotlin(), View.OnClickListener{
+class NewListFragmentKotlin : LazyFragmentKotlin(), View.OnClickListener{
+
+    /**
+     *  继承懒加载fragment LazyFragmentKotlin
+     *  不能使用Kotlin的anko库来查找控件,会找不到控件
+     */
 
     var mIndex : Int = -1
     var mTitleName : String ?= null
     var mTitleCode : String ?= null
-    var mFragment : NewListFragment ?= null
-
-    var mAdapter : NewListAdapter ?= null
     var mStartNum : Int = 0
+
+    var mFragment : NewListFragmentKotlin?= null
+    var mAdapter : NewListAdapter ?= null
+
+    var multistate_view : MultiStateView ?= null
+    var recycler_view : XRecyclerView ?= null
+    var loading_page_fail : RelativeLayout?= null
 
     var Get_LIST : Int = 111
 
     companion object {
-        fun getInstance(vararg arg: String) : NewListFragment{
-            var fragment = NewListFragment()
+        fun getInstance(vararg arg: String) : NewListFragmentKotlin {
+            var fragment = NewListFragmentKotlin()
             if (arg.isNotEmpty()){
                 var bundle = Bundle()
                 if (arg.isNotEmpty()){
@@ -67,18 +74,9 @@ class NewListFragment : LazyFragmentKotlin(), View.OnClickListener{
         super.onCreateViewLazy(savedInstanceState)
         setContentView(R.layout.public_list_layout)
         mFragment = this
+        initView()
         initData()
-        if (mIndex > 0){
-            initView()
-        }
-    }
-
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        // 第一页的内容在这个方法中加载，因为在onCreateViewLazy中初始化的时候，控件是找不到的
-        if (mIndex == 0){
-            initView()
-        }
+        Log.d("My_Log","   mIndex =   " + mIndex)
     }
 
     override fun initData() {
@@ -86,11 +84,7 @@ class NewListFragment : LazyFragmentKotlin(), View.OnClickListener{
         mIndex = arguments.getString("index").toInt()
         mTitleName = arguments.getString("name")
         mTitleCode = arguments.getString("code")
-        Log.d("My_Log","initData mTitleName = " + mTitleName)
-    }
 
-    override fun initView() {
-        super.initView()
         loading_page_fail?.setOnClickListener(mFragment)
         mAdapter = NewListAdapter(ArrayList())
         recycler_view?.setLoadingMoreProgressStyle(ProgressStyle.BallRotate)
@@ -107,6 +101,14 @@ class NewListFragment : LazyFragmentKotlin(), View.OnClickListener{
         })
         multistate_view?.viewState = MultiStateView.VIEW_STATE_LOADING
         getData()
+    }
+
+    override fun initView() {
+        super.initView()
+        multistate_view = findViewById(R.id.multistate_view)
+        recycler_view = findViewById(R.id.recycler_view)
+        loading_page_fail = findViewById(R.id.loading_page_fail)
+
     }
 
     override fun getData() {

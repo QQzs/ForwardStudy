@@ -1,5 +1,6 @@
 package com.zs.project.ui.fragment
 
+import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
@@ -10,10 +11,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import com.google.gson.reflect.TypeToken
 import com.zs.project.R
-import com.zs.project.R.id.indicator_layout
 import com.zs.project.base.BaseFragment
 import com.zs.project.bean.Channel
-import com.zs.project.ui.fragment.news.NewListFragment
+import com.zs.project.event.RefreshEvent
+import com.zs.project.ui.activity.news.ChooseTagActivity
+import com.zs.project.ui.fragment.news.NewListFragmentKotlin
 import com.zs.project.util.PublicFieldUtil
 import com.zs.project.util.SharedPreferencesUtil
 import com.zs.project.util.StringUtils
@@ -22,7 +24,11 @@ import com.zs.project.view.topscorllview.indicator.slidebar.ColorBar
 import com.zs.project.view.topscorllview.indicator.slidebar.ScrollBar
 import com.zs.project.view.topscorllview.indicator.transition.OnTransitionTextListener
 import kotlinx.android.synthetic.main.fragment_news_layout.*
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 import org.jetbrains.anko.dip
+import org.jetbrains.anko.startActivity
 
 /**
  * Created by zs
@@ -33,10 +39,9 @@ import org.jetbrains.anko.dip
  * —————————————————————————————————————
  */
 
-class NewsFragment : BaseFragment() {
-
-    var mSelectTitles : ArrayList<Channel> = ArrayList()
-    var mUnSelectTitles : ArrayList<Channel> = ArrayList()
+class NewsFragment : BaseFragment() , View.OnClickListener{
+    var mSelectTitles : MutableList<Channel> = ArrayList()
+    var mUnSelectTitles : MutableList<Channel> = ArrayList()
     var mAdapter : MyAdapter ?= null
     var mIndicatorViewPager : IndicatorViewPager ?= null
 
@@ -47,6 +52,7 @@ class NewsFragment : BaseFragment() {
     override fun onCreateView(savedInstanceState: Bundle?) {
         super.onCreateView(savedInstanceState)
         setContentView(R.layout.fragment_news_layout)
+        EventBus.getDefault().register(this)
     }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
@@ -56,30 +62,16 @@ class NewsFragment : BaseFragment() {
 
     override fun initData() {
         super.initData()
-        val selectTitle = SharedPreferencesUtil.getString(PublicFieldUtil.TITLE_SELECTED, "")
-        val unselectTitle = SharedPreferencesUtil.getString(PublicFieldUtil.TITLE_UNSELECTED, "")
-        if (StringUtils.isNullOrEmpty(selectTitle) || StringUtils.isNullOrEmpty(unselectTitle)) {
-            var titleName = resources.getStringArray(R.array.category_name)
-            var titleCode = resources.getStringArray(R.array.category_type)
-            for (i in titleCode.indices){
-                mSelectTitles.add(Channel(titleName[i],titleCode[i]))
-            }
-            SharedPreferencesUtil.setString(PublicFieldUtil.TITLE_SELECTED , mGson.toJson(mSelectTitles))
-        } else {
-            var select = mGson.fromJson<List<Channel>>(selectTitle , object : TypeToken<List<Channel>>(){}.type)
-            val unSelecte = mGson.fromJson<List<Channel>>(unselectTitle, object : TypeToken<List<Channel>>() {
-            }.type)
 
-            mSelectTitles.addAll(select)
-            mUnSelectTitles.addAll(unSelecte)
-        }
+        iv_add_tab?.setOnClickListener(this)
 
+        initTitleData()
         indicator_layout?.isSplitAuto = false
         indicator_layout?.setPinnedTabView(false)
-        var colorBar = ColorBar(activity,R.color.colorBar, activity.dip(2f), ScrollBar.Gravity.BOTTOM)
+        var colorBar = ColorBar(activity,Color.parseColor("#d81e06"), activity.dip(2f), ScrollBar.Gravity.BOTTOM)
         indicator_layout?.setScrollBar(colorBar)
-        indicator_layout?.onTransitionListener = OnTransitionTextListener().setColor(activity.resources.getColor(R.color.colorBar)
-        , activity.resources.getColor(R.color.defaultText))
+        indicator_layout?.onTransitionListener = OnTransitionTextListener().setColor(activity.resources.getColor(R.color.main_color_red)
+        , activity.resources.getColor(R.color.font_default))
 
         vp_more_tab?.offscreenPageLimit = 15
         mIndicatorViewPager = IndicatorViewPager(indicator_layout,vp_more_tab)
@@ -88,15 +80,56 @@ class NewsFragment : BaseFragment() {
 
     }
 
-    inner class MyAdapter(fragmentManager: FragmentManager?) : IndicatorViewPager.IndicatorFragmentPagerAdapter(fragmentManager) {
+    /**
+     * 获取标签数据
+     */
+    fun initTitleData(){
+        val selectTitle = SharedPreferencesUtil.getString(PublicFieldUtil.TITLE_SELECTED, "")
+        if (StringUtils.isNullOrEmpty(selectTitle)) {
+            var titleName = resources.getStringArray(R.array.category_name)
+            var titleCode = resources.getStringArray(R.array.category_type)
+            for (i in titleCode.indices){
+                mSelectTitles.add(Channel(titleName[i],titleCode[i]))
+            }
+            SharedPreferencesUtil.setString(PublicFieldUtil.TITLE_SELECTED , mGson.toJson(mSelectTitles))
+        } else {
+            var select = mGson.fromJson<List<Channel>>(selectTitle , object : TypeToken<List<Channel>>(){}.type)
+            mSelectTitles.clear()
+            mSelectTitles.addAll(select)
+        }
+    }
 
+    override fun onClick(view: View?) {
+
+        when(view?.id){
+            R.id.iv_add_tab ->{
+                activity.startActivity<ChooseTagActivity>()
+            }
+        }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun refreshTitle(event : RefreshEvent){
+        if (event != null && event.getmFlag() == "title" && event.isRefresh){
+            initTitleData()
+            mAdapter?.notifyDataSetChanged()
+            mIndicatorViewPager?.setCurrentItem(0,false)
+        }
+    }
+
+    inner class MyAdapter(fragmentManager: FragmentManager?) : IndicatorViewPager.IndicatorFragmentPagerAdapter(fragmentManager) {
 
         override fun getCount(): Int {
             return mSelectTitles.size
         }
 
         override fun getViewForTab(position: Int, convertView: View?, container: ViewGroup?): View {
-            var view = LayoutInflater.from(activity).inflate(R.layout.tab_title_layout,container,false)
+            var view : View ?= null
+            if (convertView == null){
+                view = LayoutInflater.from(activity).inflate(R.layout.tab_title_layout,container,false)
+            }else{
+                view = convertView
+            }
             var textView : TextView = view as TextView
             textView.text = mSelectTitles[position].getTitleName()
             return view
@@ -106,7 +139,9 @@ class NewsFragment : BaseFragment() {
         override fun getFragmentForPage(position: Int): Fragment {
 
             var title = mSelectTitles[position]
-            return NewListFragment.getInstance(position.toString(),title.titleName,title.titleCode)
+            return NewListFragmentKotlin.getInstance(position.toString(),title.titleName,title.titleCode)
+//            return NewListFragment.getInstance(position.toString(),title.titleName,title.titleCode)
+
         }
 
         override fun getItemPosition(obj : Any?): Int {

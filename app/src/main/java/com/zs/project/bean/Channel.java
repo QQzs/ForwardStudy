@@ -14,16 +14,16 @@ public class Channel implements Serializable {
     public String titleCode;
     private int itemType;
 
-    public Channel(String titleName, int itemType) {
-        this.titleName = titleName;
-        this.itemType = itemType;
+    public Channel(String name, int type) {
+        this.titleName = name;
+        this.itemType = type;
     }
 
     public Channel(String name, String pk) {
-        this(TYPE_MY_CHANNEL, name, pk);
+        this(name, pk , TYPE_MY_CHANNEL);
     }
 
-    public Channel(int type, String name, String pk) {
+    public Channel(String name, String pk , int type) {
         titleName = name;
         titleCode = pk;
         itemType = type;

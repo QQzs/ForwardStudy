@@ -46,5 +46,7 @@ public abstract class BaseActivity extends BaseRxActivity implements View.OnClic
      * @param request
      * @param type
      */
-    protected abstract void requestData(Observable request, int type);
+    protected void requestData(Observable request, int type){
+
+    }
 }

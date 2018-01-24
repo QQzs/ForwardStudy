@@ -26,7 +26,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="15dp"
             android:text="暂无内容~"
-            android:textColor="@color/defaultText"
+            android:textColor="@color/font_default"
             android:textSize="14sp"/>
     </RelativeLayout>
 

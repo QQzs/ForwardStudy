@@ -8,17 +8,23 @@
     <color name="background">#f1f1f1</color>
     <color name="main_color_red">#d81e06</color>
     <color name="main_color_gray">#bfbfbf</color>
-    <color name="loadingColor">#5b52b5</color>
+    <color name="loading_color">#5b52b5</color>
     <color name="loading_textColor">#7d74d4</color>
+    <color name="loading_bg_color">#00000000</color>
 
-    <color name="cutline">#c0c0c0</color>
-    <color name="titlecolor">#f8f8f8</color>
+    <color name="cut_line">#c0c0c0</color>
+    <color name="title_color">#f8f8f8</color>
 
-    <color name="lineColor">#b9b9b9</color>
+    <color name="line_color">#b9b9b9</color>
 
-    <color name="defaultText">#333333</color>
+    // 字体 黑色
+    <color name="font_default">#333333</color>
+    // 字体 灰色
+    <color name="font_gray">#666666</color>
+    // 字体
+    <color name="font_light_gray">#999999</color>
 
-    <color name="colorBar">#e86060</color>
+    <color name="color_bar">#e86060</color>
 
 
 </resources>
