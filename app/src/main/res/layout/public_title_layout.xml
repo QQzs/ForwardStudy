@@ -15,7 +15,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:padding="8dp"
+            android:padding="10dp"
             android:src="@mipmap/iv_public_back" />
 
         <TextView

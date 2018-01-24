@@ -166,7 +166,11 @@ class NewListFragmentKotlin : LazyFragmentKotlin(), View.OnClickListener{
 
                     override fun onError(e: Throwable) {
                         super.onError(e)
-                        multistate_view?.viewState = MultiStateView.VIEW_STATE_ERROR
+                        if (mAdapter?.itemCount!! > 0){
+                            recycler_view?.reset()
+                        }else{
+                            multistate_view?.viewState = MultiStateView.VIEW_STATE_ERROR
+                        }
                     }
                 })
             }
