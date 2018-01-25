@@ -2,7 +2,6 @@ package com.zs.project.ui.fragment
 
 import android.os.Bundle
 import android.view.View
-
 import com.zs.project.R
 import com.zs.project.base.BaseFragment
 

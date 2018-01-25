@@ -25,9 +25,9 @@ import com.zs.project.app.MyApplication;
  *     desc  : 屏幕相关工具类
  * </pre>
  */
-public final class ScreenUtils {
+public final class ScreenUtil {
 
-    private ScreenUtils() {
+    private ScreenUtil() {
         throw new UnsupportedOperationException("u can't instantiate me...");
     }
 
@@ -48,6 +48,17 @@ public final class ScreenUtils {
     public static int getScreenHeight() {
         return MyApplication.getAppContext().getResources().getDisplayMetrics().heightPixels;
     }
+
+    public static int dp2px(Context ctx, float dpValue) {
+        final float density = ctx.getResources().getDisplayMetrics().density;
+        return (int) (dpValue * density + 0.5f);
+    }
+
+    public static int sp2px(Context ctx, float spValue) {
+        final float scaledDensity = ctx.getResources().getDisplayMetrics().scaledDensity;
+        return (int) (spValue * scaledDensity + 0.5f);
+    }
+
 
     /**
      * 设置屏幕为全屏

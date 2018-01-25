@@ -112,10 +112,10 @@
 //                    Bitmap> glideAnimation) {
 //                int imageWidth = resource.getWidth();
 //                int imageHeight = resource.getHeight();
-//                int height = ScreenUtils.getScreenWidth() * imageHeight / imageWidth;
+//                int height = ScreenUtil.getScreenWidth() * imageHeight / imageWidth;
 //                ViewGroup.LayoutParams para = imageView.getLayoutParams();
 //                para.height = height;
-//                para.width = ScreenUtils.getScreenWidth();
+//                para.width = ScreenUtil.getScreenWidth();
 //                imageView.setImageBitmap(resource);
 //            }
 //        });

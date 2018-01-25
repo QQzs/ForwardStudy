@@ -3,6 +3,7 @@ package com.zs.project.ui.fragment.news
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.ImageView
 import android.widget.RelativeLayout
 import com.jcodecraeer.xrecyclerview.ProgressStyle
 import com.jcodecraeer.xrecyclerview.XRecyclerView
@@ -11,11 +12,13 @@ import com.zs.project.app.Constant
 import com.zs.project.base.LazyFragmentKotlin
 import com.zs.project.bean.News.NewListBean
 import com.zs.project.bean.News.NewListData
+import com.zs.project.listener.KotlinItemClickListener
 import com.zs.project.request.DefaultObserver
 import com.zs.project.request.RequestApi
 import com.zs.project.request.RequestUtil
 import com.zs.project.ui.adapter.NewListAdapter
 import com.zs.project.util.RecyclerViewUtil
+import com.zs.project.util.SnackbarUtils
 import com.zs.project.util.StringUtils
 import com.zs.project.view.MultiStateView
 import io.reactivex.Observable
@@ -31,7 +34,7 @@ Time：14:49
 About: 资讯列表界面
 —————————————————————————————————————
  */
-class NewListFragmentKotlin : LazyFragmentKotlin(), View.OnClickListener{
+class NewListFragmentKotlin : LazyFragmentKotlin(), View.OnClickListener , KotlinItemClickListener {
 
     /**
      *  继承懒加载fragment LazyFragmentKotlin
@@ -91,7 +94,7 @@ class NewListFragmentKotlin : LazyFragmentKotlin(), View.OnClickListener{
         mTitleCode = arguments?.getString("code")
 
         loading_page_fail?.setOnClickListener(mFragment)
-        mAdapter = NewListAdapter(ArrayList())
+        mAdapter = NewListAdapter(ArrayList(),this)
         recycler_view?.setLoadingMoreProgressStyle(ProgressStyle.BallRotate)
         RecyclerViewUtil.init(activity,recycler_view,mAdapter)
         recycler_view?.setLoadingListener(object : XRecyclerView.LoadingListener{
@@ -134,6 +137,16 @@ class NewListFragmentKotlin : LazyFragmentKotlin(), View.OnClickListener{
                 getData()
             }
         }
+    }
+
+    override fun onItemClick(position: Int, data: Any) {
+
+//        Snackbar.make(multistate_view!!,"dddd",Snackbar.LENGTH_SHORT).show()
+
+        val imageView = ImageView(context)
+        imageView.setImageResource(R.mipmap.timg)
+        SnackbarUtils.Short(multistate_view!!,"ffffff")
+                .show()
     }
 
     override fun requestData(request: Observable<*>?, type: Int) {

@@ -120,10 +120,10 @@ public class GlideImageLoaderTest {
                     public void onResourceReady(Drawable resource, Transition<? super Drawable> transition) {
                         int imageWidth = resource.getIntrinsicWidth();
                         int imageHeight = resource.getIntrinsicHeight();
-                        int height = ScreenUtils.getScreenWidth() * imageHeight / imageWidth;
+                        int height = ScreenUtil.getScreenWidth() * imageHeight / imageWidth;
                         ViewGroup.LayoutParams para = imageView.getLayoutParams();
                         para.height = height;
-                        para.width = ScreenUtils.getScreenWidth();
+                        para.width = ScreenUtil.getScreenWidth();
                         imageView.setImageDrawable(resource);
                     }
                 });
