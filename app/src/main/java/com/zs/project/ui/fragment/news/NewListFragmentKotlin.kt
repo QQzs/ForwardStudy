@@ -16,6 +16,7 @@ import com.zs.project.request.RequestApi
 import com.zs.project.request.RequestUtil
 import com.zs.project.ui.adapter.NewListAdapter
 import com.zs.project.util.RecyclerViewUtil
+import com.zs.project.util.StringUtils
 import com.zs.project.view.MultiStateView
 import io.reactivex.Observable
 import java.util.*
@@ -82,9 +83,12 @@ class NewListFragmentKotlin : LazyFragmentKotlin(), View.OnClickListener{
 
     override fun initData() {
         super.initData()
-        mIndex = arguments.getString("index").toInt()
-        mTitleName = arguments.getString("name")
-        mTitleCode = arguments.getString("code")
+        var index = arguments?.getString("index")
+        if(StringUtils.isNullOrEmpty(index)){
+            mIndex = index!!.toInt()
+        }
+        mTitleName = arguments?.getString("name")
+        mTitleCode = arguments?.getString("code")
 
         loading_page_fail?.setOnClickListener(mFragment)
         mAdapter = NewListAdapter(ArrayList())

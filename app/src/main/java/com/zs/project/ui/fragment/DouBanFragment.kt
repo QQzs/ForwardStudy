@@ -1,6 +1,7 @@
 package com.zs.project.ui.fragment
 
 import android.os.Bundle
+import android.view.View
 
 import com.zs.project.R
 import com.zs.project.base.BaseFragment
@@ -16,7 +17,6 @@ import com.zs.project.base.BaseFragment
 
 class DouBanFragment : BaseFragment() {
 
-
     /**
      * Bundle 后面不加 ？ 会报错误
      * Parameter specified as non-null is null
@@ -26,4 +26,8 @@ class DouBanFragment : BaseFragment() {
         setContentView(R.layout.fragment_home_layout)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+    }
 }

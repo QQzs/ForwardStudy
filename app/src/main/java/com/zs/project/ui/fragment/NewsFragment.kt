@@ -41,7 +41,6 @@ import org.jetbrains.anko.startActivity
 
 class NewsFragment : BaseFragment() , View.OnClickListener{
     var mSelectTitles : MutableList<Channel> = ArrayList()
-    var mUnSelectTitles : MutableList<Channel> = ArrayList()
     var mAdapter : MyAdapter ?= null
     var mIndicatorViewPager : IndicatorViewPager ?= null
 
@@ -55,7 +54,7 @@ class NewsFragment : BaseFragment() , View.OnClickListener{
         EventBus.getDefault().register(this)
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initData()
     }
@@ -68,14 +67,14 @@ class NewsFragment : BaseFragment() , View.OnClickListener{
         initTitleData()
         indicator_layout?.isSplitAuto = false
         indicator_layout?.setPinnedTabView(false)
-        var colorBar = ColorBar(activity,Color.parseColor("#d81e06"), activity.dip(2f), ScrollBar.Gravity.BOTTOM)
+        var colorBar = ColorBar(activity,Color.parseColor("#d81e06"), activity!!.dip(2f), ScrollBar.Gravity.BOTTOM)
         indicator_layout?.setScrollBar(colorBar)
-        indicator_layout?.onTransitionListener = OnTransitionTextListener().setColor(activity.resources.getColor(R.color.main_color_red)
-        , activity.resources.getColor(R.color.font_default))
+        indicator_layout?.onTransitionListener = OnTransitionTextListener().setColor(activity!!.resources.getColor(R.color.main_color_red)
+        , activity!!.resources.getColor(R.color.font_default))
 
         vp_more_tab?.offscreenPageLimit = 15
         mIndicatorViewPager = IndicatorViewPager(indicator_layout,vp_more_tab)
-        mAdapter = MyAdapter(activity.supportFragmentManager)
+        mAdapter = MyAdapter(activity!!.supportFragmentManager)
         mIndicatorViewPager?.adapter = mAdapter
 
     }
@@ -103,7 +102,7 @@ class NewsFragment : BaseFragment() , View.OnClickListener{
 
         when(view?.id){
             R.id.iv_add_tab ->{
-                activity.startActivity<ChooseTagActivity>()
+                activity!!.startActivity<ChooseTagActivity>()
             }
         }
     }
