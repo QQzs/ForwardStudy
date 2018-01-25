@@ -52,6 +52,6 @@ public interface RequestService {
                                             @Field("option") String option);
 
     @GET("jisuapi/get")
-    Observable<NewListData> newListDataRxjava(@QueryMap Map<String, String> params);
+    Observable<NewListData> newListDataRxjava(@QueryMap Map<String, Object> params);
 
 }

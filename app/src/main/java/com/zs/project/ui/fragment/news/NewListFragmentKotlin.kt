@@ -19,6 +19,7 @@ import com.zs.project.util.RecyclerViewUtil
 import com.zs.project.view.MultiStateView
 import io.reactivex.Observable
 import java.util.*
+import kotlin.collections.HashMap
 
 /**
  *
@@ -113,11 +114,12 @@ class NewListFragmentKotlin : LazyFragmentKotlin(), View.OnClickListener{
 
     override fun getData() {
         super.getData()
-        var map = HashMap<String, String>()
+        var map = HashMap<String,Any>()
         map.put("channel", mTitleName!!)
-        map.put("num", "20")
-        map.put("start", (mStartNum * 20).toString())
+        map.put("num", 20)
+        map.put("start", mStartNum * 20)
         map.put("appkey", Constant.jcloudKey)
+
         requestData(mRequestApi.getRequestService(RequestApi.REQUEST_NEWS).newListDataRxjava(map),Get_LIST)
     }
 
