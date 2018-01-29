@@ -23,4 +23,9 @@ public class Constant {
             Color.parseColor("#67CCB7"),
             Color.parseColor("#F6BC7E")
     };
+
+    public static final String MOVIE_THEATERS = "in_theaters";
+    public static final String MOVIE_COMING = "coming_soon";
+    public static final String MOVIE_TOP = "top250";
+
 }

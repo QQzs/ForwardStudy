@@ -42,7 +42,9 @@ dependencies {
     compile 'org.jetbrains.kotlin:kotlin-stdlib:1.2.10'
     compile 'org.jetbrains.anko:anko-commons:0.10.3'
     compile 'com.android.support:recyclerview-v7:27.0.2'
+    compile "com.android.support:cardview-v7:27.0.2"
     compile 'com.jcodecraeer:xrecyclerview:1.5.8'
     compile 'com.android.support:design:27.0.2'
+    compile project(':bannerview')
     testCompile 'junit:junit:4.12'
 }

@@ -3,7 +3,6 @@ package com.zs.project.ui.fragment.news
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.ImageView
 import android.widget.RelativeLayout
 import com.jcodecraeer.xrecyclerview.ProgressStyle
 import com.jcodecraeer.xrecyclerview.XRecyclerView
@@ -16,12 +15,13 @@ import com.zs.project.listener.KotlinItemClickListener
 import com.zs.project.request.DefaultObserver
 import com.zs.project.request.RequestApi
 import com.zs.project.request.RequestUtil
+import com.zs.project.ui.activity.TestActivity
 import com.zs.project.ui.adapter.NewListAdapter
 import com.zs.project.util.RecyclerViewUtil
-import com.zs.project.util.SnackbarUtils
 import com.zs.project.util.StringUtils
 import com.zs.project.view.MultiStateView
 import io.reactivex.Observable
+import org.jetbrains.anko.startActivity
 import java.util.*
 import kotlin.collections.HashMap
 
@@ -143,10 +143,12 @@ class NewListFragmentKotlin : LazyFragmentKotlin(), View.OnClickListener , Kotli
 
 //        Snackbar.make(multistate_view!!,"dddd",Snackbar.LENGTH_SHORT).show()
 
-        val imageView = ImageView(context)
-        imageView.setImageResource(R.mipmap.timg)
-        SnackbarUtils.Short(multistate_view!!,"ffffff")
-                .show()
+//        val imageView = ImageView(context)
+//        imageView.setImageResource(R.mipmap.default_img)
+//        SnackbarUtils.Short(multistate_view!!,"ffffff")
+//                .show()
+
+        activity!!.startActivity<TestActivity>()
     }
 
     override fun requestData(request: Observable<*>?, type: Int) {

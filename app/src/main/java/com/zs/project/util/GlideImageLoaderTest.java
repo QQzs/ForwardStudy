@@ -43,9 +43,9 @@ public class GlideImageLoaderTest {
     private static void loadNormal(String url, ImageView img) {  //placeholder占位符。错误占位符：.error()
         GlideApp.with(mContext)
                 .load(url)
-                .placeholder(R.mipmap.timg)
-                .error(R.mipmap.timg)
-                .fallback(R.mipmap.timg)
+                .placeholder(R.mipmap.default_img)
+                .error(R.mipmap.default_img)
+                .fallback(R.mipmap.default_img)
                 .dontAnimate()//去掉动画
                 .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
                 .into(img);
@@ -59,9 +59,9 @@ public class GlideImageLoaderTest {
     private static void loadCircleImage(String url, ImageView img) {  //placeholder占位符。错误占位符：.error()
         GlideApp.with(mContext)
                 .load(url)
-                .placeholder(R.mipmap.timg)
-                .error(R.mipmap.timg)
-                .fallback(R.mipmap.timg)
+                .placeholder(R.mipmap.default_img)
+                .error(R.mipmap.default_img)
+                .fallback(R.mipmap.default_img)
                 .dontAnimate()//去掉动画
                 .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
                 .transform(new CircleTransform(mContext))
@@ -77,9 +77,9 @@ public class GlideImageLoaderTest {
     private static void loadRoundImage(String url, ImageView img , int round) {  //placeholder占位符。错误占位符：.error()
         GlideApp.with(mContext)
                 .load(url)
-                .placeholder(R.mipmap.timg)
-                .error(R.mipmap.timg)
-                .fallback(R.mipmap.timg)
+                .placeholder(R.mipmap.default_img)
+                .error(R.mipmap.default_img)
+                .fallback(R.mipmap.default_img)
                 .dontAnimate()//去掉动画
                 .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
                 .transform(new RoundTransform(mContext,round))
@@ -89,9 +89,9 @@ public class GlideImageLoaderTest {
     private static void loadCache(String url, ImageView img) {
         GlideApp.with(mContext)
                 .load(url)
-                .placeholder(R.mipmap.timg)
-                .error(R.mipmap.timg)
-                .fallback(R.mipmap.timg)
+                .placeholder(R.mipmap.default_img)
+                .error(R.mipmap.default_img)
+                .fallback(R.mipmap.default_img)
                 .dontAnimate()
                 .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
                 .into(img);
@@ -102,9 +102,9 @@ public class GlideImageLoaderTest {
         GlideApp.with(mContext)
                     .load(imageUrl)
                     .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
-                    .placeholder(R.mipmap.timg)
-                    .error(R.mipmap.timg)
-                    .fallback(R.mipmap.timg)
+                    .placeholder(R.mipmap.default_img)
+                    .error(R.mipmap.default_img)
+                    .fallback(R.mipmap.default_img)
                     .into(imageView);
     }
 
@@ -112,9 +112,9 @@ public class GlideImageLoaderTest {
     public static void loadImage(String url, final ImageView imageView) {
         GlideApp.with(mContext)
                 .load(url)
-                .placeholder(R.mipmap.timg)
-                .error(R.mipmap.timg)
-                .fallback(R.mipmap.timg)
+                .placeholder(R.mipmap.default_img)
+                .error(R.mipmap.default_img)
+                .fallback(R.mipmap.default_img)
                 .into(new SimpleTarget<Drawable>() {
                     @Override
                     public void onResourceReady(Drawable resource, Transition<? super Drawable> transition) {
@@ -155,9 +155,9 @@ public class GlideImageLoaderTest {
                 .with(mContext)
                 .load(url)
                 .override(width, height)
-                .placeholder(R.mipmap.timg)
-                .error(R.mipmap.timg)
-                .fallback(R.mipmap.timg)
+                .placeholder(R.mipmap.default_img)
+                .error(R.mipmap.default_img)
+                .fallback(R.mipmap.default_img)
                 .into(imageView);
     }
 
@@ -165,9 +165,9 @@ public class GlideImageLoaderTest {
     public static void Image(@DrawableRes int url, ImageView imageView) {
         GlideApp.with(mContext)
                 .load(url)
-                .placeholder(R.mipmap.timg)
-                .error(R.mipmap.timg)
-                .fallback(R.mipmap.timg)
+                .placeholder(R.mipmap.default_img)
+                .error(R.mipmap.default_img)
+                .fallback(R.mipmap.default_img)
                 .into(imageView);
     }
 

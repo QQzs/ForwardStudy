@@ -23,6 +23,22 @@
         </attr>
     </declare-styleable>
 
+    <!-- 五星评价 -->
+    <declare-styleable name="RatingBar">
+        <!--星星间距-->
+        <attr format="dimension" name="starDistance"/>
+        <!--星星大小-->
+        <attr format="dimension" name="starSize"/>
+        <!--星星个数-->
+        <attr format="integer" name="starCount"/>
+        <!--星星空图-->
+        <attr format="reference" name="starEmpty"/>
+        <!--星星满图-->
+        <attr format="reference" name="starFill"/>
+        <!--是否可点-->
+        <attr format="boolean" name="isTouch"/>
+    </declare-styleable>
+
     <string-array name="category_name">
         <item>头条</item>
         <item>新闻</item>

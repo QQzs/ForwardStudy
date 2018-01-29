@@ -27,8 +27,11 @@ import retrofit2.http.QueryMap;
 
 public interface RequestService {
 
-    @GET("v2/movie/in_theaters")
-    Call<ResponseBody> getMovieListData(@Query("start") String start , @Query("count") String count);
+    @GET("jisuapi/get")
+    Observable<NewListData> newListDataRxjava(@QueryMap Map<String, Object> params);
+
+    @GET("v2/movie/{path}")
+    Call<ResponseBody> getMovieListData(@Path("path") String path , @Query("start") String start , @Query("count") String count);
 
     @GET("v2/movie/subject/{movieId}")
     Call<ResponseBody> getMovieDetailData(@Path("movieId") String movieId);
@@ -50,8 +53,5 @@ public interface RequestService {
     @POST("android")
     Observable<BaseResponse> getRequestData(@Field("optioncode") String optioncode,
                                             @Field("option") String option);
-
-    @GET("jisuapi/get")
-    Observable<NewListData> newListDataRxjava(@QueryMap Map<String, Object> params);
 
 }
