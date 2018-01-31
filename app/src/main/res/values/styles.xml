@@ -11,11 +11,15 @@
     <!-- Base application theme. -->
     <style name="MyAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimary">@color/main_color_red</item>
+        <item name="colorPrimaryDark">@color/main_color_red</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="SplashTheme" parent="MyAppTheme">
+        <item name="android:windowBackground">@drawable/iv_app_splash</item>
+        <item name="windowNoTitle">true</item>
+    </style>
 
 
 </resources>

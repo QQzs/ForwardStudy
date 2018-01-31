@@ -7,7 +7,9 @@ import com.zs.project.R
 import com.zs.project.app.Constant
 import com.zs.project.base.BaseFragment
 import com.zs.project.request.RequestApi
+import kotlinx.android.synthetic.main.fragment_me_layout.*
 import okhttp3.ResponseBody
+import org.jetbrains.anko.toast
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -21,9 +23,10 @@ import retrofit2.Response
  * —————————————————————————————————————
  */
 
-class MeFragment : BaseFragment() {
+class MeFragment : BaseFragment() , View.OnClickListener{
 
     var mFragment : MeFragment ?= null
+    var mFlag : Boolean = true
     /**
      * Bundle 后面不加 ？ 会报错误
      * Parameter specified as non-null is null
@@ -36,7 +39,13 @@ class MeFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initView()
         initData()
+    }
+
+    override fun initView() {
+        super.initView()
+        iv_avatar_img?.setOnClickListener(this)
     }
 
     override fun initData() {
@@ -78,6 +87,19 @@ class MeFragment : BaseFragment() {
 //
 //        })
 
+
+    }
+
+    override fun onClick(view: View?) {
+
+        when(view?.id){
+            R.id.iv_avatar_img ->{
+                activity?.toast("hhh")
+                mFlag = !mFlag
+                colorfull_bg_view?.switchAnim(mFlag)
+            }
+
+        }
 
     }
 
