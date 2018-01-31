@@ -69,7 +69,7 @@ class NewsFragment : BaseFragment() , View.OnClickListener{
         indicator_layout?.setPinnedTabView(false)
         var colorBar = ColorBar(activity,Color.parseColor("#d81e06"), activity!!.dip(2f), ScrollBar.Gravity.BOTTOM)
         indicator_layout?.setScrollBar(colorBar)
-        indicator_layout?.onTransitionListener = OnTransitionTextListener().setColor(activity!!.resources.getColor(R.color.main_color_red)
+        indicator_layout?.onTransitionListener = OnTransitionTextListener().setColor(activity!!.resources.getColor(R.color.color_red)
         , activity!!.resources.getColor(R.color.font_default))
 
         vp_more_tab?.offscreenPageLimit = 15

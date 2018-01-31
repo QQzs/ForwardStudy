@@ -1,5 +1,6 @@
 package com.zs.project.request;
 
+import com.zs.project.bean.Movie.MovieListData;
 import com.zs.project.bean.News.NewListData;
 import com.zs.project.request.bean.BaseResponse;
 
@@ -31,7 +32,10 @@ public interface RequestService {
     Observable<NewListData> newListDataRxjava(@QueryMap Map<String, Object> params);
 
     @GET("v2/movie/{path}")
-    Call<ResponseBody> getMovieListData(@Path("path") String path , @Query("start") String start , @Query("count") String count);
+    Observable<MovieListData> getMovieListData(@Path("path") String path , @Query("start") int start , @Query("count") int count);
+
+    @GET("v2/movie/{path}")
+    Call<ResponseBody> getTestData(@Path("path") String path , @Query("start") int start , @Query("count") int count);
 
     @GET("v2/movie/subject/{movieId}")
     Call<ResponseBody> getMovieDetailData(@Path("movieId") String movieId);

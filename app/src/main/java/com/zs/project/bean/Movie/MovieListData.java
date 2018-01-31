@@ -1,5 +1,9 @@
 package com.zs.project.bean.Movie;
 
+import com.zs.project.request.bean.BaseResponse;
+
+import java.util.List;
+
 /**
  * Created by zs
  * Date：2018年 01月 17日
@@ -9,12 +13,12 @@ package com.zs.project.bean.Movie;
  * —————————————————————————————————————
  */
 
-public class MovieListData {
+public class MovieListData extends BaseResponse {
 
     private int count;
     private int start;
     private int total;
-    private MovieDetailData subjects;
+    private List<MovieDetailData> subjects;
     private String title;
 
     public int getCount() {
@@ -41,11 +45,11 @@ public class MovieListData {
         this.total = total;
     }
 
-    public MovieDetailData getSubjects() {
+    public List<MovieDetailData> getSubjects() {
         return subjects;
     }
 
-    public void setSubjects(MovieDetailData subjects) {
+    public void setSubjects(List<MovieDetailData> subjects) {
         this.subjects = subjects;
     }
 

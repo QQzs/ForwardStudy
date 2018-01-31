@@ -14,10 +14,11 @@ import java.util.List;
 
 public class MovieDetailData implements Serializable{
 
+    private String id;
     private String title;
     private MovieRating rating;
     private String year;
-    private List<MovieImages> images;
+    private MovieImages images;
     private String alt;
     private String mobile_url;
     private String share_url;
@@ -33,6 +34,14 @@ public class MovieDetailData implements Serializable{
     private List<MovieCasts> casts;
     private List<MovieCasts> directors;
 
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getTitle() {
         return title;
@@ -58,11 +67,11 @@ public class MovieDetailData implements Serializable{
         this.year = year;
     }
 
-    public List<MovieImages> getImages() {
+    public MovieImages getImages() {
         return images;
     }
 
-    public void setImages(List<MovieImages> images) {
+    public void setImages(MovieImages images) {
         this.images = images;
     }
 
@@ -182,6 +191,7 @@ public class MovieDetailData implements Serializable{
     public String toString() {
         return "MovieListData{" +
                 "title='" + title + '\'' +
+                ", id=" + id +
                 ", rating=" + rating +
                 ", year='" + year + '\'' +
                 ", images=" + images +

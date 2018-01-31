@@ -9,6 +9,7 @@ import android.text.style.ImageSpan;
 import android.widget.Toast;
 
 import com.zs.project.app.MyApplication;
+import com.zs.project.bean.Movie.MovieCasts;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -811,6 +812,40 @@ public class StringUtils {
             return String.valueOf(data1);
         }else{
             return String.valueOf(data);
+        }
+    }
+
+    public static String genresToString(List<String> data){
+
+        if (data == null || data.size() == 0){
+           return "";
+        }else{
+            StringBuilder builder = new StringBuilder();
+            int size = data.size();
+            if (size > 4){
+                size = 4;
+            }
+            for (int i = 0;i<size;i++){
+                builder.append(data.get(i) + "/");
+            }
+            return builder.toString().substring(0,builder.length() - 1);
+        }
+    }
+
+    public static String castsToString(List<MovieCasts> data){
+
+        if (data == null || data.size() == 0){
+            return "";
+        }else{
+            StringBuilder builder = new StringBuilder();
+            int size = data.size();
+            if (size > 4){
+                size = 4;
+            }
+            for (int i = 0;i<size;i++){
+                builder.append(data.get(i).getName() + "/");
+            }
+            return builder.toString().substring(0,builder.length() - 1);
         }
     }
 }

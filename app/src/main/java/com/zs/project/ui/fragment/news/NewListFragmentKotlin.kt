@@ -96,6 +96,7 @@ class NewListFragmentKotlin : LazyFragmentKotlin(), View.OnClickListener , Kotli
         loading_page_fail?.setOnClickListener(mFragment)
         mAdapter = NewListAdapter(ArrayList(),this)
         recycler_view?.setLoadingMoreProgressStyle(ProgressStyle.BallRotate)
+        recycler_view?.setRefreshProgressStyle(ProgressStyle.BallSpinFadeLoader)
         RecyclerViewUtil.init(activity,recycler_view,mAdapter)
         recycler_view?.setLoadingListener(object : XRecyclerView.LoadingListener{
             override fun onLoadMore() {

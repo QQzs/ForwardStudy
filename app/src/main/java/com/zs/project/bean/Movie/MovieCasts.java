@@ -1,7 +1,6 @@
 package com.zs.project.bean.Movie;
 
 import java.io.Serializable;
-import java.util.List;
 
 /**
  * Created by zs
@@ -15,7 +14,7 @@ import java.util.List;
 public class MovieCasts implements Serializable{
 
     private String alt;
-    private List<MovieImages> avatars;
+    private MovieImages avatars;
     private String name;
     private String id;
 
@@ -27,11 +26,11 @@ public class MovieCasts implements Serializable{
         this.alt = alt;
     }
 
-    public List<MovieImages> getAvatars() {
+    public MovieImages getAvatars() {
         return avatars;
     }
 
-    public void setAvatars(List<MovieImages> avatars) {
+    public void setAvatars(MovieImages avatars) {
         this.avatars = avatars;
     }
 

@@ -42,8 +42,8 @@ class MeFragment : BaseFragment() {
     override fun initData() {
         super.initData()
 
-        var listDataCall = mRequestApi.getRequestService(RequestApi.REQUEST_DOUBAN).getMovieListData(Constant.MOVIE_THEATERS,"0","1")
-        listDataCall.enqueue(object : Callback<ResponseBody>{
+        var listDataCall = mRequestApi.getRequestService(RequestApi.REQUEST_DOUBAN).getTestData(Constant.MOVIE_THEATERS,0,1)
+        listDataCall.enqueue(object : Callback<ResponseBody> {
             override fun onFailure(call: Call<ResponseBody>?, t: Throwable?) {
                 Log.d("My_Log","error")
             }
@@ -53,30 +53,30 @@ class MeFragment : BaseFragment() {
             }
 
         })
-
-        var newDataCall = mRequestApi.getRequestService(RequestApi.REQUEST_DOUBAN).getMovieListData(Constant.MOVIE_COMING,"0","1")
-        newDataCall.enqueue(object : Callback<ResponseBody>{
-            override fun onFailure(call: Call<ResponseBody>?, t: Throwable?) {
-                Log.d("My_Log","error")
-            }
-
-            override fun onResponse(call: Call<ResponseBody>?, response: Response<ResponseBody>?) {
-                Log.d("My_Log",response?.body()?.string())
-            }
-
-        })
-
-        var newDataCall2 = mRequestApi.getRequestService(RequestApi.REQUEST_DOUBAN).getMovieListData(Constant.MOVIE_TOP,"0","1")
-        newDataCall2.enqueue(object : Callback<ResponseBody>{
-            override fun onFailure(call: Call<ResponseBody>?, t: Throwable?) {
-                Log.d("My_Log","error")
-            }
-
-            override fun onResponse(call: Call<ResponseBody>?, response: Response<ResponseBody>?) {
-                Log.d("My_Log",response?.body()?.string())
-            }
-
-        })
+//
+//        var newDataCall = mRequestApi.getRequestService(RequestApi.REQUEST_DOUBAN).getMovieListData(Constant.MOVIE_COMING,0,1)
+//        newDataCall.enqueue(object : Callback<ResponseBody>{
+//            override fun onFailure(call: Call<ResponseBody>?, t: Throwable?) {
+//                Log.d("My_Log","error")
+//            }
+//
+//            override fun onResponse(call: Call<ResponseBody>?, response: Response<ResponseBody>?) {
+//                Log.d("My_Log",response?.body()?.string())
+//            }
+//
+//        })
+//
+//        var newDataCall2 = mRequestApi.getRequestService(RequestApi.REQUEST_DOUBAN).getMovieListData(Constant.MOVIE_TOP,0,1)
+//        newDataCall2.enqueue(object : Callback<ResponseBody>{
+//            override fun onFailure(call: Call<ResponseBody>?, t: Throwable?) {
+//                Log.d("My_Log","error")
+//            }
+//
+//            override fun onResponse(call: Call<ResponseBody>?, response: Response<ResponseBody>?) {
+//                Log.d("My_Log",response?.body()?.string())
+//            }
+//
+//        })
 
 
     }

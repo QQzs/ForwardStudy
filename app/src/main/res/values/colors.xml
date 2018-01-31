@@ -6,7 +6,8 @@
 
     <color name="white">#ffffff</color>
     <color name="background">#f1f1f1</color>
-    <color name="main_color_red">#d81e06</color>
+    <color name="main_color_red">#e86060</color>
+    <color name="color_red">#d81e06</color>
     <color name="main_color_gray">#bfbfbf</color>
     <color name="loading_color">#5b52b5</color>
     <color name="loading_textColor">#7d74d4</color>

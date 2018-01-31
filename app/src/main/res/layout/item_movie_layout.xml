@@ -1,67 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <RelativeLayout
-        android:layout_width="160dp"
-        android:layout_height="240dp">
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        app:contentPadding="4dp"
+        android:foreground="?attr/selectableItemBackground"
+        >
 
-        <ImageView
-            android:id="@+id/iv_movie_img"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:background="@mipmap/default_img"/>
+            android:layout_height="140dp"
+            >
 
-        <LinearLayout
-            android:id="@+id/ll_movie_info"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:gravity="center_vertical"
-            android:layout_below="@+id/iv_movie_img"
-            android:paddingTop="2dp"
-            android:paddingBottom="2dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="移动迷宫3"
-                android:textSize="@dimen/fontsize13"
-                android:textStyle="bold"
-                android:ellipsize="end"
-                android:singleLine="true"/>
+            <ImageView
+                android:id="@+id/iv_movie_img"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                />
 
             <LinearLayout
+                android:id="@+id/ll_movie_info"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="2dp">
-
-                <com.zs.project.view.StarBarView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:starEmpty="@mipmap/zhibo_pl_bigstar_quan_nor"
-                    app:starFill="@mipmap/zhibo_pl_bigstar_quan_sel"
-                    app:starDistance="5dp"
-                    app:starCount="5"
-                    app:starSize="16dp"
-                    app:isTouch="false"
-                    android:layout_marginRight="2dp"/>
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center_vertical"
+                android:layout_toRightOf="@+id/iv_movie_img"
+                android:padding="8dp">
 
                 <TextView
+                    android:id="@+id/tv_movie_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="4.6"
-                    android:textColor="@color/font_light_gray"
-                    android:textSize="@dimen/fontsize12"/>
+                    android:text="移动迷宫3"
+                    android:textSize="@dimen/fontsize14"
+                    android:textStyle="bold"
+                    android:ellipsize="end"
+                    android:singleLine="true"/>
+
+                <TextView
+                    android:id="@+id/tv_movie_casts"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="主演："
+                    android:textSize="@dimen/fontsize13"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:singleLine="true"/>
+
+                <TextView
+                    android:id="@+id/tv_movie_genres"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="类型："
+                    android:textSize="@dimen/fontsize13"
+                    android:layout_marginBottom="8dp"
+                    android:singleLine="true"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="2dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="评分："
+                        android:textSize="@dimen/fontsize13"
+                        android:singleLine="true"/>
+
+                    <com.zs.project.view.StarBarView
+                        android:id="@+id/star_movie_rating"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:starEmpty="@mipmap/zhibo_pl_bigstar_quan_nor"
+                        app:starFill="@mipmap/zhibo_pl_bigstar_quan_sel"
+                        app:starDistance="3dp"
+                        app:starCount="5"
+                        app:starSize="13dp"
+                        app:isTouch="false"
+                        android:layout_marginRight="5dp"/>
+
+                    <TextView
+                        android:id="@+id/tv_movie_rating"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="4.6"
+                        android:textColor="@color/font_light_gray"
+                        android:textSize="@dimen/fontsize12"/>
+
+                </LinearLayout>
 
             </LinearLayout>
 
+        </RelativeLayout>
 
-        </LinearLayout>
+    </android.support.v7.widget.CardView>
 
-    </RelativeLayout>
+
 
 </RelativeLayout>

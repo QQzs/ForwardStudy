@@ -15,7 +15,10 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:padding="10dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:paddingLeft="6dp"
+            android:paddingRight="12dp"
             android:src="@mipmap/iv_public_back" />
 
         <TextView
@@ -25,7 +28,7 @@
             android:layout_centerInParent="true"
             android:text="选择标签"
             android:textColor="@color/white"
-            android:textSize="18sp" />
+            android:textSize="@dimen/fontsize16" />
 
         <View
             android:layout_width="match_parent"
