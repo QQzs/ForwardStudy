@@ -1,29 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.zs.project.view.ColorfulView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/colorfull_bg_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.zs.project.view.HeadZoomScrollView
+    <com.zs.project.view.scrollview.ScrollableLayout
+        android:id="@+id/scroll_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
 
-        <RelativeLayout
+        <ImageView
+            android:id="@+id/iv_avatar_img"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="200dp"
+            android:layout_centerHorizontal="true"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/default_img" />
 
-            <ImageView
-                android:id="@+id/iv_avatar_img"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:src="@mipmap/default_img"
-                android:scaleType="centerCrop"/>
+        <com.jcodecraeer.xrecyclerview.XRecyclerView
+            android:id="@+id/recycler_view_me"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/iv_avatar_img"
+            android:background="@color/white">
 
+        </com.jcodecraeer.xrecyclerview.XRecyclerView>
 
-        </RelativeLayout>
-    </com.zs.project.view.HeadZoomScrollView>
-
-
+    </com.zs.project.view.scrollview.ScrollableLayout>
 
 
 </com.zs.project.view.ColorfulView>

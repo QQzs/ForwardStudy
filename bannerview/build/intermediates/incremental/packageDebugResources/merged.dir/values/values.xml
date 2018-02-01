@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="BannerIndicator"><attr format="integer" name="totalCount"/><attr name="android:gravity"/></declare-styleable>
+    <declare-styleable name="BannerView"><attr format="integer" name="pagingIntervalTime"/><attr format="integer" name="decelerateMultiple"/><attr format="reference" name="bannerIndicator"/><attr format="reference" name="titleView"/><attr format="reference" name="subTitleView"/><attr format="reference" name="interpolator"/><attr format="integer" name="singlePageMode">
+            
+            <flag name="noIndicator" value="0x01"/>
+            
+            <flag name="canNotPaging" value="0x02"/>
+        </attr></declare-styleable>
+    <declare-styleable name="NumberIndicatorView"><attr name="android:textSize"/><attr name="android:textColor"/><attr format="string" name="separator"/><attr format="color" name="separatorTextColor"/><attr format="color" name="currentPageTextColor"/><attr format="color" name="totalPageTextColor"/></declare-styleable>
+    <declare-styleable name="PointIndicatorView"><attr format="dimension" name="pointRadius"/><attr format="dimension" name="selectedPointRadius"/><attr format="dimension" name="pointSpacing"/><attr format="color" name="pointColor"/><attr format="color" name="selectedPointColor"/></declare-styleable>
+    <string name="app_name">Banner</string>
+</resources>

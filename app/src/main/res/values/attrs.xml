@@ -39,6 +39,10 @@
         <attr format="boolean" name="isTouch"/>
     </declare-styleable>
 
+    <declare-styleable name="HeaderScrollView">
+        <attr name="top_offset" format="dimension"/>
+    </declare-styleable>
+
     <string-array name="category_name">
         <item>头条</item>
         <item>新闻</item>

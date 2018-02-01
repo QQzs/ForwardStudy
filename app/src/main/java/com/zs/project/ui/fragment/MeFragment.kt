@@ -7,12 +7,18 @@ import com.zs.project.R
 import com.zs.project.app.Constant
 import com.zs.project.base.BaseFragment
 import com.zs.project.request.RequestApi
+import com.zs.project.ui.adapter.MeAdapter
+import com.zs.project.util.RecyclerViewUtil
+import com.zs.project.view.scrollview.ScrollableLayout
+import com.zs.project.view.scrollview.ViewHelper
 import kotlinx.android.synthetic.main.fragment_me_layout.*
 import okhttp3.ResponseBody
 import org.jetbrains.anko.toast
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+
+
 
 /**
  * Created by zs
@@ -24,9 +30,9 @@ import retrofit2.Response
  */
 
 class MeFragment : BaseFragment() , View.OnClickListener{
-
     var mFragment : MeFragment ?= null
     var mFlag : Boolean = true
+    var mAapter : MeAdapter ?= null
     /**
      * Bundle 后面不加 ？ 会报错误
      * Parameter specified as non-null is null
@@ -46,6 +52,17 @@ class MeFragment : BaseFragment() , View.OnClickListener{
     override fun initView() {
         super.initView()
         iv_avatar_img?.setOnClickListener(this)
+
+        mAapter = MeAdapter()
+        RecyclerViewUtil.init(activity,recycler_view_me,mAapter)
+        recycler_view_me?.setPullRefreshEnabled(false)
+        scroll_view?.setOnScrollListener(ScrollableLayout.OnScrollListener {
+            currentY, maxY -> ViewHelper.setTranslationY(iv_avatar_img, currentY * 0.7f)
+        })
+        scroll_view?.setCurrentScrollableContainer(recycler_view_me)
+        scroll_view?.setClickHeadExpand(60)
+
+
     }
 
     override fun initData() {
@@ -62,31 +79,6 @@ class MeFragment : BaseFragment() , View.OnClickListener{
             }
 
         })
-//
-//        var newDataCall = mRequestApi.getRequestService(RequestApi.REQUEST_DOUBAN).getMovieListData(Constant.MOVIE_COMING,0,1)
-//        newDataCall.enqueue(object : Callback<ResponseBody>{
-//            override fun onFailure(call: Call<ResponseBody>?, t: Throwable?) {
-//                Log.d("My_Log","error")
-//            }
-//
-//            override fun onResponse(call: Call<ResponseBody>?, response: Response<ResponseBody>?) {
-//                Log.d("My_Log",response?.body()?.string())
-//            }
-//
-//        })
-//
-//        var newDataCall2 = mRequestApi.getRequestService(RequestApi.REQUEST_DOUBAN).getMovieListData(Constant.MOVIE_TOP,0,1)
-//        newDataCall2.enqueue(object : Callback<ResponseBody>{
-//            override fun onFailure(call: Call<ResponseBody>?, t: Throwable?) {
-//                Log.d("My_Log","error")
-//            }
-//
-//            override fun onResponse(call: Call<ResponseBody>?, response: Response<ResponseBody>?) {
-//                Log.d("My_Log",response?.body()?.string())
-//            }
-//
-//        })
-
 
     }
 
@@ -98,6 +90,10 @@ class MeFragment : BaseFragment() , View.OnClickListener{
                 mFlag = !mFlag
                 colorfull_bg_view?.switchAnim(mFlag)
             }
+
+//            R.id.tv_bottom ->{
+//                activity?.toast("wwwwwww")
+//            }
 
         }
 
