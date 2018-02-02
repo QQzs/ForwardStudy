@@ -15,7 +15,7 @@ Time：10:35
 About:
 —————————————————————————————————————
  */
-class MeAdapter : RecyclerView.Adapter<MeAdapter.MeViewHolder>(){
+class MeAdapter(private var mData : MutableList<String>) : RecyclerView.Adapter<MeAdapter.MeViewHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): MeViewHolder {
         var view = View.inflate(parent?.context, R.layout.item_me_layout,null)
@@ -23,18 +23,29 @@ class MeAdapter : RecyclerView.Adapter<MeAdapter.MeViewHolder>(){
     }
 
     override fun getItemCount(): Int {
-        return 20
+        return mData.size
+    }
+
+    fun refreshData(data : ArrayList<String>){
+        this.mData.clear()
+        this.mData = data
+        notifyDataSetChanged()
+    }
+
+    fun appendData(data : ArrayList<String>){
+        this.mData.addAll(data)
+        notifyDataSetChanged()
     }
 
     override fun onBindViewHolder(holder: MeViewHolder?, position: Int) {
-        holder?.bindData()
+        holder?.bindData(position)
     }
 
 
     inner class MeViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView){
-        fun bindData(){
+        fun bindData(position: Int){
             itemView.setOnClickListener {
-                ToastUtils.show("ddddd")
+                ToastUtils.show("data" + position)
             }
         }
     }

@@ -32,7 +32,8 @@ import retrofit2.Response
 class MeFragment : BaseFragment() , View.OnClickListener{
     var mFragment : MeFragment ?= null
     var mFlag : Boolean = true
-    var mAapter : MeAdapter ?= null
+    var mAdapter : MeAdapter ?= null
+    var mData : MutableList<String> ?= null
     /**
      * Bundle 后面不加 ？ 会报错误
      * Parameter specified as non-null is null
@@ -53,8 +54,12 @@ class MeFragment : BaseFragment() , View.OnClickListener{
         super.initView()
         iv_avatar_img?.setOnClickListener(this)
 
-        mAapter = MeAdapter()
-        RecyclerViewUtil.init(activity,recycler_view_me,mAapter)
+        mData = ArrayList()
+        for ( i in 1..10){
+            mData!!.add("")
+        }
+        mAdapter = MeAdapter(mData!!)
+        RecyclerViewUtil.init(activity,recycler_view_me,mAdapter)
         recycler_view_me?.setPullRefreshEnabled(false)
         scroll_view?.setOnScrollListener(ScrollableLayout.OnScrollListener {
             currentY, maxY -> ViewHelper.setTranslationY(iv_avatar_img, currentY * 0.7f)

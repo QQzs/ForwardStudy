@@ -13,13 +13,10 @@ import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.content.Context;
 import android.support.v4.view.MotionEventCompat;
-import android.support.v4.view.ViewConfigurationCompat;
-import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.MotionEvent;
-import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.view.animation.Interpolator;
 import android.widget.FrameLayout;
@@ -30,24 +27,33 @@ import com.jcodecraeer.xrecyclerview.XRecyclerView;
 /**
  * Created by gyzhong on 15/3/22.
  */
-public class PullZoomRecyclerView extends XRecyclerView {
+public class PullZoomRecyclerView extends XRecyclerView{
 
-    /*头部View 的容器*/
+    /**
+     * 头部View 的容器
+     */
     private FrameLayout mHeaderContainer;
-    /*头部View 的图片*/
+    /**
+     * 头部View 的图片
+     */
     private ImageView mHeaderImg;
     /*屏幕的高度*/
     private int mScreenHeight;
     /*屏幕的宽度*/
     private int mScreenWidth;
-
     private int mHeaderHeight;
 
-    /*无效的点*/
+    /**
+     * 无效的点
+     */
     private static final int INVALID_POINTER = -1;
-    /*滑动动画执行的时间*/
+    /**
+     * 滑动动画执行的时间
+     */
     private static final int MIN_SETTLE_DURATION = 200; // ms
-    /*定义了一个时间插值器，根据ViewPage控件来定义的*/
+    /**
+     * 定义了一个时间插值器，根据ViewPage控件来定义的
+     */
     private static final Interpolator sInterpolator = new Interpolator() {
         public float getInterpolation(float t) {
             t -= 1.0f;
@@ -55,28 +61,32 @@ public class PullZoomRecyclerView extends XRecyclerView {
         }
     };
 
-    /*记录上一次手指触摸的点*/
-    private float mLastMotionX;
+    /**
+     * 记录上一次手指触摸的点
+     */
     private float mLastMotionY;
-
-    /*当前活动的点Id,有效的点的Id*/
+    /**
+     * 当前活动的点Id,有效的点的Id
+     */
     protected int mActivePointerId = INVALID_POINTER;
-    /*开始滑动的标志距离*/
-    private int mTouchSlop;
-
-    private float mScale;
-    private float mLastScale;
-
-    private final float mMaxScale = 2.0f;
 
     private boolean isNeedCancelParent;
 
-    private OnScrollListener mScrollListener ;
+    private float mScale;
+    private float mLastScale;
+    /**
+     * 放大的最大程度（默认两倍）
+     */
+    private float mMaxScale = 2.0f;
+    /**
+     * 滑动放大系数，系数越大，滑动时放大灵敏度越大
+     */
+    private float mScaleRatio = 0.6f;
 
-    private final float REFRESH_SCALE = 1.20F;
-
-    private OnRefreshListener mRefreshListener ;
-
+    /**
+     * 刷新的临界值，超过才刷新
+     */
+    private final float REFRESH_SCALE = 1.20f;
 
     public PullZoomRecyclerView(Context context) {
         super(context);
@@ -95,8 +105,6 @@ public class PullZoomRecyclerView extends XRecyclerView {
 
     private void init(Context context) {
 
-        final ViewConfiguration configuration = ViewConfiguration.get(context);
-        mTouchSlop = ViewConfigurationCompat.getScaledPagingTouchSlop(configuration);
         mHeaderContainer = new FrameLayout(context);
         DisplayMetrics metrics = new DisplayMetrics();
         ((Activity) context).getWindowManager().getDefaultDisplay().getMetrics(metrics);
@@ -112,10 +120,11 @@ public class PullZoomRecyclerView extends XRecyclerView {
         mHeaderImg.setLayoutParams(imgLayoutParams);
         mHeaderContainer.addView(mHeaderImg);
         addHeaderView(mHeaderContainer);
-        super.setOnScrollListener(new InternalScrollerListener() );
-
     }
-    /*处理事件用*/
+
+    public ImageView getHeaderImageView() {
+        return this.mHeaderImg;
+    }
 
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
@@ -124,17 +133,12 @@ public class PullZoomRecyclerView extends XRecyclerView {
 
         switch (action) {
             case MotionEvent.ACTION_DOWN:
-                Log.i("My_Log"," ACTION_DOWN ");
-                /*计算 x，y 的距离*/
-                int index = ev.getActionIndex();
-                mActivePointerId = ev.getPointerId(index);
-                if (mActivePointerId == INVALID_POINTER)
-                    break;
-                mLastMotionY = ev.getY();
-                mLastScale = (this.mHeaderContainer.getBottom() / this.mHeaderHeight);
-                isNeedCancelParent = true ;
+                // ACTION_DOWN 事件被RecyclerView拦截，转到 ACTION_MOVE 记录按下位置
                 break;
             case MotionEvent.ACTION_MOVE:
+                if (mLastMotionY == 0){
+                    mLastMotionY = ev.getY();
+                }
                 mActivePointerId = ev.getPointerId(ev.getActionIndex());
                 if (mActivePointerId == INVALID_POINTER) {
                     /*这里相当于松手*/
@@ -156,12 +160,10 @@ public class PullZoomRecyclerView extends XRecyclerView {
                             return super.onTouchEvent(ev);
                         }
                         /*这里设置紧凑度*/
-                        dy = dy * 0.5f * (mHeaderHeight * 1.0f / params.height);
+                        dy = dy * mScaleRatio * (mHeaderHeight * 1.0f / params.height);
                         mLastScale = (dy + params.height) * 1.0f / mHeaderHeight;
                         mScale = clamp(mLastScale, 1.0f, mMaxScale);
-                        Log.e("My_Log", "mScale = " + mScale + " mScale = " + mLastScale+",f = "+f);
                         params.height = (int) (mHeaderHeight * mScale);
-                        Log.i("My_Log","height = " + params.height);
                         mHeaderContainer.setLayoutParams(params);
                         mLastMotionY = y;
                         if(isNeedCancelParent ){
@@ -172,15 +174,14 @@ public class PullZoomRecyclerView extends XRecyclerView {
                         }
                         return true;
                     }
-                    mLastMotionY = ev.getY();
                 }
-
                 break;
             case MotionEvent.ACTION_UP:
                 finishPull();
+                mLastMotionY = 0;
                 break;
             case MotionEvent.ACTION_POINTER_UP:
-
+                mLastMotionY = 0;
                 int pointUpIndex = ev.getActionIndex();
                 int pointId = ev.getPointerId(pointUpIndex);
                 if (pointId == mActivePointerId) {
@@ -190,32 +191,27 @@ public class PullZoomRecyclerView extends XRecyclerView {
                 break;
 
         }
-
         return super.onTouchEvent(ev);
     }
 
-    @Override
-    public void setOnScrollListener(OnScrollListener l) {
-        mScrollListener = l ;
-    }
-
-    private void abortAnimation() {
-
-    }
-
+    /**
+     * 恢复原态
+     */
     private void finishPull() {
         mActivePointerId = INVALID_POINTER;
         if (mHeaderContainer.getBottom() > mHeaderHeight){
-            Log.v("My_Log", "===super====onTouchEvent========");
             if (mScale > REFRESH_SCALE){
-                if (mRefreshListener != null){
-                    mRefreshListener.onRefresh();
-                }
+                // 调用父类XRecyclerView 的刷新方法，也可以自己写一个刷新的接口
+                refresh();
+                Log.v("My_Log", "===super====onTouchEvent========");
             }
             pullBackAnimation();
         }
     }
 
+    /**
+     * 复原动画
+     */
     private void pullBackAnimation(){
         ValueAnimator pullBack = ValueAnimator.ofFloat(mScale , 1.0f);
         pullBack.setInterpolator(sInterpolator);
@@ -233,85 +229,16 @@ public class PullZoomRecyclerView extends XRecyclerView {
 
     }
 
-
     /**
-     * 通过事件和点的 id 来获取点的索引
-     *
-     * @param ev
-     * @param id
+     * 检查数据
+     * @param value
+     * @param min
+     * @param max
      * @return
      */
-    private int getPointerIndex(MotionEvent ev, int id) {
-        int activePointerIndex = MotionEventCompat.findPointerIndex(ev, id);
-        if (activePointerIndex == -1)
-            mActivePointerId = INVALID_POINTER;
-        return activePointerIndex;
-    }
-
-
-    public void setOnRefreshListener(OnRefreshListener l){
-        mRefreshListener = l ;
-    }
-
-    public ImageView getHeaderImageView() {
-        return this.mHeaderImg;
-    }
-
-
     private float clamp(float value, float min, float max) {
         return Math.min(Math.max(value, min), max);
     }
 
-    private class InternalScrollerListener extends OnScrollListener {
-
-        @Override
-        public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-            float diff = mHeaderHeight - mHeaderContainer.getBottom();
-            if ((diff > 0.0F) && (diff < mHeaderHeight)) {
-                int i = (int) (0.3D * diff);
-                mHeaderImg.scrollTo(0, -i);
-            } else if (mHeaderImg.getScrollY() != 0) {
-                mHeaderImg.scrollTo(0, 0);
-            }
-//            if (mScrollListener != null){
-//                mScrollListener.onScroll(view, firstVisibleItem, visibleItemCount, totalItemCount);
-//            }
-        }
-    }
-
-
-//    private class InternalScrollerListener implements OnScrollListener{
-//        @Override
-//        public void onScrollStateChanged(AbsListView view, int scrollState) {
-//
-//            if (mScrollListener != null){
-//                mScrollListener.onScrollStateChanged(view,scrollState);
-//            }
-//        }
-//
-//        @Override
-//        public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-//            float diff = mHeaderHeight - mHeaderContainer.getBottom();
-//            if ((diff > 0.0F) && (diff < mHeaderHeight)) {
-//                int i = (int) (0.3D * diff);
-//                mHeaderImg.scrollTo(0, -i);
-//            } else if (mHeaderImg.getScrollY() != 0) {
-//                mHeaderImg.scrollTo(0, 0);
-//            }
-//            if (mScrollListener != null){
-//                mScrollListener.onScroll(view, firstVisibleItem, visibleItemCount, totalItemCount);
-//            }
-//        }
-//    }
-
-    public interface OnRefreshListener {
-        void onRefresh() ;
-    }
-
-    public void computeRefresh(){
-        if (mActivePointerId != INVALID_POINTER){
-
-        }
-    }
 }
 

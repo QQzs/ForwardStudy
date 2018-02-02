@@ -2,11 +2,11 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/title_all_layout"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/title_height">
+    android:layout_height="wrap_content">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="@dimen/title_height"
         android:background="@color/main_color_red"
         >
 

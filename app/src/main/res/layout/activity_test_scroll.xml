@@ -6,7 +6,8 @@
     <com.zs.project.view.PullZoomRecyclerView
         android:id="@+id/scroll_view_pull"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        >
 
     </com.zs.project.view.PullZoomRecyclerView>
 
