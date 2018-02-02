@@ -16,6 +16,7 @@ import com.zs.project.request.DefaultObserver
 import com.zs.project.request.RequestApi
 import com.zs.project.request.RequestUtil
 import com.zs.project.ui.activity.TestActivity
+import com.zs.project.ui.activity.TestScrollActivity
 import com.zs.project.ui.adapter.NewListAdapter
 import com.zs.project.util.RecyclerViewUtil
 import com.zs.project.util.StringUtils
@@ -149,7 +150,7 @@ class NewListFragmentKotlin : LazyFragmentKotlin(), View.OnClickListener , Kotli
 //        SnackbarUtils.Short(multistate_view!!,"ffffff")
 //                .show()
 
-        activity!!.startActivity<TestActivity>()
+        activity!!.startActivity<TestScrollActivity>()
     }
 
     override fun requestData(request: Observable<*>?, type: Int) {

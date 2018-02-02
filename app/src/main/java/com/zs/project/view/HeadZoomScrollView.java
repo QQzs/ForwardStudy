@@ -76,8 +76,6 @@ public class HeadZoomScrollView extends ScrollView {
                 zoomView = vg.getChildAt(0);
             }
         }
-
-        ViewGroup parent = (ViewGroup) getParent();
     }
 
     @Override
