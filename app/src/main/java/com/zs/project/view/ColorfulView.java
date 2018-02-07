@@ -62,10 +62,11 @@ public class ColorfulView extends FrameLayout {
      * 产生随机数
      */
     private Random mRandom;
+    private int[] mImages = {R.mipmap.ic_snow_img,R.mipmap.ic_star_img,R.mipmap.ic_heart_img};
     /**
      * 所有颜色
      */
-    protected int[] mColors = {Color.BLUE, Color.CYAN, Color.GREEN, Color.RED, Color.MAGENTA, Color.YELLOW};
+    private int[] mColors = {Color.BLUE, Color.CYAN, Color.GREEN, Color.RED, Color.MAGENTA, Color.YELLOW};
 
     /**
      * handler
@@ -105,7 +106,7 @@ public class ColorfulView extends FrameLayout {
      */
     private void initView(){
         mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        mBitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_snow_img);
+        mBitmap = BitmapFactory.decodeResource(getResources(), mImages[0]);
         mRandom = new Random();
 
         switchAnim(true);
@@ -117,6 +118,14 @@ public class ColorfulView extends FrameLayout {
         mScreenWidth = w;
         mScreenHeight = h;
 
+    }
+
+    /**
+     *
+     * @param flag
+     */
+    public void changeImg(int flag){
+        mBitmap = BitmapFactory.decodeResource(getResources(), mImages[flag]);
     }
 
     /**

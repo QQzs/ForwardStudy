@@ -11,8 +11,8 @@
 
         <ImageView
             android:id="@+id/iv_me_icon"
-            android:layout_width="34dp"
-            android:layout_height="34dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:src="@mipmap/default_img"
             android:scaleType="centerInside"
             android:layout_centerVertical="true"/>
@@ -31,8 +31,8 @@
 
         <ImageView
             android:id="@+id/iv_turn_img"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:src="@mipmap/ic_turn_img"
             android:scaleType="centerInside"
             android:layout_alignParentRight="true"

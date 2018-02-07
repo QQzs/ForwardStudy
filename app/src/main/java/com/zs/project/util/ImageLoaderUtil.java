@@ -32,6 +32,9 @@ public class ImageLoaderUtil {
 
     public static void displayImage(String url, ImageView img) {
         mContext = img.getContext();
+        if (mContext == null){
+          return;
+        }
         if (NetworkUtil.isAvailable(mContext)) {
             loadNormal(url, img);
         } else {
@@ -308,6 +311,10 @@ public class ImageLoaderUtil {
         private static String getFormatSize(double size) {
 
         double kiloByte = size / 1024;
+        if (kiloByte == 0){
+            return "0K";
+        }
+
         if (kiloByte < 1) {
             return size + "Byte";
         }

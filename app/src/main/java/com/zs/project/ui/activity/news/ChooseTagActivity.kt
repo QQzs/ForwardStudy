@@ -16,7 +16,7 @@ import com.zs.project.listener.OnTagChangeListener
 import com.zs.project.ui.adapter.QaTagAdapter
 import com.zs.project.util.PublicFieldUtil
 import com.zs.project.util.RecyclerViewUtil
-import com.zs.project.util.SharedPreferencesUtil
+import com.zs.project.util.SpUtil
 import com.zs.project.util.StringUtils
 import kotlinx.android.synthetic.main.activity_choose_tag_layout.*
 import kotlinx.android.synthetic.main.public_title_layout.*
@@ -70,15 +70,15 @@ class ChooseTagActivity : BaseActivity() , OnTagChangeListener{
 
     override fun initData() {
 
-        val selectTitle = SharedPreferencesUtil.getString(PublicFieldUtil.TITLE_SELECTED, "")
-        val unselectTitle = SharedPreferencesUtil.getString(PublicFieldUtil.TITLE_UNSELECTED, "")
+        val selectTitle = SpUtil.getString(PublicFieldUtil.TITLE_SELECTED, "")
+        val unselectTitle = SpUtil.getString(PublicFieldUtil.TITLE_UNSELECTED, "")
         if (StringUtils.isNullOrEmpty(selectTitle) || StringUtils.isNullOrEmpty(unselectTitle)) {
             var titleName = resources.getStringArray(R.array.category_name)
             var titleCode = resources.getStringArray(R.array.category_type)
             for (i in titleCode.indices){
                 mSelectTitles.add(Channel(titleName[i],titleCode[i],Channel.TYPE_MY_CHANNEL))
             }
-            SharedPreferencesUtil.setString(PublicFieldUtil.TITLE_SELECTED , mGson.toJson(mSelectTitles))
+            SpUtil.setString(PublicFieldUtil.TITLE_SELECTED , mGson.toJson(mSelectTitles))
         } else {
             var select = mGson.fromJson<List<Channel>>(selectTitle , object : TypeToken<List<Channel>>(){}.type)
             val unSelecte = mGson.fromJson<List<Channel>>(unselectTitle, object : TypeToken<List<Channel>>() {
@@ -142,8 +142,8 @@ class ChooseTagActivity : BaseActivity() , OnTagChangeListener{
         if (mChanged){
             var selectTitles = mAdapter?.myChannel
             var unSelectTitles = mAdapter?.otherChannel
-            SharedPreferencesUtil.setString(PublicFieldUtil.TITLE_SELECTED,mGson.toJson(selectTitles))
-            SharedPreferencesUtil.setString(PublicFieldUtil.TITLE_UNSELECTED,mGson.toJson(unSelectTitles))
+            SpUtil.setString(PublicFieldUtil.TITLE_SELECTED,mGson.toJson(selectTitles))
+            SpUtil.setString(PublicFieldUtil.TITLE_UNSELECTED,mGson.toJson(unSelectTitles))
             EventBus.getDefault().post(RefreshEvent("title",true))
         }
     }

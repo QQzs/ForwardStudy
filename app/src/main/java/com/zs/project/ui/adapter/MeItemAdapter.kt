@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.zs.project.R
 import com.zs.project.bean.ItemBean
-import com.zs.project.util.ToastUtils
+import com.zs.project.listener.KotlinItemClickListener
 import kotlinx.android.synthetic.main.item_me_layout.view.*
 
 /**
@@ -17,7 +17,7 @@ Time：10:35
 About:
 —————————————————————————————————————
  */
-class MeItemAdapter(private var mData : MutableList<ItemBean>) : RecyclerView.Adapter<MeItemAdapter.MeViewHolder>(){
+class MeItemAdapter(private var mData : MutableList<ItemBean> , var mItemClickListener: KotlinItemClickListener) : RecyclerView.Adapter<MeItemAdapter.MeViewHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): MeViewHolder {
         var view = View.inflate(parent?.context, R.layout.item_me_layout, null)
@@ -35,13 +35,15 @@ class MeItemAdapter(private var mData : MutableList<ItemBean>) : RecyclerView.Ad
 
     inner class MeViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView){
         fun bindData(position: Int){
-            itemView.setOnClickListener {
-                ToastUtils.show("data" + position)
-            }
             var bean = mData[position]
             itemView.iv_me_icon.setImageResource(bean.iconId)
             itemView.tv_me_title.text = bean.itemTitle
 
+            itemView.setOnClickListener {
+                if (mItemClickListener != null){
+                    mItemClickListener.onItemClick(position,bean)
+                }
+            }
         }
     }
 

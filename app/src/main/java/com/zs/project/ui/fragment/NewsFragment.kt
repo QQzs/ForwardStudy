@@ -17,7 +17,7 @@ import com.zs.project.event.RefreshEvent
 import com.zs.project.ui.activity.news.ChooseTagActivity
 import com.zs.project.ui.fragment.news.NewListFragmentKotlin
 import com.zs.project.util.PublicFieldUtil
-import com.zs.project.util.SharedPreferencesUtil
+import com.zs.project.util.SpUtil
 import com.zs.project.util.StringUtils
 import com.zs.project.view.topscorllview.indicator.IndicatorViewPager
 import com.zs.project.view.topscorllview.indicator.slidebar.ColorBar
@@ -83,14 +83,14 @@ class NewsFragment : BaseFragment() , View.OnClickListener{
      * 获取标签数据
      */
     fun initTitleData(){
-        val selectTitle = SharedPreferencesUtil.getString(PublicFieldUtil.TITLE_SELECTED, "")
+        val selectTitle = SpUtil.getString(PublicFieldUtil.TITLE_SELECTED, "")
         if (StringUtils.isNullOrEmpty(selectTitle)) {
             var titleName = resources.getStringArray(R.array.category_name)
             var titleCode = resources.getStringArray(R.array.category_type)
             for (i in titleCode.indices){
                 mSelectTitles.add(Channel(titleName[i],titleCode[i]))
             }
-            SharedPreferencesUtil.setString(PublicFieldUtil.TITLE_SELECTED , mGson.toJson(mSelectTitles))
+            SpUtil.setString(PublicFieldUtil.TITLE_SELECTED , mGson.toJson(mSelectTitles))
         } else {
             var select = mGson.fromJson<List<Channel>>(selectTitle , object : TypeToken<List<Channel>>(){}.type)
             mSelectTitles.clear()

@@ -2,7 +2,7 @@ package com.zs.project.app;
 
 import android.app.Application;
 
-import com.zs.project.util.SharedPreferencesUtil;
+import com.zs.project.util.SpUtil;
 
 /**
  * Created by zs
@@ -21,7 +21,7 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         mApplication = this;
-        SharedPreferencesUtil.init(this,"zs_data");
+        SpUtil.init(this,"zs_data");
     }
 
     public static MyApplication getAppContext(){

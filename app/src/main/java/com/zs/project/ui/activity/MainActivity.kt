@@ -121,7 +121,7 @@ class MainActivity : BaseActivity() {
         }
     }
 
-    fun startAnimation(view: ImageView) {
+    private fun startAnimation(view: ImageView) {
         val scaleXAnimator = ObjectAnimator.ofFloat(view, "scaleX", 0.9f, 1f, 0.95f, 1f)
         scaleXAnimator.repeatCount = 0
         //沿y轴放大
@@ -162,9 +162,15 @@ class MainActivity : BaseActivity() {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun handleScroll(event: RefreshEvent?) {
-        if ("scroll" == event!!.getmFlag()){
-            setVoicePlayerAnim(event.isRefresh)
+        if (event == null){
+            return
         }
+        if ("scroll" == event.getmFlag()){
+            setVoicePlayerAnim(event.isRefresh)
+        }else if ("colorview" == event.getmFlag()){
+            colorfull_bg_view?.changeImg(event.refresh_int)
+        }
+
     }
 
     override fun onClick(view: View) {
