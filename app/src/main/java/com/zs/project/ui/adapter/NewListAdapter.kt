@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import com.zs.project.R
 import com.zs.project.bean.News.NewListBean
 import com.zs.project.listener.KotlinItemClickListener
-import com.zs.project.util.GlideImageLoaderTest
+import com.zs.project.util.ImageLoaderUtil
 import kotlinx.android.synthetic.main.new_list_item_layout.view.*
 
 /**
@@ -51,7 +51,7 @@ class NewListAdapter(private var mData :MutableList<NewListBean> , var mItemClic
             var bean = mData.get(position)
             itemView.tv_new_title?.text = bean.title
             itemView.tv_new_time?.text = bean.time
-            GlideImageLoaderTest.displayImage(bean.pic,itemView.iv_new_list_item)
+            ImageLoaderUtil.displayImage(bean.pic,itemView.iv_new_list_item)
 
             itemView.setOnClickListener {
                 mItemClickListener.onItemClick(position,bean)

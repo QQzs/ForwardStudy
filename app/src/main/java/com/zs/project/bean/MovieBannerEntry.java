@@ -9,7 +9,7 @@ import android.widget.ImageView;
 
 import com.kelin.banner.BannerEntry;
 import com.zs.project.R;
-import com.zs.project.util.GlideImageLoaderTest;
+import com.zs.project.util.ImageLoaderUtil;
 
 /**
  * 创建人 kelin
@@ -38,7 +38,7 @@ public class MovieBannerEntry implements BannerEntry<String> {
     public View onCreateView(ViewGroup parent) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.banner_movie_item_layout, parent, false);
         ImageView imageView = view.findViewById(R.id.iv_image);
-        GlideImageLoaderTest.displayImage(imgUrl,imageView);
+        ImageLoaderUtil.displayImage(imgUrl,imageView);
         return view;
     }
 

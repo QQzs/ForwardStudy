@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.zs.project.view.MultiStateView
+        android:id="@+id/multistate_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:msv_emptyView="@layout/layout_empty"
+        app:msv_errorView="@layout/layout_fail"
+        app:msv_loadingView="@layout/layout_view_loading">
+
+        <WebView
+            android:id="@+id/web_view_detail"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </WebView>
+
+    </com.zs.project.view.MultiStateView>
+
+
+
+</LinearLayout>

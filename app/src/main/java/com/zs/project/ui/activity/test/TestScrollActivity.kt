@@ -1,4 +1,4 @@
-package com.zs.project.ui.activity
+package com.zs.project.ui.activity.test
 
 import android.os.Bundle
 import android.os.Handler
@@ -42,8 +42,6 @@ class TestScrollActivity : AppCompatActivity(){
 
         var zoomHeader = View.inflate(this,R.layout.zoom_header_layout,null)
         scroll_view_pull?.addZoomHeaderView(zoomHeader,ScreenUtil.dp2px(180f))
-        var view = View.inflate(this,R.layout.public_title_layout,null)
-        scroll_view_pull?.addHeaderView(view)
 
         scroll_view_pull?.setPullRefreshEnabled(true)
         scroll_view_pull?.setRefreshProgressStyle(ProgressStyle.BallSpinFadeLoader)

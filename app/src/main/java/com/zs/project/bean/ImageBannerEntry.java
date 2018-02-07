@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.kelin.banner.BannerEntry;
 import com.zs.project.R;
-import com.zs.project.util.GlideImageLoaderTest;
+import com.zs.project.util.ImageLoaderUtil;
 
 /**
  * 创建人 kelin
@@ -41,7 +41,7 @@ public class ImageBannerEntry implements BannerEntry<String> {
         ImageView imageView = view.findViewById(R.id.iv_image);
         TextView tvTitle = view.findViewById(R.id.tv_title);
         TextView tvSubTitle = view.findViewById(R.id.tv_sub_title);
-        GlideImageLoaderTest.displayImage(imgUrl,imageView);
+        ImageLoaderUtil.displayImage(imgUrl,imageView);
         tvTitle.setText(title);
         tvSubTitle.setText(subTitle);
         return view;

@@ -24,7 +24,7 @@
 //import java.math.BigDecimal;
 //
 //
-//public class GlideImageLoader {
+//public class GlideImageLoaderOld {
 //    private static Context mContext;
 //
 //    public static void displayImage(String url, ImageView img) {

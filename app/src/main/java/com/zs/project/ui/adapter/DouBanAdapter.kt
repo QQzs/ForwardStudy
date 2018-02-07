@@ -6,7 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import com.zs.project.R
 import com.zs.project.bean.Movie.MovieDetailData
-import com.zs.project.util.GlideImageLoaderTest
+import com.zs.project.listener.KotlinItemClickListener
+import com.zs.project.util.ImageLoaderUtil
 import com.zs.project.util.StringUtils
 import kotlinx.android.synthetic.main.item_movie_layout.view.*
 
@@ -19,7 +20,7 @@ Time：13:31
 About:
 —————————————————————————————————————
  */
-class DouBanAdapter(private var mData : MutableList<MovieDetailData>) : RecyclerView.Adapter<DouBanAdapter.DouBanHolder>() {
+class DouBanAdapter(private var mData : MutableList<MovieDetailData> , var mItemClickListener: KotlinItemClickListener) : RecyclerView.Adapter<DouBanAdapter.DouBanHolder>() {
 
 
     override fun onBindViewHolder(holder: DouBanHolder?, position: Int) {
@@ -51,13 +52,17 @@ class DouBanAdapter(private var mData : MutableList<MovieDetailData>) : Recycler
 
         fun bindData(position : Int){
             var detail = mData[position]
-            GlideImageLoaderTest.displayImage(detail.images.small,itemView?.iv_movie_img)
+            ImageLoaderUtil.displayImage(detail.images.small,itemView?.iv_movie_img)
             itemView.tv_movie_title.text = detail.title
             itemView.tv_movie_casts.text = "主演：" + StringUtils.castsToString(detail.casts)
             itemView.tv_movie_genres.text = "类型：" + StringUtils.genresToString(detail.genres)
 
             itemView.star_movie_rating.starMark = detail.rating.average / 2
             itemView.tv_movie_rating.text = detail.rating.average.toString()
+
+            itemView.setOnClickListener {
+                mItemClickListener.onItemClick(position,detail)
+            }
 
         }
     }

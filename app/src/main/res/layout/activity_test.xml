@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.zs.project.ui.activity.TestActivity">
+    tools:context="com.zs.project.ui.activity.test.TestActivity">
 
     <RelativeLayout
         android:id="@+id/rl_banner_1"

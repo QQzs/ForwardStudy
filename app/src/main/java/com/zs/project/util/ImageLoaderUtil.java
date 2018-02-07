@@ -25,7 +25,7 @@ import java.io.File;
 import java.math.BigDecimal;
 
 
-public class GlideImageLoaderTest {
+public class ImageLoaderUtil {
     private static Context mContext;
 
     public static RequestOptions options = new RequestOptions().centerCrop();
@@ -57,8 +57,25 @@ public class GlideImageLoaderTest {
      * @param img
      */
     private static void loadCircleImage(String url, ImageView img) {  //placeholder占位符。错误占位符：.error()
-        GlideApp.with(mContext)
+        GlideApp.with(img.getContext())
                 .load(url)
+                .placeholder(R.mipmap.default_img)
+                .error(R.mipmap.default_img)
+                .fallback(R.mipmap.default_img)
+                .dontAnimate()//去掉动画
+                .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
+                .transform(new CircleTransform(mContext))
+                .into(img);
+    }
+
+    /**
+     *
+     * @param resourceId
+     * @param img
+     */
+    public static void loadCircleImage(int resourceId, ImageView img) {  //placeholder占位符。错误占位符：.error()
+        GlideApp.with(mContext)
+                .load(resourceId)
                 .placeholder(R.mipmap.default_img)
                 .error(R.mipmap.default_img)
                 .fallback(R.mipmap.default_img)

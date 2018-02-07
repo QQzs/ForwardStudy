@@ -28,9 +28,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activity.TestActivity"></activity>
-        <activity android:name=".ui.activity.TestScrollActivity"></activity>
+        <activity android:name=".ui.activity.test.TestActivity"></activity>
+        <activity android:name=".ui.activity.test.TestScrollActivity"></activity>
         <activity android:name=".ui.activity.news.ChooseTagActivity"></activity>
+        <activity android:name=".ui.activity.WebViewActivity"></activity>
     </application>
 
 </manifest>

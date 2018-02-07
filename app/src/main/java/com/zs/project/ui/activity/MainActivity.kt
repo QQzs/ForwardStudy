@@ -10,10 +10,15 @@ import android.view.View
 import android.widget.ImageView
 import com.zs.project.R
 import com.zs.project.base.BaseActivity
+import com.zs.project.event.RefreshEvent
 import com.zs.project.ui.fragment.DouBanFragment
 import com.zs.project.ui.fragment.MeFragment
 import com.zs.project.ui.fragment.NewsFragment
+import com.zs.project.util.ScreenUtil
 import kotlinx.android.synthetic.main.activity_main.*
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 
 /**
  * @author Administrator
@@ -27,9 +32,12 @@ class MainActivity : BaseActivity() {
     private var mMeFragment: MeFragment? = null
     private var mFragments : ArrayList<Fragment> ?= null
 
+    var mIsShow = true  // true：语音播放框滑动到显示状态  false：语音播放框移除屏幕状态
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initContentView(R.layout.activity_main)
+        EventBus.getDefault().register(this)
     }
 
     override fun init() {
@@ -128,6 +136,37 @@ class MainActivity : BaseActivity() {
         set.start()
     }
 
+    /**
+     *
+     * @param isShow
+     */
+    private fun setVoicePlayerAnim(isShow: Boolean) {
+        val objectAnimator: ObjectAnimator
+        if (home_bottom_tab?.visibility == View.GONE) {
+            return
+        }
+        if (mIsShow == isShow) {
+            return
+        }
+        if (isShow) {
+            objectAnimator = ObjectAnimator.ofFloat<View>(home_bottom_tab, View.TRANSLATION_Y, ScreenUtil.dp2px(50f).toFloat(), 0f)
+            mIsShow = true
+        } else {
+            objectAnimator = ObjectAnimator.ofFloat<View>(home_bottom_tab, View.TRANSLATION_Y, 0f, ScreenUtil.dp2px(50f).toFloat())
+            mIsShow = false
+        }
+        objectAnimator.duration = 400
+        objectAnimator.start()
+
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun handleScroll(event: RefreshEvent?) {
+        if ("scroll" == event!!.getmFlag()){
+            setVoicePlayerAnim(event.isRefresh)
+        }
+    }
+
     override fun onClick(view: View) {
 
         when(view.id){
@@ -146,5 +185,10 @@ class MainActivity : BaseActivity() {
             }
         }
 
+    }
+
+    override fun onStop() {
+        super.onStop()
+        EventBus.getDefault().unregister(this)
     }
 }

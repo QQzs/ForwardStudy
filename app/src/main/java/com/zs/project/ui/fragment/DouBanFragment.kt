@@ -1,6 +1,7 @@
 package com.zs.project.ui.fragment
 
 import android.os.Bundle
+import android.support.v7.widget.RecyclerView
 import android.view.View
 import com.jcodecraeer.xrecyclerview.ProgressStyle
 import com.jcodecraeer.xrecyclerview.XRecyclerView
@@ -12,10 +13,13 @@ import com.zs.project.base.BaseFragment
 import com.zs.project.bean.Movie.MovieDetailData
 import com.zs.project.bean.Movie.MovieListData
 import com.zs.project.bean.MovieBannerEntry
+import com.zs.project.event.RefreshEvent
+import com.zs.project.listener.KotlinItemClickListener
 import com.zs.project.request.DefaultObserver
 import com.zs.project.request.RequestApi
 import com.zs.project.request.RequestUtil
-import com.zs.project.ui.activity.TestActivity
+import com.zs.project.ui.activity.WebViewActivity
+import com.zs.project.ui.activity.test.TestActivity
 import com.zs.project.ui.adapter.DouBanAdapter
 import com.zs.project.util.RecyclerViewUtil
 import com.zs.project.util.transform.DepthPageTransformer
@@ -23,6 +27,7 @@ import com.zs.project.view.MultiStateView
 import io.reactivex.Observable
 import kotlinx.android.synthetic.main.dou_header_view_layout.view.*
 import kotlinx.android.synthetic.main.public_list_layout.*
+import org.greenrobot.eventbus.EventBus
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 
@@ -35,7 +40,7 @@ import org.jetbrains.anko.toast
  * —————————————————————————————————————
  */
 
-class DouBanFragment : BaseFragment() {
+class DouBanFragment : BaseFragment() , KotlinItemClickListener {
 
     var mTheaterMovie : MutableList<MovieDetailData> ?= null
     var mComingMovie : MutableList<MovieDetailData> ?= null
@@ -83,6 +88,13 @@ class DouBanFragment : BaseFragment() {
 
     }
 
+    override fun onItemClick(position: Int, data: Any) {
+
+        var url = (data as MovieDetailData).alt
+        activity?.startActivity<WebViewActivity>("url" to url)
+
+    }
+
     fun initBanner(){
         mHeadView?.banner_view_top?.setPageTransformer(true, DepthPageTransformer())
         mHeadView?.banner_view_top?.entries = getbannerData(mTheaterMovie!!)
@@ -95,10 +107,10 @@ class DouBanFragment : BaseFragment() {
             }
 
         })
-
+        getMovieTop250()
         recycler_view?.addHeaderView(mHeadView)
         recycler_view?.setLoadingMoreProgressStyle(ProgressStyle.BallGridPulse)
-        mAdapter = DouBanAdapter(ArrayList())
+        mAdapter = DouBanAdapter(ArrayList(),this)
         RecyclerViewUtil.initNoDecoration(activity,recycler_view,mAdapter)
         recycler_view?.setLoadingListener(object : XRecyclerView.LoadingListener{
             override fun onLoadMore() {
@@ -111,7 +123,18 @@ class DouBanFragment : BaseFragment() {
                 getMovieTop250()            }
 
         })
-        getMovieTop250()
+        recycler_view?.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+
+            override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                if (dy > 20) {
+                    EventBus.getDefault().post(RefreshEvent("scroll", false))
+                } else if (dy < -20) {
+                    EventBus.getDefault().post(RefreshEvent("scroll", true))
+                }
+            }
+
+        })
     }
 
 

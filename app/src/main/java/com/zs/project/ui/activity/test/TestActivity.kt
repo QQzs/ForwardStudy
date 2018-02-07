@@ -1,4 +1,4 @@
-package com.zs.project.ui.activity
+package com.zs.project.ui.activity.test
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity

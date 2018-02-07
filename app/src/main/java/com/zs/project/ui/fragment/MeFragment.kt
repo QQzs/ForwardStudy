@@ -6,14 +6,15 @@ import android.view.View
 import com.zs.project.R
 import com.zs.project.app.Constant
 import com.zs.project.base.BaseFragment
+import com.zs.project.bean.ItemBean
 import com.zs.project.request.RequestApi
-import com.zs.project.ui.adapter.MeAdapter
+import com.zs.project.ui.adapter.MeItemAdapter
+import com.zs.project.util.ImageLoaderUtil
 import com.zs.project.util.RecyclerViewUtil
-import com.zs.project.view.scrollview.ScrollableLayout
-import com.zs.project.view.scrollview.ViewHelper
+import com.zs.project.util.ScreenUtil
 import kotlinx.android.synthetic.main.fragment_me_layout.*
+import kotlinx.android.synthetic.main.zoom_header_layout.view.*
 import okhttp3.ResponseBody
-import org.jetbrains.anko.toast
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -32,8 +33,8 @@ import retrofit2.Response
 class MeFragment : BaseFragment() , View.OnClickListener{
     var mFragment : MeFragment ?= null
     var mFlag : Boolean = true
-    var mAdapter : MeAdapter ?= null
-    var mData : MutableList<String> ?= null
+    var mAdapter : MeItemAdapter?= null
+    var mData : MutableList<ItemBean> ?= mutableListOf()
     /**
      * Bundle 后面不加 ？ 会报错误
      * Parameter specified as non-null is null
@@ -52,21 +53,19 @@ class MeFragment : BaseFragment() , View.OnClickListener{
 
     override fun initView() {
         super.initView()
-        iv_avatar_img?.setOnClickListener(this)
 
-        mData = ArrayList()
-        for ( i in 1..10){
-            mData!!.add("")
-        }
-        mAdapter = MeAdapter(mData!!)
+        mData?.add(ItemBean(R.mipmap.ic_me_news,"我的新闻",0))
+        mData?.add(ItemBean(R.mipmap.ic_me_movie,"我的电影",1))
+        mData?.add(ItemBean(R.mipmap.ic_me_setting,"设置",2))
+        mData?.add(ItemBean(R.mipmap.ic_me_about,"关于",3))
+
+        mAdapter = MeItemAdapter(mData!!)
         RecyclerViewUtil.init(activity,recycler_view_me,mAdapter)
         recycler_view_me?.setPullRefreshEnabled(false)
-        scroll_view?.setOnScrollListener(ScrollableLayout.OnScrollListener {
-            currentY, maxY -> ViewHelper.setTranslationY(iv_avatar_img, currentY * 0.7f)
-        })
-        scroll_view?.setCurrentScrollableContainer(recycler_view_me)
-        scroll_view?.setClickHeadExpand(60)
 
+        var zoomHeader = View.inflate(activity,R.layout.zoom_header_layout,null)
+        recycler_view_me?.addZoomHeaderView(zoomHeader, ScreenUtil.dp2px(180f))
+        ImageLoaderUtil.loadCircleImage(R.mipmap.default_img,zoomHeader.tv_me_avator)
 
     }
 
@@ -90,14 +89,10 @@ class MeFragment : BaseFragment() , View.OnClickListener{
     override fun onClick(view: View?) {
 
         when(view?.id){
-            R.id.iv_avatar_img ->{
-                activity?.toast("hhh")
-                mFlag = !mFlag
-                colorfull_bg_view?.switchAnim(mFlag)
-            }
-
-//            R.id.tv_bottom ->{
-//                activity?.toast("wwwwwww")
+//            R.id.iv_avatar_img ->{
+//                activity?.toast("hhh")
+//                mFlag = !mFlag
+//                colorfull_bg_view?.switchAnim(mFlag)
 //            }
 
         }
