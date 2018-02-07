@@ -20,14 +20,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/MyAppTheme">
-        <activity android:name=".ui.activity.MainActivity"
+        <activity android:name=".ui.activity.GuideActivity"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui.activity.MainActivity"></activity>
         <activity android:name=".ui.activity.test.TestActivity"></activity>
         <activity android:name=".ui.activity.test.TestScrollActivity"></activity>
         <activity android:name=".ui.activity.news.ChooseTagActivity"></activity>

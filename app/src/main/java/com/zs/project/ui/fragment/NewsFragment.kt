@@ -67,7 +67,7 @@ class NewsFragment : BaseFragment() , View.OnClickListener{
         initTitleData()
         indicator_layout?.isSplitAuto = false
         indicator_layout?.setPinnedTabView(false)
-        var colorBar = ColorBar(activity,Color.parseColor("#d81e06"), activity!!.dip(2f), ScrollBar.Gravity.BOTTOM)
+        var colorBar = ColorBar(activity,Color.parseColor("#e86060"), activity!!.dip(2f), ScrollBar.Gravity.BOTTOM)
         indicator_layout?.setScrollBar(colorBar)
         indicator_layout?.onTransitionListener = OnTransitionTextListener().setColor(activity!!.resources.getColor(R.color.color_red)
         , activity!!.resources.getColor(R.color.font_default))

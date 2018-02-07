@@ -17,7 +17,8 @@
     </style>
 
     <style name="SplashTheme" parent="MyAppTheme">
-        <item name="android:windowBackground">@drawable/iv_app_splash</item>
+        <item name="android:windowBackground">@mipmap/iv_app_splash</item>
+        <item name="android:windowFullscreen">true</item>
         <item name="windowNoTitle">true</item>
     </style>
 

@@ -89,11 +89,6 @@ class MeFragment : BaseFragment() , View.OnClickListener{
     override fun onClick(view: View?) {
 
         when(view?.id){
-//            R.id.iv_avatar_img ->{
-//                activity?.toast("hhh")
-//                mFlag = !mFlag
-//                colorfull_bg_view?.switchAnim(mFlag)
-//            }
 
         }
 

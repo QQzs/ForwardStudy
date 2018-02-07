@@ -22,7 +22,6 @@ About:
  */
 class DouBanAdapter(private var mData : MutableList<MovieDetailData> , var mItemClickListener: KotlinItemClickListener) : RecyclerView.Adapter<DouBanAdapter.DouBanHolder>() {
 
-
     override fun onBindViewHolder(holder: DouBanHolder?, position: Int) {
         holder?.bindData(position)
     }
