@@ -15,14 +15,17 @@ public class ColorBean {
 
     private boolean choose;
 
+    private int iconId;
+
     private String name;
 
     public ColorBean(int index) {
         this.index = index;
     }
 
-    public ColorBean(int index, String name) {
+    public ColorBean(int index, int id , String name) {
         this.index = index;
+        this.iconId = id;
         this.name = name;
     }
 
@@ -48,5 +51,13 @@ public class ColorBean {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getIconId() {
+        return iconId;
+    }
+
+    public void setIconId(int iconId) {
+        this.iconId = iconId;
     }
 }

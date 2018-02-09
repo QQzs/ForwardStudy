@@ -3,6 +3,7 @@ package com.zs.project.app;
 import android.graphics.Color;
 import android.os.Environment;
 
+import com.zs.project.R;
 import com.zs.project.util.FileUtils;
 
 public class Constant {
@@ -30,6 +31,9 @@ public class Constant {
             "雪花" , "星星" , "爱心"
     };
 
+    public static final int[] iconId = new int[]{
+            R.mipmap.ic_snow_img, R.mipmap.ic_star_img, R.mipmap.ic_heart_img
+    };
     public static final String MOVIE_THEATERS = "in_theaters";
     public static final String MOVIE_COMING = "coming_soon";
     public static final String MOVIE_TOP = "top250";
