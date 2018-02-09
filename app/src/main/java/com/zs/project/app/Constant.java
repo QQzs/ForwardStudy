@@ -26,6 +26,10 @@ public class Constant {
             Color.parseColor("#F6BC7E")
     };
 
+    public static final String[] iconNames = new String[]{
+            "雪花" , "星星" , "爱心"
+    };
+
     public static final String MOVIE_THEATERS = "in_theaters";
     public static final String MOVIE_COMING = "coming_soon";
     public static final String MOVIE_TOP = "top250";

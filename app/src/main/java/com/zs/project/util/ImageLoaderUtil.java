@@ -77,7 +77,7 @@ public class ImageLoaderUtil {
      * @param img
      */
     public static void loadCircleImage(int resourceId, ImageView img) {  //placeholder占位符。错误占位符：.error()
-        GlideApp.with(mContext)
+        GlideApp.with(img.getContext())
                 .load(resourceId)
                 .placeholder(R.mipmap.default_img)
                 .error(R.mipmap.default_img)

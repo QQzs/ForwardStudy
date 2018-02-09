@@ -15,6 +15,7 @@ import com.zs.project.ui.fragment.DouBanFragment
 import com.zs.project.ui.fragment.MeFragment
 import com.zs.project.ui.fragment.NewsFragment
 import com.zs.project.util.ScreenUtil
+import com.zs.project.util.SpUtil
 import kotlinx.android.synthetic.main.activity_main.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -58,6 +59,7 @@ class MainActivity : BaseActivity() {
         fragment_douban?.setOnClickListener(this)
         fragment_me?.setOnClickListener(this)
 
+        colorfull_bg_view?.changeImg(SpUtil.getInt("color_view",0))
     }
 
     override fun initData() {

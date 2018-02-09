@@ -125,6 +125,9 @@ public class ColorfulView extends FrameLayout {
      * @param flag
      */
     public void changeImg(int flag){
+        if (flag > mImages.length -1){
+            flag = 0;
+        }
         mBitmap = BitmapFactory.decodeResource(getResources(), mImages[flag]);
     }
 

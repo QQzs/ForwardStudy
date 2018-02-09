@@ -30,6 +30,16 @@
             android:textColor="@color/white"
             android:textSize="@dimen/fontsize16" />
 
+        <TextView
+            android:id="@+id/tv_all_right"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:gravity="center"
+            android:text=""
+            android:textColor="@color/white"
+            android:textSize="@dimen/fontsize14" />
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1px"
