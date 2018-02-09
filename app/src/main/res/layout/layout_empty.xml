@@ -16,7 +16,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:background="@mipmap/user_shouru_kong"/>
+            android:background="@mipmap/ic_null_img"/>
 
         <TextView
             android:id="@+id/null_tv"
@@ -25,7 +25,7 @@
             android:layout_below="@id/null_img"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="15dp"
-            android:text="暂无内容~"
+            android:text=""
             android:textColor="@color/font_default"
             android:textSize="14sp"/>
     </RelativeLayout>

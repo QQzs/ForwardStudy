@@ -9,9 +9,12 @@ import com.zs.project.base.BaseFragment
 import com.zs.project.bean.ItemBean
 import com.zs.project.listener.KotlinItemClickListener
 import com.zs.project.request.RequestApi
+import com.zs.project.ui.activity.AboutActivity
+import com.zs.project.ui.activity.CollectionActivity
 import com.zs.project.ui.activity.SettingActivity
 import com.zs.project.ui.adapter.MeItemAdapter
 import com.zs.project.util.ImageLoaderUtil
+import com.zs.project.util.PublicFieldUtil
 import com.zs.project.util.RecyclerViewUtil
 import com.zs.project.util.ScreenUtil
 import kotlinx.android.synthetic.main.fragment_me_layout.*
@@ -101,16 +104,16 @@ class MeFragment : BaseFragment() , View.OnClickListener , KotlinItemClickListen
         var bean = data as ItemBean
         when(bean.type){
             0 ->{
-
+                activity?.startActivity<CollectionActivity>(PublicFieldUtil.FLAG_FIELD to "news")
             }
             1 ->{
-
+                activity?.startActivity<CollectionActivity>(PublicFieldUtil.FLAG_FIELD to "movies")
             }
             2 ->{
                activity?.startActivity<SettingActivity>()
             }
             3 ->{
-
+                activity?.startActivity<AboutActivity>()
             }
         }
 

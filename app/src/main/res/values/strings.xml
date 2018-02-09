@@ -11,4 +11,6 @@
     <string name="main_color_red">#d81e06</string>
     <string name="main_color_gray">#bfbfbf</string>
 
+    <string name="transition_image">transition_pinchimageview</string>
+
 </resources>

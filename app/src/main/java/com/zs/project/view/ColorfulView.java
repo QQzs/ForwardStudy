@@ -22,7 +22,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
-import com.zs.project.R;
+import com.zs.project.app.Constant;
 import com.zs.project.util.BezierUtil;
 
 import java.util.Random;
@@ -46,6 +46,10 @@ public class ColorfulView extends FrameLayout {
      * 复制图
      */
     private Bitmap mCopyBitmap;
+    /**
+     * icon标志
+     */
+    private int mFlag;
 
     private int mScreenWidth;
     private int mScreenHeight;
@@ -62,7 +66,6 @@ public class ColorfulView extends FrameLayout {
      * 产生随机数
      */
     private Random mRandom;
-    private int[] mImages = {R.mipmap.ic_snow_img,R.mipmap.ic_star_img,R.mipmap.ic_heart_img};
     /**
      * 所有颜色
      */
@@ -106,7 +109,7 @@ public class ColorfulView extends FrameLayout {
      */
     private void initView(){
         mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        mBitmap = BitmapFactory.decodeResource(getResources(), mImages[0]);
+        mBitmap = BitmapFactory.decodeResource(getResources(), Constant.iconId[0]);
         mRandom = new Random();
 
         switchAnim(true);
@@ -125,10 +128,12 @@ public class ColorfulView extends FrameLayout {
      * @param flag
      */
     public void changeImg(int flag){
-        if (flag > mImages.length -1){
-            flag = 0;
+        if (flag > Constant.iconId.length -1){
+            mFlag = 0;
+        }else{
+            mFlag = flag;
         }
-        mBitmap = BitmapFactory.decodeResource(getResources(), mImages[flag]);
+        mBitmap = BitmapFactory.decodeResource(getResources(), Constant.iconId[mFlag]);
     }
 
     /**
@@ -213,12 +218,16 @@ public class ColorfulView extends FrameLayout {
         mConOnePoint = new Point((int) (mScreenWidth * mRandom.nextFloat()), (int) (mScreenHeight * mRandom.nextFloat() ));
         mConTwoPoint = new Point((int) (mScreenWidth * mRandom.nextFloat()), (int) (mScreenHeight * mRandom.nextFloat() ));
 
-        mCopyBitmap = Bitmap.createBitmap(mBitmap.getWidth(),mBitmap.getHeight(), Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(mCopyBitmap);
-        canvas.drawBitmap(mBitmap,0,0,mPaint);
-        canvas.drawColor(mColors[mRandom.nextInt(mColors.length)], PorterDuff.Mode.SRC_IN);
         final ImageView imageView = new ImageView(getContext());
-        imageView.setImageBitmap(mCopyBitmap);
+        if (mFlag == 3 || mFlag == 4){
+            imageView.setImageBitmap(mBitmap);
+        }else{
+            mCopyBitmap = Bitmap.createBitmap(mBitmap.getWidth(),mBitmap.getHeight(), Bitmap.Config.ARGB_8888);
+            Canvas canvas = new Canvas(mCopyBitmap);
+            canvas.drawBitmap(mBitmap,0,0,mPaint);
+            canvas.drawColor(mColors[mRandom.nextInt(mColors.length)], PorterDuff.Mode.SRC_IN);
+            imageView.setImageBitmap(mCopyBitmap);
+        }
         FrameLayout.LayoutParams params = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         addView(imageView,params);
         initAnimation(imageView);

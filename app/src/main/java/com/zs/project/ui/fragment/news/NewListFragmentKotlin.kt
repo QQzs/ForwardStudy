@@ -170,6 +170,19 @@ class NewListFragmentKotlin : LazyFragmentKotlin(), View.OnClickListener , Kotli
         activity!!.startActivity<WebViewActivity>("url" to url)
     }
 
+//    public fun turnImage(view : ImageView){
+//
+//        val intent = Intent(activity, ImageShowActivity::class.java)
+//        val optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(
+//                mFragment,
+//                view,
+//                getString(R.string.transition_image)
+//        )
+//        ActivityCompat.startActivity.activity, intent, optionsCompat.toBundle())
+//
+//    }
+
+
     override fun requestData(request: Observable<*>?, type: Int) {
         super.requestData(request, type)
         var observable = RequestUtil.getObservable(request)

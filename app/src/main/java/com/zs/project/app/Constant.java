@@ -28,11 +28,12 @@ public class Constant {
     };
 
     public static final String[] iconNames = new String[]{
-            "雪花" , "星星" , "爱心"
+            "雪花" , "星星" , "爱心" , "金币" ,"红包"
     };
 
     public static final int[] iconId = new int[]{
             R.mipmap.ic_snow_img, R.mipmap.ic_star_img, R.mipmap.ic_heart_img
+            , R.mipmap.ic_money_img , R.mipmap.ic_red_img
     };
     public static final String MOVIE_THEATERS = "in_theaters";
     public static final String MOVIE_COMING = "coming_soon";

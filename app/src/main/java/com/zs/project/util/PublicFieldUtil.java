@@ -14,4 +14,7 @@ public class PublicFieldUtil {
     public static String TITLE_SELECTED = "title_selected";
     public static String TITLE_UNSELECTED = "title_unselected";
 
+    public static String FLAG_FIELD = "flag";
+    public static String URL_FIELD = "url";
+
 }

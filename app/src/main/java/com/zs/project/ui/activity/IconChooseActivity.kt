@@ -41,15 +41,13 @@ class IconChooseActivity : BaseActivity(){
     override fun init() {
 
         tv_all_title?.text = "选择图标"
-        tv_all_right?.text = "保存"
         iv_all_back?.setOnClickListener(this)
-        tv_all_right?.setOnClickListener(this)
 
     }
 
     override fun initData() {
 
-        for (i in 0..2){
+        for (i in iconId.indices){
             mDatas.add(ColorBean(i , iconId[i], iconNames[i]))
         }
         mFlag = SpUtil.getInt("color_view",0)
@@ -106,12 +104,13 @@ class IconChooseActivity : BaseActivity(){
             R.id.iv_all_back ->{
                 finish()
             }
-            R.id.tv_all_right ->{
-                SpUtil.setInt("color_view",mFlag)
-                EventBus.getDefault().post(RefreshEvent("colorview",mFlag))
-                finish()
-            }
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        SpUtil.setInt("color_view",mFlag)
+        EventBus.getDefault().post(RefreshEvent("colorview",mFlag))
     }
 
 }
