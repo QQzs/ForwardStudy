@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.zs.project.R
 import com.zs.project.bean.News.NewListBean
+import com.zs.project.listener.ItemClickListener
 import com.zs.project.listener.KotlinItemClickListener
 import com.zs.project.util.ImageLoaderUtil
 import kotlinx.android.synthetic.main.new_list_item_layout.view.*
@@ -19,7 +20,7 @@ Time：17:43
 About:
 —————————————————————————————————————
  */
-class NewListAdapter(private var mData :MutableList<NewListBean> , var mItemClickListener: KotlinItemClickListener): RecyclerView.Adapter<NewListAdapter.NewListHoler>(){
+class NewListAdapter(private var mData :MutableList<NewListBean> , var mItemClickListener: KotlinItemClickListener , var mViewClickListener : ItemClickListener): RecyclerView.Adapter<NewListAdapter.NewListHoler>(){
 
 
 
@@ -56,7 +57,7 @@ class NewListAdapter(private var mData :MutableList<NewListBean> , var mItemClic
             ImageLoaderUtil.displayImage(bean.pic,itemView.iv_new_list_item)
 
             itemView.iv_new_list_item.setOnClickListener {
-
+                mViewClickListener.onItemClick(position , bean , itemView)
             }
 
 

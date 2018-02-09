@@ -43,7 +43,7 @@
                 android:id="@+id/iv_new_list_item"
                 android:layout_width="100dp"
                 android:layout_height="80dp"
-                android:scaleType="matrix"
+                android:scaleType="centerCrop"
                 android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="10dp"
