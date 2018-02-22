@@ -18,7 +18,6 @@ import com.zs.project.bean.News.NewListBean
 import com.zs.project.bean.News.NewListData
 import com.zs.project.event.RefreshEvent
 import com.zs.project.listener.ItemClickListener
-import com.zs.project.listener.KotlinItemClickListener
 import com.zs.project.request.DefaultObserver
 import com.zs.project.request.RequestApi
 import com.zs.project.request.RequestUtil
@@ -44,7 +43,7 @@ Time：14:49
 About: 资讯列表界面
 —————————————————————————————————————
  */
-class NewListFragmentKotlin : LazyFragmentKotlin(), View.OnClickListener , KotlinItemClickListener , ItemClickListener{
+class NewListFragmentKotlin : LazyFragmentKotlin(), View.OnClickListener , ItemClickListener{
 
     /**
      *  继承懒加载fragment LazyFragmentKotlin
@@ -104,7 +103,7 @@ class NewListFragmentKotlin : LazyFragmentKotlin(), View.OnClickListener , Kotli
         mTitleCode = arguments?.getString("code")
 
         loading_page_fail?.setOnClickListener(mFragment)
-        mAdapter = NewListAdapter(ArrayList(),this, this)
+        mAdapter = NewListAdapter(ArrayList(),this)
         recycler_view?.setLoadingMoreProgressStyle(ProgressStyle.BallRotate)
         recycler_view?.setRefreshProgressStyle(ProgressStyle.BallSpinFadeLoader)
         RecyclerViewUtil.init(activity,recycler_view,mAdapter)
@@ -164,28 +163,34 @@ class NewListFragmentKotlin : LazyFragmentKotlin(), View.OnClickListener , Kotli
         }
     }
 
-    override fun onItemClick(position: Int, data: Any) {
+    override fun onItemClick(position: Int, data: Any, view: View) {
 
-//        Snackbar.make(multistate_view!!,"dddd",Snackbar.LENGTH_SHORT).show()
+        when(view.id){
+            R.id.iv_new_list_item ->{
+                val intent = Intent(activity, ImageShowActivity::class.java)
+                intent.putExtra(PublicFieldUtil.URL_FIELD,(data as NewListBean).pic)
+//                startActivity(intent)
+                val optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                        activity as Activity,
+                        view.findViewById(R.id.iv_new_list_item),
+                        getString(R.string.transition_image)
+                )
+                ActivityCompat.startActivity(activity as Activity, intent, optionsCompat.toBundle())
+            }
+
+            R.id.rl_item_view ->{
+                var url = (data as NewListBean).weburl
+                activity!!.startActivity<WebViewActivity>("url" to url)
+                //        Snackbar.make(multistate_view!!,"dddd",Snackbar.LENGTH_SHORT).show()
 
 //        val imageView = ImageView(context)
 //        imageView.setImageResource(R.mipmap.default_img)
 //        SnackbarUtils.Short(multistate_view!!,"ffffff")
 //                .show()
+            }
+        }
 
-        var url = (data as NewListBean).weburl
-        activity!!.startActivity<WebViewActivity>("url" to url)
-    }
 
-    override fun onItemClick(position: Int, data: Any, view: View) {
-        val intent = Intent(activity, ImageShowActivity::class.java)
-        intent.putExtra(PublicFieldUtil.URL_FIELD,(data as NewListBean).pic)
-        val optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(
-                activity as Activity,
-                view.findViewById(R.id.iv_new_list_item),
-                getString(R.string.transition_image)
-        )
-        ActivityCompat.startActivity(activity as Activity, intent, optionsCompat.toBundle())
 
     }
 

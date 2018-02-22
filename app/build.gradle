@@ -45,6 +45,11 @@ dependencies {
     compile "com.android.support:cardview-v7:27.0.2"
     compile 'com.jcodecraeer:xrecyclerview:1.5.8'
     compile 'com.android.support:design:27.0.2'
+
+    compile 'com.github.chrisbanes:PhotoView:2.0.0'
+    compile 'com.bm.photoview:library:1.4.1'
+
+
     compile project(':bannerview')
     compile project(':layoutmanager')
     testCompile 'junit:junit:4.12'
