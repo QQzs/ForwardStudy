@@ -37,6 +37,11 @@ class CollectionActivity : BaseActivity(){
         }
         iv_all_back?.setOnClickListener(this)
 
+
+        var bundle = Bundle()
+        bundle.putString(PublicFieldUtil.TYPE,mFlag)
+        mFragment.arguments = bundle
+
         var fragmentManager = supportFragmentManager
         var fragmenttransaction = fragmentManager?.beginTransaction()
         fragmenttransaction?.add(R.id.fl_data_content , mFragment)

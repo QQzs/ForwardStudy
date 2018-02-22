@@ -235,7 +235,7 @@ public class QaTagAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
         public TagViewHolder(View itemView) {
             super(itemView);
-            tv_text = (TextView) itemView.findViewById(R.id.tv_text);
+            tv_text = itemView.findViewById(R.id.tv_text);
         }
     }
 
