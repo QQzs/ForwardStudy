@@ -5,11 +5,16 @@ import android.view.View
 import com.zs.project.R
 import com.zs.project.base.BaseFragment
 import com.zs.project.greendao.*
+import com.zs.project.listener.ItemClickListener
+import com.zs.project.listener.ItemLongClickListener
+import com.zs.project.ui.activity.WebViewActivity
 import com.zs.project.ui.adapter.CollectListAdapter
 import com.zs.project.util.PublicFieldUtil
+import com.zs.project.util.RecyclerViewUtil
+import com.zs.project.util.SnackbarUtils
 import com.zs.project.view.MultiStateView
 import kotlinx.android.synthetic.main.public_list_layout.*
-import org.jetbrains.anko.toast
+import org.jetbrains.anko.startActivity
 
 /**
  *
@@ -20,11 +25,11 @@ Time：16:57
 About:
 —————————————————————————————————————
  */
-class CollectionFragment : BaseFragment(){
+class CollectionFragment : BaseFragment() , ItemClickListener , ItemLongClickListener{
 
     var mType : String ?= null
-    private var mNewData :MutableList<NewData> ?= null
-    private var mMovieData :MutableList<MovieData> ?= null
+    private var mNewData :MutableList<NewData> = arrayListOf()
+    private var mMovieData :MutableList<MovieData> = arrayListOf()
     private var mAdapter : CollectListAdapter ?= null
 
     override fun onCreateView(savedInstanceState: Bundle?) {
@@ -36,7 +41,6 @@ class CollectionFragment : BaseFragment(){
         super.onViewCreated(view, savedInstanceState)
 
         mType = arguments?.getString(PublicFieldUtil.TYPE)
-        activity?.toast("type = " + mType)
         initView()
         initData()
 
@@ -53,7 +57,11 @@ class CollectionFragment : BaseFragment(){
             if (mNewData == null || mNewData!!.size == 0){
                 multistate_view?.viewState = MultiStateView.VIEW_STATE_EMPTY
             }else{
-//                mAdapter = CollectListAdapter("news",this)
+                multistate_view?.viewState = MultiStateView.VIEW_STATE_CONTENT
+                mAdapter = CollectListAdapter("news",this,this)
+                RecyclerViewUtil.init(activity,recycler_view,mAdapter)
+                mAdapter?.updateNewData(mNewData)
+
             }
 
         }else{
@@ -61,10 +69,33 @@ class CollectionFragment : BaseFragment(){
             if (mMovieData == null || mMovieData!!.size == 0){
                 multistate_view?.viewState = MultiStateView.VIEW_STATE_EMPTY
             }else{
-
+                multistate_view?.viewState = MultiStateView.VIEW_STATE_CONTENT
+                mAdapter = CollectListAdapter("movies",this,this)
+                RecyclerViewUtil.initNoDecoration(activity,recycler_view,mAdapter)
+                mAdapter?.updateMovieData(mMovieData)
             }
         }
+        recycler_view?.setPullRefreshEnabled(false)
 
+    }
+
+    override fun onItemClick(position: Int, data: Any, view: View) {
+        if ("news" == mType){
+            var url = (data as NewData).weburl
+            activity!!.startActivity<WebViewActivity>("url" to url)
+        }else{
+            var url = (data as MovieData).url
+            activity?.startActivity<WebViewActivity>("url" to url)
+        }
+    }
+
+    override fun onItemLongClick(position: Int, data: Any, view: View) {
+        SnackbarUtils.Long(multistate_view!!,"删除收藏~")
+                .setAction("确定", View.OnClickListener {
+
+                })
+                .warning()
+                .show()
     }
 
     private fun getNewDao() : NewDataDao{

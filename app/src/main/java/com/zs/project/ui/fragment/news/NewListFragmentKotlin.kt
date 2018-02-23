@@ -2,6 +2,7 @@ package com.zs.project.ui.fragment.news
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.app.ActivityCompat
 import android.support.v4.app.ActivityOptionsCompat
@@ -14,10 +15,13 @@ import com.jcodecraeer.xrecyclerview.XRecyclerView
 import com.zs.project.R
 import com.zs.project.app.Constant
 import com.zs.project.base.LazyFragmentKotlin
-import com.zs.project.bean.News.NewListBean
 import com.zs.project.bean.News.NewListData
 import com.zs.project.event.RefreshEvent
+import com.zs.project.greendao.GreenDaoManager
+import com.zs.project.greendao.NewData
+import com.zs.project.greendao.NewDataDao
 import com.zs.project.listener.ItemClickListener
+import com.zs.project.listener.ItemLongClickListener
 import com.zs.project.request.DefaultObserver
 import com.zs.project.request.RequestApi
 import com.zs.project.request.RequestUtil
@@ -26,6 +30,7 @@ import com.zs.project.ui.activity.WebViewActivity
 import com.zs.project.ui.adapter.NewListAdapter
 import com.zs.project.util.PublicFieldUtil
 import com.zs.project.util.RecyclerViewUtil
+import com.zs.project.util.SnackbarUtils
 import com.zs.project.util.StringUtils
 import com.zs.project.view.MultiStateView
 import io.reactivex.Observable
@@ -43,7 +48,7 @@ Time：14:49
 About: 资讯列表界面
 —————————————————————————————————————
  */
-class NewListFragmentKotlin : LazyFragmentKotlin(), View.OnClickListener , ItemClickListener{
+class NewListFragmentKotlin : LazyFragmentKotlin(), View.OnClickListener , ItemClickListener , ItemLongClickListener{
 
     /**
      *  继承懒加载fragment LazyFragmentKotlin
@@ -103,7 +108,7 @@ class NewListFragmentKotlin : LazyFragmentKotlin(), View.OnClickListener , ItemC
         mTitleCode = arguments?.getString("code")
 
         loading_page_fail?.setOnClickListener(mFragment)
-        mAdapter = NewListAdapter(ArrayList(),this)
+        mAdapter = NewListAdapter(ArrayList(),this,this)
         recycler_view?.setLoadingMoreProgressStyle(ProgressStyle.BallRotate)
         recycler_view?.setRefreshProgressStyle(ProgressStyle.BallSpinFadeLoader)
         RecyclerViewUtil.init(activity,recycler_view,mAdapter)
@@ -168,7 +173,7 @@ class NewListFragmentKotlin : LazyFragmentKotlin(), View.OnClickListener , ItemC
         when(view.id){
             R.id.iv_new_list_item ->{
                 val intent = Intent(activity, ImageShowActivity::class.java)
-                intent.putExtra(PublicFieldUtil.URL_FIELD,(data as NewListBean).pic)
+                intent.putExtra(PublicFieldUtil.URL_FIELD,(data as NewData).pic)
 //                startActivity(intent)
                 val optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(
                         activity as Activity,
@@ -179,7 +184,7 @@ class NewListFragmentKotlin : LazyFragmentKotlin(), View.OnClickListener , ItemC
             }
 
             R.id.rl_item_view ->{
-                var url = (data as NewListBean).weburl
+                var url = (data as NewData).weburl
                 activity!!.startActivity<WebViewActivity>("url" to url)
                 //        Snackbar.make(multistate_view!!,"dddd",Snackbar.LENGTH_SHORT).show()
 
@@ -190,8 +195,19 @@ class NewListFragmentKotlin : LazyFragmentKotlin(), View.OnClickListener , ItemC
             }
         }
 
+    }
 
+    override fun onItemLongClick(position: Int, data: Any, view: View) {
 
+        getNewDao().insertOrReplace(data as NewData)
+        SnackbarUtils.Short(multistate_view,"收藏成功~")
+                .backColor(Color.parseColor("#e86060"))
+                .show()
+
+    }
+
+    private fun getNewDao() : NewDataDao {
+        return GreenDaoManager.getInstance().session.newDataDao
     }
 
     override fun requestData(request: Observable<*>?, type: Int) {
@@ -202,7 +218,7 @@ class NewListFragmentKotlin : LazyFragmentKotlin(), View.OnClickListener , ItemC
                 observable.subscribe(object : DefaultObserver<NewListData>(mFragment){
                     override fun onSuccess(response: NewListData?) {
                         Log.d("My_Log",response.toString())
-                        var listData : MutableList<NewListBean>? = response?.result?.result?.list
+                        var listData : MutableList<NewData>? = response?.result?.result?.list
 
                         if (listData == null || listData.size == 0){
                             if (mStartNum == 0){

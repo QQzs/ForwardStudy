@@ -6,7 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import com.zs.project.R
 import com.zs.project.bean.Movie.MovieDetailData
-import com.zs.project.listener.KotlinItemClickListener
+import com.zs.project.greendao.MovieData
+import com.zs.project.listener.ItemClickListener
+import com.zs.project.listener.ItemLongClickListener
 import com.zs.project.util.ImageLoaderUtil
 import com.zs.project.util.StringUtils
 import kotlinx.android.synthetic.main.item_movie_layout.view.*
@@ -20,7 +22,7 @@ Time：13:31
 About:
 —————————————————————————————————————
  */
-class DouBanAdapter(private var mData : MutableList<MovieDetailData> , var mItemClickListener: KotlinItemClickListener) : RecyclerView.Adapter<DouBanAdapter.DouBanHolder>() {
+class DouBanAdapter(private var mData : MutableList<MovieDetailData>, var mItemClickListener: ItemClickListener, var mItemLongClickListener: ItemLongClickListener) : RecyclerView.Adapter<DouBanAdapter.DouBanHolder>() {
 
     override fun onBindViewHolder(holder: DouBanHolder?, position: Int) {
         holder?.bindData(position)
@@ -60,7 +62,14 @@ class DouBanAdapter(private var mData : MutableList<MovieDetailData> , var mItem
             itemView.tv_movie_rating.text = detail.rating.average.toString()
 
             itemView.setOnClickListener {
-                mItemClickListener.onItemClick(position,detail)
+                mItemClickListener.onItemClick(position,detail,itemView.rl_movie_item)
+            }
+
+            itemView.setOnLongClickListener {
+                var movie = MovieData(detail.id.toLong(),detail.images.small,itemView.tv_movie_title.text.toString(),itemView.tv_movie_casts.text.toString(),itemView.tv_movie_genres.text.toString(),detail.alt,detail.rating.average)
+                mItemLongClickListener.onItemLongClick(position,movie,itemView.rl_movie_item)
+                true
+
             }
 
         }

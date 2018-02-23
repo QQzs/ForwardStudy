@@ -154,31 +154,7 @@ public class SnackbarUtils {
      * @return
      */
     public static SnackbarUtils Short(View view, String message){
-        /*
-        <view xmlns:android="http://schemas.android.com/apk/res/android"
-          class="android.support.design.widget.Snackbar$SnackbarLayout"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_gravity="bottom"
-          android:theme="@style/ThemeOverlay.AppCompat.Dark"
-          style="@style/Widget.Design.Snackbar" />
-        <style name="Widget.Design.Snackbar" parent="android:Widget">
-            <item name="android:minWidth">@dimen/design_snackbar_min_width</item>
-            <item name="android:maxWidth">@dimen/design_snackbar_max_width</item>
-            <item name="android:background">@drawable/design_snackbar_background</item>
-            <item name="android:paddingLeft">@dimen/design_snackbar_padding_horizontal</item>
-            <item name="android:paddingRight">@dimen/design_snackbar_padding_horizontal</item>
-            <item name="elevation">@dimen/design_snackbar_elevation</item>
-            <item name="maxActionInlineWidth">@dimen/design_snackbar_action_inline_max_width</item>
-        </style>
-        <shape xmlns:android="http://schemas.android.com/apk/res/android"
-            android:shape="rectangle">
-            <corners android:radius="@dimen/design_snackbar_background_corner_radius"/>
-            <solid android:color="@color/design_snackbar_background_color"/>
-        </shape>
-        <color name="design_snackbar_background_color">#323232</color>
-        */
-        return new SnackbarUtils(new WeakReference<Snackbar>(Snackbar.make(view,message,Snackbar.LENGTH_SHORT))).backColor(0XFF323232);
+        return new SnackbarUtils(new WeakReference<Snackbar>(Snackbar.make(view,message,Snackbar.LENGTH_SHORT))).backColor(0Xffe86060);
     }
     /**
      * 初始化Snackbar实例

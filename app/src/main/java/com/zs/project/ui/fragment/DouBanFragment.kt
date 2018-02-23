@@ -1,5 +1,6 @@
 package com.zs.project.ui.fragment
 
+import android.graphics.Color
 import android.os.Bundle
 import android.support.v7.widget.RecyclerView
 import android.view.View
@@ -14,7 +15,11 @@ import com.zs.project.bean.Movie.MovieDetailData
 import com.zs.project.bean.Movie.MovieListData
 import com.zs.project.bean.MovieBannerEntry
 import com.zs.project.event.RefreshEvent
-import com.zs.project.listener.KotlinItemClickListener
+import com.zs.project.greendao.GreenDaoManager
+import com.zs.project.greendao.MovieData
+import com.zs.project.greendao.MovieDataDao
+import com.zs.project.listener.ItemClickListener
+import com.zs.project.listener.ItemLongClickListener
 import com.zs.project.request.DefaultObserver
 import com.zs.project.request.RequestApi
 import com.zs.project.request.RequestUtil
@@ -22,6 +27,7 @@ import com.zs.project.ui.activity.WebViewActivity
 import com.zs.project.ui.activity.test.TestActivity
 import com.zs.project.ui.adapter.DouBanAdapter
 import com.zs.project.util.RecyclerViewUtil
+import com.zs.project.util.SnackbarUtils
 import com.zs.project.util.transform.DepthPageTransformer
 import com.zs.project.view.MultiStateView
 import io.reactivex.Observable
@@ -40,7 +46,7 @@ import org.jetbrains.anko.toast
  * —————————————————————————————————————
  */
 
-class DouBanFragment : BaseFragment() , KotlinItemClickListener {
+class DouBanFragment : BaseFragment() , ItemClickListener, ItemLongClickListener {
 
     var mTheaterMovie : MutableList<MovieDetailData> ?= null
     var mComingMovie : MutableList<MovieDetailData> ?= null
@@ -88,11 +94,20 @@ class DouBanFragment : BaseFragment() , KotlinItemClickListener {
 
     }
 
-    override fun onItemClick(position: Int, data: Any) {
-
+    override fun onItemClick(position: Int, data: Any, view: View) {
         var url = (data as MovieDetailData).alt
         activity?.startActivity<WebViewActivity>("url" to url)
+    }
 
+    override fun onItemLongClick(position: Int, data: Any, view: View) {
+        getMovieDao().insertOrReplace(data as MovieData)
+        SnackbarUtils.Short(multistate_view,"收藏成功~")
+                .backColor(Color.parseColor("#e86060"))
+                .show()
+    }
+
+    private fun getMovieDao() : MovieDataDao {
+        return GreenDaoManager.getInstance().session.movieDataDao
     }
 
     fun initBanner(){
@@ -110,7 +125,7 @@ class DouBanFragment : BaseFragment() , KotlinItemClickListener {
         getMovieTop250()
         recycler_view?.addHeaderView(mHeadView)
         recycler_view?.setLoadingMoreProgressStyle(ProgressStyle.BallGridPulse)
-        mAdapter = DouBanAdapter(ArrayList(),this)
+        mAdapter = DouBanAdapter(ArrayList(),this,this)
         RecyclerViewUtil.initNoDecoration(activity,recycler_view,mAdapter)
         recycler_view?.setLoadingListener(object : XRecyclerView.LoadingListener{
             override fun onLoadMore() {

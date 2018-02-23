@@ -8,6 +8,7 @@ import com.zs.project.R
 import com.zs.project.greendao.MovieData
 import com.zs.project.greendao.NewData
 import com.zs.project.listener.ItemClickListener
+import com.zs.project.listener.ItemLongClickListener
 import com.zs.project.util.ImageLoaderUtil
 import kotlinx.android.synthetic.main.item_movie_layout.view.*
 import kotlinx.android.synthetic.main.new_list_item_layout.view.*
@@ -21,11 +22,10 @@ Time：17:43
 About:
 —————————————————————————————————————
  */
-class CollectListAdapter(var mType : String , var mItemClickListener : ItemClickListener): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class CollectListAdapter(var mType : String , var mItemClickListener : ItemClickListener , var mItemLongClickListener : ItemLongClickListener): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private var mNewData :MutableList<NewData> ?= null
-    private var mMovieData :MutableList<MovieData> ?= null
-
+    private var mNewData :MutableList<NewData> = arrayListOf()
+    private var mMovieData :MutableList<MovieData> = arrayListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): RecyclerView.ViewHolder {
 
@@ -65,20 +65,19 @@ class CollectListAdapter(var mType : String , var mItemClickListener : ItemClick
                 return if(mNewData == null){
                     0
                 }else{
-                    mNewData!!.size
+                    mNewData.size
                 }
             }
             "movies" ->{
                 return if(mMovieData == null){
                     0
                 }else{
-                    mMovieData!!.size
+                    mMovieData.size
                 }
             }
             else ->{
                 return 0
             }
-
         }
 
     }
@@ -106,7 +105,7 @@ class CollectListAdapter(var mType : String , var mItemClickListener : ItemClick
     inner class NewListHoler(itemView : View?) : RecyclerView.ViewHolder(itemView){
 
         fun bindData(position : Int){
-            var bean = mNewData!![position]
+            var bean = mNewData[position]
             itemView.tv_new_title?.text = bean.title
             itemView.tv_new_time?.text = bean.time
             ImageLoaderUtil.displayImage(bean.pic,itemView.iv_new_list_item)
@@ -115,9 +114,12 @@ class CollectListAdapter(var mType : String , var mItemClickListener : ItemClick
                 mItemClickListener.onItemClick(position , bean , itemView.iv_new_list_item)
             }
 
-
             itemView.setOnClickListener {
                 mItemClickListener.onItemClick(position , bean , itemView.rl_item_view)
+            }
+            itemView.setOnLongClickListener {
+                mItemLongClickListener.onItemLongClick(position , bean , itemView.rl_item_view)
+                true
             }
         }
 
@@ -126,7 +128,7 @@ class CollectListAdapter(var mType : String , var mItemClickListener : ItemClick
     inner class DouBanHolder(itemView : View?) : RecyclerView.ViewHolder(itemView){
 
         fun bindData(position : Int){
-            var detail = mMovieData!![position]
+            var detail = mMovieData[position]
             ImageLoaderUtil.displayImage(detail.imageUrl,itemView?.iv_movie_img)
             itemView.tv_movie_title.text = detail.title
             itemView.tv_movie_casts.text = "主演：" + detail.casts
@@ -137,6 +139,11 @@ class CollectListAdapter(var mType : String , var mItemClickListener : ItemClick
 
             itemView.setOnClickListener {
                 mItemClickListener.onItemClick(position,detail,itemView.rl_movie_item)
+            }
+
+            itemView.setOnLongClickListener {
+                mItemLongClickListener.onItemLongClick(position,detail,itemView.rl_movie_item)
+                true
             }
 
         }

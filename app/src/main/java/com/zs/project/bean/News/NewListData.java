@@ -1,5 +1,6 @@
 package com.zs.project.bean.News;
 
+import com.zs.project.greendao.NewData;
 import com.zs.project.request.bean.BaseResponse;
 
 import java.util.List;
@@ -118,7 +119,7 @@ public class NewListData extends BaseResponse{
 
             private String num;
             private String channel;
-            private List<NewListBean> list;
+            private List<NewData> list;
 
             public String getNum() {
                 return num;
@@ -136,11 +137,11 @@ public class NewListData extends BaseResponse{
                 this.channel = channel;
             }
 
-            public List<NewListBean> getList() {
+            public List<NewData> getList() {
                 return list;
             }
 
-            public void setList(List<NewListBean> list) {
+            public void setList(List<NewData> list) {
                 this.list = list;
             }
 

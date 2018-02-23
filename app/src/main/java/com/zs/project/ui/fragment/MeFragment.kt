@@ -72,6 +72,9 @@ class MeFragment : BaseFragment() , View.OnClickListener , KotlinItemClickListen
         recycler_view_me?.addZoomHeaderView(zoomHeader, ScreenUtil.dp2px(200f))
         ImageLoaderUtil.loadCircleImage(R.mipmap.default_img,zoomHeader.tv_me_avator)
 
+        var header = View.inflate(activity,R.layout.public_title_layout,null)
+        recycler_view_me?.addHeaderView(header)
+
     }
 
     override fun initData() {
