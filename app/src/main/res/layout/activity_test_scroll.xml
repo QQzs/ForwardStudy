@@ -14,4 +14,14 @@
 
     </com.zs.project.view.PullZoomRecyclerView>
 
+    <!--<com.jcodecraeer.xrecyclerview.XRecyclerView-->
+        <!--android:id="@+id/scroll_view_pull"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--app:zoom_headerView="@layout/zoom_header_layout"-->
+        <!--app:zoom_header_height="180dp"-->
+        <!--&gt;-->
+
+    <!--</com.jcodecraeer.xrecyclerview.XRecyclerView>-->
+
 </RelativeLayout>

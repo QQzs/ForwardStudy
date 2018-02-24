@@ -23,7 +23,7 @@ import com.zs.project.request.DefaultObserver
 import com.zs.project.request.RequestApi
 import com.zs.project.request.RequestUtil
 import com.zs.project.ui.activity.WebViewActivity
-import com.zs.project.ui.activity.test.TestActivity
+import com.zs.project.ui.activity.test.TestScrollActivity
 import com.zs.project.ui.adapter.DouBanAdapter
 import com.zs.project.util.RecyclerViewUtil
 import com.zs.project.util.SnackbarUtils
@@ -34,7 +34,6 @@ import kotlinx.android.synthetic.main.dou_header_view_layout.view.*
 import kotlinx.android.synthetic.main.public_list_layout.*
 import org.greenrobot.eventbus.EventBus
 import org.jetbrains.anko.startActivity
-import org.jetbrains.anko.toast
 
 /**
  * Created by zs
@@ -112,8 +111,8 @@ class DouBanFragment : BaseFragment() , ItemClickListener, ItemLongClickListener
             override fun onPageClick(entry: BannerEntry<*>?, index: Int) {
 
                 var bannerEntry : MovieBannerEntry = entry as MovieBannerEntry
-                activity?.toast(bannerEntry.movieId)
-                activity?.startActivity<TestActivity>()
+//                activity?.startActivity<TestActivity>()
+                activity?.startActivity<TestScrollActivity>()
             }
 
         })

@@ -130,7 +130,7 @@ public class PullZoomRecyclerView extends XRecyclerView{
     }
 
     /**
-     * 方法三，手动添加
+     * 头布局中只有伸缩view
      * 高度必须有 布局内的高度无效
      * @param view
      * @param height
@@ -138,9 +138,27 @@ public class PullZoomRecyclerView extends XRecyclerView{
     public void addZoomHeaderView(View view, int height){
         mHeaderContainer = view;
         mHeaderHeight = height;
-        LayoutParams absLayoutParams = new LayoutParams(ScreenUtil.getScreenWidth(),mHeaderHeight);
-        mHeaderContainer.setLayoutParams(absLayoutParams);
+        // mHeaderContainer 没有父布局  Recyclerview.LayoutParams
+        LayoutParams params = new LayoutParams(ScreenUtil.getScreenWidth(),mHeaderHeight);
+        mHeaderContainer.setLayoutParams(params);
         addHeaderView(mHeaderContainer);
+
+    }
+
+    /**
+     * 头布局中有伸缩view 和 其他view
+     * @param header  头布局view
+     * @param zoomView 可伸缩的view
+     * @param height 伸缩默认高度
+     */
+    public void addZoomContainerView(View header,View zoomView, int height){
+        mHeaderContainer = zoomView;
+        mHeaderHeight = height;
+        // mHeaderContainer 有父布局
+        ViewGroup.LayoutParams params = mHeaderContainer.getLayoutParams();
+        params.height = height;
+        mHeaderContainer.setLayoutParams(params);
+        addHeaderView(header);
 
     }
 
@@ -236,7 +254,7 @@ public class PullZoomRecyclerView extends XRecyclerView{
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
                 float value = (float) animation.getAnimatedValue();
-                LayoutParams params = (LayoutParams) mHeaderContainer.getLayoutParams();
+                ViewGroup.LayoutParams params = mHeaderContainer.getLayoutParams();
                 params.height = (int) (mHeaderHeight * value);
                 mHeaderContainer.setLayoutParams(params);
             }
