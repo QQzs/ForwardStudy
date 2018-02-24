@@ -1,5 +1,6 @@
 package com.zs.project.ui.fragment
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import com.zs.project.R
@@ -15,6 +16,7 @@ import com.zs.project.util.SnackbarUtils
 import com.zs.project.view.MultiStateView
 import kotlinx.android.synthetic.main.public_list_layout.*
 import org.jetbrains.anko.startActivity
+import org.jetbrains.anko.toast
 
 /**
  *
@@ -92,9 +94,16 @@ class CollectionFragment : BaseFragment() , ItemClickListener , ItemLongClickLis
     override fun onItemLongClick(position: Int, data: Any, view: View) {
         SnackbarUtils.Long(multistate_view!!,"删除收藏~")
                 .setAction("确定", View.OnClickListener {
-
+                    if ("news" == mType){
+                        getNewDao().delete(data as NewData)
+                    }else{
+                        getMovieDao().delete(data as MovieData)
+                    }
+                    mAdapter?.deleteData(position)
+                    activity?.toast("删除成功")
                 })
-                .warning()
+                .actionColor(Color.parseColor("#ffffff"))
+                .danger()
                 .show()
     }
 

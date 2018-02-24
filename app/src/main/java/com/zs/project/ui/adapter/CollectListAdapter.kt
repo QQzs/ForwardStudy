@@ -102,6 +102,15 @@ class CollectListAdapter(var mType : String , var mItemClickListener : ItemClick
         notifyDataSetChanged()
     }
 
+    fun deleteData(position: Int){
+        if ("news" == mType){
+            mNewData.removeAt(position)
+        }else{
+            mMovieData.removeAt(position)
+        }
+        notifyDataSetChanged()
+    }
+
     inner class NewListHoler(itemView : View?) : RecyclerView.ViewHolder(itemView){
 
         fun bindData(position : Int){

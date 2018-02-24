@@ -17,7 +17,6 @@ import com.zs.project.bean.MovieBannerEntry
 import com.zs.project.event.RefreshEvent
 import com.zs.project.greendao.GreenDaoManager
 import com.zs.project.greendao.MovieData
-import com.zs.project.greendao.MovieDataDao
 import com.zs.project.listener.ItemClickListener
 import com.zs.project.listener.ItemLongClickListener
 import com.zs.project.request.DefaultObserver
@@ -100,14 +99,10 @@ class DouBanFragment : BaseFragment() , ItemClickListener, ItemLongClickListener
     }
 
     override fun onItemLongClick(position: Int, data: Any, view: View) {
-        getMovieDao().insertOrReplace(data as MovieData)
+        GreenDaoManager.getInstance().session.movieDataDao.insertOrReplace(data as MovieData)
         SnackbarUtils.Short(multistate_view,"收藏成功~")
                 .backColor(Color.parseColor("#e86060"))
                 .show()
-    }
-
-    private fun getMovieDao() : MovieDataDao {
-        return GreenDaoManager.getInstance().session.movieDataDao
     }
 
     fun initBanner(){

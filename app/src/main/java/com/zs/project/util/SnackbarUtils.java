@@ -216,7 +216,7 @@ public class SnackbarUtils {
         return this;
     }
     /**
-     * 设置Snackbar背景色为   color_warning
+     * 设置Snackbar背景色为   color_danger
      */
     public SnackbarUtils danger(){
         if(getSnackbar()!=null){

@@ -19,7 +19,6 @@ import com.zs.project.bean.News.NewListData
 import com.zs.project.event.RefreshEvent
 import com.zs.project.greendao.GreenDaoManager
 import com.zs.project.greendao.NewData
-import com.zs.project.greendao.NewDataDao
 import com.zs.project.listener.ItemClickListener
 import com.zs.project.listener.ItemLongClickListener
 import com.zs.project.request.DefaultObserver
@@ -199,15 +198,11 @@ class NewListFragmentKotlin : LazyFragmentKotlin(), View.OnClickListener , ItemC
 
     override fun onItemLongClick(position: Int, data: Any, view: View) {
 
-        getNewDao().insertOrReplace(data as NewData)
+        GreenDaoManager.getInstance().session.newDataDao.insertOrReplace(data as NewData)
         SnackbarUtils.Short(multistate_view,"收藏成功~")
                 .backColor(Color.parseColor("#e86060"))
                 .show()
 
-    }
-
-    private fun getNewDao() : NewDataDao {
-        return GreenDaoManager.getInstance().session.newDataDao
     }
 
     override fun requestData(request: Observable<*>?, type: Int) {
