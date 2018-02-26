@@ -48,6 +48,11 @@
         <attr name="zoom_header_height" format="dimension"/>
     </declare-styleable>
 
+    <declare-styleable name="DownLoadingView">
+        <attr name="loadingText" format="string"/>
+        <attr name="loadingTextAppearance" format="reference"/>
+    </declare-styleable>
+
     <string-array name="category_name">
         <item>头条</item>
         <item>新闻</item>

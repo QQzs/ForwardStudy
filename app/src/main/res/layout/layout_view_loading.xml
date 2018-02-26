@@ -2,14 +2,30 @@
 
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/loading_page"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/loading_bg_color">
 
-    <com.zs.project.view.loadingview.LoadingView
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+    <!--<com.zs.project.view.loadingview.circleloading.LoadingView-->
+        <!--android:layout_width="80dp"-->
+        <!--android:layout_height="80dp"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:layout_marginTop="100dp"/>-->
+
+    <com.zs.project.view.loadingview.updown.LoadingImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="100dp"/>
+        android:layout_marginTop="100dp"
+        app:loadingText="加载中..."/>
+
+    <!--<com.zs.project.view.loadingview.updown.DownLoadingView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:layout_marginTop="100dp"-->
+        <!--app:loadingText="加载中..."/>-->
+
 </RelativeLayout>

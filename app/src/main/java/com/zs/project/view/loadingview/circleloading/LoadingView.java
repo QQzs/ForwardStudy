@@ -1,4 +1,4 @@
-package com.zs.project.view.loadingview;
+package com.zs.project.view.loadingview.circleloading;
 
 import android.content.Context;
 import android.support.v4.view.ViewCompat;
