@@ -2,6 +2,7 @@ package com.zs.project.ui.activity
 
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.view.View
 import com.mcxtzhang.commonadapter.rv.CommonAdapter
 import com.mcxtzhang.commonadapter.rv.ViewHolder
@@ -107,8 +108,9 @@ class IconChooseActivity : BaseActivity(){
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onStop() {
+        super.onStop()
+        Log.d("My_Log","onStop")
         SpUtil.setInt("color_view",mFlag)
         EventBus.getDefault().post(RefreshEvent("colorview",mFlag))
     }
