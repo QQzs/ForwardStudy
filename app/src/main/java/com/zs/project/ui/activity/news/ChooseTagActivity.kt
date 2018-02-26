@@ -48,6 +48,7 @@ class ChooseTagActivity : BaseActivity() , OnTagChangeListener{
 
     override fun init() {
 
+        tv_all_title?.text = "选择标签"
         mAdapter = QaTagAdapter(this , mAllTagTitles)
         RecyclerViewUtil.Gridinit(this,tag_recycler_view , mAdapter , mSpanCount)
         tag_recycler_view?.adapter = mAdapter

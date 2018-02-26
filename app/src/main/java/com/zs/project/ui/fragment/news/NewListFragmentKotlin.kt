@@ -53,7 +53,6 @@ class NewListFragmentKotlin : LazyFragmentKotlin(), View.OnClickListener , ItemC
      *  继承懒加载fragment LazyFragmentKotlin
      *  不能使用Kotlin的anko库来查找控件,会找不到控件
      */
-
     var mIndex : Int = -1
     var mTitleName : String ?= null
     var mTitleCode : String ?= null

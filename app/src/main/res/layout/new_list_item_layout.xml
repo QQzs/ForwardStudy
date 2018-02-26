@@ -26,7 +26,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=""
-                    android:textSize="16dp"
+                    android:textSize="@dimen/fontsize15"
+                    android:textColor="@color/font_default"
                     android:maxLines="3"/>
 
                 <TextView

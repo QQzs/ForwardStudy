@@ -27,7 +27,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activity.MainActivity"></activity>
+        <activity android:name=".ui.activity.MainActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait">
+        </activity>
         <activity android:name=".ui.activity.test.TestActivity"></activity>
         <activity android:name=".ui.activity.test.TestScrollActivity"></activity>
         <activity android:name=".ui.activity.news.ChooseTagActivity"></activity>
