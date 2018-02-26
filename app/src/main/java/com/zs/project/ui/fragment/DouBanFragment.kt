@@ -87,8 +87,8 @@ class DouBanFragment : BaseFragment() , ItemClickListener, ItemLongClickListener
         multistate_view?.viewState = MultiStateView.VIEW_STATE_LOADING
         requestData(mRequestApi
                 .getRequestService(RequestApi.REQUEST_DOUBAN)
-                .getMovieListData(Constant.MOVIE_THEATERS,0,5)
-                ,THEATER_MOVIE)
+                .getMovieListData(Constant.MOVIE_COMING,0,5)
+                ,COMING_MOVIE)
 
     }
 
@@ -106,30 +106,32 @@ class DouBanFragment : BaseFragment() , ItemClickListener, ItemLongClickListener
 
     fun initBanner(){
         mHeadView?.banner_view_top?.setPageTransformer(true, DepthPageTransformer())
-        mHeadView?.banner_view_top?.entries = getbannerData(mTheaterMovie!!)
+        mHeadView?.banner_view_top?.entries = getbannerData(mComingMovie!!)
         mHeadView?.banner_view_top?.setOnPageClickListener(object : BannerView.OnPageClickListener(){
             override fun onPageClick(entry: BannerEntry<*>?, index: Int) {
 
                 var bannerEntry : MovieBannerEntry = entry as MovieBannerEntry
+
 //                activity?.startActivity<TestActivity>()
                 activity?.startActivity<TestScrollActivity>()
             }
 
         })
-        getMovieTop250()
+        getTheaterMovie()
         recycler_view?.addHeaderView(mHeadView)
-        recycler_view?.setLoadingMoreProgressStyle(ProgressStyle.BallGridPulse)
+        recycler_view?.setLoadingMoreProgressStyle(ProgressStyle.BallBeat)
+        recycler_view?.setFootViewText("加载更多","我是有底线的~")
         mAdapter = DouBanAdapter(ArrayList(),this,this)
         RecyclerViewUtil.initNoDecoration(activity,recycler_view,mAdapter)
         recycler_view?.setLoadingListener(object : XRecyclerView.LoadingListener{
             override fun onLoadMore() {
                 mStartNum ++
-                getMovieTop250()
+                getTheaterMovie()
             }
 
             override fun onRefresh() {
                 mStartNum = 0
-                getMovieTop250()            }
+                getTheaterMovie()            }
 
         })
         recycler_view?.addOnScrollListener(object : RecyclerView.OnScrollListener() {
@@ -157,6 +159,16 @@ class DouBanFragment : BaseFragment() , ItemClickListener, ItemLongClickListener
     }
 
     /**
+     * 获取最热电影数据
+     */
+    fun getTheaterMovie(){
+        requestData(mRequestApi
+                .getRequestService(RequestApi.REQUEST_DOUBAN)
+                .getMovieListData(Constant.MOVIE_THEATERS,mStartNum * 15,15)
+                ,THEATER_MOVIE)
+    }
+
+    /**
      * 获取top250电影数据
      */
     fun getMovieTop250(){
@@ -171,42 +183,25 @@ class DouBanFragment : BaseFragment() , ItemClickListener, ItemLongClickListener
         var observable = RequestUtil.getObservable(request)
         when(type){
             THEATER_MOVIE ->{
-                observable.subscribe(object : DefaultObserver<MovieListData>(mFragment) {
-                    override fun onSuccess(response: MovieListData?) {
-                        if (response != null){
-                            mTheaterMovie = response?.subjects
-                            initBanner()
-                        }
-                    }
-                    override fun onError(e: Throwable) {
-                        super.onError(e)
-                        recycler_view?.reset()
-                        multistate_view?.viewState = MultiStateView.VIEW_STATE_ERROR
-                    }
-
-                })
-            }
-            TOP_MOVIE ->{
                 observable.subscribe(object : DefaultObserver<MovieListData>(mFragment){
                     override fun onSuccess(response: MovieListData?) {
                         if (response == null){
                             return
                         }
-                        mTopMovie = response?.subjects
-                        if (mTopMovie == null || mTopMovie?.size == 0){
+                        mTheaterMovie = response?.subjects
+                        if (mTheaterMovie == null || mTheaterMovie?.size == 0){
                             if (mStartNum == 0){
                                 recycler_view?.refreshComplete()
                             }else{
                                 recycler_view?.setNoMore(true)
-                                recycler_view?.loadMoreComplete()
                             }
 
                         }else{
                             if (mStartNum == 0){
-                                mAdapter?.refreshData(mTopMovie!!)
+                                mAdapter?.refreshData(mTheaterMovie!!)
                                 recycler_view?.refreshComplete()
                             }else{
-                                mAdapter?.appendData(mTopMovie!!)
+                                mAdapter?.appendData(mTheaterMovie!!)
                                 recycler_view?.loadMoreComplete()
                             }
                         }
@@ -228,6 +223,26 @@ class DouBanFragment : BaseFragment() , ItemClickListener, ItemLongClickListener
                     }
 
                 })
+            }
+            COMING_MOVIE ->{
+                observable.subscribe(object : DefaultObserver<MovieListData>(mFragment) {
+                    override fun onSuccess(response: MovieListData?) {
+                        if (response != null){
+                            mComingMovie = response?.subjects
+                            initBanner()
+                        }
+                    }
+                    override fun onError(e: Throwable) {
+                        super.onError(e)
+                        recycler_view?.reset()
+                        multistate_view?.viewState = MultiStateView.VIEW_STATE_ERROR
+                    }
+
+                })
+            }
+
+            TOP_MOVIE ->{
+
             }
 
         }

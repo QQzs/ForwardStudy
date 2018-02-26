@@ -4,10 +4,8 @@ import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.graphics.Color
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentTransaction
-import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import com.zs.project.R
@@ -38,25 +36,9 @@ class MainActivity : BaseActivity() {
     var mIsShow = true  // true：语音播放框滑动到显示状态  false：语音播放框移除屏幕状态
     var SAVE_INDEX : String = "save_index"
     var mTags = arrayOf("news" , "movies" , "me")
-    var mIndex = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (savedInstanceState != null){
-            mIndex = savedInstanceState?.getInt(SAVE_INDEX)
-            mNewsFragment = supportFragmentManager.findFragmentByTag(mTags[0]) as NewsFragment?
-            mDouBanFragment = supportFragmentManager.findFragmentByTag(mTags[1]) as DouBanFragment?
-            mMeFragment = supportFragmentManager.findFragmentByTag(mTags[2]) as MeFragment?
-        }
-        if (mNewsFragment == null){
-            mNewsFragment = NewsFragment()
-        }
-        if (mDouBanFragment == null){
-            mDouBanFragment = DouBanFragment()
-        }
-        if (mMeFragment == null){
-            mMeFragment = MeFragment()
-        }
         initContentView(R.layout.activity_main)
         EventBus.getDefault().register(this)
     }
@@ -64,12 +46,14 @@ class MainActivity : BaseActivity() {
     override fun init() {
 
         mTransaction = supportFragmentManager.beginTransaction()
+        mNewsFragment = NewsFragment()
+        mDouBanFragment = DouBanFragment()
+        mMeFragment = MeFragment()
         mFragments?.add(mNewsFragment!!)
         mFragments?.add(mDouBanFragment!!)
         mFragments?.add(mMeFragment!!)
 
-        Log.d("My_Log","mmIndex = " + mIndex)
-        changePage(mIndex)
+        changePage(0)
 
         fragment_news?.setOnClickListener(this)
         fragment_douban?.setOnClickListener(this)
@@ -102,7 +86,6 @@ class MainActivity : BaseActivity() {
                 transaction.hide(mCurrentFragment).commitAllowingStateLoss()
             }
             mCurrentFragment = nextFragment
-            mIndex = index
             var transaction = supportFragmentManager.beginTransaction()
             if (nextFragment.isAdded) {
                 transaction.show(nextFragment).commitAllowingStateLoss()
@@ -110,12 +93,6 @@ class MainActivity : BaseActivity() {
                 transaction.add(R.id.fl_homepage, nextFragment,mTags[index]).commitAllowingStateLoss()
             }
         }
-    }
-
-    override fun onSaveInstanceState(outState: Bundle?, outPersistentState: PersistableBundle?) {
-        outState?.putInt(SAVE_INDEX,mIndex)
-        Log.d("My_Log","onSaveInstanceState mmIndex = " + mIndex)
-        super.onSaveInstanceState(outState, outPersistentState)
     }
 
     private fun changeTab(index : Int){
