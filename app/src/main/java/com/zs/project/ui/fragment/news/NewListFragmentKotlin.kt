@@ -213,7 +213,6 @@ class NewListFragmentKotlin : LazyFragmentKotlin(), View.OnClickListener , ItemC
                     override fun onSuccess(response: NewListData?) {
                         Log.d("My_Log",response.toString())
                         var listData : MutableList<NewData>? = response?.result?.result?.list
-
                         if (listData == null || listData.size == 0){
                             if (mStartNum == 0){
                                 recycler_view?.refreshComplete()

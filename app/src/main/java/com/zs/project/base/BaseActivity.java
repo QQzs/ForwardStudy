@@ -1,10 +1,14 @@
 package com.zs.project.base;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.View;
 
 import com.google.gson.Gson;
+import com.zs.project.app.MyActivityManager;
 import com.zs.project.request.RequestApi;
+import com.zs.project.ui.activity.GuideActivity;
 
 import io.reactivex.Observable;
 
@@ -26,6 +30,7 @@ public abstract class BaseActivity extends BaseRxActivity implements View.OnClic
         setContentView(layoutResID);
         mRequestApi = RequestApi.getInstance();
         mActivity = this;
+        MyActivityManager.getActivityManager().addActivity(this);
         /**
          * 初始化一些UI
          */
@@ -48,5 +53,20 @@ public abstract class BaseActivity extends BaseRxActivity implements View.OnClic
      */
     protected void requestData(Observable request, int type){
 
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        MyActivityManager.finishAllActivity();
+        Intent intent = new Intent(this, GuideActivity.class);
+        startActivity(intent);
+
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        MyActivityManager.getActivityManager().finishActivity(this);
     }
 }
