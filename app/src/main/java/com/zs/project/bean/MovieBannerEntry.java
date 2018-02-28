@@ -7,9 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.kelin.banner.BannerEntry;
 import com.zs.project.R;
 import com.zs.project.util.ImageLoaderUtil;
+import com.zs.project.view.banner.BannerEntry;
 
 /**
  * 创建人 kelin

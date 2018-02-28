@@ -3,7 +3,8 @@ package com.zs.project.bean;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.kelin.banner.BannerEntry;
+import com.zs.project.view.banner.BannerEntry;
+
 
 /**
  * Created by zs

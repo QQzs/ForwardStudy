@@ -24,6 +24,6 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     //noinspection GradleCompatible
-    compile 'com.android.support:recyclerview-v7:27.0.2'
+//    compile 'com.android.support:recyclerview-v7:27.0.2'
     compile 'com.github.mcxtzhang:all-base-adapter:V1.8.0'
 }

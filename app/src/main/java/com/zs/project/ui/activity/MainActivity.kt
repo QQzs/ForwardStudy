@@ -2,20 +2,23 @@ package com.zs.project.ui.activity
 
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentTransaction
+import android.util.Log
+import android.view.KeyEvent
 import android.view.View
 import android.widget.ImageView
 import com.zs.project.R
+import com.zs.project.app.AppStatusManager
 import com.zs.project.base.BaseActivity
 import com.zs.project.event.RefreshEvent
 import com.zs.project.ui.fragment.DouBanFragment
 import com.zs.project.ui.fragment.MeFragment
 import com.zs.project.ui.fragment.NewsFragment
 import com.zs.project.util.ScreenUtil
-import com.zs.project.util.SpUtil
 import kotlinx.android.synthetic.main.activity_main.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -61,7 +64,8 @@ class MainActivity : BaseActivity() {
         fragment_douban?.setOnClickListener(this)
         fragment_me?.setOnClickListener(this)
 
-        colorfull_bg_view?.changeImg(SpUtil.getInt("color_view",0))
+//        colorfull_bg_view?.changeImg(SpUtil.getInt("color_view",0))
+        colorfull_bg_view?.switchAnim(false)
     }
 
     override fun initData() {
@@ -196,6 +200,32 @@ class MainActivity : BaseActivity() {
             }
         }
 
+    }
+
+    override fun restartApp() {
+        startActivity(Intent(this,GuideActivity::class.java))
+        finish()
+    }
+
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        Log.d("My_Log_base", "main onNewIntent")
+        var action = intent?.getIntExtra(AppStatusManager.KEY_HOME_ACTION,AppStatusManager.ACTION_BACK_TO_HOME)
+        if (action == AppStatusManager.ACTION_RESTART_APP){
+            restartApp()
+        }
+    }
+
+    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+
+        if (keyCode == KeyEvent.KEYCODE_BACK && event?.repeatCount == 0){
+            val intent = Intent(Intent.ACTION_MAIN)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            intent.addCategory(Intent.CATEGORY_HOME)
+            startActivity(intent)
+            return true
+        }
+        return super.onKeyDown(keyCode, event)
     }
 
     override fun onDestroy() {

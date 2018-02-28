@@ -3,12 +3,14 @@ package com.zs.project.base;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import com.google.gson.Gson;
+import com.zs.project.app.AppStatusManager;
 import com.zs.project.app.MyActivityManager;
 import com.zs.project.request.RequestApi;
-import com.zs.project.ui.activity.GuideActivity;
+import com.zs.project.ui.activity.MainActivity;
 
 import io.reactivex.Observable;
 
@@ -25,6 +27,21 @@ public abstract class BaseActivity extends BaseRxActivity implements View.OnClic
     protected Activity mActivity;
     protected RequestApi mRequestApi = null;
     protected Gson mGson = new Gson();
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        switch (AppStatusManager.getInstance().getAppStatus()) {
+            case AppStatusManager.STATUS_FORCE_KILLED:
+                Log.d("My_Log_base", "AppStatusManager ==  STATUS_FORCE_KILLED");
+                restartApp();
+                break;
+            case AppStatusManager.STATUS_NORMAL:
+//              setUpViewAndData();
+                break;
+        }
+
+    }
 
     protected void initContentView(int layoutResID){
         setContentView(layoutResID);
@@ -55,12 +72,18 @@ public abstract class BaseActivity extends BaseRxActivity implements View.OnClic
 
     }
 
+    protected void restartApp() {
+        Intent intent = new Intent(this,MainActivity.class);
+        intent.putExtra(AppStatusManager.KEY_HOME_ACTION,AppStatusManager.ACTION_RESTART_APP);
+        startActivity(intent);
+    }
+
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-        MyActivityManager.finishAllActivity();
-        Intent intent = new Intent(this, GuideActivity.class);
-        startActivity(intent);
+//        MyActivityManager.getActivityManager().finishAllActivity();
+//        Intent intent = new Intent(this, MainActivity.class);
+//        startActivity(intent);
+//        super.onRestoreInstanceState(savedInstanceState);
 
     }
 

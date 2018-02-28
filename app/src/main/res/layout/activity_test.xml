@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="180dp">
 
-        <com.kelin.banner.view.BannerView
+        <com.zs.project.view.banner.view.BannerView
             android:id="@+id/banner_view1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -22,7 +22,7 @@
             app:bannerIndicator="@+id/banner_indicator1"
             app:titleView="@+id/tv_title1">
 
-        </com.kelin.banner.view.BannerView>
+        </com.zs.project.view.banner.view.BannerView>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -44,7 +44,7 @@
                 tools:text="我是标题！"/>
 
             <!--Banner的圆点型指示器-->
-            <com.kelin.banner.view.PointIndicatorView
+            <com.zs.project.view.banner.view.PointIndicatorView
                 android:id="@+id/banner_indicator1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -60,7 +60,7 @@
 
     </RelativeLayout>
 
-    <com.kelin.banner.view.BannerView
+    <com.zs.project.view.banner.view.BannerView
         android:id="@+id/banner_view2"
         android:layout_width="match_parent"
         android:layout_height="180dp"
@@ -70,9 +70,9 @@
         android:layout_below="@+id/rl_banner_1"
         android:layout_marginTop="10dp">
 
-    </com.kelin.banner.view.BannerView>
+    </com.zs.project.view.banner.view.BannerView>
 
-    <com.kelin.banner.view.BannerView
+    <com.zs.project.view.banner.view.BannerView
         android:id="@+id/banner_view3"
         android:layout_width="match_parent"
         android:layout_height="180dp"
@@ -82,6 +82,6 @@
         android:layout_below="@+id/banner_view2"
         android:layout_marginTop="10dp">
 
-    </com.kelin.banner.view.BannerView>
+    </com.zs.project.view.banner.view.BannerView>
 
 </RelativeLayout>

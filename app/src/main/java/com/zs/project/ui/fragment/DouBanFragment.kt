@@ -6,8 +6,6 @@ import android.support.v7.widget.RecyclerView
 import android.view.View
 import com.jcodecraeer.xrecyclerview.ProgressStyle
 import com.jcodecraeer.xrecyclerview.XRecyclerView
-import com.kelin.banner.BannerEntry
-import com.kelin.banner.view.BannerView
 import com.zs.project.R
 import com.zs.project.app.Constant
 import com.zs.project.base.BaseFragment
@@ -29,6 +27,8 @@ import com.zs.project.util.RecyclerViewUtil
 import com.zs.project.util.SnackbarUtils
 import com.zs.project.util.transform.DepthPageTransformer
 import com.zs.project.view.MultiStateView
+import com.zs.project.view.banner.BannerEntry
+import com.zs.project.view.banner.view.BannerView
 import io.reactivex.Observable
 import kotlinx.android.synthetic.main.dou_header_view_layout.view.*
 import kotlinx.android.synthetic.main.public_list_layout.*

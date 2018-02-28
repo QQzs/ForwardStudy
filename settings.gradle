@@ -1,1 +1,1 @@
-include ':app', ':bannerview', ':layoutmanager'
+include ':app', ':layoutmanager'

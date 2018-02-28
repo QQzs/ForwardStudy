@@ -15,7 +15,7 @@
             android:layout_height="180dp"
             >
 
-            <com.kelin.banner.view.BannerView
+            <com.zs.project.view.banner.view.BannerView
                 android:id="@+id/banner_view_top"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -26,7 +26,7 @@
                 app:bannerIndicator="@+id/banner_head_indicator"
                 app:titleView="@+id/tv_head_title">
 
-            </com.kelin.banner.view.BannerView>
+            </com.zs.project.view.banner.view.BannerView>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -48,7 +48,7 @@
                     tools:text="我是标题！"/>
 
                 <!--Banner的圆点型指示器-->
-                <com.kelin.banner.view.PointIndicatorView
+                <com.zs.project.view.banner.view.PointIndicatorView
                     android:id="@+id/banner_head_indicator"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

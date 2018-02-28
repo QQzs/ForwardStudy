@@ -2,12 +2,12 @@ package com.zs.project.ui.activity.test
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import com.kelin.banner.page.CenterBigTransformer
 import com.zs.project.R
 import com.zs.project.bean.CardBannerEntry
 import com.zs.project.bean.ImageBannerEntry
 import com.zs.project.util.transform.DepthPageTransformer
 import com.zs.project.util.transform.ZoomOutPageTransformer
+import com.zs.project.view.banner.page.CenterBigTransformer
 import kotlinx.android.synthetic.main.activity_test.*
 
 
