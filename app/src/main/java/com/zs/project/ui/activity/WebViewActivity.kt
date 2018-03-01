@@ -1,12 +1,11 @@
 package com.zs.project.ui.activity
 
 import android.graphics.Bitmap
+import android.net.http.SslError
+import android.os.Build
 import android.os.Bundle
 import android.view.View
-import android.webkit.WebResourceRequest
-import android.webkit.WebSettings
-import android.webkit.WebView
-import android.webkit.WebViewClient
+import android.webkit.*
 import com.zs.project.R
 import com.zs.project.base.BaseActivity
 import com.zs.project.view.MultiStateView
@@ -66,6 +65,10 @@ class WebViewActivity : BaseActivity(){
         webSettings?.loadsImagesAutomatically = true //支持自动加载图片
         webSettings?.defaultTextEncodingName = "utf-8"//设置编码格式
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+            webSettings?.mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
+        }
+
         // 滚动条
 //        web_view_detail?.isHorizontalScrollBarEnabled = false //水平不显示
         web_view_detail?.isVerticalScrollBarEnabled = false //垂直不显示
@@ -80,8 +83,12 @@ class WebViewActivity : BaseActivity(){
             }
 
             override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest?): Boolean {
-                web_view_detail?.loadUrl(mWebUrl)
-                return true
+                return super.shouldOverrideUrlLoading(view, request)
+            }
+
+            override fun onReceivedSslError(view: WebView?, handler: SslErrorHandler?, error: SslError?) {
+                handler?.proceed()
+                super.onReceivedSslError(view, handler, error)
             }
 
             override fun onPageFinished(view: WebView?, url: String?) {
@@ -90,8 +97,6 @@ class WebViewActivity : BaseActivity(){
             }
 
         }
-
-
 
 
     }

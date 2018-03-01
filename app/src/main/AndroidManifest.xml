@@ -36,7 +36,10 @@
         <activity android:name=".ui.activity.test.TestActivity" android:screenOrientation="portrait"></activity>
         <activity android:name=".ui.activity.test.TestScrollActivity" android:screenOrientation="portrait"></activity>
         <activity android:name=".ui.activity.news.ChooseTagActivity" android:screenOrientation="portrait"></activity>
-        <activity android:name=".ui.activity.WebViewActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".ui.activity.WebViewActivity"
+            android:screenOrientation="portrait"
+            android:hardwareAccelerated="false">
+        </activity>
         <activity android:name=".ui.activity.SettingActivity" android:screenOrientation="portrait"></activity>
         <activity android:name=".ui.activity.IconChooseActivity" android:screenOrientation="portrait"></activity>
         <activity android:name=".ui.activity.CollectionActivity" android:screenOrientation="portrait"></activity>

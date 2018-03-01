@@ -47,39 +47,39 @@ Time：14:49
 About: 资讯列表界面
 —————————————————————————————————————
  */
-class NewListFragmentKotlin : LazyFragmentKotlin(), View.OnClickListener , ItemClickListener , ItemLongClickListener{
+class NewListFragmentKotlin : LazyFragmentKotlin(), View.OnClickListener, ItemClickListener, ItemLongClickListener {
 
     /**
      *  继承懒加载fragment LazyFragmentKotlin
      *  不能使用Kotlin的anko库来查找控件,会找不到控件
      */
-    var mIndex : Int = -1
-    var mTitleName : String ?= null
-    var mTitleCode : String ?= null
-    var mStartNum : Int = 0
+    var mIndex: Int = -1
+    var mTitleName: String? = null
+    var mTitleCode: String? = null
+    var mStartNum: Int = 0
 
-    var mFragment : NewListFragmentKotlin?= null
-    var mAdapter : NewListAdapter ?= null
+    var mFragment: NewListFragmentKotlin? = null
+    var mAdapter: NewListAdapter? = null
 
-    var multistate_view : MultiStateView ?= null
-    var recycler_view : XRecyclerView ?= null
-    var loading_page_fail : RelativeLayout?= null
+    var multistate_view: MultiStateView? = null
+    var recycler_view: XRecyclerView? = null
+    var loading_page_fail: RelativeLayout? = null
 
-    var Get_LIST : Int = 111
+    var Get_LIST: Int = 111
 
     companion object {
-        fun getInstance(vararg arg: String) : NewListFragmentKotlin {
+        fun getInstance(vararg arg: String): NewListFragmentKotlin {
             var fragment = NewListFragmentKotlin()
-            if (arg.isNotEmpty()){
+            if (arg.isNotEmpty()) {
                 var bundle = Bundle()
-                if (arg.isNotEmpty()){
-                    bundle.putString("index",arg[0])
+                if (arg.isNotEmpty()) {
+                    bundle.putString("index", arg[0])
                 }
-                if (arg.size > 1){
-                    bundle.putString("name",arg[1])
+                if (arg.size > 1) {
+                    bundle.putString("name", arg[1])
                 }
-                if (arg.size > 2){
-                    bundle.putString("code",arg[2])
+                if (arg.size > 2) {
+                    bundle.putString("code", arg[2])
                 }
                 fragment.arguments = bundle
             }
@@ -93,29 +93,30 @@ class NewListFragmentKotlin : LazyFragmentKotlin(), View.OnClickListener , ItemC
         mFragment = this
         initView()
         initData()
-        Log.d("My_Log","   mIndex =   " + mIndex)
+        Log.d("My_Log", "   mIndex =   " + mIndex)
     }
 
     override fun initData() {
         super.initData()
         var index = arguments?.getString("index")
-        if(StringUtils.isNullOrEmpty(index)){
+        if (StringUtils.isNullOrEmpty(index)) {
             mIndex = index!!.toInt()
         }
         mTitleName = arguments?.getString("name")
         mTitleCode = arguments?.getString("code")
 
         loading_page_fail?.setOnClickListener(mFragment)
-        mAdapter = NewListAdapter(ArrayList(),this,this)
+        mAdapter = NewListAdapter(ArrayList(), this, this)
         recycler_view?.setLoadingMoreProgressStyle(ProgressStyle.BallRotate)
         recycler_view?.setRefreshProgressStyle(ProgressStyle.BallSpinFadeLoader)
-        RecyclerViewUtil.init(activity,recycler_view,mAdapter)
+        RecyclerViewUtil.init(activity, recycler_view, mAdapter)
         getData()
-        recycler_view?.setLoadingListener(object : XRecyclerView.LoadingListener{
+        recycler_view?.setLoadingListener(object : XRecyclerView.LoadingListener {
             override fun onLoadMore() {
-                mStartNum ++
+                mStartNum++
                 getData()
             }
+
             override fun onRefresh() {
                 mStartNum = 0
                 getData()
@@ -148,19 +149,19 @@ class NewListFragmentKotlin : LazyFragmentKotlin(), View.OnClickListener , ItemC
 
     override fun getData() {
         super.getData()
-        var map = HashMap<String,Any>()
+        var map = HashMap<String, Any>()
         map.put("channel", mTitleName!!)
         map.put("num", 20)
         map.put("start", mStartNum * 20)
         map.put("appkey", Constant.jcloudKey)
 
-        requestData(mRequestApi.getRequestService(RequestApi.REQUEST_NEWS).newListDataRxjava(map),Get_LIST)
+        requestData(mRequestApi.getRequestService(RequestApi.REQUEST_NEWS).newListDataRxjava(map), Get_LIST)
     }
 
     override fun onClick(view: View?) {
 
-        when(view?.id){
-            R.id.loading_page_fail ->{
+        when (view?.id) {
+            R.id.loading_page_fail -> {
                 getData()
             }
         }
@@ -168,10 +169,10 @@ class NewListFragmentKotlin : LazyFragmentKotlin(), View.OnClickListener , ItemC
 
     override fun onItemClick(position: Int, data: Any, view: View) {
 
-        when(view.id){
-            R.id.iv_new_list_item ->{
+        when (view.id) {
+            R.id.iv_new_list_item -> {
                 val intent = Intent(activity, ImageShowActivity::class.java)
-                intent.putExtra(PublicFieldUtil.URL_FIELD,(data as NewData).pic)
+                intent.putExtra(PublicFieldUtil.URL_FIELD, (data as NewData).pic)
 //                startActivity(intent)
                 val optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(
                         activity as Activity,
@@ -181,10 +182,11 @@ class NewListFragmentKotlin : LazyFragmentKotlin(), View.OnClickListener , ItemC
                 ActivityCompat.startActivity(activity as Activity, intent, optionsCompat.toBundle())
             }
 
-            R.id.rl_item_view ->{
+            R.id.rl_item_view -> {
                 var url = (data as NewData).weburl
                 activity!!.startActivity<WebViewActivity>("url" to url)
-                //        Snackbar.make(multistate_view!!,"dddd",Snackbar.LENGTH_SHORT).show()
+
+//        Snackbar.make(multistate_view!!,"dddd",Snackbar.LENGTH_SHORT).show()
 
 //        val imageView = ImageView(context)
 //        imageView.setImageResource(R.mipmap.default_img)
@@ -198,7 +200,7 @@ class NewListFragmentKotlin : LazyFragmentKotlin(), View.OnClickListener , ItemC
     override fun onItemLongClick(position: Int, data: Any, view: View) {
 
         GreenDaoManager.getInstance().session.newDataDao.insertOrReplace(data as NewData)
-        SnackbarUtils.Short(multistate_view,"收藏成功~")
+        SnackbarUtils.Short(multistate_view, "收藏成功~")
                 .backColor(Color.parseColor("#e86060"))
                 .show()
 
@@ -207,41 +209,41 @@ class NewListFragmentKotlin : LazyFragmentKotlin(), View.OnClickListener , ItemC
     override fun requestData(request: Observable<*>?, type: Int) {
         super.requestData(request, type)
         var observable = RequestUtil.getObservable(request)
-        when(type){
-            Get_LIST ->{
-                observable.subscribe(object : DefaultObserver<NewListData>(mFragment){
+        when (type) {
+            Get_LIST -> {
+                observable.subscribe(object : DefaultObserver<NewListData>(mFragment) {
                     override fun onSuccess(response: NewListData?) {
-                        Log.d("My_Log",response.toString())
-                        var listData : MutableList<NewData>? = response?.result?.result?.list
-                        if (listData == null || listData.size == 0){
-                            if (mStartNum == 0){
+                        Log.d("My_Log", response.toString())
+                        var listData: MutableList<NewData>? = response?.result?.result?.list
+                        if (listData == null || listData.size == 0) {
+                            if (mStartNum == 0) {
                                 recycler_view?.refreshComplete()
-                            }else{
+                            } else {
                                 recycler_view?.setNoMore(true)
                                 recycler_view?.loadMoreComplete()
                             }
-                        }else{
-                            if (mStartNum == 0){
+                        } else {
+                            if (mStartNum == 0) {
                                 mAdapter?.updateData(listData)
                                 recycler_view?.refreshComplete()
-                            }else{
+                            } else {
                                 mAdapter?.appendData(listData)
                                 recycler_view?.loadMoreComplete()
                             }
                         }
 
-                        if (mAdapter?.itemCount == 0){
+                        if (mAdapter?.itemCount == 0) {
                             multistate_view?.viewState = MultiStateView.VIEW_STATE_EMPTY
-                        }else{
+                        } else {
                             multistate_view?.viewState = MultiStateView.VIEW_STATE_CONTENT
                         }
                     }
 
                     override fun onError(e: Throwable) {
                         super.onError(e)
-                        if (mAdapter?.itemCount!! > 0){
+                        if (mAdapter?.itemCount!! > 0) {
                             recycler_view?.reset()
-                        }else{
+                        } else {
                             multistate_view?.viewState = MultiStateView.VIEW_STATE_ERROR
                         }
                     }
