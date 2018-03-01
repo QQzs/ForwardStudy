@@ -50,12 +50,32 @@
 
     </RelativeLayout>
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/rl_zoom_view"
-        android:background="@color/main_color_red">
+        android:orientation="vertical">
 
-    </RelativeLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/main_color_red">
+        </View>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/loading_color">
+        </View>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="你好,我是测试内容"
+            android:textSize="@dimen/fontsize15"
+            android:background="@color/circle"/>
+
+    </LinearLayout>
 
 </RelativeLayout>

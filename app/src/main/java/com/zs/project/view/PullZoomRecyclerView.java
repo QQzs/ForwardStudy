@@ -1,14 +1,5 @@
 package com.zs.project.view;
 
-/**
- * Created by zs
- * Date：2018年 02月 01日
- * Time：16:53
- * —————————————————————————————————————
- * About:
- * —————————————————————————————————————
- */
-
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.util.AttributeSet;
@@ -24,7 +15,12 @@ import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.zs.project.util.ScreenUtil;
 
 /**
- * Created by gyzhong on 15/3/22.
+ * Created by zs
+ * Date：2018年 02月 01日
+ * Time：16:53
+ * —————————————————————————————————————
+ * About:
+ * —————————————————————————————————————
  */
 public class PullZoomRecyclerView extends XRecyclerView{
 
@@ -38,7 +34,6 @@ public class PullZoomRecyclerView extends XRecyclerView{
      */
     private ImageView mHeaderImg;
     /*屏幕的宽度*/
-    private int mScreenWidth;
     private int mHeaderHeight;
 
     /**
@@ -130,6 +125,7 @@ public class PullZoomRecyclerView extends XRecyclerView{
     }
 
     /**
+     * 方法三:
      * 头布局中只有伸缩view
      * 高度必须有 布局内的高度无效
      * @param view
@@ -146,6 +142,7 @@ public class PullZoomRecyclerView extends XRecyclerView{
     }
 
     /**
+     * 方法三:
      * 头布局中有伸缩view 和 其他view
      * @param header  头布局view
      * @param zoomView 可伸缩的view
