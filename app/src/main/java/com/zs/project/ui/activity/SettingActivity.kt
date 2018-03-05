@@ -41,6 +41,9 @@ class SettingActivity : BaseActivity(){
         item_color_view?.setOnClickListener(this)
         item_cache_clear?.setOnClickListener(this)
 
+        card_area_list_free?.setOnClickListener(this)
+        card_area_list_price?.setOnClickListener(this)
+
     }
 
     override fun initData() {

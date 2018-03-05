@@ -19,6 +19,7 @@ import com.zs.project.ui.fragment.DouBanFragment
 import com.zs.project.ui.fragment.MeFragment
 import com.zs.project.ui.fragment.NewsFragment
 import com.zs.project.util.ScreenUtil
+import com.zs.project.util.SpUtil
 import kotlinx.android.synthetic.main.activity_main.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -64,8 +65,8 @@ class MainActivity : BaseActivity() {
         fragment_douban?.setOnClickListener(this)
         fragment_me?.setOnClickListener(this)
 
-//        colorfull_bg_view?.changeImg(SpUtil.getInt("color_view",0))
-        colorfull_bg_view?.switchAnim(false)
+        colorfull_bg_view?.changeImg(SpUtil.getInt("color_view",0))
+//        colorfull_bg_view?.switchAnim(false)
     }
 
     override fun initData() {
@@ -131,10 +132,10 @@ class MainActivity : BaseActivity() {
     }
 
     private fun startAnimation(view: ImageView) {
-        val scaleXAnimator = ObjectAnimator.ofFloat(view, "scaleX", 0.9f, 1f, 0.95f, 1f)
+        val scaleXAnimator = ObjectAnimator.ofFloat(view, "scaleX", 0.6f, 1f, 0.75f, 1f)
         scaleXAnimator.repeatCount = 0
         //沿y轴放大
-        val scaleYAnimator = ObjectAnimator.ofFloat(view, "scaleY", 0.9f, 1f, 0.95f, 1f)
+        val scaleYAnimator = ObjectAnimator.ofFloat(view, "scaleY", 0.6f, 1f, 0.75f, 1f)
         scaleYAnimator.repeatCount = 0
         val set = AnimatorSet()
         //同时沿X,Y轴放大

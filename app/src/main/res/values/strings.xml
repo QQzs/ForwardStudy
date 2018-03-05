@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ForwardStudy</string>
+    <string name="app_name">AndroidStudy</string>
 
     <string name="connect_error">网络连接失败,请检查网络</string>
     <string name="connect_timeout">连接超时,请稍后再试</string>

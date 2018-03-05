@@ -45,7 +45,7 @@ class TestScrollActivity : AppCompatActivity(){
         scroll_view_pull?.addZoomContainerView(zoomHeader, zoomHeader.rl_zoom_view,ScreenUtil.dp2px(180f))
 //        scroll_view_pull?.addZoomHeaderView(zoomHeader,ScreenUtil.dp2px(180f))
 
-        scroll_view_pull?.setPullRefreshEnabled(true)
+        scroll_view_pull?.setPullRefreshEnabled(false)
         scroll_view_pull?.setRefreshProgressStyle(ProgressStyle.BallSpinFadeLoader)
         scroll_view_pull?.setLoadingMoreProgressStyle(ProgressStyle.BallGridPulse)
 
