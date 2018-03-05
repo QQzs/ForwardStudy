@@ -21,7 +21,6 @@ import com.zs.project.request.DefaultObserver
 import com.zs.project.request.RequestApi
 import com.zs.project.request.RequestUtil
 import com.zs.project.ui.activity.WebViewActivity
-import com.zs.project.ui.activity.test.TestScrollActivity
 import com.zs.project.ui.adapter.DouBanAdapter
 import com.zs.project.util.RecyclerViewUtil
 import com.zs.project.util.SnackbarUtils
@@ -111,9 +110,11 @@ class DouBanFragment : BaseFragment() , ItemClickListener, ItemLongClickListener
             override fun onPageClick(entry: BannerEntry<*>?, index: Int) {
 
                 var bannerEntry : MovieBannerEntry = entry as MovieBannerEntry
+                var url = bannerEntry.alt
+                activity?.startActivity<WebViewActivity>("url" to url)
 
 //                activity?.startActivity<TestActivity>()
-                activity?.startActivity<TestScrollActivity>()
+//                activity?.startActivity<TestScrollActivity>()
             }
 
         })
@@ -154,7 +155,7 @@ class DouBanFragment : BaseFragment() , ItemClickListener, ItemLongClickListener
      */
     fun getbannerData(data : List<MovieDetailData>) : MutableList<MovieBannerEntry>{
         var items = ArrayList<MovieBannerEntry>()
-        data.mapTo(items) { MovieBannerEntry(it.title, it.id, it.images.large) }
+        data.mapTo(items) { MovieBannerEntry(it.title, it.id, it.images.large,it.alt) }
         return items
     }
 

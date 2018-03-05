@@ -21,11 +21,13 @@ public class MovieBannerEntry implements BannerEntry<String> {
     private String title;
     private String movieId;
     private String imgUrl;
+    private String alt;
 
-    public MovieBannerEntry(String title, String id, String imgUrl) {
+    public MovieBannerEntry(String title, String id, String imgUrl,String alt) {
         this.title = title;
         this.movieId = id;
         this.imgUrl = imgUrl;
+        this.alt = alt;
     }
 
     /**
@@ -71,6 +73,9 @@ public class MovieBannerEntry implements BannerEntry<String> {
         return movieId;
     }
 
+    public String getAlt(){
+        return alt;
+    }
     /**
      * 获取当前页面的数据。改方法为辅助方法，是为了方便使用者调用而提供的，Api本身并没有任何调用。如果你不需要该方法可以空实现。
      *
