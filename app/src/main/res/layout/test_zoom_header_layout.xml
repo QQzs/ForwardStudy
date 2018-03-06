@@ -54,7 +54,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/rl_zoom_view"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="visible">
 
         <View
             android:layout_width="match_parent"
@@ -64,13 +65,13 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="250dp"
             android:background="@color/loading_color">
         </View>
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             android:gravity="center"
             android:text="你好,我是测试内容"
             android:textSize="@dimen/fontsize15"

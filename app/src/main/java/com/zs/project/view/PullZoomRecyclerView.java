@@ -2,14 +2,14 @@ package com.zs.project.view;
 
 import android.animation.ValueAnimator;
 import android.content.Context;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Interpolator;
-import android.widget.ImageView;
 
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.zs.project.util.ScreenUtil;
@@ -24,17 +24,18 @@ import com.zs.project.util.ScreenUtil;
  */
 public class PullZoomRecyclerView extends XRecyclerView{
 
-    private LayoutInflater mInflater;
     /**
      * 头部View 的容器
      */
-    private View mHeaderContainer;
+    private View mZoomView;
     /**
-     * 头部View 的图片
+     * 初始的高度
      */
-    private ImageView mHeaderImg;
-    /*屏幕的宽度*/
-    private int mHeaderHeight;
+    private int mZoomDefaultHeight;
+    /**
+     * 是否滑动到顶部
+     */
+    private boolean mIsTop;
 
     /**
      * 无效的点
@@ -97,29 +98,29 @@ public class PullZoomRecyclerView extends XRecyclerView{
     private void init(AttributeSet attrs) {
 
         // 方法一 默认添加
-//        mHeaderContainer = new FrameLayout(getContext());
+//        mZoomView = new FrameLayout(getContext());
 //        mScreenWidth = ScreenUtil.getScreenWidth();
-//        mHeaderHeight = (int) ((9 * 1.0f / 16) * mScreenWidth);
-//        LayoutParams absLayoutParams = new LayoutParams(mScreenWidth, mHeaderHeight);
-//        mHeaderContainer.setLayoutParams(absLayoutParams);
+//        mZoomDefaultHeight = (int) ((9 * 1.0f / 16) * mScreenWidth);
+//        LayoutParams absLayoutParams = new LayoutParams(mScreenWidth, mZoomDefaultHeight);
+//        mZoomView.setLayoutParams(absLayoutParams);
 //        mHeaderImg = new ImageView(getContext());
 //        FrameLayout.LayoutParams imgLayoutParams = new FrameLayout.LayoutParams
 //                (ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
 //        mHeaderImg.setScaleType(ImageView.ScaleType.CENTER_CROP);
 //        mHeaderImg.setLayoutParams(imgLayoutParams);
-//        ((FrameLayout)mHeaderContainer).addView(mHeaderImg);
-//        addHeaderView(mHeaderContainer);
+//        ((FrameLayout)mZoomView).addView(mHeaderImg);
+//        addHeaderView(mZoomView);
 
         // 方法二，属性添加
 //        mInflater = LayoutInflater.from(getContext());
 //        TypedArray array = getContext().obtainStyledAttributes(attrs, R.styleable.PullZoomRecyclerView);
 //        int headerResId = array.getResourceId(R.styleable.PullZoomRecyclerView_zoom_headerView,-1);
 //        float headerHeight = array.getDimension(R.styleable.PullZoomRecyclerView_zoom_header_height, 600f);
-//        mHeaderContainer = mInflater.inflate(headerResId,null);
-//        mHeaderHeight = (int)headerHeight;
-//        LayoutParams absLayoutParams = new LayoutParams(ScreenUtil.getScreenWidth(),mHeaderHeight);
-//        mHeaderContainer.setLayoutParams(absLayoutParams);
-//        addHeaderView(mHeaderContainer);
+//        mZoomView = mInflater.inflate(headerResId,null);
+//        mZoomDefaultHeight = (int)headerHeight;
+//        LayoutParams absLayoutParams = new LayoutParams(ScreenUtil.getScreenWidth(),mZoomDefaultHeight);
+//        mZoomView.setLayoutParams(absLayoutParams);
+//        addHeaderView(mZoomView);
 //        array.recycle();
 
     }
@@ -132,13 +133,13 @@ public class PullZoomRecyclerView extends XRecyclerView{
      * @param height
      */
     public void addZoomHeaderView(View view, int height){
-        mHeaderContainer = view;
-        mHeaderHeight = height;
-        // mHeaderContainer 没有父布局  Recyclerview.LayoutParams
-        LayoutParams params = new LayoutParams(ScreenUtil.getScreenWidth(),mHeaderHeight);
-        mHeaderContainer.setLayoutParams(params);
-        addHeaderView(mHeaderContainer);
-
+        mZoomView = view;
+        mZoomDefaultHeight = height;
+        // mZoomView 没有父布局  Recyclerview.LayoutParams
+        LayoutParams params = new LayoutParams(ScreenUtil.getScreenWidth(),mZoomDefaultHeight);
+        mZoomView.setLayoutParams(params);
+        addHeaderView(mZoomView);
+        Log.d("My_Log_h","height ==" + mZoomDefaultHeight);
     }
 
     /**
@@ -149,19 +150,52 @@ public class PullZoomRecyclerView extends XRecyclerView{
      * @param height 伸缩默认高度
      */
     public void addZoomContainerView(View header,View zoomView, int height){
-        mHeaderContainer = zoomView;
-        mHeaderHeight = height;
-        // mHeaderContainer 有父布局
-        ViewGroup.LayoutParams params = mHeaderContainer.getLayoutParams();
+        mZoomView = zoomView;
+        mZoomDefaultHeight = height;
+        // mZoomView 有父布局
+        ViewGroup.LayoutParams params = mZoomView.getLayoutParams();
         params.height = height;
-        mHeaderContainer.setLayoutParams(params);
+        mZoomView.setLayoutParams(params);
+        addHeaderView(header);
+
+    }
+
+    /**
+     * 方法三:
+     * 头布局中有伸缩view 和 其他view
+     * @param header  头布局view
+     * @param id 可伸缩的view的id
+     * @param height 伸缩默认高度
+     */
+    public void addZoomContainerView(View header,int id, int height){
+        mZoomView = header.findViewById(id);
+        mZoomDefaultHeight = height;
+        // mZoomView 有父布局
+        ViewGroup.LayoutParams params = mZoomView.getLayoutParams();
+        params.height = height;
+        mZoomView.setLayoutParams(params);
         addHeaderView(header);
 
     }
 
     @Override
+    public void onScrollStateChanged(int state) {
+        super.onScrollStateChanged(state);
+        RecyclerView.LayoutManager layoutManager = this.getLayoutManager();
+        if (layoutManager instanceof LinearLayoutManager) {
+            View firstVisibleItem = this.getChildAt(0);
+            int firstItemTop = layoutManager.getDecoratedTop(firstVisibleItem);
+            if (firstItemTop == 0) {
+                mIsTop = true;
+            } else {
+                mIsTop = false;
+            }
+        }
+    }
+
+    @Override
     public boolean onTouchEvent(MotionEvent ev) {
-        if (mHeaderContainer != null){
+        if (mZoomView != null){
             switch (ev.getAction()) {
                 case MotionEvent.ACTION_DOWN:
                     // ACTION_DOWN 事件被RecyclerView拦截，转到 ACTION_MOVE 记录按下位置
@@ -176,26 +210,32 @@ public class PullZoomRecyclerView extends XRecyclerView{
                         finishPull();
                         isNeedCancelParent = true ;
                     } else {
-                        if (mHeaderContainer.getBottom() >= mHeaderHeight) {
-                            ViewGroup.LayoutParams params = this.mHeaderContainer
+                        // mZoomView.getBottom() < mZoomDefaultHeight
+                        if (mIsTop) { // 判断是否滑动到顶部
+                            ViewGroup.LayoutParams params = this.mZoomView
                                     .getLayoutParams();
                             final float y = ev.getY();
                             float dy = y - mLastMotionY;
-                            float f = ((y - this.mLastMotionY + this.mHeaderContainer
-                                    .getBottom()) / this.mHeaderHeight - this.mLastScale)
+                            float f = ((y - this.mLastMotionY + this.mZoomView
+                                    .getBottom()) / this.mZoomDefaultHeight - this.mLastScale)
                                     / 2.0F + this.mLastScale;
                             if ((this.mLastScale <= 1.0D) && (f <= this.mLastScale)) {
-                                params.height = this.mHeaderHeight;
-                                this.mHeaderContainer
+                                params.height = this.mZoomDefaultHeight;
+                                this.mZoomView
                                         .setLayoutParams(params);
                                 return super.onTouchEvent(ev);
                             }
-                        /*这里设置紧凑度*/
-                            dy = dy * mScaleRatio * (mHeaderHeight * 1.0f / params.height);
-                            mLastScale = (dy + params.height) * 1.0f / mHeaderHeight;
+                            /*这里设置紧凑度*/
+                            dy = dy * mScaleRatio * (mZoomDefaultHeight * 1.0f / params.height);
+                            if (this.mLastScale == 1.0){
+                                // 防止慢速化到顶部时高度设置过大
+                                mLastScale = 1.05f;
+                            }else{
+                                mLastScale = (dy + params.height) * 1.0f / mZoomDefaultHeight;
+                            }
                             mScale = clamp(mLastScale, 1.0f, mMaxScale);
-                            params.height = (int) (mHeaderHeight * mScale);
-                            mHeaderContainer.setLayoutParams(params);
+                            params.height = (int) (mZoomDefaultHeight * mScale);
+                            mZoomView.setLayoutParams(params);
                             mLastMotionY = y;
                             if(isNeedCancelParent ){
                                 isNeedCancelParent = false;
@@ -231,7 +271,7 @@ public class PullZoomRecyclerView extends XRecyclerView{
      */
     private void finishPull() {
         mActivePointerId = INVALID_POINTER;
-        if (mHeaderContainer.getBottom() > mHeaderHeight){
+        if (mZoomView.getBottom() > mZoomDefaultHeight){
             if (mScale > REFRESH_SCALE){
                 // 调用父类XRecyclerView 的刷新方法，也可以自己写一个刷新的接口
                 refresh();
@@ -251,9 +291,9 @@ public class PullZoomRecyclerView extends XRecyclerView{
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
                 float value = (float) animation.getAnimatedValue();
-                ViewGroup.LayoutParams params = mHeaderContainer.getLayoutParams();
-                params.height = (int) (mHeaderHeight * value);
-                mHeaderContainer.setLayoutParams(params);
+                ViewGroup.LayoutParams params = mZoomView.getLayoutParams();
+                params.height = (int) (mZoomDefaultHeight * value);
+                mZoomView.setLayoutParams(params);
             }
         });
         pullBack.setDuration((long) (MIN_SETTLE_DURATION*mScale));

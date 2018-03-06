@@ -11,7 +11,6 @@ import com.zs.project.ui.adapter.MeAdapter
 import com.zs.project.util.RecyclerViewUtil
 import com.zs.project.util.ScreenUtil
 import kotlinx.android.synthetic.main.activity_test_scroll.*
-import kotlinx.android.synthetic.main.test_zoom_header_layout.view.*
 
 /**
  *
@@ -42,10 +41,14 @@ class TestScrollActivity : AppCompatActivity(){
         RecyclerViewUtil.init(this,scroll_view_pull,mAdapter)
 
         var zoomHeader = View.inflate(this,R.layout.test_zoom_header_layout,null)
-        scroll_view_pull?.addZoomContainerView(zoomHeader, zoomHeader.rl_zoom_view,ScreenUtil.dp2px(180f))
+//        scroll_view_pull?.addZoomContainerView(zoomHeader, zoomHeader.rl_zoom_view,ScreenUtil.dp2px(180f))
+        scroll_view_pull?.addZoomContainerView(zoomHeader, R.id.rl_zoom_view,ScreenUtil.dp2px(180f))
+
+
+//        var zoomHeader = View.inflate(this,R.layout.zoom_header_layout,null)
 //        scroll_view_pull?.addZoomHeaderView(zoomHeader,ScreenUtil.dp2px(180f))
 
-        scroll_view_pull?.setPullRefreshEnabled(false)
+        scroll_view_pull?.setPullRefreshEnabled(true)
         scroll_view_pull?.setRefreshProgressStyle(ProgressStyle.BallSpinFadeLoader)
         scroll_view_pull?.setLoadingMoreProgressStyle(ProgressStyle.BallGridPulse)
 

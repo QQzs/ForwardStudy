@@ -113,8 +113,6 @@ class DouBanFragment : BaseFragment() , ItemClickListener, ItemLongClickListener
                 var url = bannerEntry.alt
                 activity?.startActivity<WebViewActivity>("url" to url)
 
-//                activity?.startActivity<TestActivity>()
-//                activity?.startActivity<TestScrollActivity>()
             }
 
         })
