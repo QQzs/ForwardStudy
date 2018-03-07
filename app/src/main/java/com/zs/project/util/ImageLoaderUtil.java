@@ -17,6 +17,7 @@ import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.target.Target;
 import com.bumptech.glide.request.transition.Transition;
 import com.zs.project.R;
+import com.zs.project.util.image.BlurTransform;
 import com.zs.project.util.image.CircleTransform;
 import com.zs.project.util.image.GlideApp;
 import com.zs.project.util.image.RoundTransform;
@@ -26,9 +27,21 @@ import java.math.BigDecimal;
 
 
 public class ImageLoaderUtil {
+
     private static Context mContext;
 
-    public static RequestOptions options = new RequestOptions().centerCrop();
+    public static RequestOptions mOptions = new RequestOptions()
+            .placeholder(R.mipmap.default_img)
+            .error(R.mipmap.default_img)
+            .fallback(R.mipmap.default_img)
+            .dontAnimate()//去掉动画
+            .diskCacheStrategy(DiskCacheStrategy.RESOURCE);
+
+    public static RequestOptions mOptionsNoPlace = new RequestOptions()
+            .error(R.mipmap.default_img)
+            .fallback(R.mipmap.default_img)
+            .dontAnimate()//去掉动画
+            .diskCacheStrategy(DiskCacheStrategy.RESOURCE);
 
     public static void displayImage(String url, ImageView img) {
         mContext = img.getContext();
@@ -46,95 +59,73 @@ public class ImageLoaderUtil {
     private static void loadNormal(String url, ImageView img) {  //placeholder占位符。错误占位符：.error()
         GlideApp.with(mContext)
                 .load(url)
-                .placeholder(R.mipmap.default_img)
-                .error(R.mipmap.default_img)
-                .fallback(R.mipmap.default_img)
-                .dontAnimate()//去掉动画
-                .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
-                .into(img);
-    }
-
-    /**
-     *
-     * @param url
-     * @param img
-     */
-    private static void loadCircleImage(String url, ImageView img) {  //placeholder占位符。错误占位符：.error()
-        GlideApp.with(img.getContext())
-                .load(url)
-                .placeholder(R.mipmap.default_img)
-                .error(R.mipmap.default_img)
-                .fallback(R.mipmap.default_img)
-                .dontAnimate()//去掉动画
-                .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
-                .transform(new CircleTransform(mContext))
-                .into(img);
-    }
-
-    /**
-     *
-     * @param resourceId
-     * @param img
-     */
-    public static void loadCircleImage(int resourceId, ImageView img) {  //placeholder占位符。错误占位符：.error()
-        GlideApp.with(img.getContext())
-                .load(resourceId)
-                .placeholder(R.mipmap.default_img)
-                .error(R.mipmap.default_img)
-                .fallback(R.mipmap.default_img)
-                .dontAnimate()//去掉动画
-                .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
-                .transform(new CircleTransform(mContext))
-                .into(img);
-    }
-
-    /**
-     *
-     * @param url
-     * @param img
-     * @param round
-     */
-    private static void loadRoundImage(String url, ImageView img , int round) {  //placeholder占位符。错误占位符：.error()
-        GlideApp.with(mContext)
-                .load(url)
-                .placeholder(R.mipmap.default_img)
-                .error(R.mipmap.default_img)
-                .fallback(R.mipmap.default_img)
-                .dontAnimate()//去掉动画
-                .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
-                .transform(new RoundTransform(mContext,round))
+                .apply(mOptions)
                 .into(img);
     }
 
     private static void loadCache(String url, ImageView img) {
         GlideApp.with(mContext)
                 .load(url)
-                .placeholder(R.mipmap.default_img)
-                .error(R.mipmap.default_img)
-                .fallback(R.mipmap.default_img)
-                .dontAnimate()
-                .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
+                .apply(mOptions)
                 .into(img);
     }
 
-    //Glide 动态设置图片宽高
-    public static void loadIntoUseFitWidth(String imageUrl, ImageView imageView, float f) {
-        GlideApp.with(mContext)
-                    .load(imageUrl)
-                    .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
-                    .placeholder(R.mipmap.default_img)
-                    .error(R.mipmap.default_img)
-                    .fallback(R.mipmap.default_img)
-                    .into(imageView);
+    /**
+     * 圆形图片
+     * @param url
+     * @param img
+     */
+    private static void loadCircleImage(String url, ImageView img) {
+        GlideApp.with(img.getContext())
+                .load(url)
+                .apply(mOptions)
+                .transform(new CircleTransform(mContext))
+                .into(img);
     }
 
-    //等比例缩放图片至屏幕宽度
+    /**
+     * 圆形图片 资源文件
+     * @param resourceId
+     * @param img
+     */
+    public static void loadCircleImage(int resourceId, ImageView img) {
+        GlideApp.with(img.getContext())
+                .load(resourceId)
+                .apply(mOptions)
+                .transform(new CircleTransform(mContext))
+                .into(img);
+    }
+
+    /**
+     * 圆角图片
+     * @param url
+     * @param img
+     * @param round
+     */
+    private static void loadRoundImage(String url, ImageView img , int round) {
+        GlideApp.with(mContext)
+                .load(url)
+                .apply(mOptions)
+                .transform(new RoundTransform(mContext,round))
+                .into(img);
+    }
+
+    public static void showImage(String url, ImageView imageView) {
+        GlideApp.with(mContext)
+                .load(url)
+                .apply(mOptionsNoPlace)
+                .into(imageView);
+    }
+
+    /**
+     * 等比例缩放图片至屏幕宽度
+     * @param url
+     * @param imageView
+     */
     public static void loadImage(String url, final ImageView imageView) {
         GlideApp.with(mContext)
                 .load(url)
-                .placeholder(R.mipmap.default_img)
-                .error(R.mipmap.default_img)
-                .fallback(R.mipmap.default_img)
+                .apply(mOptions)
                 .into(new SimpleTarget<Drawable>() {
                     @Override
                     public void onResourceReady(Drawable resource, Transition<? super Drawable> transition) {
@@ -169,30 +160,52 @@ public class ImageLoaderUtil {
         return null;
     }
 
-    //加载网络图片并设置大小
+    /**
+     * 加载网络图片并设置大小
+     * @param url
+     * @param imageView
+     * @param width
+     * @param height
+     */
     public static void displayImage(String url, ImageView imageView, int width, int height) {
-        GlideApp
-                .with(mContext)
-                .load(url)
-                .override(width, height)
-                .placeholder(R.mipmap.default_img)
-                .error(R.mipmap.default_img)
-                .fallback(R.mipmap.default_img)
-                .into(imageView);
-    }
-
-    //加载本地图片
-    public static void Image(@DrawableRes int url, ImageView imageView) {
         GlideApp.with(mContext)
                 .load(url)
-                .placeholder(R.mipmap.default_img)
-                .error(R.mipmap.default_img)
-                .fallback(R.mipmap.default_img)
+                .override(width, height)
+                .apply(mOptions)
                 .into(imageView);
     }
 
+    /**
+     * 高斯模糊图片
+     * @param url
+     * @param imageView
+     */
+    public static void displayBlurImage(@DrawableRes int url, ImageView imageView) {
+        GlideApp.with(mContext)
+                .load(url)
+                .apply(mOptions)
+                .transform(new BlurTransform(mContext))
+                .into(imageView);
+    }
 
-    // 清除图片磁盘缓存，调用Glide自带方法
+    /**
+     * 优先显示缩略图再加载原图
+     * @param thumb 缩略图
+     * @param url   原图
+     * @param img
+     */
+    public static void displaythumbImage(String thumb,String url, ImageView img) {  //placeholder占位符。错误占位符：.error()
+        GlideApp.with(mContext)
+                .load(url)
+                .apply(mOptions)
+                .thumbnail(GlideApp.with(mContext).load(thumb))
+                .into(img);
+    }
+
+    /**
+     * 清除图片磁盘缓存，调用Glide自带方法
+     * @return
+     */
     public static boolean clearCacheDiskSelf() {
         try {
             if (Looper.myLooper() == Looper.getMainLooper()) {

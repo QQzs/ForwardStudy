@@ -8,7 +8,6 @@
         android:layout_height="match_parent"
         android:background="@color/black">
 
-
         <com.github.chrisbanes.photoview.PhotoView
             android:id="@+id/iv_show_img"
             android:layout_width="match_parent"
@@ -22,6 +21,14 @@
             <!--android:layout_height="match_parent"-->
             <!--android:transitionName="@string/transition_image"-->
             <!--android:layout_centerInParent="true"/>-->
+
+        <com.zs.project.view.loadingview.circleloading.LoadingView
+            android:id="@+id/iv_loading"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_centerInParent="true"
+            android:visibility="gone">
+        </com.zs.project.view.loadingview.circleloading.LoadingView>
 
     </RelativeLayout>
 

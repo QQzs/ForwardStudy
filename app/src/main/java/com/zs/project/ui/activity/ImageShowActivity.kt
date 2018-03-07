@@ -26,7 +26,6 @@ About:图片预览
 class ImageShowActivity : BaseActivity(){
 
     var mImageUrl : String ?= null
-    var scale: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,8 +44,8 @@ class ImageShowActivity : BaseActivity(){
     override fun initData() {
 
         mImageUrl = intent.getStringExtra(PublicFieldUtil.URL_FIELD)
-        //创建一个photoview的一个attacher
-        ImageLoaderUtil.displayImage(mImageUrl,iv_show_img)
+//        ImageLoaderUtil.displayImage(mImageUrl,iv_show_img)
+        ImageLoaderUtil.showImage(mImageUrl,iv_show_img)
     }
 
     override fun onClick(p0: View?) {
