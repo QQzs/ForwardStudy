@@ -20,8 +20,9 @@ Time：17:43
 About:
 —————————————————————————————————————
  */
-class NewListAdapter(private var mData :MutableList<NewData>, var mViewClickListener : ItemClickListener, var mItemLongClickListener : ItemLongClickListener): RecyclerView.Adapter<NewListAdapter.NewListHoler>(){
+class NewListAdapter(var mViewClickListener : ItemClickListener, var mItemLongClickListener : ItemLongClickListener): RecyclerView.Adapter<NewListAdapter.NewListHoler>(){
 
+    private var mData :MutableList<NewData> = mutableListOf()
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): NewListHoler {
         var itemView = LayoutInflater.from(parent?.context)?.inflate(R.layout.new_list_item_layout,null)
         return NewListHoler(itemView)

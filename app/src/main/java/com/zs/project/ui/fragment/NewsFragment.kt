@@ -82,7 +82,7 @@ class NewsFragment : BaseFragment() , View.OnClickListener{
     /**
      * 获取标签数据
      */
-    fun initTitleData(){
+    private fun initTitleData(){
         val selectTitle = SpUtil.getString(PublicFieldUtil.TITLE_SELECTED, "")
         if (StringUtils.isNullOrEmpty(selectTitle)) {
             var titleName = resources.getStringArray(R.array.category_name)
@@ -139,7 +139,6 @@ class NewsFragment : BaseFragment() , View.OnClickListener{
 
             var title = mSelectTitles[position]
             return NewListFragmentKotlin.getInstance(position.toString(),title.titleName,title.titleCode)
-//            return NewListFragment.getInstance(position.toString(),title.titleName,title.titleCode)
 
         }
 

@@ -38,8 +38,9 @@ public class ImageLoaderUtil {
             .diskCacheStrategy(DiskCacheStrategy.RESOURCE);
 
     public static RequestOptions mOptionsNoPlace = new RequestOptions()
-            .error(R.mipmap.default_img)
-            .fallback(R.mipmap.default_img)
+            .placeholder(R.mipmap.img_empty)
+            .error(R.mipmap.img_empty)
+            .fallback(R.mipmap.img_empty)
             .dontAnimate()//去掉动画
             .diskCacheStrategy(DiskCacheStrategy.RESOURCE);
 

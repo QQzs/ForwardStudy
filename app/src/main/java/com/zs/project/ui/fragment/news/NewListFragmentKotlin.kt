@@ -35,8 +35,6 @@ import com.zs.project.view.MultiStateView
 import io.reactivex.Observable
 import org.greenrobot.eventbus.EventBus
 import org.jetbrains.anko.startActivity
-import java.util.*
-import kotlin.collections.HashMap
 
 /**
  *
@@ -106,7 +104,7 @@ class NewListFragmentKotlin : LazyFragmentKotlin(), View.OnClickListener, ItemCl
         mTitleCode = arguments?.getString("code")
 
         loading_page_fail?.setOnClickListener(mFragment)
-        mAdapter = NewListAdapter(ArrayList(), this, this)
+        mAdapter = NewListAdapter(this, this)
         recycler_view?.setLoadingMoreProgressStyle(ProgressStyle.BallRotate)
         recycler_view?.setRefreshProgressStyle(ProgressStyle.BallSpinFadeLoader)
         RecyclerViewUtil.init(activity, recycler_view, mAdapter)
