@@ -12,7 +12,7 @@ Created by zs
 Date：2018年 02月 09日
 Time：16:34
 —————————————————————————————————————
-About:
+About:关于页面
 —————————————————————————————————————
  */
 class AboutActivity : BaseActivity(){

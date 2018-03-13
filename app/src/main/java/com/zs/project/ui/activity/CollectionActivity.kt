@@ -14,7 +14,7 @@ Created by zs
 Date：2018年 02月 09日
 Time：16:25
 —————————————————————————————————————
-About:
+About: 收藏页面
 —————————————————————————————————————
  */
 class CollectionActivity : BaseActivity(){

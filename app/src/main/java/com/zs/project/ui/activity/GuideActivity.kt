@@ -14,7 +14,7 @@ Created by zs
 Date：2018年 02月 07日
 Time：11:50
 —————————————————————————————————————
-About:
+About: 引导页面
 —————————————————————————————————————
  */
 class GuideActivity : BaseActivity(){

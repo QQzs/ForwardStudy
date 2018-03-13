@@ -24,7 +24,7 @@ Created by zs
 Date：2018年 02月 07日
 Time：14:48
 —————————————————————————————————————
-About:
+About: 设置页面
 —————————————————————————————————————
  */
 class SettingActivity : BaseActivity(){

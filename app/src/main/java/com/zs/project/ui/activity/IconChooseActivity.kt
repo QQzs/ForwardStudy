@@ -24,7 +24,7 @@ Created by zs
 Date：2018年 02月 08日
 Time：15:15
 —————————————————————————————————————
-About:
+About: 选图标页面
 —————————————————————————————————————
  */
 class IconChooseActivity : BaseActivity(){
