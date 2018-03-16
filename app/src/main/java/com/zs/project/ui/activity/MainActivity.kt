@@ -106,7 +106,7 @@ class MainActivity : BaseActivity() {
         when(index){
             0 ->{
                 iv_home_news.setBackgroundResource(R.mipmap.home_bar_news_sel)
-                tv_news.setTextColor(Color.parseColor(getString(R.string.main_color_red)))
+                tv_news.setTextColor(Color.parseColor(getString(R.string.app_main_color)))
                 iv_home_product.setBackgroundResource(R.mipmap.home_bar_dou_nor)
                 tv_product.setTextColor(Color.parseColor(getString(R.string.main_color_gray)))
                 iv_home_me.setBackgroundResource(R.mipmap.home_bar_user_nor)
@@ -116,7 +116,7 @@ class MainActivity : BaseActivity() {
                 iv_home_news.setBackgroundResource(R.mipmap.home_bar_news_nor)
                 tv_news.setTextColor(Color.parseColor(getString(R.string.main_color_gray)))
                 iv_home_product.setBackgroundResource(R.mipmap.home_bar_dou_sel)
-                tv_product.setTextColor(Color.parseColor(getString(R.string.main_color_red)))
+                tv_product.setTextColor(Color.parseColor(getString(R.string.app_main_color)))
                 iv_home_me.setBackgroundResource(R.mipmap.home_bar_user_nor)
                 tv_me.setTextColor(Color.parseColor(getString(R.string.main_color_gray)))
             }
@@ -126,7 +126,7 @@ class MainActivity : BaseActivity() {
                 iv_home_product.setBackgroundResource(R.mipmap.home_bar_dou_nor)
                 tv_product.setTextColor(Color.parseColor(getString(R.string.main_color_gray)))
                 iv_home_me.setBackgroundResource(R.mipmap.home_bar_user_sel)
-                tv_me.setTextColor(Color.parseColor(getString(R.string.main_color_red)))
+                tv_me.setTextColor(Color.parseColor(getString(R.string.app_main_color)))
             }
         }
     }

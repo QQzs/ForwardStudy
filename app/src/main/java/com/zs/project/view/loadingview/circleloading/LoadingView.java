@@ -91,7 +91,7 @@ public class LoadingView extends RelativeLayout {
         mCircleView.setVisibility(View.VISIBLE);
         mProgress.setAlpha(255);
         /*���ü���ʱ����ɫֵ*/
-        mProgress.setColorSchemeColors(getResources().getColor(R.color.main_color_red));
+        mProgress.setColorSchemeColors(getResources().getColor(R.color.app_main_color));
         addView(mCircleView);
     }
 

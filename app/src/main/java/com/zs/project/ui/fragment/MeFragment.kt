@@ -24,6 +24,8 @@ import org.jetbrains.anko.startActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import solid.ren.skinlibrary.listener.ILoaderListener
+import solid.ren.skinlibrary.loader.SkinManager
 
 
 /**
@@ -118,7 +120,41 @@ class MeFragment : BaseFragment() , View.OnClickListener , KotlinItemClickListen
                 activity?.startActivity<AboutActivity>()
             }
             4 ->{
-//                SkinManager.getInstance().restoreDefaultTheme()
+                SkinManager.getInstance().loadSkin("theme-green.skin",
+                        object : ILoaderListener {
+                            override fun onSuccess() {
+                                Log.i("SkinLoaderListener", "切换成功")
+                            }
+
+                            override fun onFailed(errMsg: String?) {
+                                Log.i("SkinLoaderListener", "切换失败:" + errMsg)
+                            }
+
+                            override fun onProgress(progress: Int) {
+                            }
+
+                            override fun onStart() {
+                            }
+//                            fun onStart() {
+//                                Log.i("SkinLoaderListener", "正在切换中")
+//                                //dialog.show();
+//                            }
+//
+//                            fun onSuccess() {
+//                                Log.i("SkinLoaderListener", "切换成功")
+//                            }
+//
+//                            fun onFailed(errMsg: String) {
+//                                Log.i("SkinLoaderListener", "切换失败:" + errMsg)
+//                            }
+//
+//                            fun onProgress(progress: Int) {
+//                                Log.i("SkinLoaderListener", "皮肤文件下载中:" + progress)
+//
+//                            }
+                        }
+
+                )
             }
         }
 

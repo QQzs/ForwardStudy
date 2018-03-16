@@ -19,7 +19,7 @@
                 android:id="@+id/banner_view_top"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/main_color_red"
+                android:background="@color/app_main_color"
                 app:decelerateMultiple="4"
                 app:pagingIntervalTime="3000"
                 app:singlePageMode="canNotPaging|noIndicator"

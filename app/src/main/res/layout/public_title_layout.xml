@@ -7,7 +7,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/title_height"
-        android:background="@color/main_color_red"
+        android:background="@color/app_main_color"
         >
 
         <ImageView

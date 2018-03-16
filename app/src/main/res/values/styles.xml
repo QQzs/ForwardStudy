@@ -11,9 +11,9 @@
     <!-- Base application theme. -->
     <style name="MyAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/main_color_red</item>
-        <item name="colorPrimaryDark">@color/main_color_red</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/app_main_color</item>
+        <item name="colorPrimaryDark">@color/app_main_color</item>
+        <item name="colorAccent">@color/app_main_color</item>
     </style>
 
     <style name="SplashTheme" parent="MyAppTheme">
