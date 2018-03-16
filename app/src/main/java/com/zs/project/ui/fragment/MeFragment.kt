@@ -26,7 +26,6 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-
 /**
  * Created by zs
  * Date：2018年 01月 04日
@@ -63,6 +62,7 @@ class MeFragment : BaseFragment() , View.OnClickListener , KotlinItemClickListen
         mData?.add(ItemBean(R.mipmap.ic_me_movie,"我的电影",1))
         mData?.add(ItemBean(R.mipmap.ic_me_setting,"设置",2))
         mData?.add(ItemBean(R.mipmap.ic_me_about,"关于",3))
+        mData?.add(ItemBean(R.mipmap.ic_me_about,"换肤",4))
 
         mAdapter = MeItemAdapter(mData!!,this)
         RecyclerViewUtil.init(activity,recycler_view_me,mAdapter)
@@ -116,6 +116,9 @@ class MeFragment : BaseFragment() , View.OnClickListener , KotlinItemClickListen
             }
             3 ->{
                 activity?.startActivity<AboutActivity>()
+            }
+            4 ->{
+//                SkinManager.getInstance().restoreDefaultTheme()
             }
         }
 

@@ -1,12 +1,12 @@
 package com.zs.project.base;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 
 import com.zs.project.request.BaseImpl;
 
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
+import solid.ren.skinlibrary.base.SkinBaseFragment;
 
 /**
  * Created by zs
@@ -17,7 +17,7 @@ import io.reactivex.disposables.Disposable;
  * —————————————————————————————————————
  */
 
-public class BaseRxFragment extends Fragment implements BaseImpl {
+public class BaseRxFragment extends SkinBaseFragment implements BaseImpl {
 
     /**
      * 管理Stop取消订阅者

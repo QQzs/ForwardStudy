@@ -1,17 +1,17 @@
 package com.zs.project.base;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 
 import com.zs.project.request.BaseImpl;
 
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
+import solid.ren.skinlibrary.base.SkinBaseActivity;
 
 /**
  * @author Administrator
  */
-public class BaseRxActivity extends AppCompatActivity implements BaseImpl {
+public class BaseRxActivity extends SkinBaseActivity implements BaseImpl {
 
     /**
      * 管理Stop取消订阅者
