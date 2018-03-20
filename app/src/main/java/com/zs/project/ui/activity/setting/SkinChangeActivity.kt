@@ -20,7 +20,7 @@ Created by zs
 Date：2018年 03月 20日
 Time：14:45
 —————————————————————————————————————
-About:
+About: 设置主题皮肤
 —————————————————————————————————————
  */
 class SkinChangeActivity : BaseActivity(){
@@ -56,7 +56,7 @@ class SkinChangeActivity : BaseActivity(){
                     when(index){
                         1 -> SkinManager.getInstance().restoreDefaultTheme()
                         2 -> changeSkin("theme-green-1.skin")
-                        3 -> changeSkin("theme-blue.skin")
+                        3 -> changeSkin("theme-blue-1.skin")
                     }
 
                 })

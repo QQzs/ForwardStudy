@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/ForwardStudy.iml" filepath="$PROJECT_DIR$/ForwardStudy.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/layoutmanager/layoutmanager.iml" filepath="$PROJECT_DIR$/layoutmanager/layoutmanager.iml" />
+      <module fileurl="file://$PROJECT_DIR$/skinblue/skinblue.iml" filepath="$PROJECT_DIR$/skinblue/skinblue.iml" />
       <module fileurl="file://$PROJECT_DIR$/skingreen/skingreen.iml" filepath="$PROJECT_DIR$/skingreen/skingreen.iml" />
       <module fileurl="file://$PROJECT_DIR$/skinlibrary/skinlibrary.iml" filepath="$PROJECT_DIR$/skinlibrary/skinlibrary.iml" />
     </modules>

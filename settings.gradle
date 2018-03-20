@@ -1,1 +1,1 @@
-include ':app', ':layoutmanager', ':skingreen', ':skinlibrary'
+include ':app', ':layoutmanager', ':skingreen', ':skinlibrary', ':skinblue'
