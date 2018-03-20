@@ -11,6 +11,7 @@
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/layoutmanager" />
             <option value="$PROJECT_DIR$/skingreen" />
+            <option value="$PROJECT_DIR$/skinlibrary" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

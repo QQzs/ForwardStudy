@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:skin="http://schemas.android.com/android/skin"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="180dp">
+    android:layout_height="180dp"
+    >
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -10,8 +13,8 @@
             android:id="@+id/iv_zoom_img"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@mipmap/default_img"
-            android:scaleType="centerCrop"/>
+            android:scaleType="centerCrop"
+            tools:ignore="MissingPrefix" />
 
         <LinearLayout
             android:gravity="center|right"
@@ -26,7 +29,6 @@
                 android:id="@+id/iv_me_avator"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:src="@mipmap/default_img"
                 android:scaleType="centerCrop"/>
 
             <TextView

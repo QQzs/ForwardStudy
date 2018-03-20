@@ -5,13 +5,12 @@
 
     <include layout="@layout/public_title_layout"></include>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/color_sel_recycler"
+    <include
+        layout="@layout/public_list_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/title_height"
-        >
+        android:layout_marginTop="@dimen/title_height">
 
-    </android.support.v7.widget.RecyclerView>
+    </include>
 
 </RelativeLayout>

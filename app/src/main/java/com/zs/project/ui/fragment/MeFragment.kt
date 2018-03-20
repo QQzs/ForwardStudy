@@ -10,8 +10,9 @@ import com.zs.project.bean.ItemBean
 import com.zs.project.listener.KotlinItemClickListener
 import com.zs.project.request.RequestApi
 import com.zs.project.ui.activity.AboutActivity
-import com.zs.project.ui.activity.CollectionActivity
-import com.zs.project.ui.activity.SettingActivity
+import com.zs.project.ui.activity.setting.CollectionActivity
+import com.zs.project.ui.activity.setting.SettingActivity
+import com.zs.project.ui.activity.setting.SkinChangeActivity
 import com.zs.project.ui.adapter.MeItemAdapter
 import com.zs.project.util.ImageLoaderUtil
 import com.zs.project.util.PublicFieldUtil
@@ -24,8 +25,6 @@ import org.jetbrains.anko.startActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import solid.ren.skinlibrary.listener.ILoaderListener
-import solid.ren.skinlibrary.loader.SkinManager
 
 
 /**
@@ -39,9 +38,8 @@ import solid.ren.skinlibrary.loader.SkinManager
 
 class MeFragment : BaseFragment() , View.OnClickListener , KotlinItemClickListener {
     var mFragment : MeFragment ?= null
-    var mFlag : Boolean = true
     var mAdapter : MeItemAdapter?= null
-    var mData : MutableList<ItemBean> ?= mutableListOf()
+    var mData : MutableList<ItemBean> = mutableListOf()
     /**
      * Bundle 后面不加 ？ 会报错误
      * Parameter specified as non-null is null
@@ -63,17 +61,16 @@ class MeFragment : BaseFragment() , View.OnClickListener , KotlinItemClickListen
         mData?.add(ItemBean(R.mipmap.ic_me_news,"我的新闻",0))
         mData?.add(ItemBean(R.mipmap.ic_me_movie,"我的电影",1))
         mData?.add(ItemBean(R.mipmap.ic_me_setting,"设置",2))
-        mData?.add(ItemBean(R.mipmap.ic_me_about,"关于",3))
-        mData?.add(ItemBean(R.mipmap.ic_me_about,"换肤",4))
+        mData?.add(ItemBean(R.mipmap.ic_me_skin,"换肤",3))
+        mData?.add(ItemBean(R.mipmap.ic_me_about,"关于",4))
 
-        mAdapter = MeItemAdapter(mData!!,this)
+        mAdapter = MeItemAdapter(this,mData,this)
         RecyclerViewUtil.init(activity,recycler_view_me,mAdapter)
         recycler_view_me?.setPullRefreshEnabled(false)
 
         var zoomHeader = View.inflate(activity,R.layout.zoom_header_layout,null)
         recycler_view_me?.addZoomHeaderView(zoomHeader, ScreenUtil.dp2px(200f))
         ImageLoaderUtil.loadCircleImage(R.mipmap.default_img,zoomHeader.iv_me_avator)
-
         ImageLoaderUtil.displayBlurImage(R.drawable.head_bg_img,zoomHeader.iv_zoom_img)
 
     }
@@ -117,44 +114,10 @@ class MeFragment : BaseFragment() , View.OnClickListener , KotlinItemClickListen
                activity?.startActivity<SettingActivity>()
             }
             3 ->{
-                activity?.startActivity<AboutActivity>()
+                activity?.startActivity<SkinChangeActivity>()
             }
             4 ->{
-                SkinManager.getInstance().loadSkin("theme-green.skin",
-                        object : ILoaderListener {
-                            override fun onSuccess() {
-                                Log.i("SkinLoaderListener", "切换成功")
-                            }
-
-                            override fun onFailed(errMsg: String?) {
-                                Log.i("SkinLoaderListener", "切换失败:" + errMsg)
-                            }
-
-                            override fun onProgress(progress: Int) {
-                            }
-
-                            override fun onStart() {
-                            }
-//                            fun onStart() {
-//                                Log.i("SkinLoaderListener", "正在切换中")
-//                                //dialog.show();
-//                            }
-//
-//                            fun onSuccess() {
-//                                Log.i("SkinLoaderListener", "切换成功")
-//                            }
-//
-//                            fun onFailed(errMsg: String) {
-//                                Log.i("SkinLoaderListener", "切换失败:" + errMsg)
-//                            }
-//
-//                            fun onProgress(progress: Int) {
-//                                Log.i("SkinLoaderListener", "皮肤文件下载中:" + progress)
-//
-//                            }
-                        }
-
-                )
+                activity?.startActivity<AboutActivity>()
             }
         }
 

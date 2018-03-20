@@ -1,4 +1,4 @@
-package com.zs.project.ui.activity
+package com.zs.project.ui.activity.setting
 
 import android.os.Bundle
 import android.os.Handler
@@ -14,7 +14,7 @@ import com.zs.project.bean.ColorBean
 import com.zs.project.event.RefreshEvent
 import com.zs.project.util.RecyclerViewUtil
 import com.zs.project.util.SpUtil
-import kotlinx.android.synthetic.main.activity_icon_choose_layout.*
+import kotlinx.android.synthetic.main.public_list_layout.*
 import kotlinx.android.synthetic.main.public_title_layout.*
 import org.greenrobot.eventbus.EventBus
 
@@ -36,7 +36,7 @@ class IconChooseActivity : BaseActivity(){
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        initContentView(R.layout.activity_icon_choose_layout)
+        initContentView(R.layout.public_list_activity_layout)
     }
 
     override fun init() {
@@ -59,11 +59,13 @@ class IconChooseActivity : BaseActivity(){
                 viewHolder?.setImageResource(R.id.iv_icon_img, iconId[colorBean!!.index])
                 viewHolder?.setText(R.id.tv_icon_name,colorBean?.name)
 
-                viewHolder?.setImageResource(R.id.iv_choose_check,if (colorBean!!.isChoose){
-                    R.mipmap.item_choose_sel
-                }else{
-                    R.mipmap.item_choose_nor
-                })
+                viewHolder?.setVisible(R.id.iv_choose_check , colorBean!!.isChoose)
+
+//                viewHolder?.setImageResource(R.id.iv_choose_check,if (colorBean!!.isChoose){
+//                    R.mipmap.item_choose_sel
+//                }else{
+//                    R.mipmap.item_choose_nor
+//                })
 
                 viewHolder?.setOnClickListener(R.id.cv_color_item , {
                     mFlag = colorBean!!.index
@@ -79,8 +81,7 @@ class IconChooseActivity : BaseActivity(){
 //        val callback = RenRenCallback(color_sel_recycler, mAdapter, mDatas)
 //        val itemTouchHelper = ItemTouchHelper(callback)
 //        itemTouchHelper.attachToRecyclerView(color_sel_recycler)
-
-        RecyclerViewUtil.initNoDecoration(this,color_sel_recycler,mAdapter)
+        RecyclerViewUtil.initNoDecoration(this,recycler_view,mAdapter)
         refreshData()
 
     }

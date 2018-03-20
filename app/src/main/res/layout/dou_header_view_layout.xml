@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:skin="http://schemas.android.com/android/skin">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -70,10 +71,12 @@
             android:text="最近热映"
             android:textColor="@color/white"
             android:textSize="@dimen/fontsize15"
-            android:background="@color/color_bar"
+            android:background="@color/app_main_color"
             android:gravity="center_vertical"
             android:paddingLeft="14dp"
-            android:layout_below="@+id/rl_dou_banner"/>
+            android:layout_below="@+id/rl_dou_banner"
+            skin:enable="true"
+            tools:ignore="MissingPrefix" />
 
     </RelativeLayout>
 

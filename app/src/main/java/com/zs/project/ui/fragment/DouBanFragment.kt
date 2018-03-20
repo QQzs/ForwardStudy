@@ -119,6 +119,7 @@ class DouBanFragment : BaseFragment() , ItemClickListener, ItemLongClickListener
         getTheaterMovie()
         recycler_view?.addHeaderView(mHeadView)
         recycler_view?.setLoadingMoreProgressStyle(ProgressStyle.BallBeat)
+        recycler_view?.setRefreshProgressStyle(ProgressStyle.BallSpinFadeLoader)
         recycler_view?.setFootViewText("加载更多","我是有底线的~")
         mAdapter = DouBanAdapter(ArrayList(),this,this)
         RecyclerViewUtil.initNoDecoration(activity,recycler_view,mAdapter)

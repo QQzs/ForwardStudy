@@ -1,4 +1,4 @@
-package com.zs.project.ui.activity
+package com.zs.project.ui.activity.setting
 
 import android.os.Bundle
 import android.view.View

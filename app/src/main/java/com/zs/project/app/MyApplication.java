@@ -1,9 +1,11 @@
 package com.zs.project.app;
 
 import com.zs.project.util.SpUtil;
+import com.zs.project.view.viewattr.AttrScrollColorBar;
+import com.zs.project.view.viewattr.AttrScrollIndicator;
 
+import solid.ren.skinlibrary.SkinConfig;
 import solid.ren.skinlibrary.base.SkinBaseApplication;
-import solid.ren.skinlibrary.config.SkinConfig;
 
 /**
  * Created by zs
@@ -24,6 +26,9 @@ public class MyApplication extends SkinBaseApplication {
         mApplication = this;
         SpUtil.init(this,"zs_data");
         SkinConfig.setCanChangeStatusColor(true);
+        SkinConfig.enableGlobalSkinApply();
+        SkinConfig.addSupportAttr("colorBar" , new AttrScrollColorBar());
+        SkinConfig.addSupportAttr("scrollIndicator" , new AttrScrollIndicator());
     }
 
     public static MyApplication getAppContext(){

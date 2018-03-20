@@ -1,4 +1,4 @@
-package com.zs.project.ui.activity
+package com.zs.project.ui.activity.setting
 
 import android.app.Activity
 import android.content.Intent
@@ -38,6 +38,7 @@ class SettingActivity : BaseActivity(){
     override fun init() {
 
         tv_all_title?.text = "设置"
+        iv_all_back?.setOnClickListener(this)
         item_color_view?.setOnClickListener(this)
         item_cache_clear?.setOnClickListener(this)
 
@@ -58,6 +59,7 @@ class SettingActivity : BaseActivity(){
     override fun onClick(view: View?) {
 
         when(view?.id){
+            R.id.iv_all_back -> finish()
             R.id.item_color_view ->{
                 this.startActivity<IconChooseActivity>()
             }

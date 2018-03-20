@@ -40,11 +40,25 @@
             android:screenOrientation="portrait"
             android:hardwareAccelerated="false">
         </activity>
-        <activity android:name=".ui.activity.SettingActivity" android:screenOrientation="portrait"></activity>
-        <activity android:name=".ui.activity.IconChooseActivity" android:screenOrientation="portrait"></activity>
-        <activity android:name=".ui.activity.CollectionActivity" android:screenOrientation="portrait"></activity>
-        <activity android:name=".ui.activity.AboutActivity" android:screenOrientation="portrait"></activity>
-        <activity android:name=".ui.activity.ImageShowActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".ui.activity.setting.SettingActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity android:name=".ui.activity.setting.IconChooseActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity android:name=".ui.activity.setting.CollectionActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity android:name=".ui.activity.AboutActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity android:name=".ui.activity.ImageShowActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity android:name=".ui.activity.setting.SkinChangeActivity"
+            android:screenOrientation="portrait"
+            >
+        </activity>
     </application>
 
 </manifest>

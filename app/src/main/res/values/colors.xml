@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <!--<color name="colorPrimary">#3F51B5</color>-->
+    <!--<color name="colorPrimaryDark">#303F9F</color>-->
+    <!--<color name="colorAccent">#FF4081</color>-->
+
+    <color name="colorPrimary">#e86060</color>
+    <color name="colorPrimaryDark">#e86060</color>
+    <color name="colorAccent">#e86060</color>
 
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
     <color name="background">#f1f1f1</color>
     <color name="app_main_color">#e86060</color>
-    <color name="color_red">#d81e06</color>
     <color name="main_color_gray">#bfbfbf</color>
+    <color name="color_red">#d81e06</color>
     <color name="loading_color">#5b52b5</color>
     <color name="loading_textColor">#7d74d4</color>
     <color name="loading_bg_color">#00000000</color>
@@ -28,11 +32,9 @@
     // 字体
     <color name="font_light_gray">#999999</color>
 
-    <color name="color_bar">#e86060</color>
-
-    <color name="triangle">#aa72d572</color>
-    <color name="circle">#aa738ffe</color>
-    <color name="rect">#aae84e40</color>
+    <color name="triangle">#3CB371</color>
+    <color name="circle">#738ffe</color>
+    <color name="rect">#e86060</color>
     <color name="shadow">#25808080</color>
 
 

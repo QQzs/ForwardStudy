@@ -182,7 +182,7 @@ public class ImageLoaderUtil {
      * @param imageView
      */
     public static void displayBlurImage(@DrawableRes int url, ImageView imageView) {
-        GlideApp.with(mContext)
+        GlideApp.with(imageView.getContext())
                 .load(url)
                 .apply(mOptions)
                 .transform(new BlurTransform(mContext))

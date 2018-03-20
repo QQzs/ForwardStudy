@@ -1,6 +1,5 @@
 package com.zs.project.ui.fragment
 
-import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
@@ -20,14 +19,10 @@ import com.zs.project.util.PublicFieldUtil
 import com.zs.project.util.SpUtil
 import com.zs.project.util.StringUtils
 import com.zs.project.view.topscorllview.indicator.IndicatorViewPager
-import com.zs.project.view.topscorllview.indicator.slidebar.ColorBar
-import com.zs.project.view.topscorllview.indicator.slidebar.ScrollBar
-import com.zs.project.view.topscorllview.indicator.transition.OnTransitionTextListener
 import kotlinx.android.synthetic.main.fragment_news_layout.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
-import org.jetbrains.anko.dip
 import org.jetbrains.anko.startActivity
 
 /**
@@ -67,10 +62,12 @@ class NewsFragment : BaseFragment() , View.OnClickListener{
         initTitleData()
         indicator_layout?.isSplitAuto = false
         indicator_layout?.setPinnedTabView(false)
-        var colorBar = ColorBar(activity,Color.parseColor("#e86060"), activity!!.dip(2f), ScrollBar.Gravity.BOTTOM)
-        indicator_layout?.setScrollBar(colorBar)
-        indicator_layout?.onTransitionListener = OnTransitionTextListener().setColor(activity!!.resources.getColor(R.color.color_red)
-        , activity!!.resources.getColor(R.color.font_default))
+//        var colorBar = ColorBar(activity, ContextCompat.getColor(activity!!,R.color.app_main_color), activity!!.dip(2f), ScrollBar.Gravity.BOTTOM)
+//        indicator_layout?.setScrollBar(colorBar)
+//        indicator_layout?.onTransitionListener = OnTransitionTextListener().setColor(ContextCompat.getColor(activity!!,R.color.app_main_color)
+//        , ContextCompat.getColor(activity!!,R.color.font_default))
+        dynamicAddView(indicator_layout,"colorBar",R.color.app_main_color)
+        dynamicAddView(indicator_layout,"scrollIndicator",R.color.app_main_color)
 
         vp_more_tab?.offscreenPageLimit = 15
         mIndicatorViewPager = IndicatorViewPager(indicator_layout,vp_more_tab)

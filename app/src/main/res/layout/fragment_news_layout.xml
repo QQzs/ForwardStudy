@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:skin="http://schemas.android.com/android/skin"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white">
@@ -15,7 +17,10 @@
             android:layout_height="40dp"
             android:divider="#fff"
             android:dividerHeight="0dip"
-            android:layout_toLeftOf="@+id/iv_add_tab">
+            android:layout_toLeftOf="@+id/iv_add_tab"
+
+            skin:enable="true"
+            tools:ignore="MissingPrefix">
 
         </com.zs.project.view.topscorllview.indicator.ScrollIndicatorView>
 
@@ -26,7 +31,9 @@
             android:src="@mipmap/ic_add_tab"
             android:layout_alignParentRight="true"
             android:padding="4dp"
-            android:scaleType="centerInside"/>
+            android:scaleType="centerInside"
+            skin:enable="true"
+            tools:ignore="MissingPrefix" />
 
         <TextView
             android:id="@+id/line"
