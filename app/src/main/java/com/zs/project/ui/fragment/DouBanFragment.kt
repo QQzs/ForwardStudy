@@ -96,10 +96,10 @@ class DouBanFragment : BaseFragment() , ItemClickListener, ItemLongClickListener
 
     override fun onItemLongClick(position: Int, data: Any, view: View) {
         GreenDaoManager.getInstance().session.movieDataDao.insertOrReplace(data as MovieData)
+
 //        SnackbarUtils.Short(multistate_view,"收藏成功~")
 //                .backColor(ContextCompat.getColor(activity!!,R.color.app_main_color))
 //                .show()
-
         dynamicAddView(multistate_view,"snackBar",R.color.app_main_color)
 
     }

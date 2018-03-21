@@ -4,7 +4,7 @@ import android.content.Context;
 import android.text.TextUtils;
 import android.widget.Toast;
 
-import com.zs.project.app.MyApplication;
+import com.zs.project.app.MyApp;
 
 /**
  * ToastUtils
@@ -12,7 +12,7 @@ import com.zs.project.app.MyApplication;
 
 public class ToastUtils {
 
-    private static Context context = MyApplication.getAppContext();
+    private static Context context = MyApp.getAppContext();
     private static Toast toast;
 
     public static void show(int resId) {

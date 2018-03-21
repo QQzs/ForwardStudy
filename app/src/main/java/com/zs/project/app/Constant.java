@@ -13,7 +13,7 @@ public class Constant {
     public static final String weatherKey="65f888e8c8ef49539f89a249a5e296ed";
     public static final String SAVED_PATH = Environment.getExternalStorageDirectory().getAbsolutePath() + "/meng";
 
-    public static String PATH_DATA = FileUtils.createRootPath(MyApplication.getAppContext()) + "/cache";
+    public static String PATH_DATA = FileUtils.createRootPath(MyApp.getAppContext()) + "/cache";
     public static String PATH_TXT = PATH_DATA + "/mengm/";
     public static String PATH_EPUB = PATH_DATA + "/epub";
     public static final String SUFFIX_ZIP = ".zip";

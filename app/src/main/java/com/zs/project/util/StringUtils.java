@@ -8,7 +8,7 @@ import android.text.SpannableString;
 import android.text.style.ImageSpan;
 import android.widget.Toast;
 
-import com.zs.project.app.MyApplication;
+import com.zs.project.app.MyApp;
 import com.zs.project.bean.Movie.MovieCasts;
 
 import java.io.BufferedReader;
@@ -512,11 +512,11 @@ public class StringUtils {
     //检验姓名
     public static boolean checkName(String str) {
         if (isNullOrEmpty(str)) {
-            Toast.makeText(MyApplication.getAppContext(), "请输入姓名", Toast.LENGTH_SHORT).show();
+            Toast.makeText(MyApp.getAppContext(), "请输入姓名", Toast.LENGTH_SHORT).show();
             return false;
         } else {
             if (str.length() > 32) {
-                Toast.makeText(MyApplication.getAppContext(), "姓名不能超过32个字符，请修改", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MyApp.getAppContext(), "姓名不能超过32个字符，请修改", Toast.LENGTH_SHORT).show();
                 return false;
             }
         }
@@ -526,11 +526,11 @@ public class StringUtils {
     //检验手机号
     public static boolean checkPhone(String str) {
         if (isNullOrEmpty(str)) {
-            Toast.makeText(MyApplication.getAppContext(), "请输入11位手机号", Toast.LENGTH_SHORT).show();
+            Toast.makeText(MyApp.getAppContext(), "请输入11位手机号", Toast.LENGTH_SHORT).show();
             return false;
         } else {
             if (!validatePhoneNumber(str)) {
-                Toast.makeText(MyApplication.getAppContext(), "请输入正确的11位手机号", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MyApp.getAppContext(), "请输入正确的11位手机号", Toast.LENGTH_SHORT).show();
                 return false;
             }
         }
@@ -541,14 +541,14 @@ public class StringUtils {
     //检验邮箱
     public static boolean checkMail(String str) {
         if (isNullOrEmpty(str)) {
-            Toast.makeText(MyApplication.getAppContext(), "请输入邮箱", Toast.LENGTH_SHORT).show();
+            Toast.makeText(MyApp.getAppContext(), "请输入邮箱", Toast.LENGTH_SHORT).show();
             return false;
         } else {
             if (str.length() > 32) {
-                Toast.makeText(MyApplication.getAppContext(), "邮箱不能超过32个字符，请修改", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MyApp.getAppContext(), "邮箱不能超过32个字符，请修改", Toast.LENGTH_SHORT).show();
                 return false;
             } else if (!validateEmail(str)) {
-                Toast.makeText(MyApplication.getAppContext(), "格式错误，请输入正确格式的邮箱", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MyApp.getAppContext(), "格式错误，请输入正确格式的邮箱", Toast.LENGTH_SHORT).show();
                 return false;
             }
         }

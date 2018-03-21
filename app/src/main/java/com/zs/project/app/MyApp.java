@@ -17,9 +17,9 @@ import solid.ren.skinlibrary.base.SkinBaseApplication;
  * —————————————————————————————————————
  */
 
-public class MyApplication extends SkinBaseApplication {
+public class MyApp extends SkinBaseApplication {
 
-    public static MyApplication mApplication;
+    public static MyApp mApplication;
 
     @Override
     public void onCreate() {
@@ -33,7 +33,7 @@ public class MyApplication extends SkinBaseApplication {
         SkinConfig.addSupportAttr("snackBar" , new AttrSnackbar());
     }
 
-    public static MyApplication getAppContext(){
+    public static MyApp getAppContext(){
         return mApplication;
     }
 

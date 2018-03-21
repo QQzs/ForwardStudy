@@ -112,7 +112,7 @@ public class ImageLoaderUtil {
     }
 
     public static void showImage(String url, ImageView imageView) {
-        GlideApp.with(mContext)
+        GlideApp.with(imageView.getContext())
                 .load(url)
                 .apply(mOptionsNoPlace)
                 .into(imageView);

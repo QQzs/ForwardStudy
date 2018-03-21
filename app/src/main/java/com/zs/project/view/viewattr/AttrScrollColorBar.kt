@@ -1,7 +1,7 @@
 package com.zs.project.view.viewattr
 
 import android.view.View
-import com.zs.project.app.MyApplication
+import com.zs.project.app.MyApp
 import com.zs.project.view.topscorllview.indicator.ScrollIndicatorView
 import com.zs.project.view.topscorllview.indicator.slidebar.ColorBar
 import com.zs.project.view.topscorllview.indicator.slidebar.ScrollBar
@@ -24,7 +24,7 @@ class AttrScrollColorBar : SkinAttr() {
             var indicatorView = view
             if (isColor) {
                 val color = SkinResourcesUtils.getColor(attrValueRefId)
-                var colorBar = ColorBar(MyApplication.getAppContext(), color, MyApplication.getAppContext().dip(2f), ScrollBar.Gravity.BOTTOM)
+                var colorBar = ColorBar(MyApp.getAppContext(), color, MyApp.getAppContext().dip(2f), ScrollBar.Gravity.BOTTOM)
                 indicatorView.setScrollBar(colorBar)
             }
 

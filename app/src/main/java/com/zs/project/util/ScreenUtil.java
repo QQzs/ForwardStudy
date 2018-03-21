@@ -15,7 +15,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.zs.project.app.MyApplication;
+import com.zs.project.app.MyApp;
 
 /**
  * <pre>
@@ -37,7 +37,7 @@ public final class ScreenUtil {
      * @return 屏幕宽
      */
     public static int getScreenWidth() {
-        return MyApplication.getAppContext().getResources().getDisplayMetrics().widthPixels;
+        return MyApp.getAppContext().getResources().getDisplayMetrics().widthPixels;
     }
 
     /**
@@ -46,16 +46,16 @@ public final class ScreenUtil {
      * @return 屏幕高
      */
     public static int getScreenHeight() {
-        return MyApplication.getAppContext().getResources().getDisplayMetrics().heightPixels;
+        return MyApp.getAppContext().getResources().getDisplayMetrics().heightPixels;
     }
 
     public static int dp2px(float dpValue) {
-        final float density = MyApplication.getAppContext().getResources().getDisplayMetrics().density;
+        final float density = MyApp.getAppContext().getResources().getDisplayMetrics().density;
         return (int) (dpValue * density + 0.5f);
     }
 
     public static int sp2px(float spValue) {
-        final float scaledDensity = MyApplication.getAppContext().getResources().getDisplayMetrics().scaledDensity;
+        final float scaledDensity = MyApp.getAppContext().getResources().getDisplayMetrics().scaledDensity;
         return (int) (spValue * scaledDensity + 0.5f);
     }
 
@@ -101,7 +101,7 @@ public final class ScreenUtil {
      * @return {@code true}: 是<br>{@code false}: 否
      */
     public static boolean isLandscape() {
-        return MyApplication.getAppContext().getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
+        return MyApp.getAppContext().getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
     }
 
     /**
@@ -110,7 +110,7 @@ public final class ScreenUtil {
      * @return {@code true}: 是<br>{@code false}: 否
      */
     public static boolean isPortrait() {
-        return MyApplication.getAppContext().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
+        return MyApp.getAppContext().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
     }
 
     /**
@@ -175,7 +175,7 @@ public final class ScreenUtil {
      * @return {@code true}: 是<br>{@code false}: 否
      */
     public static boolean isScreenLock() {
-        KeyguardManager km = (KeyguardManager) MyApplication.getAppContext().getSystemService(Context.KEYGUARD_SERVICE);
+        KeyguardManager km = (KeyguardManager) MyApp.getAppContext().getSystemService(Context.KEYGUARD_SERVICE);
         return km.inKeyguardRestrictedInputMode();
     }
 
@@ -186,7 +186,7 @@ public final class ScreenUtil {
      * @param duration 时长
      */
     public static void setSleepDuration(final int duration) {
-        Settings.System.putInt(MyApplication.getAppContext().getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, duration);
+        Settings.System.putInt(MyApp.getAppContext().getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, duration);
     }
 
     /**
@@ -196,7 +196,7 @@ public final class ScreenUtil {
      */
     public static int getSleepDuration() {
         try {
-            return Settings.System.getInt(MyApplication.getAppContext().getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT);
+            return Settings.System.getInt(MyApp.getAppContext().getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT);
         } catch (Settings.SettingNotFoundException e) {
             e.printStackTrace();
             return -123;
@@ -209,7 +209,7 @@ public final class ScreenUtil {
      * @return {@code true}: 是<br>{@code false}: 否
      */
     public static boolean isTablet() {
-        return (MyApplication.getAppContext().getResources().getConfiguration().screenLayout
+        return (MyApp.getAppContext().getResources().getConfiguration().screenLayout
                 & Configuration.SCREENLAYOUT_SIZE_MASK)
                 >= Configuration.SCREENLAYOUT_SIZE_LARGE;
     }

@@ -6,7 +6,7 @@ import android.os.Environment;
 import android.util.Log;
 
 import com.zs.project.app.Constant;
-import com.zs.project.app.MyApplication;
+import com.zs.project.app.MyApp;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -43,7 +43,7 @@ public class FileUtils {
         }
         byte[] buffer = null;
         try {
-            InputStream fin = MyApplication.getAppContext().getAssets().open("uploader" + fileName);
+            InputStream fin = MyApp.getAppContext().getAssets().open("uploader" + fileName);
             int length = fin.available();
             buffer = new byte[length];
             fin.read(buffer);
