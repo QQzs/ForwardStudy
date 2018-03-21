@@ -2,6 +2,10 @@ package com.zs.project.request;
 
 import android.text.TextUtils;
 
+import com.zs.project.app.MyApp;
+import com.zs.project.request.cookie.CookieJarImpl;
+import com.zs.project.request.cookie.SPCookieStore;
+
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
@@ -14,7 +18,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Date：2017年 09月 22日
  * Time：10:36
  * —————————————————————————————————————
- * About:
+ * About: 初始化请求Api
  * —————————————————————————————————————
  */
 public class RequestApi {
@@ -104,7 +108,8 @@ public class RequestApi {
                     .retryOnConnectionFailure(true)//连接失败后是否重新连接
                     .connectTimeout(CONNECT_TIMEOUT, TimeUnit.SECONDS)//超时时间
                     .readTimeout(READ_TIMEOUT, TimeUnit.SECONDS)
-                    .writeTimeout(READ_TIMEOUT, TimeUnit.SECONDS);
+                    .writeTimeout(READ_TIMEOUT, TimeUnit.SECONDS)
+                    .cookieJar(new CookieJarImpl(new SPCookieStore(MyApp.getAppContext())));
             mOkHttpClient = builder.build();
         }
         return mOkHttpClient;

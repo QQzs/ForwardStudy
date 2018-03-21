@@ -22,7 +22,7 @@ import com.zs.project.listener.ItemClickListener
 import com.zs.project.listener.ItemLongClickListener
 import com.zs.project.request.DefaultObserver
 import com.zs.project.request.RequestApi
-import com.zs.project.request.RequestUtil
+import com.zs.project.request.RequestHelper
 import com.zs.project.ui.activity.ImageShowActivity
 import com.zs.project.ui.activity.WebViewActivity
 import com.zs.project.ui.adapter.NewListAdapter
@@ -207,7 +207,7 @@ class NewListFragmentKotlin : LazyFragmentKotlin(), View.OnClickListener, ItemCl
 
     override fun requestData(request: Observable<*>?, type: Int) {
         super.requestData(request, type)
-        var observable = RequestUtil.getObservable(request)
+        var observable = RequestHelper.getObservable(request)
         when (type) {
             Get_LIST -> {
                 observable.subscribe(object : DefaultObserver<NewListData>(mFragment) {

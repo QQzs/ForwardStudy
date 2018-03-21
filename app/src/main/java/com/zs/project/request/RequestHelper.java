@@ -9,11 +9,10 @@ import io.reactivex.schedulers.Schedulers;
  * Date：2018年 01月 17日
  * Time：11:26
  * —————————————————————————————————————
- * About:
+ * About: 请求简化帮助类
  * —————————————————————————————————————
  */
-
-public class RequestUtil {
+public class RequestHelper {
     public static Observable getObservable(Observable request){
         return request.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
     }

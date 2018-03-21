@@ -18,7 +18,7 @@ import com.zs.project.listener.ItemClickListener
 import com.zs.project.listener.ItemLongClickListener
 import com.zs.project.request.DefaultObserver
 import com.zs.project.request.RequestApi
-import com.zs.project.request.RequestUtil
+import com.zs.project.request.RequestHelper
 import com.zs.project.ui.activity.WebViewActivity
 import com.zs.project.ui.adapter.DouBanAdapter
 import com.zs.project.util.RecyclerViewUtil
@@ -122,7 +122,7 @@ class DouBanFragment : BaseFragment() , ItemClickListener, ItemLongClickListener
         recycler_view?.setLoadingMoreProgressStyle(ProgressStyle.BallBeat)
         recycler_view?.setRefreshProgressStyle(ProgressStyle.BallSpinFadeLoader)
         recycler_view?.setFootViewText("加载更多","我是有底线的~")
-        mAdapter = DouBanAdapter(ArrayList(),this,this)
+        mAdapter = DouBanAdapter(mutableListOf(),this,this)
         RecyclerViewUtil.initNoDecoration(activity,recycler_view,mAdapter)
         recycler_view?.setLoadingListener(object : XRecyclerView.LoadingListener{
             override fun onLoadMore() {
@@ -153,7 +153,7 @@ class DouBanFragment : BaseFragment() , ItemClickListener, ItemLongClickListener
     /**
      * 获取banner数据
      */
-    fun getbannerData(data : List<MovieDetailData>) : MutableList<MovieBannerEntry>{
+    private fun getbannerData(data : List<MovieDetailData>) : MutableList<MovieBannerEntry>{
         var items = ArrayList<MovieBannerEntry>()
         data.mapTo(items) { MovieBannerEntry(it.title, it.id, it.images.large,it.alt) }
         return items
@@ -181,7 +181,7 @@ class DouBanFragment : BaseFragment() , ItemClickListener, ItemLongClickListener
 
     override fun requestData(request: Observable<*>?, type: Int) {
         super.requestData(request, type)
-        var observable = RequestUtil.getObservable(request)
+        var observable = RequestHelper.getObservable(request)
         when(type){
             THEATER_MOVIE ->{
                 observable.subscribe(object : DefaultObserver<MovieListData>(mFragment){
