@@ -3,6 +3,7 @@ package com.zs.project.app;
 import com.zs.project.util.SpUtil;
 import com.zs.project.view.viewattr.AttrScrollColorBar;
 import com.zs.project.view.viewattr.AttrScrollIndicator;
+import com.zs.project.view.viewattr.AttrSnackbar;
 
 import solid.ren.skinlibrary.SkinConfig;
 import solid.ren.skinlibrary.base.SkinBaseApplication;
@@ -29,6 +30,7 @@ public class MyApplication extends SkinBaseApplication {
         SkinConfig.enableGlobalSkinApply();
         SkinConfig.addSupportAttr("colorBar" , new AttrScrollColorBar());
         SkinConfig.addSupportAttr("scrollIndicator" , new AttrScrollIndicator());
+        SkinConfig.addSupportAttr("snackBar" , new AttrSnackbar());
     }
 
     public static MyApplication getAppContext(){

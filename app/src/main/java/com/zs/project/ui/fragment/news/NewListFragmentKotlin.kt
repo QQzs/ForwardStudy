@@ -2,7 +2,6 @@ package com.zs.project.ui.fragment.news
 
 import android.app.Activity
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.app.ActivityCompat
 import android.support.v4.app.ActivityOptionsCompat
@@ -29,7 +28,6 @@ import com.zs.project.ui.activity.WebViewActivity
 import com.zs.project.ui.adapter.NewListAdapter
 import com.zs.project.util.PublicFieldUtil
 import com.zs.project.util.RecyclerViewUtil
-import com.zs.project.util.SnackbarUtils
 import com.zs.project.util.StringUtils
 import com.zs.project.view.MultiStateView
 import io.reactivex.Observable
@@ -200,9 +198,10 @@ class NewListFragmentKotlin : LazyFragmentKotlin(), View.OnClickListener, ItemCl
     override fun onItemLongClick(position: Int, data: Any, view: View) {
 
         GreenDaoManager.getInstance().session.newDataDao.insertOrReplace(data as NewData)
-        SnackbarUtils.Short(multistate_view, "收藏成功~")
-                .backColor(Color.parseColor("#e86060"))
-                .show()
+//        SnackbarUtils.Short(multistate_view, "收藏成功~")
+//                .backColor(ContextCompat.getColor(activity!!,R.color.app_main_color))
+//                .show()
+        dynamicAddView(multistate_view,"snackBar",R.color.app_main_color)
 
     }
 

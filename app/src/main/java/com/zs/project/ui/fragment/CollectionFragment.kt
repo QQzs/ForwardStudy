@@ -24,7 +24,7 @@ Created by zs
 Date：2018年 02月 09日
 Time：16:57
 —————————————————————————————————————
-About:
+About: 我的收藏
 —————————————————————————————————————
  */
 class CollectionFragment : BaseFragment() , ItemClickListener , ItemLongClickListener{

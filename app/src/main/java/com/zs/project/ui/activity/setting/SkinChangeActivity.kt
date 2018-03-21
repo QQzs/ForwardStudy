@@ -64,8 +64,8 @@ class SkinChangeActivity : BaseActivity(){
             }
 
         }
-
-        RecyclerViewUtil.initNoDecoration(this,recycler_view,mAdapter)
+        recycler_view?.setPullRefreshEnabled(false)
+        RecyclerViewUtil.initGrid(this,recycler_view,mAdapter,2)
     }
 
     private fun changeSkin(theme : String){

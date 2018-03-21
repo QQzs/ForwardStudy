@@ -1,6 +1,5 @@
 package com.zs.project.ui.fragment
 
-import android.graphics.Color
 import android.os.Bundle
 import android.support.v7.widget.RecyclerView
 import android.view.View
@@ -23,7 +22,6 @@ import com.zs.project.request.RequestUtil
 import com.zs.project.ui.activity.WebViewActivity
 import com.zs.project.ui.adapter.DouBanAdapter
 import com.zs.project.util.RecyclerViewUtil
-import com.zs.project.util.SnackbarUtils
 import com.zs.project.util.transform.DepthPageTransformer
 import com.zs.project.view.MultiStateView
 import com.zs.project.view.banner.BannerEntry
@@ -98,9 +96,12 @@ class DouBanFragment : BaseFragment() , ItemClickListener, ItemLongClickListener
 
     override fun onItemLongClick(position: Int, data: Any, view: View) {
         GreenDaoManager.getInstance().session.movieDataDao.insertOrReplace(data as MovieData)
-        SnackbarUtils.Short(multistate_view,"收藏成功~")
-                .backColor(Color.parseColor("#e86060"))
-                .show()
+//        SnackbarUtils.Short(multistate_view,"收藏成功~")
+//                .backColor(ContextCompat.getColor(activity!!,R.color.app_main_color))
+//                .show()
+
+        dynamicAddView(multistate_view,"snackBar",R.color.app_main_color)
+
     }
 
     fun initBanner(){

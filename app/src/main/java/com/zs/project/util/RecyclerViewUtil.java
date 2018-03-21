@@ -61,7 +61,7 @@ public class RecyclerViewUtil {
      * @param recyclerView
      * @param adapter
      */
-    public static  void ScrollInit(Context context, RecyclerView recyclerView, RecyclerView.Adapter adapter) {
+    public static  void initScroll(Context context, RecyclerView recyclerView, RecyclerView.Adapter adapter) {
         LinearLayoutManager layoutManager = new LinearLayoutManager(context);
         layoutManager.setSmoothScrollbarEnabled(true);
         layoutManager.setAutoMeasureEnabled(true);
@@ -78,7 +78,7 @@ public class RecyclerViewUtil {
      * @param adapter
      * @param i
      */
-    public static  void Gridinit(Context context, RecyclerView recyclerView, RecyclerView.Adapter adapter, int i) {
+    public static  void initGrid(Context context, RecyclerView recyclerView, RecyclerView.Adapter adapter, int i) {
         recyclerView.setLayoutManager(new GridLayoutManager(context, i));
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
@@ -89,7 +89,7 @@ public class RecyclerViewUtil {
      * @param recyclerView
      * @param adapter
      */
-    public static void StaggeredGridinit(RecyclerView recyclerView, RecyclerView.Adapter adapter){
+    public static void initStaggeredGrid(RecyclerView recyclerView, RecyclerView.Adapter adapter){
         StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
         layoutManager.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_NONE);//可防止Item切换
