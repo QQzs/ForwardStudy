@@ -31,6 +31,7 @@ public class MyApp extends SkinBaseApplication {
         SkinConfig.addSupportAttr("colorBar" , new AttrScrollColorBar());
         SkinConfig.addSupportAttr("scrollIndicator" , new AttrScrollIndicator());
         SkinConfig.addSupportAttr("snackBar" , new AttrSnackbar());
+
     }
 
     public static MyApp getAppContext(){

@@ -70,6 +70,7 @@ class MeFragment : BaseFragment() , View.OnClickListener , KotlinItemClickListen
 
         var zoomHeader = View.inflate(activity,R.layout.zoom_header_layout,null)
         recycler_view_me?.addZoomHeaderView(zoomHeader, ScreenUtil.dp2px(200f))
+        ImageLoaderUtil.loadAvatarImage(R.mipmap.ic_default_avatar,zoomHeader.iv_me_avator)
         ImageLoaderUtil.displayBlurImage(R.drawable.head_bg_img,zoomHeader.iv_zoom_img)
 
     }

@@ -17,6 +17,7 @@ import java.security.MessageDigest;
  * 转换圆形图片
  */
 public class CircleTransform extends BitmapTransformation {
+
     public CircleTransform(Context context){
         super(context);
     }

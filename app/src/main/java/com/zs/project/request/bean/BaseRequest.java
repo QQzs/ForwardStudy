@@ -10,7 +10,7 @@ package com.zs.project.request.bean;
  * —————————————————————————————————————
  */
 
-public class RequestBean {
+public class BaseRequest {
 
     private String version;
     private String optioncode;
@@ -19,7 +19,7 @@ public class RequestBean {
     private String nonce;
     private String option;
 
-    public RequestBean(String optioncode, String option) {
+    public BaseRequest(String optioncode, String option) {
 
         this.optioncode = optioncode;
 

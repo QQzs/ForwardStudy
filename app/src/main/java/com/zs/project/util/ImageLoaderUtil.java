@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Looper;
 import android.support.annotation.DrawableRes;
+import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -18,6 +19,7 @@ import com.bumptech.glide.request.target.Target;
 import com.bumptech.glide.request.transition.Transition;
 import com.zs.project.R;
 import com.zs.project.util.image.BlurTransform;
+import com.zs.project.util.image.BorderCircleTransform;
 import com.zs.project.util.image.CircleTransform;
 import com.zs.project.util.image.GlideApp;
 import com.zs.project.util.image.RoundTransform;
@@ -93,7 +95,21 @@ public class ImageLoaderUtil {
         GlideApp.with(img.getContext())
                 .load(resourceId)
                 .apply(mOptions)
-                .transform(new CircleTransform(mContext))
+                .transform(new CircleTransform(img.getContext()))
+                .into(img);
+    }
+
+    /**
+     * 圆形图片 资源文件
+     * @param resourceId
+     * @param img
+     */
+    public static void loadAvatarImage(int resourceId, ImageView img) {
+        Context context = img.getContext();
+        GlideApp.with(context)
+                .load(resourceId)
+                .apply(mOptions)
+                .transform(new BorderCircleTransform(context,4, ContextCompat.getColor(context,R.color.main_color_gray)))
                 .into(img);
     }
 
