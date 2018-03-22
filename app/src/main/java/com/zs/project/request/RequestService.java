@@ -34,6 +34,16 @@ public interface RequestService {
     @GET("v2/movie/{path}")
     Observable<MovieListData> getMovieListData(@Path("path") String path , @Query("start") int start , @Query("count") int count);
 
+    @FormUrlEncoded
+    @POST("user/login")
+    Call<ResponseBody> login(@Field("username") String username,
+                             @Field("password") String password);
+
+    @GET("lg/collect/list/{page}/json")
+    Call<ResponseBody> getColllectList(@Path("page") int page);
+
+
+
     @GET("v2/movie/{path}")
     Call<ResponseBody> getTestData(@Path("path") String path , @Query("start") int start , @Query("count") int count);
 

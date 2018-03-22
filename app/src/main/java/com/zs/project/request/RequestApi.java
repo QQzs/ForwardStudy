@@ -23,15 +23,16 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class RequestApi {
 
-    private final static int CONNECT_TIMEOUT = 10;
+    private final static int CONNECT_TIMEOUT = 20;
     private final static int READ_TIMEOUT = 10;
 
     public static final String BASE_DOUBAN_URL = "https://api.douban.com/";
     public static final String BASE_NEW_URL = "https://way.jd.com/";
+    public static final String BASE_WAN_ANDROID = "http://www.wanandroid.com/";
 
     public static final int REQUEST_DOUBAN = 1001;
     public static final int REQUEST_NEWS = 1002;
-    public static final int REQUEST_URL3 = 1003;
+    public static final int REQUEST_ANDROID = 1003;
 
 
     private static RequestApi mRetrofitApi;
@@ -81,8 +82,8 @@ public class RequestApi {
             case REQUEST_NEWS:
                 baseUrl = BASE_NEW_URL;
                 break;
-            case REQUEST_URL3:
-                baseUrl = BASE_NEW_URL;
+            case REQUEST_ANDROID:
+                baseUrl = BASE_WAN_ANDROID;
                 break;
             default:
                 baseUrl = BASE_DOUBAN_URL;
@@ -103,16 +104,24 @@ public class RequestApi {
      * @return
      */
     private OkHttpClient getOkHttpClient() {
-        if (mOkHttpClient == null) {
-            OkHttpClient.Builder builder = new OkHttpClient.Builder()
-                    .retryOnConnectionFailure(true)//连接失败后是否重新连接
-                    .connectTimeout(CONNECT_TIMEOUT, TimeUnit.SECONDS)//超时时间
-                    .readTimeout(READ_TIMEOUT, TimeUnit.SECONDS)
-                    .writeTimeout(READ_TIMEOUT, TimeUnit.SECONDS)
-                    .cookieJar(new CookieJarImpl(new SPCookieStore(MyApp.getAppContext())));
-            mOkHttpClient = builder.build();
-        }
-        return mOkHttpClient;
+//        if (mOkHttpClient == null) {
+//            OkHttpClient.Builder builder = new OkHttpClient.Builder()
+//                    .retryOnConnectionFailure(true)//连接失败后是否重新连接
+//                    .connectTimeout(CONNECT_TIMEOUT, TimeUnit.SECONDS)//超时时间
+//                    .readTimeout(READ_TIMEOUT, TimeUnit.SECONDS)
+//                    .writeTimeout(READ_TIMEOUT, TimeUnit.SECONDS)
+//                    .cookieJar(new CookieJarImpl(new SPCookieStore(MyApp.getAppContext())));
+//            mOkHttpClient = builder.build();
+//        }
+//        return mOkHttpClient;
+
+        OkHttpClient.Builder builder = new OkHttpClient.Builder()
+                .retryOnConnectionFailure(true)//连接失败后是否重新连接
+                .connectTimeout(CONNECT_TIMEOUT, TimeUnit.SECONDS)//超时时间
+                .readTimeout(READ_TIMEOUT, TimeUnit.SECONDS)
+                .writeTimeout(READ_TIMEOUT, TimeUnit.SECONDS)
+                .cookieJar(new CookieJarImpl(new SPCookieStore(MyApp.getAppContext())));
+        return builder.build();
     }
 
 }

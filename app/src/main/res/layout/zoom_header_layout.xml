@@ -29,7 +29,8 @@
                 android:id="@+id/iv_me_avator"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:scaleType="centerCrop"/>
+                android:scaleType="centerCrop"
+                android:src="@mipmap/ic_default_avatar"/>
 
             <TextView
                 android:layout_width="wrap_content"

@@ -26,7 +26,7 @@ import okhttp3.HttpUrl;
  */
 public class SPCookieStore implements CookieStore {
 
-    private static final String COOKIE_PREFS = "ok_cookie";           //cookie使用prefs保存
+    private static final String COOKIE_PREFS = "zs_data";           //cookie使用prefs保存
     private static final String COOKIE_NAME_PREFIX = "cookie_";         //cookie持久化的统一前缀
 
     /**

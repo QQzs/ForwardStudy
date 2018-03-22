@@ -70,7 +70,7 @@ public class SpUtil {
      */
     public static void remove(Context context, String key){
 
-        SharedPreferences sp = context.getSharedPreferences("mengm", Context.MODE_PRIVATE);
+        SharedPreferences sp = context.getSharedPreferences("zs_data", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
         editor.remove(key).commit();
     }
