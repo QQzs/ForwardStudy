@@ -1,8 +1,10 @@
 package com.zs.project.request;
 
+import com.zs.project.bean.LoginBean;
 import com.zs.project.bean.Movie.MovieListData;
 import com.zs.project.bean.News.NewListData;
 import com.zs.project.request.bean.BaseResponse;
+import com.zs.project.request.bean.BaseResponseAndroid;
 
 import java.util.Map;
 
@@ -34,6 +36,13 @@ public interface RequestService {
     @GET("v2/movie/{path}")
     Observable<MovieListData> getMovieListData(@Path("path") String path , @Query("start") int start , @Query("count") int count);
 
+
+    @FormUrlEncoded
+    @POST("user/login")
+    Observable<BaseResponseAndroid<LoginBean>> loginAndroid(@Field("username") String username,
+                                                            @Field("password") String password);
+
+
     @FormUrlEncoded
     @POST("user/login")
     Call<ResponseBody> login(@Field("username") String username,
@@ -41,7 +50,6 @@ public interface RequestService {
 
     @GET("lg/collect/list/{page}/json")
     Call<ResponseBody> getColllectList(@Path("page") int page);
-
 
 
     @GET("v2/movie/{path}")

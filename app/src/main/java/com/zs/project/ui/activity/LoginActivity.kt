@@ -4,6 +4,11 @@ import android.os.Bundle
 import android.view.View
 import com.zs.project.R
 import com.zs.project.base.BaseActivity
+import com.zs.project.bean.LoginBean
+import com.zs.project.request.RequestHelper
+import com.zs.project.request.bean.BaseResponseAndroid
+import com.zs.project.request.cookie.DefaultObserverAndroid
+import io.reactivex.Observable
 
 /**
  *
@@ -23,16 +28,31 @@ class LoginActivity : BaseActivity(){
     }
 
     override fun init() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
+
+
     override fun initData() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
     }
 
     override fun onClick(view: View?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
+
     }
 
+
+    override fun requestData(request: Observable<*>?, type: Int) {
+        super.requestData(request, type)
+        var observable = RequestHelper.getObservable(request)
+        observable.subscribe(object : DefaultObserverAndroid<BaseResponseAndroid<LoginBean>>(this){
+            override fun onSuccess(response: BaseResponseAndroid<LoginBean>?) {
+
+                var login = response?.data
+
+            }
+
+        })
+    }
 
 }
