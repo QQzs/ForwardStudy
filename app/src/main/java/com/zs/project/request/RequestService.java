@@ -1,8 +1,9 @@
 package com.zs.project.request;
 
 import com.zs.project.bean.LoginBean;
-import com.zs.project.bean.Movie.MovieListData;
-import com.zs.project.bean.News.NewListData;
+import com.zs.project.bean.movie.MovieListData;
+import com.zs.project.bean.news.NewListData;
+import com.zs.project.bean.video.VideoData;
 import com.zs.project.request.bean.BaseResponse;
 import com.zs.project.request.bean.BaseResponseAndroid;
 
@@ -33,9 +34,11 @@ public interface RequestService {
     @GET("jisuapi/get")
     Observable<NewListData> newListDataRxjava(@QueryMap Map<String, Object> params);
 
+    @GET("255-1")
+    Observable<VideoData> getVideoListData(@QueryMap Map<String, String> params);
+
     @GET("v2/movie/{path}")
     Observable<MovieListData> getMovieListData(@Path("path") String path , @Query("start") int start , @Query("count") int count);
-
 
     @FormUrlEncoded
     @POST("user/login")

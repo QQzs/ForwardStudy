@@ -9,7 +9,7 @@ import com.google.gson.reflect.TypeToken
 import com.zs.project.R
 import com.zs.project.base.BaseActivity
 import com.zs.project.bean.Channel
-import com.zs.project.bean.News.QaTagInfo
+import com.zs.project.bean.news.QaTagInfo
 import com.zs.project.event.RefreshEvent
 import com.zs.project.listener.ItemDragHelperCallBack
 import com.zs.project.listener.OnTagChangeListener

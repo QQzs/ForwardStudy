@@ -14,7 +14,7 @@ import com.jcodecraeer.xrecyclerview.XRecyclerView
 import com.zs.project.R
 import com.zs.project.app.Constant
 import com.zs.project.base.LazyFragmentKotlin
-import com.zs.project.bean.News.NewListData
+import com.zs.project.bean.news.NewListData
 import com.zs.project.event.RefreshEvent
 import com.zs.project.greendao.GreenDaoManager
 import com.zs.project.greendao.NewData
@@ -28,6 +28,7 @@ import com.zs.project.ui.activity.test.TestAndroidActivity
 import com.zs.project.ui.adapter.NewListAdapter
 import com.zs.project.util.PublicFieldUtil
 import com.zs.project.util.RecyclerViewUtil
+import com.zs.project.util.SnackbarUtils
 import com.zs.project.util.StringUtils
 import com.zs.project.view.MultiStateView
 import io.reactivex.Observable
@@ -89,7 +90,6 @@ class NewListFragmentKotlin : LazyFragmentKotlin(), View.OnClickListener, ItemCl
         mFragment = this
         initView()
         initData()
-        Log.d("My_Log", "   mIndex =   " + mIndex)
     }
 
     override fun initData() {
@@ -199,10 +199,9 @@ class NewListFragmentKotlin : LazyFragmentKotlin(), View.OnClickListener, ItemCl
     override fun onItemLongClick(position: Int, data: Any, view: View) {
 
         GreenDaoManager.getInstance().session.newDataDao.insertOrReplace(data as NewData)
-//        SnackbarUtils.Short(multistate_view, "收藏成功~")
-//                .backColor(ContextCompat.getColor(activity!!,R.color.app_main_color))
-//                .show()
         dynamicAddView(multistate_view,"snackBar",R.color.app_main_color)
+        SnackbarUtils.Short(multistate_view, "收藏成功~")
+                .show()
 
     }
 

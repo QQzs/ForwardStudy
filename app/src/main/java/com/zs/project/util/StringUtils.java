@@ -9,7 +9,7 @@ import android.text.style.ImageSpan;
 import android.widget.Toast;
 
 import com.zs.project.app.MyApp;
-import com.zs.project.bean.Movie.MovieCasts;
+import com.zs.project.bean.movie.MovieCasts;
 
 import java.io.BufferedReader;
 import java.io.IOException;

@@ -11,6 +11,7 @@ import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.Space;
 import android.util.Log;
 import android.view.Gravity;
@@ -23,6 +24,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.zs.project.R;
+import com.zs.project.app.MyApp;
 
 import java.lang.ref.WeakReference;
 
@@ -123,6 +125,9 @@ public class SnackbarUtils {
     private static final int color_confirm = 0XFF4CB04E;
     private static final int color_warning = 0XFFFEC005;
     private static final int color_danger = 0XFFF44336;
+
+    private static int color_default = ContextCompat.getColor(MyApp.getAppContext(),R.color.app_main_color);
+
     //工具类当前持有的Snackbar实例
     private static WeakReference<Snackbar> snackbarWeakReference;
 
@@ -147,6 +152,14 @@ public class SnackbarUtils {
     }
 
     /**
+     * 设置默认背景颜色
+     * @param color
+     */
+    public static void setDefaultColor(int color){
+        color_default = color;
+    }
+
+    /**
      * 初始化Snackbar实例
      *      展示时间:Snackbar.LENGTH_SHORT
      * @param view
@@ -154,7 +167,7 @@ public class SnackbarUtils {
      * @return
      */
     public static SnackbarUtils Short(View view, String message){
-        return new SnackbarUtils(new WeakReference<Snackbar>(Snackbar.make(view,message,Snackbar.LENGTH_SHORT))).backColor(0Xffe86060);
+        return new SnackbarUtils(new WeakReference<Snackbar>(Snackbar.make(view,message,Snackbar.LENGTH_SHORT))).backColor(color_default);
     }
     /**
      * 初始化Snackbar实例
@@ -164,7 +177,7 @@ public class SnackbarUtils {
      * @return
      */
     public static SnackbarUtils Long(View view, String message){
-        return new SnackbarUtils(new WeakReference<Snackbar>(Snackbar.make(view,message,Snackbar.LENGTH_LONG))).backColor(0XFF323232);
+        return new SnackbarUtils(new WeakReference<Snackbar>(Snackbar.make(view,message,Snackbar.LENGTH_LONG))).backColor(color_default);
     }
     /**
      * 初始化Snackbar实例

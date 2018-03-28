@@ -64,6 +64,34 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/fragment_video"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <ImageView
+                        android:id="@+id/iv_home_video"
+                        android:layout_width="@dimen/main_tab_size"
+                        android:layout_height="@dimen/main_tab_size"
+                        android:background="@mipmap/home_bar_video_nor"
+                        android:padding="2dp"
+                        skin:enable="true"
+                        tools:ignore="MissingPrefix" />
+
+                    <TextView
+                        android:id="@+id/tv_video"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:gravity="center_horizontal"
+                        android:text="视频"
+                        android:textSize="10sp" />
+                </LinearLayout>
+
+                <LinearLayout
                     android:id="@+id/fragment_douban"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"

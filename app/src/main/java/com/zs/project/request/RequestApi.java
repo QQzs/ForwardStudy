@@ -26,13 +26,15 @@ public class RequestApi {
     private final static int CONNECT_TIMEOUT = 20;
     private final static int READ_TIMEOUT = 10;
 
-    public static final String BASE_DOUBAN_URL = "https://api.douban.com/";
     public static final String BASE_NEW_URL = "https://way.jd.com/";
+    public static final String BASE_SHOW_URL="http://route.showapi.com/";
+    public static final String BASE_DOUBAN_URL = "https://api.douban.com/";
     public static final String BASE_WAN_ANDROID = "http://www.wanandroid.com/";
 
     public static final int REQUEST_DOUBAN = 1001;
-    public static final int REQUEST_NEWS = 1002;
-    public static final int REQUEST_ANDROID = 1003;
+    public static final int REQUEST_SHOW = 1002;
+    public static final int REQUEST_NEWS = 1003;
+    public static final int REQUEST_ANDROID = 1004;
 
 
     private static RequestApi mRetrofitApi;
@@ -78,6 +80,9 @@ public class RequestApi {
         switch (type){
             case REQUEST_DOUBAN:
                 baseUrl = BASE_DOUBAN_URL;
+                break;
+            case REQUEST_SHOW:
+                baseUrl = BASE_SHOW_URL;
                 break;
             case REQUEST_NEWS:
                 baseUrl = BASE_NEW_URL;

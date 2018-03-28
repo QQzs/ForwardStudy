@@ -8,9 +8,9 @@ import com.jcodecraeer.xrecyclerview.XRecyclerView
 import com.zs.project.R
 import com.zs.project.app.Constant
 import com.zs.project.base.BaseFragment
-import com.zs.project.bean.Movie.MovieDetailData
-import com.zs.project.bean.Movie.MovieListData
 import com.zs.project.bean.MovieBannerEntry
+import com.zs.project.bean.movie.MovieDetailData
+import com.zs.project.bean.movie.MovieListData
 import com.zs.project.event.RefreshEvent
 import com.zs.project.greendao.GreenDaoManager
 import com.zs.project.greendao.MovieData
@@ -22,6 +22,7 @@ import com.zs.project.request.RequestHelper
 import com.zs.project.ui.activity.WebViewActivity
 import com.zs.project.ui.adapter.DouBanAdapter
 import com.zs.project.util.RecyclerViewUtil
+import com.zs.project.util.SnackbarUtils
 import com.zs.project.util.transform.DepthPageTransformer
 import com.zs.project.view.MultiStateView
 import com.zs.project.view.banner.BannerEntry
@@ -96,11 +97,9 @@ class DouBanFragment : BaseFragment() , ItemClickListener, ItemLongClickListener
 
     override fun onItemLongClick(position: Int, data: Any, view: View) {
         GreenDaoManager.getInstance().session.movieDataDao.insertOrReplace(data as MovieData)
-
-//        SnackbarUtils.Short(multistate_view,"收藏成功~")
-//                .backColor(ContextCompat.getColor(activity!!,R.color.app_main_color))
-//                .show()
         dynamicAddView(multistate_view,"snackBar",R.color.app_main_color)
+        SnackbarUtils.Short(multistate_view,"收藏成功~")
+                .show()
 
     }
 

@@ -17,6 +17,7 @@ import com.zs.project.event.RefreshEvent
 import com.zs.project.ui.fragment.DouBanFragment
 import com.zs.project.ui.fragment.MeFragment
 import com.zs.project.ui.fragment.NewsFragment
+import com.zs.project.ui.fragment.VideoFragment
 import com.zs.project.util.ScreenUtil
 import com.zs.project.util.SpUtil
 import kotlinx.android.synthetic.main.activity_main.*
@@ -33,14 +34,11 @@ class MainActivity : BaseActivity() {
 
     private var mTransaction: FragmentTransaction? = null
     private var mCurrentFragment: Fragment? = null
-    private var mNewsFragment: NewsFragment? = null
-    private var mDouBanFragment: DouBanFragment? = null
-    private var mMeFragment: MeFragment? = null
     private var mFragments : ArrayList<Fragment> = arrayListOf()
 
     var mIsShow = true  // true：语音播放框滑动到显示状态  false：语音播放框移除屏幕状态
     var SAVE_INDEX : String = "save_index"
-    var mTags = arrayOf("news" , "movies" , "me")
+    var mTags = arrayOf("news" , "video" , "movies" , "me")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,16 +49,15 @@ class MainActivity : BaseActivity() {
     override fun init() {
 
         mTransaction = supportFragmentManager.beginTransaction()
-        mNewsFragment = NewsFragment()
-        mDouBanFragment = DouBanFragment()
-        mMeFragment = MeFragment()
-        mFragments?.add(mNewsFragment!!)
-        mFragments?.add(mDouBanFragment!!)
-        mFragments?.add(mMeFragment!!)
+        mFragments?.add(NewsFragment())
+        mFragments?.add(VideoFragment())
+        mFragments?.add(DouBanFragment())
+        mFragments?.add(MeFragment())
 
         changePage(0)
 
         fragment_news?.setOnClickListener(this)
+        fragment_video?.setOnClickListener(this)
         fragment_douban?.setOnClickListener(this)
         fragment_me?.setOnClickListener(this)
 
@@ -102,56 +99,54 @@ class MainActivity : BaseActivity() {
     }
 
     private fun changeTab(index : Int){
+        // ContextCompat.getColor(activity!!,R.color.app_main_color)
         when(index){
             0 ->{
-//                tv_news.setTextColor(ContextCompat.getColor(this,R.color.app_main_color))
-//                tv_product.setTextColor(ContextCompat.getColor(this,R.color.main_color_gray))
-//                tv_me.setTextColor(ContextCompat.getColor(this,R.color.main_color_gray))
-
-//                iv_home_news.setBackgroundResource(R.mipmap.home_bar_news_sel)
-//                iv_home_product.setBackgroundResource(R.mipmap.home_bar_dou_nor)
-//                iv_home_me.setBackgroundResource(R.mipmap.home_bar_user_nor)
 
                 dynamicAddView(tv_news, "textColor", R.color.app_main_color)
+                dynamicAddView(tv_video, "textColor", R.color.main_color_gray)
                 dynamicAddView(tv_product, "textColor", R.color.main_color_gray)
                 dynamicAddView(tv_me, "textColor", R.color.main_color_gray)
 
                 dynamicAddView(iv_home_news, "background", R.mipmap.home_bar_news_sel)
+                dynamicAddView(iv_home_video, "background", R.mipmap.home_bar_video_nor)
                 dynamicAddView(iv_home_product, "background", R.mipmap.home_bar_dou_nor)
                 dynamicAddView(iv_home_me, "background", R.mipmap.home_bar_user_nor)
 
             }
             1 ->{
-//                tv_news.setTextColor(ContextCompat.getColor(this,R.color.main_color_gray))
-//                tv_product.setTextColor(ContextCompat.getColor(this,R.color.app_main_color))
-//                tv_me.setTextColor(ContextCompat.getColor(this,R.color.main_color_gray))
-
-//                iv_home_news.setBackgroundResource(R.mipmap.home_bar_news_nor)
-//                iv_home_product.setBackgroundResource(R.mipmap.home_bar_dou_sel)
-//                iv_home_me.setBackgroundResource(R.mipmap.home_bar_user_nor)
 
                 dynamicAddView(tv_news, "textColor", R.color.main_color_gray)
+                dynamicAddView(tv_video, "textColor", R.color.app_main_color)
+                dynamicAddView(tv_product, "textColor", R.color.main_color_gray)
+                dynamicAddView(tv_me, "textColor",R.color.main_color_gray)
+
+                dynamicAddView(iv_home_news, "background", R.mipmap.home_bar_news_nor)
+                dynamicAddView(iv_home_video, "background", R.mipmap.home_bar_video_sel)
+                dynamicAddView(iv_home_product, "background", R.mipmap.home_bar_dou_nor)
+                dynamicAddView(iv_home_me, "background", R.mipmap.home_bar_user_nor)
+            }
+            2 ->{
+
+                dynamicAddView(tv_news, "textColor", R.color.main_color_gray)
+                dynamicAddView(tv_video, "textColor", R.color.main_color_gray)
                 dynamicAddView(tv_product, "textColor", R.color.app_main_color)
                 dynamicAddView(tv_me, "textColor",R.color.main_color_gray)
 
                 dynamicAddView(iv_home_news, "background", R.mipmap.home_bar_news_nor)
+                dynamicAddView(iv_home_video, "background", R.mipmap.home_bar_video_nor)
                 dynamicAddView(iv_home_product, "background", R.mipmap.home_bar_dou_sel)
                 dynamicAddView(iv_home_me, "background", R.mipmap.home_bar_user_nor)
             }
-            2 ->{
-//                tv_news.setTextColor(ContextCompat.getColor(this,R.color.main_color_gray))
-//                tv_product.setTextColor(ContextCompat.getColor(this,R.color.main_color_gray))
-//                tv_me.setTextColor(ContextCompat.getColor(this,R.color.app_main_color))
-
-//                iv_home_news.setBackgroundResource(R.mipmap.home_bar_news_nor)
-//                iv_home_product.setBackgroundResource(R.mipmap.home_bar_dou_nor)
-//                iv_home_me.setBackgroundResource(R.mipmap.home_bar_user_sel)
+            3 ->{
 
                 dynamicAddView(tv_news, "textColor", R.color.main_color_gray)
+                dynamicAddView(tv_video, "textColor", R.color.main_color_gray)
                 dynamicAddView(tv_product, "textColor", R.color.main_color_gray)
                 dynamicAddView(tv_me, "textColor",R.color.app_main_color)
 
                 dynamicAddView(iv_home_news, "background", R.mipmap.home_bar_news_nor)
+                dynamicAddView(iv_home_video, "background", R.mipmap.home_bar_video_nor)
                 dynamicAddView(iv_home_product, "background", R.mipmap.home_bar_dou_nor)
                 dynamicAddView(iv_home_me, "background", R.mipmap.home_bar_user_sel)
             }
@@ -217,13 +212,18 @@ class MainActivity : BaseActivity() {
                 changePage(0)
                 startAnimation(iv_home_news)
             }
-            R.id.fragment_douban ->{
+            R.id.fragment_video ->{
                 changePage(1)
-                startAnimation(iv_home_product)
+                startAnimation(iv_home_video)
             }
             
-            R.id.fragment_me ->{
+            R.id.fragment_douban ->{
                 changePage(2)
+                startAnimation(iv_home_product)
+            }
+
+            R.id.fragment_me ->{
+                changePage(3)
                 startAnimation(iv_home_me)
             }
         }

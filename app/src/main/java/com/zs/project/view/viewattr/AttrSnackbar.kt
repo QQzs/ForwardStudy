@@ -2,6 +2,7 @@ package com.zs.project.view.viewattr
 
 import android.view.View
 import com.zs.project.util.SnackbarUtils
+import com.zs.project.view.MultiStateView
 import solid.ren.skinlibrary.attr.base.SkinAttr
 import solid.ren.skinlibrary.utils.SkinResourcesUtils
 
@@ -17,10 +18,10 @@ About:
 class AttrSnackbar : SkinAttr(){
     override fun applySkin(view: View?) {
 
-        if (isColor){
-            SnackbarUtils.Short(view, "收藏成功~")
-                    .backColor(SkinResourcesUtils.getColor(attrValueRefId))
-                    .show()
+        if(view is MultiStateView){
+            if (isColor){
+                SnackbarUtils.setDefaultColor(SkinResourcesUtils.getColor(attrValueRefId))
+            }
         }
 
     }

@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.zs.project.R
-import com.zs.project.bean.Movie.MovieDetailData
+import com.zs.project.bean.movie.MovieDetailData
 import com.zs.project.greendao.MovieData
 import com.zs.project.listener.ItemClickListener
 import com.zs.project.listener.ItemLongClickListener
