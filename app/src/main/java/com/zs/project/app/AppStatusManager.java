@@ -5,7 +5,7 @@ package com.zs.project.app;
  * Date：2018年 02月 27日
  * Time：11:48
  * —————————————————————————————————————
- * About:
+ * About:activity manager
  * —————————————————————————————————————
  */
 
