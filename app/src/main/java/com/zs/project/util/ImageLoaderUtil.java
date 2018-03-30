@@ -114,6 +114,20 @@ public class ImageLoaderUtil {
     }
 
     /**
+     * 圆形图片 资源文件
+     * @param imagePath
+     * @param img
+     */
+    public static void loadAvatarImage(String imagePath, ImageView img) {
+        Context context = img.getContext();
+        GlideApp.with(context)
+                .load(imagePath)
+                .apply(mOptions)
+                .transform(new BorderCircleTransform(context,4, ContextCompat.getColor(context,R.color.main_color_gray)))
+                .into(img);
+    }
+
+    /**
      * 圆角图片
      * @param url
      * @param img

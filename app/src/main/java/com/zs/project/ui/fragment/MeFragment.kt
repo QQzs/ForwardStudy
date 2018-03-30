@@ -3,10 +3,12 @@ package com.zs.project.ui.fragment
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import com.donkingliang.imageselector.utils.ImageSelectorUtils
 import com.zs.project.R
 import com.zs.project.app.Constant
 import com.zs.project.base.BaseFragment
 import com.zs.project.bean.ItemBean
+import com.zs.project.event.SelectImageEvent
 import com.zs.project.listener.KotlinItemClickListener
 import com.zs.project.request.RequestApi
 import com.zs.project.ui.activity.AboutActivity
@@ -21,6 +23,9 @@ import com.zs.project.util.ScreenUtil
 import kotlinx.android.synthetic.main.fragment_me_layout.*
 import kotlinx.android.synthetic.main.zoom_header_layout.view.*
 import okhttp3.ResponseBody
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 import org.jetbrains.anko.startActivity
 import retrofit2.Call
 import retrofit2.Callback
@@ -37,9 +42,16 @@ import retrofit2.Response
  */
 
 class MeFragment : BaseFragment() , View.OnClickListener , KotlinItemClickListener {
+
     var mFragment : MeFragment ?= null
     var mAdapter : MeItemAdapter?= null
     var mData : MutableList<ItemBean> = mutableListOf()
+    var mZoomHeader : View? = null
+
+    companion object {
+        val SELECT_IMAGE : Int = 9000
+    }
+
     /**
      * Bundle 后面不加 ？ 会报错误
      * Parameter specified as non-null is null
@@ -48,6 +60,7 @@ class MeFragment : BaseFragment() , View.OnClickListener , KotlinItemClickListen
         super.onCreateView(savedInstanceState)
         setContentView(R.layout.fragment_me_layout)
         mFragment = this
+        EventBus.getDefault().register(mFragment)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -68,10 +81,12 @@ class MeFragment : BaseFragment() , View.OnClickListener , KotlinItemClickListen
         RecyclerViewUtil.init(activity,recycler_view_me,mAdapter)
         recycler_view_me?.setPullRefreshEnabled(false)
 
-        var zoomHeader = View.inflate(activity,R.layout.zoom_header_layout,null)
-        recycler_view_me?.addZoomHeaderView(zoomHeader, ScreenUtil.dp2px(200f))
-        ImageLoaderUtil.loadAvatarImage(R.mipmap.ic_default_avatar,zoomHeader.iv_me_avator)
-        ImageLoaderUtil.displayBlurImage(R.drawable.head_bg_img,zoomHeader.iv_zoom_img)
+        mZoomHeader = View.inflate(activity,R.layout.zoom_header_layout,null)
+        recycler_view_me?.addZoomHeaderView(mZoomHeader, ScreenUtil.dp2px(200f))
+        ImageLoaderUtil.loadAvatarImage(R.mipmap.ic_default_avatar,mZoomHeader?.iv_me_avator)
+        ImageLoaderUtil.displayBlurImage(R.drawable.head_bg_img,mZoomHeader?.iv_zoom_img)
+
+        mZoomHeader?.iv_me_avator?.setOnClickListener(this)
 
     }
 
@@ -95,7 +110,9 @@ class MeFragment : BaseFragment() , View.OnClickListener , KotlinItemClickListen
     override fun onClick(view: View?) {
 
         when(view?.id){
-
+            R.id.iv_me_avator ->{
+                ImageSelectorUtils.openPhotoAndClip(activity,SELECT_IMAGE)
+            }
         }
 
     }
@@ -121,6 +138,19 @@ class MeFragment : BaseFragment() , View.OnClickListener , KotlinItemClickListen
             }
         }
 
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun setAvatar(event : SelectImageEvent){
+        if ("avatar" == event.type){
+            var avatar = event.getmImages()[0]
+            ImageLoaderUtil.loadAvatarImage(avatar,mZoomHeader?.iv_me_avator)
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        EventBus.getDefault().unregister(mFragment)
     }
 
 }

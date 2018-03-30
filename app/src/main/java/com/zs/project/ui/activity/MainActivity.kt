@@ -10,10 +10,12 @@ import android.util.Log
 import android.view.KeyEvent
 import android.view.View
 import android.widget.ImageView
+import com.donkingliang.imageselector.utils.ImageSelectorUtils
 import com.zs.project.R
 import com.zs.project.app.AppStatusManager
 import com.zs.project.base.BaseActivity
 import com.zs.project.event.RefreshEvent
+import com.zs.project.event.SelectImageEvent
 import com.zs.project.ui.fragment.DouBanFragment
 import com.zs.project.ui.fragment.MeFragment
 import com.zs.project.ui.fragment.NewsFragment
@@ -254,6 +256,15 @@ class MainActivity : BaseActivity() {
             return true
         }
         return super.onKeyDown(keyCode, event)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == MeFragment.SELECT_IMAGE && data != null){
+            var image = data.getStringArrayListExtra(ImageSelectorUtils.SELECT_RESULT)
+            EventBus.getDefault().post(SelectImageEvent("avatar",image))
+        }
+
     }
 
     override fun onDestroy() {
