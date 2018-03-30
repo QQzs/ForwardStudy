@@ -1,9 +1,10 @@
 package com.zs.project.ui.fragment
 
+import android.Manifest
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import com.donkingliang.imageselector.utils.ImageSelectorUtils
+import com.tbruyelle.rxpermissions2.RxPermissions
 import com.zs.project.R
 import com.zs.project.app.Constant
 import com.zs.project.base.BaseFragment
@@ -111,7 +112,14 @@ class MeFragment : BaseFragment() , View.OnClickListener , KotlinItemClickListen
 
         when(view?.id){
             R.id.iv_me_avator ->{
-                ImageSelectorUtils.openPhotoAndClip(activity,SELECT_IMAGE)
+
+                val rxPermissions = RxPermissions(activity)
+
+                //同时请求多个权限
+                rxPermissions.request(Manifest.permission.RECEIVE_MMS,
+                                Manifest.permission.READ_CALL_LOG)//多个权限用","隔开
+                        .subscribe()
+//                ImageSelectorUtils.openPhotoAndClip(activity,SELECT_IMAGE)
             }
         }
 

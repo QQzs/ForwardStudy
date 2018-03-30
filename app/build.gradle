@@ -57,8 +57,9 @@ dependencies {
     // 数据库
     compile 'org.greenrobot:greendao:3.2.0'
     compile 'org.greenrobot:greendao-generator:3.2.0'
-    // 换肤
-    //    compile 'com.solid.skin:skinlibrary:1.3.1'
+
+    compile 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.5@aar'
+
     implementation project(':skinlibrary')
     implementation project(':imageselector')
 }
