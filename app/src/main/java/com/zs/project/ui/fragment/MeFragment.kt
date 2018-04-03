@@ -48,6 +48,7 @@ class MeFragment : BaseFragment() , View.OnClickListener , KotlinItemClickListen
     var mAdapter : MeItemAdapter?= null
     var mData : MutableList<ItemBean> = mutableListOf()
     var mZoomHeader : View? = null
+    var mPermissions : RxPermissions? = null
 
     companion object {
 //        val SELECT_IMAGE : Int = 9000
@@ -62,6 +63,7 @@ class MeFragment : BaseFragment() , View.OnClickListener , KotlinItemClickListen
         super.onCreateView(savedInstanceState)
         setContentView(R.layout.fragment_me_layout)
         mFragment = this
+        mPermissions = RxPermissions(activity!!)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -116,21 +118,29 @@ class MeFragment : BaseFragment() , View.OnClickListener , KotlinItemClickListen
                 mDialogUtil?.setDialogBackListener(object : DialogUtil.DialogBackListener{
                     override fun onComfirmClick(dialog: Dialog) {
                         dialog.dismiss()
-                        val rxPermissions = RxPermissions(activity!!)
-                        //同时请求多个权限
-                        rxPermissions.request(Manifest.permission.CAMERA)//多个权限用","隔开
-                                .subscribe({
+                        mPermissions?.request(Manifest.permission.CAMERA)
+                                ?.subscribe({
                                     if (it){
                                         ImageSelectorUtils.openCameraAndClip(activity,TAKE_PHOTO)
                                     }else{
-                                        activity?.toast("拒绝")
+                                        activity?.toast("相机权限已关闭")
                                     }
                                 })
                     }
 
                     override fun onBackClick(dialog: Dialog) {
                         dialog.dismiss()
-                        ImageSelectorUtils.openPhotoAndClip(activity,SELECT_IMAGE)
+                        //同时请求多个权限
+                        mPermissions?.request(Manifest.permission.READ_EXTERNAL_STORAGE
+                                ,Manifest.permission.WRITE_EXTERNAL_STORAGE)//多个权限用","隔开
+                                ?.subscribe({
+                                    if (it){
+                                        ImageSelectorUtils.openPhotoAndClip(activity,SELECT_IMAGE)
+                                    }else{
+                                        activity?.toast("读取存储卡权限已关闭")
+                                    }
+                                })
+
                     }
 
                     override fun onCancelClick(dialog: Dialog) {
