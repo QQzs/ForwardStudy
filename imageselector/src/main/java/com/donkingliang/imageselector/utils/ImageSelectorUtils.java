@@ -74,4 +74,14 @@ public class ImageSelectorUtils {
     public static void openPhotoAndClip(Activity activity, int requestCode) {
         ClipImageActivity.openActivity(activity, requestCode);
     }
+
+    /**
+     * 打开相机拍照并剪裁。
+     *
+     * @param activity
+     */
+    public static void openCameraAndClip(Activity activity, int requestCode) {
+        ClipImageActivity.openCamera(activity , requestCode);
+    }
+
 }

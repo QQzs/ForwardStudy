@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -20,24 +21,38 @@ import com.donkingliang.imageselector.view.ClipImageView;
 import java.io.File;
 import java.util.ArrayList;
 
+import static com.donkingliang.imageselector.utils.ImageUtil.CAMERA_WITH_DATA;
+import static com.donkingliang.imageselector.utils.ImageUtil.IMAGE_FILE;
+import static com.donkingliang.imageselector.utils.ImageUtil.PHOTO_CROP_RESOULT;
+
 public class ClipImageActivity extends Activity {
 
     private FrameLayout btnConfirm;
     private FrameLayout btnBack;
     private ClipImageView imageView;
     private int mRequestCode;
+    public static final int SELECT_IMAGE = 9000;
+    public static final int TAKE_PHOTO = 9001;
+
+    /**
+     * 拍照的 Uri
+     */
+    private static Uri mImageUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_clip_image);
-
         mRequestCode = getIntent().getIntExtra("requestCode", 0);
+        if (getIntent().getBooleanExtra("camera",false)){
+            mImageUri = ImageUtil.doTakePhoto(this);
+        }else{
+            setStatusBarColor();
+            ImageSelectorUtils.openPhoto(this, mRequestCode, true, 0);
+            initView();
+        }
 
-        setStatusBarColor();
-        ImageSelectorUtils.openPhoto(this, mRequestCode, true, 0);
-        initView();
     }
 
     /**
@@ -77,17 +92,30 @@ public class ClipImageActivity extends Activity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (data != null && requestCode == mRequestCode) {
-            ArrayList<String> images = data.getStringArrayListExtra(ImageSelectorUtils.SELECT_RESULT);
-            Bitmap bitmap = ImageUtil.decodeSampledBitmapFromFile(images.get(0), 720, 1080);
-            if (bitmap != null) {
-                imageView.setBitmapData(bitmap);
-            } else {
+        if (data != null && resultCode == RESULT_OK){
+            if (requestCode == SELECT_IMAGE){
+                ArrayList<String> images = data.getStringArrayListExtra(ImageSelectorUtils.SELECT_RESULT);
+                Bitmap bitmap = ImageUtil.decodeSampledBitmapFromFile(images.get(0), 720, 1080);
+                if (bitmap != null) {
+                    imageView.setBitmapData(bitmap);
+                } else {
+                    finish();
+                }
+            }else if (requestCode == CAMERA_WITH_DATA){
+                ImageUtil.startPhotoZoom(this,ImageUtil.getImageUri(this,mImageUri,"avatar_test"));
+            }else if (requestCode == PHOTO_CROP_RESOULT){
+                Intent intent = new Intent();
+                intent.putExtra(ImageSelectorUtils.SELECT_RESULT,IMAGE_FILE+ "/avatar_crop");
+                setResult(RESULT_OK,intent);
+                finish();
+            }else{
                 finish();
             }
-        } else {
+
+        }else{
             finish();
         }
+
     }
 
     private void confirm(Bitmap bitmap) {
@@ -113,4 +141,12 @@ public class ClipImageActivity extends Activity {
         intent.putExtra("requestCode", requestCode);
         context.startActivityForResult(intent, requestCode);
     }
+
+    public static void openCamera(Activity context, int requestCode){
+        Intent intent = new Intent(context, ClipImageActivity.class);
+        intent.putExtra("camera", true);
+        intent.putExtra("requestCode", requestCode);
+        context.startActivityForResult(intent, requestCode);
+    }
+
 }

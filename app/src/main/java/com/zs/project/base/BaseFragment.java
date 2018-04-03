@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 import com.google.gson.Gson;
 import com.zs.project.request.RequestApi;
+import com.zs.project.util.DialogUtil;
 
 import java.lang.reflect.Field;
 
@@ -22,6 +23,7 @@ public class BaseFragment extends BaseRxFragment {
 	protected LayoutInflater inflater;
 	protected RequestApi mRequestApi = null;
 	protected Gson mGson = new Gson();
+	protected DialogUtil mDialogUtil;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -33,6 +35,7 @@ public class BaseFragment extends BaseRxFragment {
 		this.inflater = inflater;
 		this.container = container;
 		mRequestApi = RequestApi.getInstance();
+		mDialogUtil = new DialogUtil(getActivity());
 		onCreateView(savedInstanceState);
 		if (contentView == null)
 			return super.onCreateView(inflater, container, savedInstanceState);

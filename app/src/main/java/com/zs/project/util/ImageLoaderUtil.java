@@ -39,6 +39,13 @@ public class ImageLoaderUtil {
             .dontAnimate()//去掉动画
             .diskCacheStrategy(DiskCacheStrategy.RESOURCE);
 
+    public static RequestOptions mOptionsNoCache = new RequestOptions()
+            .placeholder(R.mipmap.default_img)
+            .error(R.mipmap.default_img)
+            .fallback(R.mipmap.default_img)
+            .dontAnimate()//去掉动画
+            .diskCacheStrategy(DiskCacheStrategy.NONE);
+
     public static RequestOptions mOptionsNoPlace = new RequestOptions()
             .placeholder(R.mipmap.img_empty)
             .error(R.mipmap.img_empty)
@@ -122,7 +129,7 @@ public class ImageLoaderUtil {
         Context context = img.getContext();
         GlideApp.with(context)
                 .load(imagePath)
-                .apply(mOptions)
+                .apply(mOptionsNoCache)
                 .transform(new BorderCircleTransform(context,4, ContextCompat.getColor(context,R.color.main_color_gray)))
                 .into(img);
     }

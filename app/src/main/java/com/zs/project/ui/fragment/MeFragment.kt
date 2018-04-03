@@ -1,15 +1,20 @@
 package com.zs.project.ui.fragment
 
 import android.Manifest
+import android.app.Activity.RESULT_OK
+import android.app.Dialog
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import com.donkingliang.imageselector.ClipImageActivity.SELECT_IMAGE
+import com.donkingliang.imageselector.ClipImageActivity.TAKE_PHOTO
+import com.donkingliang.imageselector.utils.ImageSelectorUtils
 import com.tbruyelle.rxpermissions2.RxPermissions
 import com.zs.project.R
 import com.zs.project.app.Constant
 import com.zs.project.base.BaseFragment
 import com.zs.project.bean.ItemBean
-import com.zs.project.event.SelectImageEvent
 import com.zs.project.listener.KotlinItemClickListener
 import com.zs.project.request.RequestApi
 import com.zs.project.ui.activity.AboutActivity
@@ -17,17 +22,12 @@ import com.zs.project.ui.activity.setting.CollectionActivity
 import com.zs.project.ui.activity.setting.SettingActivity
 import com.zs.project.ui.activity.setting.SkinChangeActivity
 import com.zs.project.ui.adapter.MeItemAdapter
-import com.zs.project.util.ImageLoaderUtil
-import com.zs.project.util.PublicFieldUtil
-import com.zs.project.util.RecyclerViewUtil
-import com.zs.project.util.ScreenUtil
+import com.zs.project.util.*
 import kotlinx.android.synthetic.main.fragment_me_layout.*
 import kotlinx.android.synthetic.main.zoom_header_layout.view.*
 import okhttp3.ResponseBody
-import org.greenrobot.eventbus.EventBus
-import org.greenrobot.eventbus.Subscribe
-import org.greenrobot.eventbus.ThreadMode
 import org.jetbrains.anko.startActivity
+import org.jetbrains.anko.toast
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -50,7 +50,8 @@ class MeFragment : BaseFragment() , View.OnClickListener , KotlinItemClickListen
     var mZoomHeader : View? = null
 
     companion object {
-        val SELECT_IMAGE : Int = 9000
+//        val SELECT_IMAGE : Int = 9000
+//        val TAKE_PHOTO : Int = 9001
     }
 
     /**
@@ -61,7 +62,6 @@ class MeFragment : BaseFragment() , View.OnClickListener , KotlinItemClickListen
         super.onCreateView(savedInstanceState)
         setContentView(R.layout.fragment_me_layout)
         mFragment = this
-        EventBus.getDefault().register(mFragment)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -112,14 +112,49 @@ class MeFragment : BaseFragment() , View.OnClickListener , KotlinItemClickListen
 
         when(view?.id){
             R.id.iv_me_avator ->{
+                mDialogUtil?.showAvatarDialog()
+                mDialogUtil?.setDialogBackListener(object : DialogUtil.DialogBackListener{
+                    override fun onComfirmClick(dialog: Dialog) {
+                        dialog.dismiss()
+                        val rxPermissions = RxPermissions(activity!!)
+                        //同时请求多个权限
+                        rxPermissions.request(Manifest.permission.CAMERA)//多个权限用","隔开
+                                .subscribe({
+                                    if (it){
+                                        ImageSelectorUtils.openCameraAndClip(activity,TAKE_PHOTO)
+                                    }else{
+                                        activity?.toast("拒绝")
+                                    }
+                                })
+                    }
 
-                val rxPermissions = RxPermissions(activity)
+                    override fun onBackClick(dialog: Dialog) {
+                        dialog.dismiss()
+                        ImageSelectorUtils.openPhotoAndClip(activity,SELECT_IMAGE)
+                    }
 
-                //同时请求多个权限
-                rxPermissions.request(Manifest.permission.RECEIVE_MMS,
-                                Manifest.permission.READ_CALL_LOG)//多个权限用","隔开
-                        .subscribe()
-//                ImageSelectorUtils.openPhotoAndClip(activity,SELECT_IMAGE)
+                    override fun onCancelClick(dialog: Dialog) {
+                        dialog.dismiss()
+                    }
+
+                })
+
+//                rxPermissions
+//                        .requestEach(
+//                                Manifest.permission.CAMERA)
+//                        .subscribe({
+//
+//                            if (it.granted){
+//                                activity?.toast("ok")
+//                            }else if (it.shouldShowRequestPermissionRationale){
+//                                activity?.toast("拒绝")
+//                            }else{
+//                                activity?.toast("记住拒绝")
+//                            }
+//
+//                        })
+
+
             }
         }
 
@@ -148,17 +183,24 @@ class MeFragment : BaseFragment() , View.OnClickListener , KotlinItemClickListen
 
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    fun setAvatar(event : SelectImageEvent){
-        if ("avatar" == event.type){
-            var avatar = event.getmImages()[0]
-            ImageLoaderUtil.loadAvatarImage(avatar,mZoomHeader?.iv_me_avator)
-        }
-    }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == RESULT_OK && data != null){
+            when(requestCode){
+                TAKE_PHOTO ->{
+                    var path = data?.getStringExtra(ImageSelectorUtils.SELECT_RESULT)
+                    ImageLoaderUtil.loadAvatarImage(path,mZoomHeader?.iv_me_avator)
+                }
+                SELECT_IMAGE ->{
+                    var path = data?.getStringArrayListExtra(ImageSelectorUtils.SELECT_RESULT)[0]
+                    ImageLoaderUtil.loadAvatarImage(path,mZoomHeader?.iv_me_avator)
+                }
+            }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        EventBus.getDefault().unregister(mFragment)
+        }else{
+            activity?.toast("请重新选择")
+        }
+
     }
 
 }
