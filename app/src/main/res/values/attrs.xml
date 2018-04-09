@@ -109,6 +109,15 @@
         <attr name="totalPageTextColor" format="color"/>
     </declare-styleable>
 
+    <!-- 有边框和背景的TextView -->
+    <declare-styleable name="BorderTextView">
+        <attr name="strokeWidth" format="dimension"/>
+        <attr name="cornerRadius" format="dimension"/>
+        <attr name="strokeColor" format="color"/>
+        <attr name="contentBackColor" format="color"/>
+        <attr name="followTextColor" format="boolean"/>
+    </declare-styleable>
+
     <string-array name="category_name">
         <item>头条</item>
         <item>新闻</item>

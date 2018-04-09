@@ -116,7 +116,7 @@ public class ImageLoaderUtil {
         GlideApp.with(context)
                 .load(resourceId)
                 .apply(mOptions)
-                .transform(new BorderCircleTransform(context,4, ContextCompat.getColor(context,R.color.main_color_gray)))
+                .transform(new BorderCircleTransform(context,4, ContextCompat.getColor(context,R.color.white)))
                 .into(img);
     }
 
@@ -130,7 +130,7 @@ public class ImageLoaderUtil {
         GlideApp.with(context)
                 .load(imagePath)
                 .apply(mOptionsNoCache)
-                .transform(new BorderCircleTransform(context,4, ContextCompat.getColor(context,R.color.main_color_gray)))
+                .transform(new BorderCircleTransform(context,4, ContextCompat.getColor(context,R.color.white)))
                 .into(img);
     }
 

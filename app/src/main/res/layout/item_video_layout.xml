@@ -1,36 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <View
-        android:id="@+id/video_player_item"
+    <cn.jzvd.JZVideoPlayerStandard
+        android:id="@+id/item_video_player"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:background="@color/black"/>
+        android:layout_height="200dp"/>
 
     <TextView
         android:id="@+id/tv_video_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="12345678"
-        android:textSize="@dimen/fontsize15"
-        android:textColor="@color/font_default"
-        android:layout_margin="6dp"/>
+        android:textSize="@dimen/fontsize14"
+        android:textColor="@color/white"
+        android:layout_margin="10dp"/>
 
-    <ImageView
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+
+    <com.zs.project.view.BorderTextView
+        android:id="@+id/tv_video_time"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:textColor="@color/white"
+        android:textSize="@dimen/fontsize12"
+        android:text="timetime"
         android:layout_above="@+id/rl_video_detail"
-        android:layout_marginBottom="-6dp"
-        android:layout_marginLeft="10dp"
-        android:src="@mipmap/default_img"/>
+        android:layout_alignParentRight="true"
+        android:layout_margin="10dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:includeFontPadding="false"
+        android:gravity="center"
+        app:strokeWidth="1px"
+        app:followTextColor="true"
+        app:cornerRadius="10dp"/>
 
     <RelativeLayout
         android:id="@+id/rl_video_detail"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_below="@+id/video_player_item"
+        android:layout_below="@+id/item_video_player"
         android:background="@color/white">
 
         <TextView
@@ -38,22 +49,48 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="123456"
-            android:textSize="@dimen/fontsize15"
+            android:textSize="@dimen/fontsize14"
             android:textColor="@color/font_default"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"/>
 
         <TextView
+            android:id="@+id/tv_voice_like"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="center_vertical"
             android:textColor="@color/font_gray"
-            android:textSize="@dimen/fontsize14"
+            android:textSize="@dimen/fontsize13"
             android:text="喜欢"
             android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="10dp"/>
+            android:layout_toLeftOf="@+id/tv_video_follow"
+            android:layout_marginRight="10dp"
+            android:drawableLeft="@mipmap/ic_like_img"
+            android:drawablePadding="4dp"/>
 
+        <TextView
+            android:id="@+id/tv_video_follow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:textColor="@color/font_gray"
+            android:textSize="@dimen/fontsize13"
+            android:text="关注"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:drawableLeft="@mipmap/ic_follow_img"
+            android:drawablePadding="4dp"/>
 
     </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/iv_video_header"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_above="@+id/rl_video_detail"
+        android:layout_marginBottom="-6dp"
+        android:layout_marginLeft="10dp"
+        android:src="@mipmap/default_img"/>
 
 </RelativeLayout>
