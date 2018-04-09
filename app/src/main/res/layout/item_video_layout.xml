@@ -6,26 +6,53 @@
     <View
         android:id="@+id/video_player_item"
         android:layout_width="match_parent"
-        android:layout_height="200dp" />
+        android:layout_height="200dp"
+        android:background="@color/black"/>
 
     <TextView
         android:id="@+id/tv_video_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="1234"
-        />
+        android:text="12345678"
+        android:textSize="@dimen/fontsize15"
+        android:textColor="@color/font_default"
+        android:layout_margin="6dp"/>
+
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_above="@+id/rl_video_detail"
+        android:layout_marginBottom="-6dp"
+        android:layout_marginLeft="10dp"
+        android:src="@mipmap/default_img"/>
 
     <RelativeLayout
+        android:id="@+id/rl_video_detail"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_below="@+id/video_player_item">
+        android:layout_below="@+id/video_player_item"
+        android:background="@color/white">
+
+        <TextView
+            android:id="@+id/tv_voice_author"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="123456"
+            android:textSize="@dimen/fontsize15"
+            android:textColor="@color/font_default"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="1234"
+            android:textColor="@color/font_gray"
+            android:textSize="@dimen/fontsize14"
+            android:text="喜欢"
             android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"/>
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"/>
+
 
     </RelativeLayout>
 
