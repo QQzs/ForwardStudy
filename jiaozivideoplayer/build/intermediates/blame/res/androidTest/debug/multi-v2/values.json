@@ -1,0 +1,20 @@
+{
+    "logs": [
+        {
+            "outputFile": "D:\\MyWork\\code\\github3\\ForwardStudy\\jiaozivideoplayer\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values\\values.xml",
+            "map": [
+                {
+                    "source": "D:\\MyWork\\code\\github3\\ForwardStudy\\jiaozivideoplayer\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,17",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,117,175,221,261,325,367,409,539,598,655,724,968",
+                        "endLines": "2,3,4,5,6,7,8,9,10,11,12,16,22",
+                        "endColumns": "61,57,45,39,63,41,41,129,58,56,68,12,12",
+                        "endOffsets": "112,170,216,256,320,362,404,534,593,650,719,963,1339"
+                    }
+                }
+            ]
+        }
+    ]
+}

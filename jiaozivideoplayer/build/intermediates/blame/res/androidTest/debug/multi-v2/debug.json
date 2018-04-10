@@ -1,0 +1,80 @@
+{
+    "logs": [
+        {
+            "outputFile": "D:\\MyWork\\code\\github3\\ForwardStudy\\jiaozivideoplayer\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-zh_values-zh.arsc.flat",
+            "map": [
+                {
+                    "source": "D:\\MyWork\\code\\github3\\ForwardStudy\\jiaozivideoplayer\\build\\intermediates\\bundles\\debug\\res\\values-zh\\values-zh.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8",
+                        "startColumns": "4,4,4,4,4,4,4",
+                        "startOffsets": "55,105,147,185,249,303,358",
+                        "endColumns": "49,41,37,63,53,54,54",
+                        "endOffsets": "100,142,180,244,298,353,408"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "D:\\MyWork\\code\\github3\\ForwardStudy\\jiaozivideoplayer\\build\\intermediates\\res\\merged\\androidTest\\debug\\values_values.arsc.flat",
+            "map": [
+                {
+                    "source": "D:\\MyWork\\code\\github3\\ForwardStudy\\jiaozivideoplayer\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,17",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,117,175,221,261,325,367,409,539,598,655,724,968",
+                        "endLines": "2,3,4,5,6,7,8,9,10,11,12,16,22",
+                        "endColumns": "61,57,45,39,63,41,41,129,58,56,68,12,12",
+                        "endOffsets": "112,170,216,256,320,362,404,534,593,650,719,963,1339"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "D:\\MyWork\\code\\github3\\ForwardStudy\\jiaozivideoplayer\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-pt_values-pt.arsc.flat",
+            "map": [
+                {
+                    "source": "D:\\MyWork\\code\\github3\\ForwardStudy\\jiaozivideoplayer\\build\\intermediates\\bundles\\debug\\res\\values-pt\\values-pt.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8",
+                        "startColumns": "4,4,4,4,4,4,4",
+                        "startOffsets": "55,129,174,216,320,375,435",
+                        "endColumns": "73,44,41,103,54,59,78",
+                        "endOffsets": "124,169,211,315,370,430,509"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "D:\\MyWork\\code\\github3\\ForwardStudy\\jiaozivideoplayer\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-tr_values-tr.arsc.flat",
+            "map": [
+                {
+                    "source": "D:\\MyWork\\code\\github3\\ForwardStudy\\jiaozivideoplayer\\build\\intermediates\\bundles\\debug\\res\\values-tr\\values-tr.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8",
+                        "startColumns": "4,4,4,4,4,4,4",
+                        "startOffsets": "55,129,179,221,334,390,449",
+                        "endColumns": "73,49,41,112,55,58,65",
+                        "endOffsets": "124,174,216,329,385,444,510"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "D:\\MyWork\\code\\github3\\ForwardStudy\\jiaozivideoplayer\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-es_values-es.arsc.flat",
+            "map": [
+                {
+                    "source": "D:\\MyWork\\code\\github3\\ForwardStudy\\jiaozivideoplayer\\build\\intermediates\\bundles\\debug\\res\\values-es\\values-es.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8",
+                        "startColumns": "4,4,4,4,4,4,4",
+                        "startOffsets": "55,135,183,231,354,412,473",
+                        "endColumns": "79,47,47,122,57,60,71",
+                        "endOffsets": "130,178,226,349,407,468,540"
+                    }
+                }
+            ]
+        }
+    ]
+}

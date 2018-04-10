@@ -49,6 +49,8 @@ class VideoFragment : BaseFragment(){
     var mAdapter: CommonAdapter<ContentlistBean>? = null
     var mData = mutableListOf<ContentlistBean>()
 
+    var mVideoUrl = "http://dn-chunyu.qbox.me/fwb/static/images/home/video/video_aboutCY_A.mp4"
+
     val DATA_VIDEO : Int = 2000
 
     override fun onCreateView(savedInstanceState: Bundle?) {
@@ -80,7 +82,8 @@ class VideoFragment : BaseFragment(){
                 ImageLoaderUtil.loadAvatarImage(data?.profile_image,header)
                 var video = viewHolder?.getView<JZVideoPlayerStandard>(R.id.item_video_player)
                 video?.setUp(data?.video_uri, JZVideoPlayerStandard.SCREEN_WINDOW_NORMAL, "")
-//                video?.thumbImageView?.setImageBitmap(getNetVideoBitmap(data!!.video_uri))
+//                video?.setUp(mVideoUrl, JZVideoPlayerStandard.SCREEN_WINDOW_NORMAL, "")
+                ImageLoaderUtil.displayLocalImage(R.mipmap.iv_video_img1,video?.thumbImageView)
 
 //                JZVideoPlayerStandard.setJzUserAction { type, url, screen, objects ->
 //                    when(type){
@@ -98,7 +101,6 @@ class VideoFragment : BaseFragment(){
             }
 
         }
-//        recycler_view?.setPullRefreshEnabled(false)
         recycler_view?.setLoadingMoreProgressStyle(ProgressStyle.BallBeat)
         recycler_view?.setRefreshProgressStyle(ProgressStyle.BallSpinFadeLoader)
         RecyclerViewUtil.initNoDecoration(activity,recycler_view,mAdapter)

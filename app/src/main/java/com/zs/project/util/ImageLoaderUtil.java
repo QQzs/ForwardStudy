@@ -94,6 +94,18 @@ public class ImageLoaderUtil {
     }
 
     /**
+     * @param resourceId
+     * @param img
+     */
+    public static void displayLocalImage(int resourceId, ImageView img) {
+        GlideApp.with(img.getContext())
+                .load(resourceId)
+                .apply(mOptions)
+                .into(img);
+    }
+
+
+    /**
      * 圆形图片 资源文件
      * @param resourceId
      * @param img
