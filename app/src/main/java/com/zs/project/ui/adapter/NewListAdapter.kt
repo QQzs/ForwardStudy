@@ -8,6 +8,7 @@ import com.zs.project.R
 import com.zs.project.greendao.NewData
 import com.zs.project.listener.ItemClickListener
 import com.zs.project.listener.ItemLongClickListener
+import com.zs.project.util.DateUtil
 import com.zs.project.util.ImageLoaderUtil
 import kotlinx.android.synthetic.main.new_list_item_layout.view.*
 
@@ -51,9 +52,9 @@ class NewListAdapter(var mViewClickListener : ItemClickListener, var mItemLongCl
 
         fun bindData(position : Int){
             var bean = mData[position]
-            itemView.tv_new_title?.text = bean.title
-            itemView.tv_new_time?.text = bean.time
-            ImageLoaderUtil.displayImage(bean.pic,itemView.iv_new_list_item)
+            itemView.tv_new_title?.text = bean?.title
+            itemView.tv_new_time?.text = DateUtil.getStandTime1(bean?.time)
+            ImageLoaderUtil.displayImage(bean?.pic,itemView?.iv_new_list_item)
 
             itemView.iv_new_list_item.setOnClickListener {
                 mViewClickListener.onItemClick(position , bean , itemView.iv_new_list_item)

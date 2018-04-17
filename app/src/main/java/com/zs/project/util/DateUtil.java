@@ -18,6 +18,7 @@ import java.util.Locale;
 public class DateUtil {
 
     public static SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+    public static SimpleDateFormat formatDate1 = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault());
     public static SimpleDateFormat formatDateTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
 
     /**
@@ -59,6 +60,51 @@ public class DateUtil {
                         + "分钟前";
             else
                 ftime = hour + "小时前";
+        } else if (days == 1) {
+            ftime = "昨天";
+        } else if (days == 2) {
+            ftime = "前天";
+        } else if (days > 2 && days <= 10) {
+            ftime = days + "天前";
+        } else if (days > 10) {
+            ftime = formatDate.format(time);
+        }
+        return ftime;
+    }
+
+    /**
+     *  格式化时间格式
+     *
+     * @param sdate
+     * @return
+     */
+    public static String getStandTime1(String sdate) {
+        Date time = parseDateTime(sdate);
+        if (time == null) {
+            return "Unknown";
+        }
+        return formatDate1.format(time);
+    }
+
+    /**
+     * 以友好的方式显示时间
+     *
+     * @param sdate
+     * @return
+     */
+    public static String getStandTime2(String sdate) {
+        Date time = parseDateTime(sdate);
+        if (time == null) {
+            return "Unknown";
+        }
+        String ftime = "";
+        Calendar cal = Calendar.getInstance();
+
+        long lt = time.getTime() / 86400000;
+        long ct = cal.getTimeInMillis() / 86400000;
+        int days = (int) (ct - lt);
+        if (days == 0) {
+            ftime = "今天";
         } else if (days == 1) {
             ftime = "昨天";
         } else if (days == 2) {
