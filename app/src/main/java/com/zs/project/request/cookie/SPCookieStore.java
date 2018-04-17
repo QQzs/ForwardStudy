@@ -48,7 +48,7 @@ public class SPCookieStore implements CookieStore {
         for (Map.Entry<String, ?> entry : prefsMap.entrySet()) {
             if ((entry.getValue()) != null && !entry.getKey().startsWith(COOKIE_NAME_PREFIX)) {
                 //获取url对应的所有cookie的key,用","分割
-                String[] cookieNames = TextUtils.split((String) entry.getValue(), ",");
+                String[] cookieNames = TextUtils.split(entry.getValue().toString(), ",");
                 for (String name : cookieNames) {
                     //根据对应cookie的Key,从xml中获取cookie的真实值
                     String encodedCookie = cookiePrefs.getString(COOKIE_NAME_PREFIX + name, null);
