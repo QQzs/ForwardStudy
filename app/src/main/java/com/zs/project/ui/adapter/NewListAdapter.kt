@@ -48,6 +48,15 @@ class NewListAdapter(var mViewClickListener : ItemClickListener, var mItemLongCl
         notifyDataSetChanged()
     }
 
+    fun getItemData(position: Int) : String{
+        if (position <= mData.size){
+            return DateUtil.getStandTime2(mData[position].time)
+        }else{
+            return "今天"
+        }
+    }
+
+
     inner class NewListHoler(itemView : View?) : RecyclerView.ViewHolder(itemView){
 
         fun bindData(position : Int){

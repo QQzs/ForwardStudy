@@ -215,8 +215,9 @@ class VideoFragment : BaseFragment(){
             override fun onSuccess(response: VideoData?) {
 
                 mData = response?.showapi_res_body?.pagebean?.contentlist!!
-                mAdapter?.setDatas(mData)
-                Log.d("My_Log","d = " + mData.toString())
+//                mAdapter?.datas = mData
+//                Log.d("My_Log","d = " + mData.toString())
+                LogUtil.logShow("size  == " + mData.size)
 
                 if (mData.size == 0) {
                     if (mPageNum == 1) {
@@ -227,7 +228,7 @@ class VideoFragment : BaseFragment(){
 
                 } else {
                     if (mPageNum == 1) {
-                        mAdapter?.setDatas(mData)
+                        mAdapter?.datas = mData
                         recycler_view?.refreshComplete()
                     } else {
                         mAdapter?.addDatas(mData)

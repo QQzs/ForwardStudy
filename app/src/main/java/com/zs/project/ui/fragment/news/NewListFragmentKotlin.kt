@@ -5,10 +5,12 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.ActivityCompat
 import android.support.v4.app.ActivityOptionsCompat
+import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.View
 import android.widget.RelativeLayout
+import android.widget.TextView
 import com.jcodecraeer.xrecyclerview.ProgressStyle
 import com.jcodecraeer.xrecyclerview.XRecyclerView
 import com.zs.project.R
@@ -54,6 +56,7 @@ class NewListFragmentKotlin : LazyFragmentKotlin(), View.OnClickListener, ItemCl
     var mTitleName: String? = null
     var mTitleCode: String? = null
     var mStartNum: Int = 0
+    var mCurrentPosition = 0
 
     var mFragment: NewListFragmentKotlin? = null
     var mAdapter: NewListAdapter? = null
@@ -61,6 +64,7 @@ class NewListFragmentKotlin : LazyFragmentKotlin(), View.OnClickListener, ItemCl
     var multistate_view: MultiStateView? = null
     var recycler_view: XRecyclerView? = null
     var loading_page_fail: RelativeLayout? = null
+    var tv_float_time: TextView? = null
 
     var Get_LIST: Int = 111
 
@@ -119,6 +123,7 @@ class NewListFragmentKotlin : LazyFragmentKotlin(), View.OnClickListener, ItemCl
             }
         })
 
+        var linearLayoutManager = recycler_view?.layoutManager as LinearLayoutManager
         recycler_view?.addOnScrollListener(object : RecyclerView.OnScrollListener() {
 
             override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
@@ -127,6 +132,15 @@ class NewListFragmentKotlin : LazyFragmentKotlin(), View.OnClickListener, ItemCl
                     EventBus.getDefault().post(RefreshEvent("scroll", false))
                 } else if (dy < -20) {
                     EventBus.getDefault().post(RefreshEvent("scroll", true))
+                }
+
+                //找到列表下一个可见的View
+                var view = linearLayoutManager?.findViewByPosition(mCurrentPosition + 1) ?: return
+                //判断是否需要更新悬浮条
+                if (mCurrentPosition != linearLayoutManager.findFirstVisibleItemPosition()){
+                    mCurrentPosition = linearLayoutManager.findFirstVisibleItemPosition()
+                    tv_float_time?.text = mAdapter?.getItemData(mCurrentPosition)
+
                 }
             }
 
@@ -140,6 +154,7 @@ class NewListFragmentKotlin : LazyFragmentKotlin(), View.OnClickListener, ItemCl
         multistate_view = findViewById(R.id.multistate_view)
         recycler_view = findViewById(R.id.recycler_view)
         loading_page_fail = findViewById(R.id.loading_page_fail)
+        tv_float_time = findViewById(R.id.tv_float_time)
 
     }
 
@@ -225,6 +240,7 @@ class NewListFragmentKotlin : LazyFragmentKotlin(), View.OnClickListener, ItemCl
                             if (mStartNum == 0) {
                                 mAdapter?.updateData(listData)
                                 recycler_view?.refreshComplete()
+                                tv_float_time?.text = mAdapter?.getItemData(mCurrentPosition)
                             } else {
                                 mAdapter?.appendData(listData)
                                 recycler_view?.loadMoreComplete()
@@ -233,8 +249,10 @@ class NewListFragmentKotlin : LazyFragmentKotlin(), View.OnClickListener, ItemCl
 
                         if (mAdapter?.itemCount == 0) {
                             multistate_view?.viewState = MultiStateView.VIEW_STATE_EMPTY
+                            tv_float_time?.visibility = View.GONE
                         } else {
                             multistate_view?.viewState = MultiStateView.VIEW_STATE_CONTENT
+                            tv_float_time?.visibility = View.VISIBLE
                         }
                     }
 
@@ -244,6 +262,7 @@ class NewListFragmentKotlin : LazyFragmentKotlin(), View.OnClickListener, ItemCl
                             recycler_view?.reset()
                         } else {
                             multistate_view?.viewState = MultiStateView.VIEW_STATE_ERROR
+                            tv_float_time?.visibility = View.GONE
                         }
                     }
                 })

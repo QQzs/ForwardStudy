@@ -19,7 +19,10 @@ public class DateUtil {
 
     public static SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
     public static SimpleDateFormat formatDate1 = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault());
+    public static SimpleDateFormat formatDate2 = new SimpleDateFormat("MM-dd HH:mm", Locale.getDefault());
+    public static SimpleDateFormat formatDate3 = new SimpleDateFormat("MM-dd", Locale.getDefault());
     public static SimpleDateFormat formatDateTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+    public static int mDayTime = 24 * 60 * 60 * 1000;
 
     /**
      * 以友好的方式显示时间
@@ -35,22 +38,10 @@ public class DateUtil {
         String ftime = "";
         Calendar cal = Calendar.getInstance();
 
-        // 判断是否是同一天
-        String curDate = formatDate.format(cal.getTime());
-        String paramDate = formatDate.format(time);
-        if (curDate.equals(paramDate)) {
-            int hour = (int) ((cal.getTimeInMillis() - time.getTime()) / 3600000);
-            if (hour == 0)
-                ftime = Math.max(
-                        (cal.getTimeInMillis() - time.getTime()) / 60000, 1)
-                        + "分钟前";
-            else
-                ftime = hour + "小时前";
-            return ftime;
-        }
-
-        long lt = time.getTime() / 86400000;
-        long ct = cal.getTimeInMillis() / 86400000;
+        // 所在时区时8，系统初始时间是1970-01-01 80:00:00，注意是从八点开始，计算的时候要加回去
+        int offSet = Calendar.getInstance().getTimeZone().getRawOffset();
+        long lt = (time.getTime() - offSet) / mDayTime;
+        long ct = (cal.getTimeInMillis() - offSet) / mDayTime;
         int days = (int) (ct - lt);
         if (days == 0) {
             int hour = (int) ((cal.getTimeInMillis() - time.getTime()) / 3600000);
@@ -83,7 +74,14 @@ public class DateUtil {
         if (time == null) {
             return "Unknown";
         }
-        return formatDate1.format(time);
+        int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+        Calendar.getInstance().setTime(time);
+        int year = Calendar.getInstance().get(Calendar.YEAR);
+        if (year == currentYear){
+            return formatDate2.format(time);
+        }else{
+            return formatDate1.format(time);
+        }
     }
 
     /**
@@ -100,8 +98,10 @@ public class DateUtil {
         String ftime = "";
         Calendar cal = Calendar.getInstance();
 
-        long lt = time.getTime() / 86400000;
-        long ct = cal.getTimeInMillis() / 86400000;
+        // 所在时区时8，系统初始时间是1970-01-01 80:00:00，注意是从八点开始，计算的时候要加回去
+        int offSet = Calendar.getInstance().getTimeZone().getRawOffset();
+        long lt = (time.getTime() + offSet) / mDayTime;
+        long ct = (cal.getTimeInMillis() + offSet) / mDayTime;
         int days = (int) (ct - lt);
         if (days == 0) {
             ftime = "今天";
@@ -111,8 +111,16 @@ public class DateUtil {
             ftime = "前天";
         } else if (days > 2 && days <= 10) {
             ftime = days + "天前";
-        } else if (days > 10) {
-            ftime = formatDate.format(time);
+        } else if (days > 10 && days < 20) {
+
+            int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+            Calendar.getInstance().setTime(time);
+            int year = Calendar.getInstance().get(Calendar.YEAR);
+            if (year == currentYear){
+                ftime = formatDate.format(time);
+            }else{
+                ftime = formatDate3.format(time);
+            }
         }
         return ftime;
     }

@@ -17,4 +17,20 @@
 
     </com.jcodecraeer.xrecyclerview.XRecyclerView>
 
+    <TextView
+        android:id="@+id/tv_float_time"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:minWidth="80dp"
+        android:background="@drawable/float_time_bg"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="70dp"
+        android:gravity="center"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:text=""
+        android:textSize="@dimen/fontsize15"
+        android:textColor="@color/white"
+        android:visibility="gone"/>
+
 </com.zs.project.view.MultiStateView>
