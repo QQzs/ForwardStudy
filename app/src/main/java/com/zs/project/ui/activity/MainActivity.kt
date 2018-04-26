@@ -24,7 +24,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
-
+import org.jetbrains.anko.toast
 
 
 /**
@@ -39,6 +39,7 @@ class MainActivity : BaseActivity() {
     var mIsShow = true  // true：语音播放框滑动到显示状态  false：语音播放框移除屏幕状态
     var SAVE_INDEX : String = "save_index"
     var mTags = arrayOf("news" , "video" , "movies" , "me")
+    var mExitTime : Long = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -247,25 +248,37 @@ class MainActivity : BaseActivity() {
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
 
         if (keyCode == KeyEvent.KEYCODE_BACK && event?.repeatCount == 0){
-            val intent = Intent(Intent.ACTION_MAIN)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-            intent.addCategory(Intent.CATEGORY_HOME)
-            startActivity(intent)
+
+            exitApp()
+
+            // 退出App 不杀死
+//            val intent = Intent(Intent.ACTION_MAIN)
+//            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+//            intent.addCategory(Intent.CATEGORY_HOME)
+//            startActivity(intent)
             return true
         }
         return super.onKeyDown(keyCode, event)
     }
+
+    /**
+     * 退出app
+     */
+    fun exitApp(){
+        if(System.currentTimeMillis() - mExitTime > 2000){
+            toast("再按一次退出")
+            mExitTime = System.currentTimeMillis()
+        }else{
+           finish()
+        }
+    }
+
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (data != null && resultCode == RESULT_OK){
             mFragments[3].onActivityResult(requestCode, resultCode, data)
         }
-//        if (requestCode == MeFragment.SELECT_IMAGE && data != null){
-//            var image = data.getStringArrayListExtra(ImageSelectorUtils.SELECT_RESULT)
-//            EventBus.getDefault().post(SelectImageEvent("avatar",image))
-//        }
-
     }
 
     override fun onDestroy() {
