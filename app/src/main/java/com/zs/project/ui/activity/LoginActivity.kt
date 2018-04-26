@@ -8,7 +8,9 @@ import com.zs.project.bean.LoginBean
 import com.zs.project.request.RequestHelper
 import com.zs.project.request.bean.BaseResponseAndroid
 import com.zs.project.request.cookie.DefaultObserverAndroid
+import com.zs.project.util.StringUtils
 import io.reactivex.Observable
+import kotlinx.android.synthetic.main.activity_login_layout.*
 
 /**
  *
@@ -28,6 +30,9 @@ class LoginActivity : BaseActivity(){
     }
 
     override fun init() {
+
+        tv_login?.setOnClickListener(this)
+
     }
 
 
@@ -37,6 +42,27 @@ class LoginActivity : BaseActivity(){
     }
 
     override fun onClick(view: View?) {
+        when(view?.id){
+            R.id.tv_login ->{
+                var name = text_input_name?.editText?.text.toString()
+                var passWord = text_input_password?.editText?.text.toString()
+
+                if (StringUtils.isNullOrEmpty(name)){
+                    text_input_name?.error = "请填写用户名"
+                    return
+                }else{
+                    text_input_name?.isErrorEnabled = false
+                }
+
+                if (StringUtils.isNullOrEmpty(passWord)){
+                    text_input_name?.error = "请填写密码"
+                    return
+                }else{
+                    text_input_name?.isErrorEnabled = false
+                }
+            }
+
+        }
 
 
     }

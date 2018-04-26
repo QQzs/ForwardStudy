@@ -17,7 +17,7 @@ import com.zs.project.base.BaseFragment
 import com.zs.project.bean.ItemBean
 import com.zs.project.listener.KotlinItemClickListener
 import com.zs.project.request.RequestApi
-import com.zs.project.ui.activity.AboutActivity
+import com.zs.project.ui.activity.LoginActivity
 import com.zs.project.ui.activity.setting.CollectionActivity
 import com.zs.project.ui.activity.setting.SettingActivity
 import com.zs.project.ui.activity.setting.SkinChangeActivity
@@ -187,7 +187,8 @@ class MeFragment : BaseFragment() , View.OnClickListener , KotlinItemClickListen
                 activity?.startActivity<SkinChangeActivity>()
             }
             4 ->{
-                activity?.startActivity<AboutActivity>()
+//                activity?.startActivity<AboutActivity>()
+                activity?.startActivity<LoginActivity>()
             }
         }
 
