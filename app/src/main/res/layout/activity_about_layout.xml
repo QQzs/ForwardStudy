@@ -37,7 +37,7 @@
                     android:id="@+id/tv_setting_color_view"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="1.0.0"
+                    android:text="2.0.0"
                     android:textSize="@dimen/fontsize13"
                     android:textColor="@color/font_default"
                     android:layout_centerVertical="true"

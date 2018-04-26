@@ -21,7 +21,7 @@ public class DateUtil {
     public static SimpleDateFormat formatDate1 = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault());
     public static SimpleDateFormat formatDate2 = new SimpleDateFormat("MM-dd HH:mm", Locale.getDefault());
     public static SimpleDateFormat formatDate3 = new SimpleDateFormat("MM-dd", Locale.getDefault());
-    public static SimpleDateFormat formatDateTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+    public static SimpleDateFormat formatDate4 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
     public static int mDayTime = 24 * 60 * 60 * 1000;
 
     /**
@@ -135,7 +135,11 @@ public class DateUtil {
     public static Date parseDateTime(String datetime) {
         Date mDate = null;
         try {
-            mDate = formatDateTime.parse(datetime);
+            if (datetime.length() < 18){
+                mDate = formatDate1.parse(datetime);
+            }else{
+                mDate = formatDate4.parse(datetime);
+            }
         } catch (ParseException e) {
             e.printStackTrace();
         }

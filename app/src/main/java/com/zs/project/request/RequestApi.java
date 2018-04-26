@@ -1,6 +1,7 @@
 package com.zs.project.request;
 
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.zs.project.app.MyApp;
 import com.zs.project.request.cookie.CookieJarImpl;
@@ -9,6 +10,7 @@ import com.zs.project.request.cookie.SPCookieStore;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -38,7 +40,7 @@ public class RequestApi {
 
 
     private static RequestApi mRetrofitApi;
-    private OkHttpClient mOkHttpClient;
+    private HttpLoggingInterceptor mLoggingInterceptor;
 
     public RequestApi(){
 
@@ -120,11 +122,23 @@ public class RequestApi {
 //        }
 //        return mOkHttpClient;
 
+        if (mLoggingInterceptor == null){
+            mLoggingInterceptor = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
+                @Override
+                public void log(String message) {
+                    //打印retrofit日志
+                    Log.i("RetrofitLog","retrofitBack = "+message);
+                }
+            });
+            mLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        }
+
         OkHttpClient.Builder builder = new OkHttpClient.Builder()
                 .retryOnConnectionFailure(true)//连接失败后是否重新连接
                 .connectTimeout(CONNECT_TIMEOUT, TimeUnit.SECONDS)//超时时间
                 .readTimeout(READ_TIMEOUT, TimeUnit.SECONDS)
                 .writeTimeout(READ_TIMEOUT, TimeUnit.SECONDS)
+                .addInterceptor(mLoggingInterceptor)
                 .cookieJar(new CookieJarImpl(new SPCookieStore(MyApp.getAppContext())));
         return builder.build();
     }
