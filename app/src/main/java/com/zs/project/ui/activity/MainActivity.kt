@@ -6,7 +6,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentTransaction
-import android.util.Log
 import android.view.KeyEvent
 import android.view.View
 import android.widget.ImageView
@@ -14,10 +13,7 @@ import com.zs.project.R
 import com.zs.project.app.AppStatusManager
 import com.zs.project.base.BaseActivity
 import com.zs.project.event.RefreshEvent
-import com.zs.project.ui.fragment.DouBanFragment
-import com.zs.project.ui.fragment.MeFragment
-import com.zs.project.ui.fragment.NewsFragment
-import com.zs.project.ui.fragment.VideoFragment
+import com.zs.project.ui.fragment.*
 import com.zs.project.util.ScreenUtil
 import com.zs.project.util.SpUtil
 import kotlinx.android.synthetic.main.activity_main.*
@@ -37,8 +33,6 @@ class MainActivity : BaseActivity() {
     private var mFragments : ArrayList<Fragment> = arrayListOf()
 
     var mIsShow = true  // true：语音播放框滑动到显示状态  false：语音播放框移除屏幕状态
-    var SAVE_INDEX : String = "save_index"
-    var mTags = arrayOf("news" , "video" , "movies" , "me")
     var mExitTime : Long = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,6 +44,7 @@ class MainActivity : BaseActivity() {
     override fun init() {
 
         mTransaction = supportFragmentManager.beginTransaction()
+        mFragments?.add(ArticleFragment())
         mFragments?.add(NewsFragment())
         mFragments?.add(VideoFragment())
         mFragments?.add(DouBanFragment())
@@ -57,6 +52,7 @@ class MainActivity : BaseActivity() {
 
         changePage(0)
 
+        fragment_article?.setOnClickListener(this)
         fragment_news?.setOnClickListener(this)
         fragment_video?.setOnClickListener(this)
         fragment_douban?.setOnClickListener(this)
@@ -94,61 +90,45 @@ class MainActivity : BaseActivity() {
             if (nextFragment.isAdded) {
                 transaction.show(nextFragment).commitAllowingStateLoss()
             } else {
-                transaction.add(R.id.fl_homepage, nextFragment,mTags[index]).commitAllowingStateLoss()
+                transaction.add(R.id.fl_homepage, nextFragment).commitAllowingStateLoss()
             }
         }
     }
 
     private fun changeTab(index : Int){
         // ContextCompat.getColor(activity!!,R.color.app_main_color)
+
+        dynamicAddView(tv_article, "textColor", R.color.main_color_gray)
+        dynamicAddView(tv_news, "textColor", R.color.main_color_gray)
+        dynamicAddView(tv_video, "textColor", R.color.main_color_gray)
+        dynamicAddView(tv_product, "textColor", R.color.main_color_gray)
+        dynamicAddView(tv_me, "textColor", R.color.main_color_gray)
+
+        dynamicAddView(iv_home_article, "background", R.mipmap.home_bar_news_nor)
+        dynamicAddView(iv_home_news, "background", R.mipmap.home_bar_news_nor)
+        dynamicAddView(iv_home_video, "background", R.mipmap.home_bar_video_nor)
+        dynamicAddView(iv_home_product, "background", R.mipmap.home_bar_dou_nor)
+        dynamicAddView(iv_home_me, "background", R.mipmap.home_bar_user_nor)
+
         when(index){
             0 ->{
-
-                dynamicAddView(tv_news, "textColor", R.color.app_main_color)
-                dynamicAddView(tv_video, "textColor", R.color.main_color_gray)
-                dynamicAddView(tv_product, "textColor", R.color.main_color_gray)
-                dynamicAddView(tv_me, "textColor", R.color.main_color_gray)
-
-                dynamicAddView(iv_home_news, "background", R.mipmap.home_bar_news_sel)
-                dynamicAddView(iv_home_video, "background", R.mipmap.home_bar_video_nor)
-                dynamicAddView(iv_home_product, "background", R.mipmap.home_bar_dou_nor)
-                dynamicAddView(iv_home_me, "background", R.mipmap.home_bar_user_nor)
-
+                dynamicAddView(tv_article, "textColor", R.color.app_main_color)
+                dynamicAddView(iv_home_article, "background", R.mipmap.home_bar_news_sel)
             }
             1 ->{
-
-                dynamicAddView(tv_news, "textColor", R.color.main_color_gray)
-                dynamicAddView(tv_video, "textColor", R.color.app_main_color)
-                dynamicAddView(tv_product, "textColor", R.color.main_color_gray)
-                dynamicAddView(tv_me, "textColor",R.color.main_color_gray)
-
-                dynamicAddView(iv_home_news, "background", R.mipmap.home_bar_news_nor)
-                dynamicAddView(iv_home_video, "background", R.mipmap.home_bar_video_sel)
-                dynamicAddView(iv_home_product, "background", R.mipmap.home_bar_dou_nor)
-                dynamicAddView(iv_home_me, "background", R.mipmap.home_bar_user_nor)
+                dynamicAddView(tv_news, "textColor", R.color.app_main_color)
+                dynamicAddView(iv_home_news, "background", R.mipmap.home_bar_news_sel)
             }
             2 ->{
-
-                dynamicAddView(tv_news, "textColor", R.color.main_color_gray)
-                dynamicAddView(tv_video, "textColor", R.color.main_color_gray)
-                dynamicAddView(tv_product, "textColor", R.color.app_main_color)
-                dynamicAddView(tv_me, "textColor",R.color.main_color_gray)
-
-                dynamicAddView(iv_home_news, "background", R.mipmap.home_bar_news_nor)
-                dynamicAddView(iv_home_video, "background", R.mipmap.home_bar_video_nor)
-                dynamicAddView(iv_home_product, "background", R.mipmap.home_bar_dou_sel)
-                dynamicAddView(iv_home_me, "background", R.mipmap.home_bar_user_nor)
+                dynamicAddView(tv_video, "textColor", R.color.app_main_color)
+                dynamicAddView(iv_home_video, "background", R.mipmap.home_bar_video_sel)
             }
             3 ->{
-
-                dynamicAddView(tv_news, "textColor", R.color.main_color_gray)
-                dynamicAddView(tv_video, "textColor", R.color.main_color_gray)
-                dynamicAddView(tv_product, "textColor", R.color.main_color_gray)
+                dynamicAddView(tv_product, "textColor", R.color.app_main_color)
+                dynamicAddView(iv_home_product, "background", R.mipmap.home_bar_dou_sel)
+            }
+            4 ->{
                 dynamicAddView(tv_me, "textColor",R.color.app_main_color)
-
-                dynamicAddView(iv_home_news, "background", R.mipmap.home_bar_news_nor)
-                dynamicAddView(iv_home_video, "background", R.mipmap.home_bar_video_nor)
-                dynamicAddView(iv_home_product, "background", R.mipmap.home_bar_dou_nor)
                 dynamicAddView(iv_home_me, "background", R.mipmap.home_bar_user_sel)
             }
         }
@@ -209,22 +189,26 @@ class MainActivity : BaseActivity() {
     override fun onClick(view: View) {
 
         when(view.id){
-            R.id.fragment_news ->{
+            R.id.fragment_article ->{
                 changePage(0)
+                startAnimation(iv_home_article)
+            }
+            R.id.fragment_news ->{
+                changePage(1)
                 startAnimation(iv_home_news)
             }
             R.id.fragment_video ->{
-                changePage(1)
+                changePage(2)
                 startAnimation(iv_home_video)
             }
             
             R.id.fragment_douban ->{
-                changePage(2)
+                changePage(3)
                 startAnimation(iv_home_product)
             }
 
             R.id.fragment_me ->{
-                changePage(3)
+                changePage(4)
                 startAnimation(iv_home_me)
             }
         }
@@ -238,7 +222,6 @@ class MainActivity : BaseActivity() {
 
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
-        Log.d("My_Log_base", "main onNewIntent")
         var action = intent?.getIntExtra(AppStatusManager.KEY_HOME_ACTION,AppStatusManager.ACTION_BACK_TO_HOME)
         if (action == AppStatusManager.ACTION_RESTART_APP){
             restartApp()
@@ -277,7 +260,7 @@ class MainActivity : BaseActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (data != null && resultCode == RESULT_OK){
-            mFragments[3].onActivityResult(requestCode, resultCode, data)
+            mFragments[4].onActivityResult(requestCode, resultCode, data)
         }
     }
 

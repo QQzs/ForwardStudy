@@ -1,6 +1,7 @@
 package com.zs.project.request;
 
 import com.zs.project.bean.LoginBean;
+import com.zs.project.bean.android.ArticleList;
 import com.zs.project.bean.movie.MovieListData;
 import com.zs.project.bean.news.NewListData;
 import com.zs.project.bean.video.VideoData;
@@ -52,7 +53,7 @@ public interface RequestService {
                                                                @Field("repassword") String repassword);
 
     @GET("article/list/{page}/json")
-    Call<ResponseBody> getArticleList(@Path("page") int page);
+    Observable<BaseResponseAndroid<ArticleList>> getArticleList(@Path("page") int page);
 
     /**
      *
