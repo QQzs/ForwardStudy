@@ -45,11 +45,28 @@ public interface RequestService {
     Observable<BaseResponseAndroid<LoginBean>> loginAndroid(@Field("username") String username,
                                                             @Field("password") String password);
 
+    @FormUrlEncoded
+    @POST("user/register")
+    Observable<BaseResponseAndroid<LoginBean>> registerAndroid(@Field("username") String username,
+                                                               @Field("password") String password,
+                                                               @Field("repassword") String repassword);
+
+    @GET("article/list/{page}/json")
+    Call<ResponseBody> getArticleList(@Path("page") int page);
+
+    /**
+     *
+     * 测试请求
+     *
+     */
 
     @FormUrlEncoded
     @POST("user/login")
     Call<ResponseBody> login(@Field("username") String username,
                              @Field("password") String password);
+
+    @GET("article/list/{page}/json")
+    Call<ResponseBody> getArticleListTest(@Path("page") int page);
 
     @GET("lg/collect/list/{page}/json")
     Call<ResponseBody> getColllectList(@Path("page") int page);

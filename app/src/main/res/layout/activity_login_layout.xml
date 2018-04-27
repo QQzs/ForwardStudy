@@ -7,8 +7,8 @@
 
     <ImageView
         android:id="@+id/iv_avatar_img"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
         android:src="@mipmap/ic_default_avatar"
         android:layout_margin="50dp"
         android:layout_centerHorizontal="true">
@@ -54,21 +54,58 @@
                 />
 
         </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/text_input_password_again"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:passwordToggleEnabled="true"
+            android:visibility="gone">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="确认密码"
+                android:inputType="textPassword"
+                />
+
+        </android.support.design.widget.TextInputLayout>
     </LinearLayout>
 
-    <com.zs.project.view.BorderTextView
-        android:id="@+id/tv_login"
+    <android.support.v7.widget.CardView
+        android:id="@+id/card_login_view"
         android:layout_width="match_parent"
         android:layout_height="45dp"
+        android:foreground="?selectableItemBackground"
         android:layout_below="@+id/ll_input"
         android:layout_margin="20dp"
-        android:text="登录"
-        android:textColor="@color/white"
-        android:textSize="@dimen/fontsize15"
-        android:gravity="center"
-        app:strokeWidth="0dp"
-        app:cornerRadius="23dp"
-        app:contentBackColor="@color/app_main_color"/>
+        app:cardElevation="0dp"
+        app:cardCornerRadius="23dp">
 
+        <com.zs.project.view.BorderTextView
+            android:id="@+id/tv_login_view"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:text="登录"
+            android:textColor="@color/white"
+            android:textSize="@dimen/fontsize15"
+            android:gravity="center"
+            app:strokeWidth="0dp"
+            app:cornerRadius="23dp"
+            app:contentBackColor="@color/app_main_color"/>
+
+    </android.support.v7.widget.CardView>
+
+
+    <TextView
+        android:id="@+id/tv_login_switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="注册"
+        android:textSize="@dimen/fontsize15"
+        android:textColor="@color/font_gray"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:padding="20dp"/>
 
 </RelativeLayout>

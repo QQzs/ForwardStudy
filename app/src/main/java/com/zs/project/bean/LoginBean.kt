@@ -11,7 +11,9 @@ About:
  */
 class LoginBean{
 
-    var userName : String  = ""
-    var passWord : String  = ""
+    var id : String = ""
+    var username : String  = ""
+    var password : String  = ""
+    var icon : String = ""
 
 }

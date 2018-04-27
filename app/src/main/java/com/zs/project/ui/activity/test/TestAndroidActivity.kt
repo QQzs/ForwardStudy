@@ -35,6 +35,7 @@ class TestAndroidActivity : BaseActivity(){
         btn_1?.setOnClickListener(this)
         btn_2?.setOnClickListener(this)
         btn_3?.setOnClickListener(this)
+        btn_4?.setOnClickListener(this)
 
     }
 
@@ -64,6 +65,19 @@ class TestAndroidActivity : BaseActivity(){
             R.id.btn_3 ->{
                 var collection = mRequestApi.getRequestService(RequestApi.REQUEST_ANDROID).getColllectList(0)
                 collection.enqueue(object : Callback<ResponseBody> {
+                    override fun onFailure(call: Call<ResponseBody>?, t: Throwable?) {
+                        Log.d("My_Log","error")
+                    }
+
+                    override fun onResponse(call: Call<ResponseBody>?, response: Response<ResponseBody>?) {
+                        Log.d("My_Log","back = " + response?.body()?.string())
+                    }
+
+                })
+            }
+            R.id.btn_4 ->{
+                var article = mRequestApi.getRequestService(RequestApi.REQUEST_ANDROID).getArticleListTest(0)
+                article.enqueue(object : Callback<ResponseBody> {
                     override fun onFailure(call: Call<ResponseBody>?, t: Throwable?) {
                         Log.d("My_Log","error")
                     }

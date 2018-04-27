@@ -14,6 +14,12 @@
         <item name="colorPrimary">@color/background</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+
+        <!--TextInputLayout 样式-->
+        <!--<item name="android:textColorHint">@color/triangle</item>-->
+        <!--<item name="colorControlNormal">@color/circle</item>-->
+        <!--<item name="colorControlActivated">@color/color_ffa63c</item>-->
+        <!--<item name="colorControlHighlight">@color/color_5b52b5</item>-->
     </style>
 
     <style name="SplashTheme" parent="MyAppTheme">
