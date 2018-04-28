@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import com.jcodecraeer.xrecyclerview.ProgressStyle
+import com.jcodecraeer.xrecyclerview.XRecyclerView
 import com.mcxtzhang.commonadapter.rv.CommonAdapter
 import com.mcxtzhang.commonadapter.rv.ViewHolder
 import com.zs.project.R
@@ -41,6 +42,8 @@ About: 玩android 文章列表
 —————————————————————————————————————
  */
 class ArticleFragment : BaseFragment() , ItemClickListener {
+
+    var mStartNum: Int = 0
 
     var mFragment: ArticleFragment? = null
     var mAdapter: CommonAdapter<Article>? = null
@@ -98,6 +101,18 @@ class ArticleFragment : BaseFragment() , ItemClickListener {
         recycler_view?.setRefreshProgressStyle(ProgressStyle.BallSpinFadeLoader)
         RecyclerViewUtil.initNoDecoration(activity,recycler_view,mAdapter)
 
+        recycler_view?.setLoadingListener(object : XRecyclerView.LoadingListener{
+            override fun onLoadMore() {
+                mStartNum ++
+                getArticleData()
+            }
+
+            override fun onRefresh() {
+                mStartNum = 0
+                getArticleData()          }
+
+        })
+
         recycler_view?.addOnScrollListener(object : RecyclerView.OnScrollListener() {
 
             override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
@@ -112,9 +127,13 @@ class ArticleFragment : BaseFragment() , ItemClickListener {
         })
 
         requestData(mRequestApi.getRequestService(RequestApi.REQUEST_ANDROID).articleBanner,ARTICLE_BANNER_ANDROID)
-        requestData(mRequestApi.getRequestService(RequestApi.REQUEST_ANDROID).getArticleList(0),ARTICLE_ANDROID)
-
+        getArticleData()
     }
+
+    private fun getArticleData(){
+        requestData(mRequestApi.getRequestService(RequestApi.REQUEST_ANDROID).getArticleList(mStartNum),ARTICLE_ANDROID)
+    }
+
 
     fun initBanner(){
 
@@ -150,17 +169,41 @@ class ArticleFragment : BaseFragment() , ItemClickListener {
     override fun requestData(request: Observable<*>?, type: Int) {
         super.requestData(request, type)
         var observable = RequestHelper.getObservable(request)
-
         when(type){
             ARTICLE_ANDROID ->{
                 observable.subscribe(object : DefaultObserverAndroid<BaseResponseAndroid<ArticleList>>(this){
                     override fun onSuccess(response: BaseResponseAndroid<ArticleList>?) {
                         var articleList = response?.data?.datas
                         if (articleList != null && articleList.size > 0){
-                            mAdapter?.datas = articleList
+                            if (mStartNum == 0){
+                                mAdapter?.datas = articleList
+                                recycler_view?.refreshComplete()
+                            }else{
+                                mAdapter?.addDatas(articleList)
+                                recycler_view?.loadMoreComplete()
+                            }
+
+                        }else{
+                            if (mStartNum == 0){
+                                recycler_view?.refreshComplete()
+                            }else{
+                                recycler_view?.setNoMore(true)
+                            }
+                        }
+                        if ( mAdapter != null && mAdapter?.itemCount!! > 0){
                             multistate_view?.viewState = MultiStateView.VIEW_STATE_CONTENT
                         }else{
+                            multistate_view?.viewState = MultiStateView.VIEW_STATE_EMPTY
+                        }
 
+                    }
+
+                    override fun onError(e: Throwable) {
+                        super.onError(e)
+                        if (mAdapter != null && mAdapter?.itemCount!! > 0){
+                            recycler_view?.reset()
+                        }else{
+                            multistate_view?.viewState = MultiStateView.VIEW_STATE_ERROR
                         }
                     }
 

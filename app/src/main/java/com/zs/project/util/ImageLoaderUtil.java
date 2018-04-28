@@ -104,6 +104,27 @@ public class ImageLoaderUtil {
                 .into(img);
     }
 
+    /**
+     * 等比例缩放图片至屏幕宽度
+     * @param resourceId
+     * @param imageView
+     */
+    public static void loadLocalImageMatch(int resourceId, final ImageView imageView) {
+        GlideApp.with(mContext)
+                .load(resourceId)
+                .apply(mOptions)
+                .into(new SimpleTarget<Drawable>() {
+                    @Override
+                    public void onResourceReady(Drawable resource, Transition<? super Drawable> transition) {
+                        ViewGroup.LayoutParams para = imageView.getLayoutParams();
+                        para.width = ScreenUtil.getScreenWidth();
+                        para.height = ScreenUtil.dp2px(200f);
+                        imageView.setImageDrawable(resource);
+
+                    }
+                });
+    }
+
 
     /**
      * 圆形图片 资源文件
