@@ -48,7 +48,7 @@
                         android:id="@+id/iv_home_article"
                         android:layout_width="@dimen/main_tab_size"
                         android:layout_height="@dimen/main_tab_size"
-                        android:background="@mipmap/home_bar_news_nor"
+                        android:src="@mipmap/home_bar_article_nor"
                         android:padding="2dp"
                         skin:enable="true"
                         tools:ignore="MissingPrefix" />
@@ -75,8 +75,7 @@
                         android:id="@+id/iv_home_news"
                         android:layout_width="@dimen/main_tab_size"
                         android:layout_height="@dimen/main_tab_size"
-                        android:background="@mipmap/home_bar_news_nor"
-                        android:padding="2dp"
+                        android:src="@mipmap/home_bar_news_nor"
                         skin:enable="true"
                         tools:ignore="MissingPrefix" />
 
@@ -103,8 +102,7 @@
                         android:id="@+id/iv_home_video"
                         android:layout_width="@dimen/main_tab_size"
                         android:layout_height="@dimen/main_tab_size"
-                        android:background="@mipmap/home_bar_video_nor"
-                        android:padding="2dp"
+                        android:src="@mipmap/home_bar_video_nor"
                         skin:enable="true"
                         tools:ignore="MissingPrefix" />
 
@@ -130,8 +128,7 @@
                         android:id="@+id/iv_home_product"
                         android:layout_width="@dimen/main_tab_size"
                         android:layout_height="@dimen/main_tab_size"
-                        android:background="@mipmap/home_bar_dou_nor"
-                        android:padding="2dp"
+                        android:src="@mipmap/home_bar_dou_nor"
                         skin:enable="true"
                         tools:ignore="MissingPrefix"/>
 
@@ -157,7 +154,7 @@
                         android:id="@+id/iv_home_me"
                         android:layout_width="@dimen/main_tab_size"
                         android:layout_height="@dimen/main_tab_size"
-                        android:background="@mipmap/home_bar_user_nor"
+                        android:src="@mipmap/home_bar_user_nor"
                         skin:enable="true"
                         tools:ignore="MissingPrefix"/>
 

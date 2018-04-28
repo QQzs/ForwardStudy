@@ -1,6 +1,7 @@
 package com.zs.project.ui.fragment
 
 import android.os.Bundle
+import android.support.v7.widget.RecyclerView
 import android.view.View
 import com.jcodecraeer.xrecyclerview.ProgressStyle
 import com.mcxtzhang.commonadapter.rv.CommonAdapter
@@ -11,6 +12,7 @@ import com.zs.project.bean.MovieBannerEntry
 import com.zs.project.bean.android.Article
 import com.zs.project.bean.android.ArticleBanner
 import com.zs.project.bean.android.ArticleList
+import com.zs.project.event.RefreshEvent
 import com.zs.project.listener.ItemClickListener
 import com.zs.project.request.RequestApi
 import com.zs.project.request.RequestHelper
@@ -25,6 +27,7 @@ import com.zs.project.view.banner.view.BannerView
 import io.reactivex.Observable
 import kotlinx.android.synthetic.main.dou_header_view_layout.view.*
 import kotlinx.android.synthetic.main.public_list_layout.*
+import org.greenrobot.eventbus.EventBus
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 
@@ -38,7 +41,6 @@ About: 玩android 文章列表
 —————————————————————————————————————
  */
 class ArticleFragment : BaseFragment() , ItemClickListener {
-
 
     var mFragment: ArticleFragment? = null
     var mAdapter: CommonAdapter<Article>? = null
@@ -89,6 +91,19 @@ class ArticleFragment : BaseFragment() , ItemClickListener {
         recycler_view?.setLoadingMoreProgressStyle(ProgressStyle.BallBeat)
         recycler_view?.setRefreshProgressStyle(ProgressStyle.BallSpinFadeLoader)
         RecyclerViewUtil.initNoDecoration(activity,recycler_view,mAdapter)
+
+        recycler_view?.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+
+            override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                if (dy > 20) {
+                    EventBus.getDefault().post(RefreshEvent("scroll", false))
+                } else if (dy < -20) {
+                    EventBus.getDefault().post(RefreshEvent("scroll", true))
+                }
+            }
+
+        })
 
         requestData(mRequestApi.getRequestService(RequestApi.REQUEST_ANDROID).articleBanner,ARTICLE_BANNER_ANDROID)
         requestData(mRequestApi.getRequestService(RequestApi.REQUEST_ANDROID).getArticleList(0),ARTICLE_ANDROID)

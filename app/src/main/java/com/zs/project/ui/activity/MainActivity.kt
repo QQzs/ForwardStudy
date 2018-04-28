@@ -104,32 +104,32 @@ class MainActivity : BaseActivity() {
         dynamicAddView(tv_product, "textColor", R.color.main_color_gray)
         dynamicAddView(tv_me, "textColor", R.color.main_color_gray)
 
-        dynamicAddView(iv_home_article, "background", R.mipmap.home_bar_news_nor)
-        dynamicAddView(iv_home_news, "background", R.mipmap.home_bar_news_nor)
-        dynamicAddView(iv_home_video, "background", R.mipmap.home_bar_video_nor)
-        dynamicAddView(iv_home_product, "background", R.mipmap.home_bar_dou_nor)
-        dynamicAddView(iv_home_me, "background", R.mipmap.home_bar_user_nor)
+        dynamicAddView(iv_home_article, "src", R.mipmap.home_bar_article_nor)
+        dynamicAddView(iv_home_news, "src", R.mipmap.home_bar_news_nor)
+        dynamicAddView(iv_home_video, "src", R.mipmap.home_bar_video_nor)
+        dynamicAddView(iv_home_product, "src", R.mipmap.home_bar_dou_nor)
+        dynamicAddView(iv_home_me, "src", R.mipmap.home_bar_user_nor)
 
         when(index){
             0 ->{
                 dynamicAddView(tv_article, "textColor", R.color.app_main_color)
-                dynamicAddView(iv_home_article, "background", R.mipmap.home_bar_news_sel)
+                dynamicAddView(iv_home_article, "src", R.mipmap.home_bar_article_sel)
             }
             1 ->{
                 dynamicAddView(tv_news, "textColor", R.color.app_main_color)
-                dynamicAddView(iv_home_news, "background", R.mipmap.home_bar_news_sel)
+                dynamicAddView(iv_home_news, "src", R.mipmap.home_bar_news_sel)
             }
             2 ->{
                 dynamicAddView(tv_video, "textColor", R.color.app_main_color)
-                dynamicAddView(iv_home_video, "background", R.mipmap.home_bar_video_sel)
+                dynamicAddView(iv_home_video, "src", R.mipmap.home_bar_video_sel)
             }
             3 ->{
                 dynamicAddView(tv_product, "textColor", R.color.app_main_color)
-                dynamicAddView(iv_home_product, "background", R.mipmap.home_bar_dou_sel)
+                dynamicAddView(iv_home_product, "src", R.mipmap.home_bar_dou_sel)
             }
             4 ->{
                 dynamicAddView(tv_me, "textColor",R.color.app_main_color)
-                dynamicAddView(iv_home_me, "background", R.mipmap.home_bar_user_sel)
+                dynamicAddView(iv_home_me, "src", R.mipmap.home_bar_user_sel)
             }
         }
     }
