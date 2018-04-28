@@ -26,7 +26,7 @@ import com.zs.project.request.DefaultObserver
 import com.zs.project.request.RequestApi
 import com.zs.project.request.RequestHelper
 import com.zs.project.ui.activity.ImageShowActivity
-import com.zs.project.ui.activity.test.TestAndroidActivity
+import com.zs.project.ui.activity.test.TestActivity
 import com.zs.project.ui.adapter.NewListAdapter
 import com.zs.project.util.PublicFieldUtil
 import com.zs.project.util.RecyclerViewUtil
@@ -196,12 +196,11 @@ class NewListFragmentKotlin : LazyFragmentKotlin(), View.OnClickListener, ItemCl
             R.id.rl_item_view -> {
                 var url = (data as NewData).weburl
 //                activity!!.startActivity<WebViewActivity>("url" to url)
-                activity?.startActivity<TestAndroidActivity>()
-//                activity?.startActivity<TestActivity>()
+//                activity?.startActivity<TestAndroidActivity>()
+                activity?.startActivity<TestActivity>()
 //                activity?.startActivity<TestScrollActivity>()
 
 //        Snackbar.make(multistate_view!!,"dddd",Snackbar.LENGTH_SHORT).show()
-
 //        val imageView = ImageView(context)
 //        imageView.setImageResource(R.mipmap.default_img)
 //        SnackbarUtils.Short(multistate_view!!,"ffffff")

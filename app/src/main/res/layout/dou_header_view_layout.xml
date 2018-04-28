@@ -66,6 +66,7 @@
         </RelativeLayout>
 
         <TextView
+            android:id="@+id/tv_banner_title"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:text="最近热映"

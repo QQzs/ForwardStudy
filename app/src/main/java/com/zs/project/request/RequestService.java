@@ -1,6 +1,7 @@
 package com.zs.project.request;
 
 import com.zs.project.bean.LoginBean;
+import com.zs.project.bean.android.ArticleBanner;
 import com.zs.project.bean.android.ArticleList;
 import com.zs.project.bean.movie.MovieListData;
 import com.zs.project.bean.news.NewListData;
@@ -8,6 +9,7 @@ import com.zs.project.bean.video.VideoData;
 import com.zs.project.request.bean.BaseResponse;
 import com.zs.project.request.bean.BaseResponseAndroid;
 
+import java.util.List;
 import java.util.Map;
 
 import io.reactivex.Observable;
@@ -51,6 +53,9 @@ public interface RequestService {
     Observable<BaseResponseAndroid<LoginBean>> registerAndroid(@Field("username") String username,
                                                                @Field("password") String password,
                                                                @Field("repassword") String repassword);
+
+    @GET("/banner/json")
+    Observable<BaseResponseAndroid<List<ArticleBanner>>> getArticleBanner();
 
     @GET("article/list/{page}/json")
     Observable<BaseResponseAndroid<ArticleList>> getArticleList(@Path("page") int page);
