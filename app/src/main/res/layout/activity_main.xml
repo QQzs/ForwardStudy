@@ -2,6 +2,7 @@
 <com.zs.project.view.ColorfulView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:skin="http://schemas.android.com/android/skin"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/colorfull_bg_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -44,11 +45,12 @@
                     android:gravity="center"
                     android:orientation="vertical">
 
-                    <ImageView
+                    <com.zs.project.view.SwitchColorView
                         android:id="@+id/iv_home_article"
                         android:layout_width="@dimen/main_tab_size"
                         android:layout_height="@dimen/main_tab_size"
-                        android:src="@mipmap/home_bar_article_nor"
+                        app:switchImage="@mipmap/home_bar_article_nor"
+                        app:switchColor="@color/main_color_gray"
                         android:padding="2dp"
                         skin:enable="true"
                         tools:ignore="MissingPrefix" />
@@ -71,11 +73,12 @@
                     android:gravity="center"
                     android:orientation="vertical">
 
-                    <ImageView
+                    <com.zs.project.view.SwitchColorView
                         android:id="@+id/iv_home_news"
                         android:layout_width="@dimen/main_tab_size"
                         android:layout_height="@dimen/main_tab_size"
-                        android:src="@mipmap/home_bar_news_nor"
+                        app:switchImage="@mipmap/home_bar_news_nor"
+                        app:switchColor="@color/main_color_gray"
                         skin:enable="true"
                         tools:ignore="MissingPrefix" />
 
@@ -98,11 +101,12 @@
                     android:orientation="vertical"
                     android:visibility="visible">
 
-                    <ImageView
+                    <com.zs.project.view.SwitchColorView
                         android:id="@+id/iv_home_video"
                         android:layout_width="@dimen/main_tab_size"
                         android:layout_height="@dimen/main_tab_size"
-                        android:src="@mipmap/home_bar_video_nor"
+                        app:switchImage="@mipmap/home_bar_video_nor"
+                        app:switchColor="@color/main_color_gray"
                         skin:enable="true"
                         tools:ignore="MissingPrefix" />
 
@@ -124,11 +128,12 @@
                     android:gravity="center"
                     android:orientation="vertical">
 
-                    <ImageView
+                    <com.zs.project.view.SwitchColorView
                         android:id="@+id/iv_home_product"
                         android:layout_width="@dimen/main_tab_size"
                         android:layout_height="@dimen/main_tab_size"
-                        android:src="@mipmap/home_bar_dou_nor"
+                        app:switchImage="@mipmap/home_bar_dou_nor"
+                        app:switchColor="@color/main_color_gray"
                         skin:enable="true"
                         tools:ignore="MissingPrefix"/>
 
@@ -150,11 +155,12 @@
                     android:gravity="center"
                     android:orientation="vertical">
 
-                    <ImageView
+                    <com.zs.project.view.SwitchColorView
                         android:id="@+id/iv_home_me"
                         android:layout_width="@dimen/main_tab_size"
                         android:layout_height="@dimen/main_tab_size"
-                        android:src="@mipmap/home_bar_user_nor"
+                        app:switchImage="@mipmap/home_bar_user_nor"
+                        app:switchColor="@color/main_color_gray"
                         skin:enable="true"
                         tools:ignore="MissingPrefix"/>
 
