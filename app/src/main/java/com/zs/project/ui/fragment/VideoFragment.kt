@@ -95,8 +95,7 @@ class VideoFragment : BaseFragment(){
                 }else{
                     viewHolder?.adapterPosition !! -1
                 }
-//                ImageLoaderUtil.displayLocalImage(mVideoImage[position % 9],video?.thumbImageView)
-                ImageLoaderUtil.loadLocalImageMatch(mVideoImage[position % 9],video?.thumbImageView)
+                video?.thumbImageView?.setBackgroundResource(mVideoImage[position % 9])
                 video?.startButton?.setOnTouchListener(object : View.OnTouchListener{
                     override fun onTouch(view: View?, motionEvent: MotionEvent?): Boolean {
                         if (motionEvent?.action == MotionEvent.ACTION_UP){

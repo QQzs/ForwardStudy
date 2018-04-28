@@ -14,7 +14,6 @@ import com.zs.project.bean.android.Article
 import com.zs.project.bean.android.ArticleBanner
 import com.zs.project.bean.android.ArticleList
 import com.zs.project.event.RefreshEvent
-import com.zs.project.listener.ItemClickListener
 import com.zs.project.request.RequestApi
 import com.zs.project.request.RequestHelper
 import com.zs.project.request.bean.BaseResponseAndroid
@@ -41,7 +40,7 @@ Time：17:31
 About: 玩android 文章列表
 —————————————————————————————————————
  */
-class ArticleFragment : BaseFragment() , ItemClickListener {
+class ArticleFragment : BaseFragment() {
 
     var mStartNum: Int = 0
 
@@ -92,6 +91,12 @@ class ArticleFragment : BaseFragment() , ItemClickListener {
                 }else{
                     dynamicAddView(viewHolder?.getView(R.id.iv_article_collect),"switchColor",R.color.main_color_gray)
                 }
+                viewHolder?.setOnClickListener(R.id.card_article_view,object : View.OnClickListener{
+                    override fun onClick(view: View?) {
+                        activity?.startActivity<WebViewActivity>("url" to data?.link)
+                    }
+
+                })
 
             }
 
@@ -158,12 +163,6 @@ class ArticleFragment : BaseFragment() , ItemClickListener {
         var items = ArrayList<MovieBannerEntry>()
         data.mapTo(items) { MovieBannerEntry(it.title, it.id, it.imagePath,it.url) }
         return items
-    }
-
-
-    override fun onItemClick(position: Int, data: Any, view: View) {
-
-
     }
 
     override fun requestData(request: Observable<*>?, type: Int) {
