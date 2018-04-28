@@ -84,6 +84,12 @@ class ArticleFragment : BaseFragment() , ItemClickListener {
                 viewHolder?.setText(R.id.tv_article_title,data?.title)
                 viewHolder?.setText(R.id.tv_article_chapter_name,data?.chapterName)
 
+                if (data!!.collect){
+                    dynamicAddView(viewHolder?.getView(R.id.iv_article_collect),"switchColor",R.color.app_main_color)
+                }else{
+                    dynamicAddView(viewHolder?.getView(R.id.iv_article_collect),"switchColor",R.color.main_color_gray)
+                }
+
             }
 
         }

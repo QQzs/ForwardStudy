@@ -80,11 +80,13 @@
                     android:layout_centerVertical="true"
                     />
 
-                <ImageView
+                <com.zs.project.view.SwitchColorView
                     android:id="@+id/iv_article_collect"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    />
+                    app:switchImage="@mipmap/ic_collect_img"
+                    app:switchColor="@color/app_main_color"
+                    android:layout_alignParentRight="true"/>
 
 
             </RelativeLayout>

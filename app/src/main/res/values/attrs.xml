@@ -118,6 +118,11 @@
         <attr name="followTextColor" format="boolean"/>
     </declare-styleable>
 
+    <declare-styleable name="SwitchColorView">
+        <attr name="switchColor" format="color"/>
+        <attr name="switchImage" format="reference"/>
+    </declare-styleable>
+
     <string-array name="category_name">
         <item>头条</item>
         <item>新闻</item>
