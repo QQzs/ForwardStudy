@@ -16,4 +16,13 @@ class LoginBean{
     var password : String  = ""
     var icon : String = ""
 
+    constructor(id: String, username: String) {
+        this.id = id
+        this.username = username
+    }
+
+    override fun toString(): String {
+        return "LoginBean(id='$id', username='$username', password='$password', icon='$icon')"
+    }
+
 }

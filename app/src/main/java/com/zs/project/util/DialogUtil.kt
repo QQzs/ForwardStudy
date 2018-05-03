@@ -34,7 +34,7 @@ class DialogUtil(private val mContext: Context?) {
     }
 
     /**
-     *
+     * 选择图片
      */
     fun showAvatarDialog(): Dialog {
 

@@ -61,7 +61,7 @@ public class SwitchColorView extends ImageView {
     private void initView(Context context, AttributeSet attrs) {
 
         TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.SwitchColorView);
-        mSwitchImage = array.getResourceId(R.styleable.SwitchColorView_switchImage, -1);
+        mSwitchImage = array.getResourceId(R.styleable.SwitchColorView_switchImage, R.mipmap.ic_launcher);
         mSwitchColor = array.getColor(R.styleable.SwitchColorView_switchColor, -1);
         if (mSwitchImage == -1) {
             return;
@@ -91,6 +91,17 @@ public class SwitchColorView extends ImageView {
         canvas.drawBitmap(mBitmap, 0, 0, mPaint);
         canvas.drawColor(mSwitchColor, PorterDuff.Mode.SRC_IN);
     }
+
+    /**
+     * 设置原图像
+     * @param image
+     */
+    public void swichImage(int image){
+        mSwitchImage = image;
+        //原图像
+        mBitmap = BitmapFactory.decodeResource(getResources(), mSwitchImage);
+    }
+
 
     /**
      * 切换颜色

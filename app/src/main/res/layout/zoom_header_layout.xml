@@ -33,6 +33,7 @@
                 />
 
             <TextView
+                android:id="@+id/tv_me_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="你的名字"
@@ -46,7 +47,8 @@
                 android:layout_height="wrap_content"
                 android:text="北京-朝阳"
                 android:textSize="@dimen/fontsize14"
-                android:textColor="@color/white"/>
+                android:textColor="@color/white"
+                android:visibility="gone"/>
 
         </LinearLayout>
 

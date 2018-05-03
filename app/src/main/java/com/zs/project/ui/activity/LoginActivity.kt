@@ -1,18 +1,24 @@
 package com.zs.project.ui.activity
 
 import android.os.Bundle
+import android.os.Handler
 import android.view.View
 import com.zs.project.R
+import com.zs.project.app.Constant
 import com.zs.project.base.BaseActivity
 import com.zs.project.bean.LoginBean
+import com.zs.project.event.LoginEvent
 import com.zs.project.request.RequestApi
 import com.zs.project.request.RequestHelper
 import com.zs.project.request.bean.BaseResponseAndroid
 import com.zs.project.request.cookie.DefaultObserverAndroid
 import com.zs.project.util.LogUtil
+import com.zs.project.util.SpUtil
 import com.zs.project.util.StringUtils
 import io.reactivex.Observable
 import kotlinx.android.synthetic.main.activity_login_layout.*
+import org.greenrobot.eventbus.EventBus
+import org.jetbrains.anko.toast
 
 /**
  *
@@ -39,11 +45,18 @@ class LoginActivity : BaseActivity(){
 
         card_login_view?.setOnClickListener(this)
         tv_login_switch?.setOnClickListener(this)
+        dynamicAddView(tv_login_view , "contentColor" , R.color.app_main_color)
 
     }
 
     override fun initData() {
 
+        Handler().postDelayed({
+            if (!StringUtils.isNullOrEmpty(mUserName)){
+                text_input_name?.editText?.setText(mUserName)
+                text_input_name?.editText?.setSelection(mUserName.length)
+            }
+        },300)
     }
 
     override fun onClick(view: View?) {
@@ -110,15 +123,21 @@ class LoginActivity : BaseActivity(){
         observable.subscribe(object : DefaultObserverAndroid<BaseResponseAndroid<LoginBean>>(this){
             override fun onSuccess(response: BaseResponseAndroid<LoginBean>?) {
                 when(type){
-                    LOGIN_ANDROID ->{
-                        var login = response?.data
-
-                        LogUtil.logShow("name = " + login?.username + " password = " + login?.password)
-
+                    LOGIN_ANDROID , REGISTER_ANDROID ->{
+                        var user = response?.data
+                        if (!StringUtils.isNullOrEmpty(user?.id) && !StringUtils.isNullOrEmpty(user?.username)){
+                            SpUtil.setString(Constant.APP_USER_ID,user?.id)
+                            SpUtil.setString(Constant.APP_USER_NAME,user?.username)
+                            EventBus.getDefault().post(LoginEvent(user!!.id , user!!.username))
+                            finish()
+                        }else{
+                            toast("用户信息出错！")
+                        }
+                        LogUtil.logShow("name = " + user?.username + " password = " + user?.password)
                     }
-                    REGISTER_ANDROID ->{
-
-                    }
+//                    REGISTER_ANDROID ->{
+//
+//                    }
 
                 }
             }

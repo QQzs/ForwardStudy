@@ -13,6 +13,7 @@ import com.zs.project.bean.MovieBannerEntry
 import com.zs.project.bean.android.Article
 import com.zs.project.bean.android.ArticleBanner
 import com.zs.project.bean.android.ArticleList
+import com.zs.project.event.LoginEvent
 import com.zs.project.event.RefreshEvent
 import com.zs.project.request.RequestApi
 import com.zs.project.request.RequestHelper
@@ -28,6 +29,8 @@ import io.reactivex.Observable
 import kotlinx.android.synthetic.main.dou_header_view_layout.view.*
 import kotlinx.android.synthetic.main.public_list_layout.*
 import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 
@@ -56,6 +59,7 @@ class ArticleFragment : BaseFragment() {
     override fun onCreateView(savedInstanceState: Bundle?) {
         super.onCreateView(savedInstanceState)
         setContentView(R.layout.fragment_home_layout)
+        EventBus.getDefault().register(this)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -114,7 +118,8 @@ class ArticleFragment : BaseFragment() {
 
             override fun onRefresh() {
                 mStartNum = 0
-                getArticleData()          }
+                getArticleData()
+            }
 
         })
 
@@ -224,6 +229,18 @@ class ArticleFragment : BaseFragment() {
 
         }
 
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun loginOrExit(event : LoginEvent){
+        mStartNum = 0
+        getArticleData()
+    }
+
+
+    override fun onDestroy() {
+        super.onDestroy()
+        EventBus.getDefault().unregister(this)
     }
 
 }

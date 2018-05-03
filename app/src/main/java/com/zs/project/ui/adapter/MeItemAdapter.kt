@@ -37,7 +37,9 @@ class MeItemAdapter(private var mFragment : MeFragment , private var mData : Mut
     inner class MeViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView){
         fun bindData(position: Int){
             var bean = mData[position]
-            mFragment.dynamicAddView(itemView?.iv_me_icon,"src",bean?.iconId)
+
+            itemView?.iv_me_icon?.swichImage(bean?.iconId)
+            mFragment.dynamicAddView(itemView?.iv_me_icon,"switchColor",R.color.app_main_color)
             itemView?.tv_me_title?.text = bean?.itemTitle
 
             itemView.setOnClickListener {

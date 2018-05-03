@@ -7,8 +7,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.gson.Gson;
+import com.zs.project.app.Constant;
 import com.zs.project.request.RequestApi;
 import com.zs.project.util.DialogUtil;
+import com.zs.project.util.SpUtil;
 
 import java.lang.reflect.Field;
 
@@ -24,6 +26,7 @@ public class BaseFragment extends BaseRxFragment {
 	protected RequestApi mRequestApi = null;
 	protected Gson mGson = new Gson();
 	protected DialogUtil mDialogUtil;
+	protected String mUserId , mUserName;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -36,6 +39,8 @@ public class BaseFragment extends BaseRxFragment {
 		this.container = container;
 		mRequestApi = RequestApi.getInstance();
 		mDialogUtil = new DialogUtil(getActivity());
+		mUserId = SpUtil.getString(Constant.APP_USER_ID,"");
+		mUserName = SpUtil.getString(Constant.APP_USER_NAME,"");
 		onCreateView(savedInstanceState);
 		if (contentView == null)
 			return super.onCreateView(inflater, container, savedInstanceState);

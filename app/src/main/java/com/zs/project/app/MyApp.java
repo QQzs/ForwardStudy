@@ -1,6 +1,7 @@
 package com.zs.project.app;
 
 import com.zs.project.util.SpUtil;
+import com.zs.project.view.viewattr.AttrBorderView;
 import com.zs.project.view.viewattr.AttrScrollColorBar;
 import com.zs.project.view.viewattr.AttrScrollIndicator;
 import com.zs.project.view.viewattr.AttrSnackbar;
@@ -33,6 +34,7 @@ public class MyApp extends SkinBaseApplication {
         SkinConfig.addSupportAttr("scrollIndicator" , new AttrScrollIndicator());
         SkinConfig.addSupportAttr("snackBar" , new AttrSnackbar());
         SkinConfig.addSupportAttr("switchColor" , new AttrSwitchColorView());
+        SkinConfig.addSupportAttr("contentColor" , new AttrBorderView());
 
     }
 

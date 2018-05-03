@@ -8,15 +8,18 @@ import android.view.View
 import com.zs.project.R
 import com.zs.project.app.Constant
 import com.zs.project.base.BaseActivity
+import com.zs.project.event.LoginEvent
 import com.zs.project.event.RefreshEvent
 import com.zs.project.util.ImageLoaderUtil
 import com.zs.project.util.SpUtil
+import com.zs.project.util.StringUtils
 import kotlinx.android.synthetic.main.activity_setting_layout.*
 import kotlinx.android.synthetic.main.public_title_layout.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 import org.jetbrains.anko.startActivity
+import org.jetbrains.anko.toast
 
 /**
  *
@@ -41,6 +44,9 @@ class SettingActivity : BaseActivity(){
         iv_all_back?.setOnClickListener(this)
         item_color_view?.setOnClickListener(this)
         item_cache_clear?.setOnClickListener(this)
+        tv_exit_view?.setOnClickListener(this)
+
+        dynamicAddView(tv_exit_view , "contentColor" , R.color.app_main_color)
 
     }
 
@@ -66,6 +72,18 @@ class SettingActivity : BaseActivity(){
             R.id.item_cache_clear ->{
                 ImageLoaderUtil.clearImageAllCache(this)
                 tv_setting_cache_size?.text = "0K"
+            }
+            R.id.tv_exit_view ->{
+                var userId = SpUtil.getString(Constant.APP_USER_ID,"")
+                var userName = SpUtil.getString(Constant.APP_USER_NAME,"")
+                if (StringUtils.isNullOrEmpty(userId)){
+                    toast("还未登录~")
+                }else{
+                    SpUtil.clearAll()
+                    SpUtil.setString(Constant.APP_USER_NAME,userName)
+                    EventBus.getDefault().post(LoginEvent("" , ""))
+                    finish()
+                }
             }
         }
     }

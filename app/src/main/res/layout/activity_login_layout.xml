@@ -2,7 +2,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:skin="http://schemas.android.com/android/skin"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
 
     <ImageView
@@ -37,6 +39,7 @@
                 android:hint="用户名"
                 android:inputType="text"
                 />
+            />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -85,14 +88,16 @@
         <com.zs.project.view.BorderTextView
             android:id="@+id/tv_login_view"
             android:layout_width="match_parent"
-            android:layout_height="45dp"
+            android:layout_height="40dp"
             android:text="登录"
             android:textColor="@color/white"
             android:textSize="@dimen/fontsize15"
             android:gravity="center"
             app:strokeWidth="0dp"
-            app:cornerRadius="23dp"
-            app:contentBackColor="@color/app_main_color"/>
+            app:cornerRadius="20dp"
+            app:contentBackColor="@color/app_main_color"
+            skin:enable="true"
+            tools:ignore="MissingPrefix" />
 
     </android.support.v7.widget.CardView>
 

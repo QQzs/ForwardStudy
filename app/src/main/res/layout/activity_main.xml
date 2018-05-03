@@ -51,7 +51,6 @@
                         android:layout_height="@dimen/main_tab_size"
                         app:switchImage="@mipmap/home_bar_article_nor"
                         app:switchColor="@color/main_color_gray"
-                        android:padding="2dp"
                         skin:enable="true"
                         tools:ignore="MissingPrefix" />
 

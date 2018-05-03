@@ -101,7 +101,6 @@ class VideoFragment : BaseFragment(){
                         if (motionEvent?.action == MotionEvent.ACTION_UP){
                             mViewHolder = viewHolder
                             mHolderPosition = position
-                            LogUtil.logShow("bbbbbbbbbb")
                         }
                         return false
                     }

@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
 
     <include layout="@layout/public_title_layout"></include>
 
@@ -85,5 +86,19 @@
         </RelativeLayout>
 
     </android.support.v7.widget.CardView>
+
+    <com.zs.project.view.BorderTextView
+        android:id="@+id/tv_exit_view"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="退出登录"
+        android:textColor="@color/white"
+        android:textSize="@dimen/fontsize15"
+        android:gravity="center"
+        android:layout_margin="30dp"
+        app:strokeWidth="0dp"
+        app:cornerRadius="20dp"
+        app:contentBackColor="@color/app_main_color"
+        />
 
 </LinearLayout>

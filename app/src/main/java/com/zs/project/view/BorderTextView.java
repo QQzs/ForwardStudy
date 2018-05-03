@@ -119,4 +119,14 @@ public class BorderTextView extends TextView {
         canvas.drawRoundRect(mRectF, cornerRadius, cornerRadius, mPaintBackground);
         super.onDraw(canvas);
     }
+
+    /**
+     * 设置背景颜色
+     * @param color
+     */
+    public void setContentColor(int color){
+        contentColor = color;
+        invalidate();
+    }
+
 }
