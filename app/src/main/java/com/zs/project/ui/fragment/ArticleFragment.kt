@@ -19,8 +19,12 @@ import com.zs.project.request.RequestApi
 import com.zs.project.request.RequestHelper
 import com.zs.project.request.bean.BaseResponseAndroid
 import com.zs.project.request.cookie.DefaultObserverAndroid
+import com.zs.project.ui.activity.LoginActivity
 import com.zs.project.ui.activity.WebViewActivity
+import com.zs.project.ui.activity.test.TestAndroidActivity
+import com.zs.project.util.LogUtil
 import com.zs.project.util.RecyclerViewUtil
+import com.zs.project.util.StringUtils
 import com.zs.project.util.transform.DepthPageTransformer
 import com.zs.project.view.MultiStateView
 import com.zs.project.view.banner.BannerEntry
@@ -46,6 +50,7 @@ About: 玩android 文章列表
 class ArticleFragment : BaseFragment() {
 
     var mStartNum: Int = 0
+    var mCollectPosition: Int = -1;
 
     var mFragment: ArticleFragment? = null
     var mAdapter: CommonAdapter<Article>? = null
@@ -55,6 +60,7 @@ class ArticleFragment : BaseFragment() {
 
     var ARTICLE_BANNER_ANDROID: Int = 5000
     var ARTICLE_ANDROID: Int = 5001
+    var ARTICLE_COLLECT_ANDROID: Int = 5002
 
     override fun onCreateView(savedInstanceState: Bundle?) {
         super.onCreateView(savedInstanceState)
@@ -95,12 +101,24 @@ class ArticleFragment : BaseFragment() {
                 }else{
                     dynamicAddView(viewHolder?.getView(R.id.iv_article_collect),"switchColor",R.color.main_color_gray)
                 }
-                viewHolder?.setOnClickListener(R.id.card_article_view,object : View.OnClickListener{
-                    override fun onClick(view: View?) {
-                        activity?.startActivity<WebViewActivity>("url" to data?.link)
+                viewHolder?.setOnClickListener(R.id.iv_article_collect){
+                    if (StringUtils.isNullOrEmpty(mUserId)){
+                        activity?.startActivity<LoginActivity>()
+                    }else if (mCollectPosition != -1){
+                        return@setOnClickListener
+                    }else{
+                        // header 和 banner
+                        mCollectPosition = viewHolder?.adapterPosition -2
+                        LogUtil.logShow("index = " + mCollectPosition)
+                        collectArticle(data?.id)
                     }
+                }
 
-                })
+                viewHolder?.setOnClickListener(R.id.card_article_view) {
+
+//                    activity?.startActivity<WebViewActivity>("url" to data?.link)
+                    activity?.startActivity<TestAndroidActivity>()
+                }
 
             }
 
@@ -140,10 +158,19 @@ class ArticleFragment : BaseFragment() {
         getArticleData()
     }
 
+    /**
+     * 获取文章列表
+     */
     private fun getArticleData(){
         requestData(mRequestApi.getRequestService(RequestApi.REQUEST_ANDROID).getArticleList(mStartNum),ARTICLE_ANDROID)
     }
 
+    /**
+     * 收藏文章
+     */
+    private fun collectArticle(id : Int){
+        requestData(mRequestApi.getRequestService(RequestApi.REQUEST_ANDROID).collectArticle(id),ARTICLE_COLLECT_ANDROID)
+    }
 
     fun initBanner(){
 
@@ -225,6 +252,28 @@ class ArticleFragment : BaseFragment() {
                     }
 
                 })
+            }
+            ARTICLE_COLLECT_ANDROID ->{
+
+                observable.subscribe(object : DefaultObserverAndroid<BaseResponseAndroid<Object>>(this){
+                    override fun onSuccess(response: BaseResponseAndroid<Object>?) {
+                        if (mAdapter?.datas != null && mCollectPosition < mAdapter?.datas!!.size && mCollectPosition != -1 ){
+                            var article = mAdapter?.datas?.get(mCollectPosition)
+                            var isCollect = article?.collect
+                            article?.collect = !isCollect!!
+                            mAdapter?.datas?.set(mCollectPosition,article)
+                            mAdapter?.notifyDataSetChanged()
+                            if (!isCollect){
+                                activity?.toast("收藏成功")
+                            }else{
+                                activity?.toast("取消收藏")
+                            }
+                            mCollectPosition = -1
+                        }
+                    }
+
+                })
+
             }
 
         }

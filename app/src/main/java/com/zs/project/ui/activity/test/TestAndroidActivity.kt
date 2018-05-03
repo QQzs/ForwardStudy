@@ -36,6 +36,7 @@ class TestAndroidActivity : BaseActivity(){
         btn_2?.setOnClickListener(this)
         btn_3?.setOnClickListener(this)
         btn_4?.setOnClickListener(this)
+        btn_5?.setOnClickListener(this)
 
     }
 
@@ -63,7 +64,7 @@ class TestAndroidActivity : BaseActivity(){
                 Log.d("My_Log","clear")
             }
             R.id.btn_3 ->{
-                var collection = mRequestApi.getRequestService(RequestApi.REQUEST_ANDROID).getColllectList(0)
+                var collection = mRequestApi.getRequestService(RequestApi.REQUEST_ANDROID).getColllectListTest(0)
                 collection.enqueue(object : Callback<ResponseBody> {
                     override fun onFailure(call: Call<ResponseBody>?, t: Throwable?) {
                         Log.d("My_Log","error")
@@ -77,6 +78,19 @@ class TestAndroidActivity : BaseActivity(){
             }
             R.id.btn_4 ->{
                 var article = mRequestApi.getRequestService(RequestApi.REQUEST_ANDROID).getArticleListTest(0)
+                article.enqueue(object : Callback<ResponseBody> {
+                    override fun onFailure(call: Call<ResponseBody>?, t: Throwable?) {
+                        Log.d("My_Log","error")
+                    }
+
+                    override fun onResponse(call: Call<ResponseBody>?, response: Response<ResponseBody>?) {
+                        Log.d("My_Log","back = " + response?.body()?.string())
+                    }
+
+                })
+            }
+            R.id.btn_5 ->{
+                var article = mRequestApi.getRequestService(RequestApi.REQUEST_ANDROID).collectArticleTest(1165)
                 article.enqueue(object : Callback<ResponseBody> {
                     override fun onFailure(call: Call<ResponseBody>?, t: Throwable?) {
                         Log.d("My_Log","error")

@@ -18,12 +18,12 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingLeft="12dp"
-            android:paddingRight="12dp"
-            android:paddingBottom="10dp">
+            >
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="40dp">
+                android:layout_height="40dp"
+                android:paddingRight="12dp">
 
                 <ImageView
                     android:id="@+id/iv_article_avatar"
@@ -63,12 +63,11 @@
                 android:textSize="@dimen/fontsize15"
                 android:textColor="@color/font_default"
                 android:maxLines="2"
-                />
+                android:paddingRight="12dp"/>
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
                 >
 
                 <TextView
@@ -83,8 +82,9 @@
 
                 <com.zs.project.view.SwitchColorView
                     android:id="@+id/iv_article_collect"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:padding="10dp"
                     app:switchImage="@mipmap/ic_collect_img"
                     app:switchColor="@color/app_main_color"
                     android:layout_alignParentRight="true"/>

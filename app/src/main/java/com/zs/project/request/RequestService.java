@@ -34,38 +34,81 @@ import retrofit2.http.QueryMap;
 
 public interface RequestService {
 
+    /**
+     * 资讯列表
+     * @param params
+     * @return
+     */
     @GET("jisuapi/get")
     Observable<NewListData> newListDataRxjava(@QueryMap Map<String, Object> params);
 
+    /**
+     * 视频列表
+     * @param params
+     * @return
+     */
     @GET("255-1")
     Observable<VideoData> getVideoListData(@QueryMap Map<String, String> params);
 
+    /**
+     * 豆瓣电影列表
+     * @param path
+     * @param start
+     * @param count
+     * @return
+     */
     @GET("v2/movie/{path}")
     Observable<MovieListData> getMovieListData(@Path("path") String path , @Query("start") int start , @Query("count") int count);
 
+    /**
+     * 玩android 登录
+     * @param username
+     * @param password
+     * @return
+     */
     @FormUrlEncoded
     @POST("user/login")
     Observable<BaseResponseAndroid<LoginBean>> loginAndroid(@Field("username") String username,
                                                             @Field("password") String password);
 
+    /**
+     * 玩android 注册
+     * @param username
+     * @param password
+     * @param repassword
+     * @return
+     */
     @FormUrlEncoded
     @POST("user/register")
     Observable<BaseResponseAndroid<LoginBean>> registerAndroid(@Field("username") String username,
                                                                @Field("password") String password,
                                                                @Field("repassword") String repassword);
 
+    /**
+     * 玩android 首页banner
+     */
     @GET("/banner/json")
     Observable<BaseResponseAndroid<List<ArticleBanner>>> getArticleBanner();
 
+    /**
+     * 玩android 首页数据
+     * @param page page
+     */
     @GET("article/list/{page}/json")
     Observable<BaseResponseAndroid<ArticleList>> getArticleList(@Path("page") int page);
+
+    /**
+     * 玩android 收藏文章
+     * @param id id
+     */
+    @POST("lg/collect/{id}/json")
+    Observable<BaseResponseAndroid<LoginBean>> collectArticle(@Path("id") int id);
 
     /**
      *
      * 测试请求
      *
      */
-
     @FormUrlEncoded
     @POST("user/login")
     Call<ResponseBody> login(@Field("username") String username,
@@ -75,31 +118,20 @@ public interface RequestService {
     Call<ResponseBody> getArticleListTest(@Path("page") int page);
 
     @GET("lg/collect/list/{page}/json")
-    Call<ResponseBody> getColllectList(@Path("page") int page);
+    Call<ResponseBody> getColllectListTest(@Path("page") int page);
 
 
     @GET("v2/movie/{path}")
     Call<ResponseBody> getTestData(@Path("path") String path , @Query("start") int start , @Query("count") int count);
 
+    @POST("lg/collect/{id}/json")
+    Call<ResponseBody> collectArticleTest(@Path("id") int id);
+
     @GET("v2/movie/subject/{movieId}")
     Call<ResponseBody> getMovieDetailData(@Path("movieId") String movieId);
 
-    @FormUrlEncoded
-    @POST("android")
-    Call<ResponseBody> getZBDatas(@Field("version") String version,
-                                  @Field("optioncode") String optioncode,
-                                  @Field("timestamp") String timestamp,
-                                  @Field("nonce") String nonce,
-                                  @Field("option") String option,
-                                  @Field("signature") String signature);
 
     @GET("福利/10/1")
     Observable<BaseResponse> getRJData();
-
-
-    @FormUrlEncoded
-    @POST("android")
-    Observable<BaseResponse> getRequestData(@Field("optioncode") String optioncode,
-                                            @Field("option") String option);
 
 }
