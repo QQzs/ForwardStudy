@@ -19,8 +19,9 @@ import com.zs.project.event.LoginEvent
 import com.zs.project.listener.KotlinItemClickListener
 import com.zs.project.request.RequestApi
 import com.zs.project.ui.activity.AboutActivity
+import com.zs.project.ui.activity.CollectionActivity
+import com.zs.project.ui.activity.CollectionLocalActivity
 import com.zs.project.ui.activity.LoginActivity
-import com.zs.project.ui.activity.setting.CollectionActivity
 import com.zs.project.ui.activity.setting.SettingActivity
 import com.zs.project.ui.activity.setting.SkinChangeActivity
 import com.zs.project.ui.adapter.MeItemAdapter
@@ -198,13 +199,13 @@ class MeFragment : BaseFragment() , View.OnClickListener , KotlinItemClickListen
         var bean = data as ItemBean
         when(bean.type){
             0 ->{
-                activity?.startActivity<CollectionActivity>(PublicFieldUtil.FLAG_FIELD to "news")
+                activity?.startActivity<CollectionActivity>()
             }
             1 ->{
-                activity?.startActivity<CollectionActivity>(PublicFieldUtil.FLAG_FIELD to "news")
+                activity?.startActivity<CollectionLocalActivity>(PublicFieldUtil.FLAG_FIELD to "news")
             }
             2 ->{
-                activity?.startActivity<CollectionActivity>(PublicFieldUtil.FLAG_FIELD to "movies")
+                activity?.startActivity<CollectionLocalActivity>(PublicFieldUtil.FLAG_FIELD to "movies")
             }
             3 ->{
                activity?.startActivity<SettingActivity>()

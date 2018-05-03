@@ -1,4 +1,4 @@
-package com.zs.project.ui.activity.setting
+package com.zs.project.ui.activity
 
 import android.os.Bundle
 import android.view.View
@@ -17,7 +17,7 @@ Time：16:25
 About: 收藏页面
 —————————————————————————————————————
  */
-class CollectionActivity : BaseActivity(){
+class CollectionLocalActivity : BaseActivity(){
 
     var mFlag : String ?= null
     var mFragment : CollectionFragment = CollectionFragment()

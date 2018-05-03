@@ -21,8 +21,6 @@ import com.zs.project.request.bean.BaseResponseAndroid
 import com.zs.project.request.cookie.DefaultObserverAndroid
 import com.zs.project.ui.activity.LoginActivity
 import com.zs.project.ui.activity.WebViewActivity
-import com.zs.project.ui.activity.test.TestAndroidActivity
-import com.zs.project.util.LogUtil
 import com.zs.project.util.RecyclerViewUtil
 import com.zs.project.util.StringUtils
 import com.zs.project.util.transform.DepthPageTransformer
@@ -50,7 +48,7 @@ About: 玩android 文章列表
 class ArticleFragment : BaseFragment() {
 
     var mStartNum: Int = 0
-    var mCollectPosition: Int = -1;
+    var mCollectPosition: Int = -1
 
     var mFragment: ArticleFragment? = null
     var mAdapter: CommonAdapter<Article>? = null
@@ -109,15 +107,13 @@ class ArticleFragment : BaseFragment() {
                     }else{
                         // header 和 banner
                         mCollectPosition = viewHolder?.adapterPosition -2
-                        LogUtil.logShow("index = " + mCollectPosition)
-                        collectArticle(data?.id)
+                        collectArticle(data?.id , data.collect)
                     }
                 }
 
                 viewHolder?.setOnClickListener(R.id.card_article_view) {
-
-//                    activity?.startActivity<WebViewActivity>("url" to data?.link)
-                    activity?.startActivity<TestAndroidActivity>()
+                    activity?.startActivity<WebViewActivity>("url" to data?.link)
+//                    activity?.startActivity<TestAndroidActivity>()
                 }
 
             }
@@ -168,8 +164,12 @@ class ArticleFragment : BaseFragment() {
     /**
      * 收藏文章
      */
-    private fun collectArticle(id : Int){
-        requestData(mRequestApi.getRequestService(RequestApi.REQUEST_ANDROID).collectArticle(id),ARTICLE_COLLECT_ANDROID)
+    private fun collectArticle(id : Int , collect : Boolean){
+        if (collect){
+            requestData(mRequestApi.getRequestService(RequestApi.REQUEST_ANDROID).unCollectArticle(id),ARTICLE_COLLECT_ANDROID)
+        }else{
+            requestData(mRequestApi.getRequestService(RequestApi.REQUEST_ANDROID).collectArticle(id),ARTICLE_COLLECT_ANDROID)
+        }
     }
 
     fun initBanner(){
@@ -254,7 +254,6 @@ class ArticleFragment : BaseFragment() {
                 })
             }
             ARTICLE_COLLECT_ANDROID ->{
-
                 observable.subscribe(object : DefaultObserverAndroid<BaseResponseAndroid<Object>>(this){
                     override fun onSuccess(response: BaseResponseAndroid<Object>?) {
                         if (mAdapter?.datas != null && mCollectPosition < mAdapter?.datas!!.size && mCollectPosition != -1 ){

@@ -50,7 +50,7 @@
         <activity android:name=".ui.activity.setting.IconChooseActivity"
             android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".ui.activity.setting.CollectionActivity"
+        <activity android:name=".ui.activity.CollectionLocalActivity"
             android:screenOrientation="portrait">
         </activity>
         <activity android:name=".ui.activity.AboutActivity"
@@ -84,6 +84,12 @@
             android:name="com.donkingliang.imageselector.ClipImageActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+
+        <activity android:name=".ui.activity.CollectionActivity"
+            android:screenOrientation="portrait"
+            >
+        </activity>
+
     </application>
 
 </manifest>

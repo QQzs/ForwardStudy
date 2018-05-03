@@ -98,11 +98,39 @@ public interface RequestService {
     Observable<BaseResponseAndroid<ArticleList>> getArticleList(@Path("page") int page);
 
     /**
+     * 玩android 收藏列表
+     * @param page page
+     */
+    @GET("lg/collect/list/{page}/json")
+    Observable<BaseResponseAndroid<ArticleList>> getCollectList(@Path("page") int page);
+
+    /**
      * 玩android 收藏文章
      * @param id id
      */
     @POST("lg/collect/{id}/json")
-    Observable<BaseResponseAndroid<LoginBean>> collectArticle(@Path("id") int id);
+    Observable<BaseResponseAndroid<Object>> collectArticle(@Path("id") int id);
+
+    /**
+     * 玩android 取消收藏文章
+     * @param id id
+     */
+    @POST("lg/uncollect_originId/{id}/json")
+    Observable<BaseResponseAndroid<Object>> unCollectArticle(@Path("id") int id);
+
+    /**
+     * 玩android 取消收藏文章
+     * @param id id
+     * @param originId originId
+     */
+    @FormUrlEncoded
+    @POST("lg/uncollect/{id}/json")
+    Observable<BaseResponseAndroid<Object>> unCollectArticleList(@Path("id") int id , @Field("originId") int originId);
+
+
+
+
+
 
     /**
      *

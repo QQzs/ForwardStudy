@@ -26,6 +26,7 @@ data class Article(
     var link: String,
     var niceDate: String,
     var origin: String,
+    var originId: Int = -1,
     var projectLink: String,
     var publishTime: Long,
     var superChapterId: Int,
