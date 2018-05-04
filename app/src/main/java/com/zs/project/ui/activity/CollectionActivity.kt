@@ -30,7 +30,7 @@ Created by zs
 Date：2018年 05月 03日
 Time：16:46
 —————————————————————————————————————
-About:
+About: 收藏文章
 —————————————————————————————————————
  */
 class CollectionActivity : BaseActivity(){

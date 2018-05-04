@@ -14,7 +14,7 @@ Created by zs
 Date：2018年 02月 09日
 Time：16:25
 —————————————————————————————————————
-About: 收藏页面
+About: 收藏资讯 电影 数据库
 —————————————————————————————————————
  */
 class CollectionLocalActivity : BaseActivity(){
