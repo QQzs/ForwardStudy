@@ -81,7 +81,7 @@ class SettingActivity : BaseActivity(){
                 }else{
                     SpUtil.clearAll()
                     SpUtil.setString(Constant.APP_USER_NAME,userName)
-                    EventBus.getDefault().post(LoginEvent("" , ""))
+                    EventBus.getDefault().post(LoginEvent("" , userName))
                     EventBus.getDefault().post(RefreshEvent("article" , true))
                     finish()
                 }
