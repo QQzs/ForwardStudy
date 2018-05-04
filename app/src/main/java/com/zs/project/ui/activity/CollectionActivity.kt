@@ -10,7 +10,7 @@ import com.zs.project.R
 import com.zs.project.base.BaseActivity
 import com.zs.project.bean.android.Article
 import com.zs.project.bean.android.ArticleList
-import com.zs.project.event.LoginEvent
+import com.zs.project.event.RefreshEvent
 import com.zs.project.request.RequestApi
 import com.zs.project.request.RequestHelper
 import com.zs.project.request.bean.BaseResponseAndroid
@@ -192,7 +192,7 @@ class CollectionActivity : BaseActivity(){
     override fun onDestroy() {
         super.onDestroy()
         // 通知文章列表刷新
-        EventBus.getDefault().post(LoginEvent("" , ""))
+        EventBus.getDefault().post(RefreshEvent("article" , true))
     }
 
 }

@@ -241,7 +241,7 @@ class MeFragment : BaseFragment() , View.OnClickListener , KotlinItemClickListen
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    fun updateUserDeta(user : LoginEvent){
+    fun updateUserData(user : LoginEvent){
 
         LogUtil.logShow("=== " + user.toString())
         mUserId = user.userId

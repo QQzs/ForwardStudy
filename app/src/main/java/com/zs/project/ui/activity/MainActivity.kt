@@ -216,9 +216,9 @@ class MainActivity : BaseActivity() {
         if (event == null){
             return
         }
-        if ("scroll" == event.getmFlag()){
+        if ("scroll" == event.flag){
             setVoicePlayerAnim(event.isRefresh)
-        }else if ("colorview" == event.getmFlag()){
+        }else if ("colorview" == event.flag){
             colorfull_bg_view?.changeImg(event.refresh_int)
         }
 

@@ -31,11 +31,11 @@ public class RefreshEvent {
         this.refresh_string = refresh_string;
     }
 
-    public String getmFlag() {
+    public String getFlag() {
         return mFlag;
     }
 
-    public void setmFlag(String mFlag) {
+    public void setFlag(String mFlag) {
         this.mFlag = mFlag;
     }
 

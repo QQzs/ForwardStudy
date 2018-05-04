@@ -13,7 +13,6 @@ import com.zs.project.bean.MovieBannerEntry
 import com.zs.project.bean.android.Article
 import com.zs.project.bean.android.ArticleBanner
 import com.zs.project.bean.android.ArticleList
-import com.zs.project.event.LoginEvent
 import com.zs.project.event.RefreshEvent
 import com.zs.project.request.RequestApi
 import com.zs.project.request.RequestHelper
@@ -280,9 +279,11 @@ class ArticleFragment : BaseFragment() {
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    fun loginOrExit(event : LoginEvent){
-        mStartNum = 0
-        getArticleData()
+    fun refrshList(event : RefreshEvent){
+        if ("article" == event.flag && event.isRefresh){
+            mStartNum = 0
+            getArticleData()
+        }
     }
 
 

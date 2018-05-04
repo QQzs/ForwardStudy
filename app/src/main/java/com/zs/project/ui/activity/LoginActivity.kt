@@ -8,6 +8,7 @@ import com.zs.project.app.Constant
 import com.zs.project.base.BaseActivity
 import com.zs.project.bean.LoginBean
 import com.zs.project.event.LoginEvent
+import com.zs.project.event.RefreshEvent
 import com.zs.project.request.RequestApi
 import com.zs.project.request.RequestHelper
 import com.zs.project.request.bean.BaseResponseAndroid
@@ -129,15 +130,13 @@ class LoginActivity : BaseActivity(){
                             SpUtil.setString(Constant.APP_USER_ID,user?.id)
                             SpUtil.setString(Constant.APP_USER_NAME,user?.username)
                             EventBus.getDefault().post(LoginEvent(user!!.id , user!!.username))
+                            EventBus.getDefault().post(RefreshEvent("article" , true))
                             finish()
                         }else{
                             toast("用户信息出错！")
                         }
                         LogUtil.logShow("name = " + user?.username + " password = " + user?.password)
                     }
-//                    REGISTER_ANDROID ->{
-//
-//                    }
 
                 }
             }

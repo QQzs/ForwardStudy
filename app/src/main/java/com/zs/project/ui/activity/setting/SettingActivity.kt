@@ -82,6 +82,7 @@ class SettingActivity : BaseActivity(){
                     SpUtil.clearAll()
                     SpUtil.setString(Constant.APP_USER_NAME,userName)
                     EventBus.getDefault().post(LoginEvent("" , ""))
+                    EventBus.getDefault().post(RefreshEvent("article" , true))
                     finish()
                 }
             }
@@ -105,7 +106,7 @@ class SettingActivity : BaseActivity(){
         if (event == null){
             return
         }
-        if ("colorview" == event.getmFlag()){
+        if ("colorview" == event.flag){
             tv_setting_color_view?.text = Constant.iconNames[event.refresh_int]
         }
 

@@ -106,7 +106,7 @@ class NewsFragment : BaseFragment() , View.OnClickListener{
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun refreshTitle(event : RefreshEvent){
-        if (event != null && event.getmFlag() == "title" && event.isRefresh){
+        if (event != null && event.getFlag() == "title" && event.isRefresh){
             initTitleData()
             mAdapter?.notifyDataSetChanged()
             mIndicatorViewPager?.setCurrentItem(0,false)
