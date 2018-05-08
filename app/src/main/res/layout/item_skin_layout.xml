@@ -8,7 +8,7 @@
         android:id="@+id/cv_skin_item"
         android:layout_width="130dp"
         android:layout_height="170dp"
-        android:foreground="?attr/selectableItemBackground"
+        android:foreground="?android:selectableItemBackground"
         app:cardElevation="0dp"
         android:layout_centerInParent="true">
 

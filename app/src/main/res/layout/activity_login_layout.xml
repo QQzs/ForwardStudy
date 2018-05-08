@@ -79,7 +79,7 @@
         android:id="@+id/card_login_view"
         android:layout_width="match_parent"
         android:layout_height="45dp"
-        android:foreground="?selectableItemBackground"
+        android:foreground="?android:selectableItemBackground"
         android:layout_below="@+id/ll_input"
         android:layout_margin="20dp"
         app:cardElevation="0dp"

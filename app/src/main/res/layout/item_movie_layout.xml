@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
         app:contentPadding="4dp"
-        android:foreground="?attr/selectableItemBackground"
+        android:foreground="?android:selectableItemBackground"
         >
 
         <RelativeLayout

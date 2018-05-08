@@ -12,7 +12,7 @@
         android:id="@+id/item_color_view"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:foreground="?selectableItemBackground"
+        android:foreground="?android:selectableItemBackground"
         app:cardElevation="0dp"
         android:layout_marginTop="5dp">
 
