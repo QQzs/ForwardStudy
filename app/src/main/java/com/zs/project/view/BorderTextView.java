@@ -17,8 +17,10 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.util.TypedValue;
 import android.widget.TextView;
 
@@ -118,6 +120,48 @@ public class BorderTextView extends TextView {
         mPaintBackground.setColor(contentColor);
         canvas.drawRoundRect(mRectF, cornerRadius, cornerRadius, mPaintBackground);
         super.onDraw(canvas);
+    }
+
+    /**
+     * 修改边框宽度
+     * @param roederWidth  传值：px
+     */
+    public void setStrokeWidth(int roederWidth){
+        try {
+            strokeWidth = roederWidth;
+            invalidate();
+        }catch (Exception e){
+            Log.e("My_Error",e.toString());
+        }
+
+    }
+
+    /**
+     * 修改边框颜色
+     * @param colorResource  传值：R.color.XXXX
+     */
+    public void setStrokeColor(int colorResource){
+        try {
+            strokeColor = ContextCompat.getColor(getContext(), colorResource);
+            invalidate();
+        }catch (Exception e){
+            Log.e("My_Error",e.toString());
+        }
+
+    }
+
+    /**
+     * 修改背景颜色
+     * @param colorResource  传值：R.color.XXXX
+     */
+    public void setContentColorResource(int colorResource){
+        try {
+            contentColor = ContextCompat.getColor(getContext(), colorResource);
+            invalidate();
+        }catch (Exception e){
+            Log.e("My_Error",e.toString());
+        }
+
     }
 
     /**
