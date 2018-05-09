@@ -9,9 +9,10 @@ Android开发代码集锦的项目
   ### glide 图片加载<br>
   ### EventBus 分发事件<br>
   ### GreenDao 数据库操作<br>
-  ### XRecyclerView 自定义可添加header、footer的 RecycerView <br>
   ### Cardview Android5.0新特性卡片形式<br>
-  ### bannerview 循环播放广告页展示<br>
+  ### XRecyclerView 自定义可添加header、footer的RecycerView <br>
+  ### bannerview 循环播放广告页展示<br>
+ 
   
   后面我会不断的更新版本，添加更多有用的内容，发布出去，希望广大Android开发者们能够相互借鉴，有什么不对的地方也希望  能够指出，大家相互学习，共同进步。  
     
