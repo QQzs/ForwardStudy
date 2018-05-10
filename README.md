@@ -1,6 +1,9 @@
 # ForwardStudy
 ## Android开发代码集锦
 
+### 效果图
+
+![](https://github.com/QQzs/Image/blob/master/ForwardStudy/android_show2.gif)<br><br>
   这个项目是我在学习和工作过程中积累的一些好用的和流行的代码，主要是用到的框架是Retrofit + RXJava + OKHttp,后续准备再添加MVP模式，项目主要包括五部分，文章、资讯、视频、豆瓣、我的，除了部分代码用的Java语言，其他大部分都是用的Kotlin语言，所用的接口有玩Android API、豆瓣API等网上开源的API<br>
   <br>用到的第三方库有<br>
   
