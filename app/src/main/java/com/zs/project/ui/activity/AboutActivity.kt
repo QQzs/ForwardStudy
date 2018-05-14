@@ -1,10 +1,14 @@
 package com.zs.project.ui.activity
 
+import android.content.Context
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.View
 import com.zs.project.R
 import com.zs.project.base.BaseActivity
+import kotlinx.android.synthetic.main.activity_about_layout.*
 import kotlinx.android.synthetic.main.public_title_layout.*
+
 
 /**
  *
@@ -28,7 +32,23 @@ class AboutActivity : BaseActivity(){
     }
 
     override fun initData() {
+        tv_app_version?.text = getLocalVersion(this)
     }
+
+    fun getLocalVersion(ctx: Context): String {
+        var localName = "2"
+        try {
+            val packageInfo = ctx.applicationContext
+                    .packageManager
+                    .getPackageInfo(ctx.packageName, 0)
+            localName = packageInfo.versionName
+        } catch (e: PackageManager.NameNotFoundException) {
+            e.printStackTrace()
+        }
+
+        return localName
+    }
+
 
     override fun onClick(view: View?) {
 
