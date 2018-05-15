@@ -194,7 +194,7 @@ class NewListFragmentKotlin : LazyFragmentKotlin(), View.OnClickListener, ItemCl
             }
 
             R.id.rl_item_view -> {
-                var url = (data as NewData).weburl
+                var url = (data as NewData).url
                 activity!!.startActivity<WebViewActivity>("url" to url)
 //                activity?.startActivity<TestAndroidActivity>()
 //                activity?.startActivity<TestActivity>()

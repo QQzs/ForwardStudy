@@ -1,5 +1,6 @@
 package com.zs.project.app;
 
+import com.squareup.leakcanary.LeakCanary;
 import com.zs.project.util.SpUtil;
 import com.zs.project.view.viewattr.AttrBorderView;
 import com.zs.project.view.viewattr.AttrScrollColorBar;
@@ -26,6 +27,14 @@ public class MyApp extends SkinBaseApplication {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        if (LeakCanary.isInAnalyzerProcess(this)) {
+            // 这个线程是专门给LeakCanary做堆内存分析的
+            // 在这里不要写app初始化代码
+            return;
+        }
+        LeakCanary.install(this);
+
         mApplication = this;
         SpUtil.init(this,"zs_data");
         SkinConfig.setCanChangeStatusColor(true);
