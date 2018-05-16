@@ -205,7 +205,7 @@ public class MultiStateView extends FrameLayout {
     }
 
     public void setViewState(@ViewState int state) {
-        if (state != mViewState) {
+        if (state != mViewState && getContext() != null) {
             mViewState = state;
             setView();
         }
@@ -213,7 +213,6 @@ public class MultiStateView extends FrameLayout {
 
     private void setView() {
         switch (mViewState) {
-
 
             case VIEW_STATE_LOADING:
                 if (mLoadingView == null) {

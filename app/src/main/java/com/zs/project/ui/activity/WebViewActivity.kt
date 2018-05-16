@@ -8,6 +8,7 @@ import android.view.View
 import android.webkit.*
 import com.zs.project.R
 import com.zs.project.base.BaseActivity
+import com.zs.project.util.LogUtil
 import com.zs.project.view.MultiStateView
 import kotlinx.android.synthetic.main.activity_web_layout.*
 import kotlinx.android.synthetic.main.public_title_layout.*
@@ -108,5 +109,20 @@ class WebViewActivity : BaseActivity(){
 
     }
 
+    override fun onStop() {
+        if(web_view_detail !=null){
+            web_view_detail?.stopLoading()
+            LogUtil.logShow("onStop")
+        }
+        super.onStop()
+    }
+
+    override fun onDestroy() {
+        if(web_view_detail !=null){
+            web_view_detail?.destroy()
+            LogUtil.logShow("onDestroy")
+        }
+        super.onDestroy()
+    }
 
 }

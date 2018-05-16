@@ -18,6 +18,7 @@ import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.target.Target;
 import com.bumptech.glide.request.transition.Transition;
 import com.zs.project.R;
+import com.zs.project.app.MyApp;
 import com.zs.project.util.image.BlurTransform;
 import com.zs.project.util.image.BorderCircleTransform;
 import com.zs.project.util.image.CircleTransform;
@@ -54,7 +55,7 @@ public class ImageLoaderUtil {
             .diskCacheStrategy(DiskCacheStrategy.RESOURCE);
 
     public static void displayImage(String url, ImageView img) {
-        mContext = img.getContext();
+        mContext = MyApp.getAppContext();
         if (mContext == null){
           return;
         }
@@ -86,10 +87,10 @@ public class ImageLoaderUtil {
      * @param img
      */
     private static void loadCircleImage(String url, ImageView img) {
-        GlideApp.with(img.getContext())
+        GlideApp.with(MyApp.getAppContext())
                 .load(url)
                 .apply(mOptions)
-                .transform(new CircleTransform(mContext))
+                .transform(new CircleTransform(MyApp.getAppContext()))
                 .into(img);
     }
 
@@ -145,11 +146,11 @@ public class ImageLoaderUtil {
      * @param img
      */
     public static void loadAvatarImage(int resourceId, ImageView img) {
-        Context context = img.getContext();
-        GlideApp.with(context)
+//        Context context = img.getContext();
+        GlideApp.with(MyApp.getAppContext())
                 .load(resourceId)
                 .apply(mOptions)
-                .transform(new BorderCircleTransform(context,4, ContextCompat.getColor(context,R.color.white)))
+                .transform(new BorderCircleTransform(MyApp.getAppContext(),4, ContextCompat.getColor(MyApp.getAppContext(),R.color.white)))
                 .into(img);
     }
 
@@ -159,11 +160,11 @@ public class ImageLoaderUtil {
      * @param img
      */
     public static void loadAvatarImage(String imagePath, ImageView img) {
-        Context context = img.getContext();
-        GlideApp.with(context)
+//        Context context = img.getContext();
+        GlideApp.with(MyApp.getAppContext())
                 .load(imagePath)
                 .apply(mOptionsNoCache)
-                .transform(new BorderCircleTransform(context,4, ContextCompat.getColor(context,R.color.white)))
+                .transform(new BorderCircleTransform(MyApp.getAppContext(),4, ContextCompat.getColor(MyApp.getAppContext(),R.color.white)))
                 .into(img);
     }
 
@@ -182,7 +183,7 @@ public class ImageLoaderUtil {
     }
 
     public static void showImage(String url, ImageView imageView) {
-        GlideApp.with(imageView.getContext())
+        GlideApp.with(MyApp.getAppContext())
                 .load(url)
                 .apply(mOptionsNoPlace)
                 .into(imageView);
@@ -252,10 +253,10 @@ public class ImageLoaderUtil {
      * @param imageView
      */
     public static void displayBlurImage(@DrawableRes int url, ImageView imageView) {
-        GlideApp.with(imageView.getContext())
+        GlideApp.with(MyApp.getAppContext())
                 .load(url)
                 .apply(mOptions)
-                .transform(new BlurTransform(mContext))
+                .transform(new BlurTransform(MyApp.getAppContext()))
                 .into(imageView);
     }
 

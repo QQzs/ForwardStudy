@@ -24,6 +24,7 @@ import android.widget.ImageView;
 
 import com.zs.project.app.Constant;
 import com.zs.project.util.BezierUtil;
+import com.zs.project.util.LogUtil;
 
 import java.util.Random;
 
@@ -78,6 +79,11 @@ public class ColorfulView extends FrameLayout {
         @Override
         public void handleMessage(Message msg) {
             if (msg.what == mWhat){
+                if (getContext() == null){
+                    LogUtil.Companion.logShow("context =  null");
+                    mHandler.removeCallbacksAndMessages(mWhat);
+                    return;
+                }
                 addMyView();
                 mHandler.sendEmptyMessageDelayed(mWhat,mDuration);
             }
