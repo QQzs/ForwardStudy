@@ -12,6 +12,7 @@ import com.zs.project.app.Constant;
 import com.zs.project.app.MyActivityManager;
 import com.zs.project.request.RequestApi;
 import com.zs.project.ui.activity.MainActivity;
+import com.zs.project.util.DialogUtil;
 import com.zs.project.util.SpUtil;
 
 import io.reactivex.Observable;
@@ -30,6 +31,7 @@ public abstract class BaseActivity extends BaseRxActivity implements View.OnClic
     protected RequestApi mRequestApi = null;
     protected Gson mGson = new Gson();
     protected String mUserId , mUserName;
+    protected DialogUtil mDialogUtil;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +54,7 @@ public abstract class BaseActivity extends BaseRxActivity implements View.OnClic
         mActivity = this;
         mUserId = SpUtil.getString(Constant.APP_USER_ID,"");
         mUserName = SpUtil.getString(Constant.APP_USER_NAME,"");
+        mDialogUtil = DialogUtil.Companion.getInstance(this);
         MyActivityManager.getActivityManager().addActivity(this);
         /**
          * 初始化一些UI
