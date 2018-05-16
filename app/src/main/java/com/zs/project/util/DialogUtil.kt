@@ -5,9 +5,9 @@ import android.content.Context
 import android.view.Gravity
 import android.view.View
 import android.view.WindowManager
-import android.widget.TextView
 import com.zs.project.R
 import kotlinx.android.synthetic.main.dialog_notice_layout.view.*
+import kotlinx.android.synthetic.main.dialog_select_image.view.*
 
 /**
  * Created by zs
@@ -42,11 +42,6 @@ class DialogUtil(private val mContext: Context?) {
         val dialog = Dialog(mContext!! , R.style.public_dialog_style)
         val view = View.inflate(mContext,R.layout.dialog_notice_layout,null)
         dialog.setContentView(view)
-
-        val tv_dialog_title = view.findViewById<TextView>(R.id.tv_dialog_title)
-        val tv_dialog_message = view.findViewById<TextView>(R.id.tv_dialog_message)
-        val tv_dialog_cancel = view.findViewById<TextView>(R.id.tv_dialog_cancel)
-        val tv_dialog_comfirm = view.findViewById<TextView>(R.id.tv_dialog_comfirm)
 
         val window = dialog.window
         if (window != null){
@@ -91,31 +86,28 @@ class DialogUtil(private val mContext: Context?) {
         val dialog = Dialog(mContext!!, R.style.public_dialog_style)
         val view = View.inflate(mContext, R.layout.dialog_select_image, null)
         dialog.setContentView(view)
-        val tv_take_pic = view.findViewById<TextView>(R.id.tv_take_pic)
-        val tv_album_pic = view.findViewById<TextView>(R.id.tv_album_pic)
-        val tv_cancel = view.findViewById<TextView>(R.id.tv_cancel)
 
         val window = dialog.window
         if (window != null) {
             window.setGravity(Gravity.BOTTOM)
-            window.decorView.setPadding(0, 0, 0, 0)
+//            window.decorView.setPadding(0, 0, 0, 0)
             val lp = window.attributes
             lp.width = WindowManager.LayoutParams.MATCH_PARENT
             lp.height = WindowManager.LayoutParams.WRAP_CONTENT
             window.attributes = lp
         }
 
-        tv_take_pic.setOnClickListener {
+        view?.tv_take_pic?.setOnClickListener {
             if (mContext != null && dialog != null && mDialogBackListener != null) {
                 mDialogBackListener?.onComfirmClick(dialog)
             }
         }
-        tv_album_pic.setOnClickListener {
+        view?.tv_album_pic?.setOnClickListener {
             if (mContext != null && dialog != null && mDialogBackListener != null) {
                 mDialogBackListener?.onBackClick(dialog)
             }
         }
-        tv_cancel.setOnClickListener {
+        view?.tv_cancel?.setOnClickListener {
             if (mContext != null && dialog != null && mDialogBackListener != null) {
                 mDialogBackListener?.onCancelClick(dialog)
             }
