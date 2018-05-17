@@ -59,7 +59,7 @@ class MainActivity : BaseActivity() {
         fragment_me?.setOnClickListener(this)
 
         colorfull_bg_view?.changeImg(SpUtil.getInt("color_view",0))
-//        colorfull_bg_view?.switchAnim(false)
+        colorfull_bg_view?.switchAnim(false)
     }
 
     override fun initData() {
@@ -305,5 +305,8 @@ class MainActivity : BaseActivity() {
     override fun onDestroy() {
         super.onDestroy()
         EventBus.getDefault().unregister(this)
+        if(colorfull_bg_view != null){
+            colorfull_bg_view?.clearView()
+        }
     }
 }

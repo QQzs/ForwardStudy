@@ -24,7 +24,6 @@ import android.widget.ImageView;
 
 import com.zs.project.app.Constant;
 import com.zs.project.util.BezierUtil;
-import com.zs.project.util.LogUtil;
 
 import java.util.Random;
 
@@ -79,11 +78,6 @@ public class ColorfulView extends FrameLayout {
         @Override
         public void handleMessage(Message msg) {
             if (msg.what == mWhat){
-                if (getContext() == null){
-                    LogUtil.Companion.logShow("context =  null");
-                    mHandler.removeCallbacksAndMessages(mWhat);
-                    return;
-                }
                 addMyView();
                 mHandler.sendEmptyMessageDelayed(mWhat,mDuration);
             }
@@ -219,6 +213,9 @@ public class ColorfulView extends FrameLayout {
      */
     private void addMyView(){
 
+        if (mBitmap == null){
+            return;
+        }
         mStartPoint = new Point((int)(mRandom.nextFloat() * (Math.random()>0.5?1:-1) * mScreenWidth),-200);
         mEndPoint = new Point((int)(mRandom.nextFloat() *(Math.random()>0.5?1:-1) * mScreenWidth),mScreenHeight + 50);
         mConOnePoint = new Point((int) (mScreenWidth * mRandom.nextFloat()), (int) (mScreenHeight * mRandom.nextFloat() ));
@@ -244,4 +241,17 @@ public class ColorfulView extends FrameLayout {
         addMyView();
         return true;
     }
+
+    public void clearView(){
+        mHandler.removeCallbacksAndMessages(mWhat);
+        if (mBitmap != null){
+            mBitmap.recycle();
+            mBitmap = null;
+        }
+        if (mCopyBitmap != null){
+            mCopyBitmap.recycle();
+            mCopyBitmap = null;
+        }
+    }
+
 }

@@ -5,10 +5,10 @@ import android.net.http.SslError
 import android.os.Build
 import android.os.Bundle
 import android.view.View
+import android.view.ViewGroup
 import android.webkit.*
 import com.zs.project.R
 import com.zs.project.base.BaseActivity
-import com.zs.project.util.LogUtil
 import com.zs.project.view.MultiStateView
 import kotlinx.android.synthetic.main.activity_web_layout.*
 import kotlinx.android.synthetic.main.public_title_layout.*
@@ -109,18 +109,20 @@ class WebViewActivity : BaseActivity(){
 
     }
 
-    override fun onStop() {
-        if(web_view_detail !=null){
-            web_view_detail?.stopLoading()
-            LogUtil.logShow("onStop")
-        }
-        super.onStop()
-    }
-
     override fun onDestroy() {
-        if(web_view_detail !=null){
+        if( web_view_detail !=null) {
+            // 如果先调用destroy()方法，则会命中if (isDestroyed()) return;这一行代码，需要先onDetachedFromWindow()，再
+            // destory()
+            var parent = web_view_detail?.parent
+            if (parent != null) {
+                (parent as ViewGroup).removeView(web_view_detail)
+            }
+            web_view_detail?.stopLoading()
+            // 退出时调用此方法，移除绑定的服务，否则某些特定系统会报错
+            web_view_detail?.settings?.javaScriptEnabled = false
+            web_view_detail?.clearHistory()
+            web_view_detail?.removeAllViews()
             web_view_detail?.destroy()
-            LogUtil.logShow("onDestroy")
         }
         super.onDestroy()
     }

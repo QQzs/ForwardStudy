@@ -283,5 +283,9 @@ class VideoFragment : BaseFragment(){
         JZVideoPlayer.releaseAllVideos()
     }
 
+    override fun onStop() {
+        super.onStop()
+        JZVideoPlayer.releaseAllVideos()
+    }
 
 }
