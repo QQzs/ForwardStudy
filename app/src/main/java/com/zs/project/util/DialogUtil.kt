@@ -29,7 +29,7 @@ class DialogUtil(private val mContext: Context?) {
 
         fun getInstance(context: Context): DialogUtil {
             return if (null == mDialog) {
-                DialogUtil(context.applicationContext)
+                DialogUtil(context)
             } else mDialog!!
         }
     }

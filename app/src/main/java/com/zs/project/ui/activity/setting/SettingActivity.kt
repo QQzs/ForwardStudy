@@ -1,9 +1,9 @@
 package com.zs.project.ui.activity.setting
 
 import android.app.Activity
-import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
+import android.support.v7.app.AlertDialog
 import android.util.Log
 import android.view.View
 import com.zs.project.R
@@ -11,7 +11,6 @@ import com.zs.project.app.Constant
 import com.zs.project.base.BaseActivity
 import com.zs.project.event.LoginEvent
 import com.zs.project.event.RefreshEvent
-import com.zs.project.util.DialogUtil
 import com.zs.project.util.ImageLoaderUtil
 import com.zs.project.util.SpUtil
 import com.zs.project.util.StringUtils
@@ -81,23 +80,40 @@ class SettingActivity : BaseActivity(){
                 if (StringUtils.isNullOrEmpty(userId)){
                     toast("还未登录~")
                 }else{
-                    mDialogUtil?.showNoticeDialog("","您确定要退出账号？")
-                    mDialogUtil?.setDialogNoticeListener(object : DialogUtil.DialogNoticeListener{
-                        override fun onComfirmClick(dialog: Dialog) {
-                            dialog.dismiss()
-                            SpUtil.clearAll()
-                            SpUtil.setString(Constant.APP_USER_NAME,userName)
-                            EventBus.getDefault().post(LoginEvent("" , userName))
-                            EventBus.getDefault().post(RefreshEvent("article" , true))
-                            finish()
+//                    mDialogUtil?.showNoticeDialog("","您确定要退出账号？")
+//                    mDialogUtil?.setDialogNoticeListener(object : DialogUtil.DialogNoticeListener{
+//                        override fun onComfirmClick(dialog: Dialog) {
+//                            dialog.dismiss()
+//                            SpUtil.clearAll()
+//                            SpUtil.setString(Constant.APP_USER_NAME,userName)
+//                            EventBus.getDefault().post(LoginEvent("" , userName))
+//                            EventBus.getDefault().post(RefreshEvent("article" , true))
+//                            finish()
+//                        }
+//
+//                        override fun onCancelClick(dialog: Dialog) {
+//                            dialog.dismiss()
+//                        }
+//
+//                    })
 
-                        }
-
-                        override fun onCancelClick(dialog: Dialog) {
-                            dialog.dismiss()
-                        }
-
-                    })
+                    AlertDialog.Builder(this)
+                            .setCancelable(true)
+                            .setMessage("确定退出当前账号？")
+                            .setPositiveButton("确定") {
+                                dialog, which ->
+                                dialog.dismiss()
+                                SpUtil.clearAll()
+                                SpUtil.setString(Constant.APP_USER_NAME,userName)
+                                EventBus.getDefault().post(LoginEvent("" , userName))
+                                EventBus.getDefault().post(RefreshEvent("article" , true))
+                                finish()
+                            }
+                            .setNegativeButton("取消") {
+                                dialog, which -> dialog.dismiss()
+                            }
+                            .create()
+                            .show()
 
                 }
             }
