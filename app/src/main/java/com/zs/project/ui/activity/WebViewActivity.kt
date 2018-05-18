@@ -124,6 +124,14 @@ class WebViewActivity : BaseActivity(){
             web_view_detail?.removeAllViews()
             web_view_detail?.destroy()
         }
+        clearView(multistate_view)
+//        if (multistate_view!= null){
+//            var parent = multistate_view?.parent
+//            if (parent != null) {
+//                (parent as ViewGroup).removeView(multistate_view)
+//            }
+//            multistate_view?.removeAllViews()
+//        }
         super.onDestroy()
     }
 

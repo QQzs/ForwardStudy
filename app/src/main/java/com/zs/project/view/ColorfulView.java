@@ -242,7 +242,9 @@ public class ColorfulView extends FrameLayout {
         return true;
     }
 
-    public void clearView(){
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
         mHandler.removeCallbacksAndMessages(mWhat);
         if (mBitmap != null){
             mBitmap.recycle();
@@ -252,6 +254,7 @@ public class ColorfulView extends FrameLayout {
             mCopyBitmap.recycle();
             mCopyBitmap = null;
         }
+
     }
 
 }

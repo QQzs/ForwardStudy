@@ -305,8 +305,13 @@ class MainActivity : BaseActivity() {
     override fun onDestroy() {
         super.onDestroy()
         EventBus.getDefault().unregister(this)
-        if(colorfull_bg_view != null){
-            colorfull_bg_view?.clearView()
-        }
+        clearView(colorfull_bg_view)
+//        if(colorfull_bg_view != null){
+//            var parent = colorfull_bg_view?.parent
+//            if (parent != null){
+//                (colorfull_bg_view?.parent as ViewGroup).removeAllViews()
+//            }
+//            colorfull_bg_view?.removeAllViews()
+//        }
     }
 }

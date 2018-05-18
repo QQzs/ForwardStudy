@@ -60,6 +60,11 @@ public class LoadingImageView extends FrameLayout {
 
     private String mLoadText;
 
+    private AnimatorSet mUpAnimSet;
+    private AnimatorSet mDownAnimSet;
+
+    private MyRunnable mRunnable;
+
     public LoadingImageView(Context context) {
         super(context);
     }
@@ -107,14 +112,17 @@ public class LoadingImageView extends FrameLayout {
 
         addView(view, layoutParams);
 
-        this.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                freeFall();
-            }
-        }, 200);
-
+        postDelayed( mRunnable = new MyRunnable(), 200);
     }
+
+    class MyRunnable implements Runnable{
+        @Override
+        public void run() {
+            freeFall();
+        }
+    }
+
+
 
     public void setLoadingText(CharSequence loadingText) {
 
@@ -130,7 +138,9 @@ public class LoadingImageView extends FrameLayout {
      * 上抛
      */
     public void upThrow() {
-
+        if (getContext() == null){
+            return;
+        }
         // 阴影伸缩 动画
         ObjectAnimator scaleIndication = ObjectAnimator.ofFloat(mIndicationIm, "scaleX", 1, 0.2f);
         // 三个图标图标下降 动画
@@ -165,10 +175,10 @@ public class LoadingImageView extends FrameLayout {
         objectAnimator1.setDuration(ANIMATION_DURATION);
         objectAnimator.setInterpolator(new DecelerateInterpolator(factor));
         objectAnimator1.setInterpolator(new DecelerateInterpolator(factor));
-        AnimatorSet animatorSet = new AnimatorSet();
-        animatorSet.setDuration(ANIMATION_DURATION);
-        animatorSet.playTogether(objectAnimator, objectAnimator1, scaleIndication);
-        animatorSet.addListener(new Animator.AnimatorListener() {
+        mUpAnimSet = new AnimatorSet();
+        mUpAnimSet.setDuration(ANIMATION_DURATION);
+        mUpAnimSet.playTogether(objectAnimator, objectAnimator1, scaleIndication);
+        mUpAnimSet.addListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator animation) {
 
@@ -189,7 +199,7 @@ public class LoadingImageView extends FrameLayout {
 
             }
         });
-        animatorSet.start();
+        mUpAnimSet.start();
 
     }
 
@@ -197,7 +207,9 @@ public class LoadingImageView extends FrameLayout {
      * 下落
      */
     public void freeFall() {
-
+        if (getContext() == null){
+            return;
+        }
         // 阴影伸缩 动画
         ObjectAnimator scaleIndication = ObjectAnimator.ofFloat(mIndicationIm, "scaleX", 0.2f, 1);
         // 三个图标图标下降 动画
@@ -207,11 +219,11 @@ public class LoadingImageView extends FrameLayout {
         // 设置加速下落
         objectAnimator.setInterpolator(new AccelerateInterpolator(factor));
 
-        AnimatorSet animatorSet = new AnimatorSet();
-        animatorSet.setDuration(ANIMATION_DURATION);
+        mDownAnimSet = new AnimatorSet();
+        mDownAnimSet.setDuration(ANIMATION_DURATION);
         // 两个动画同时进行
-        animatorSet.playTogether(objectAnimator, scaleIndication);
-        animatorSet.addListener(new Animator.AnimatorListener() {
+        mDownAnimSet.playTogether(objectAnimator, scaleIndication);
+        mDownAnimSet.addListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator animation) {
 
@@ -243,13 +255,25 @@ public class LoadingImageView extends FrameLayout {
 
             }
         });
-        animatorSet.start();
+        mDownAnimSet.start();
 
     }
 
     public int dip2px(float dipValue) {
         final float scale = getContext().getResources().getDisplayMetrics().density;
         return (int) (dipValue * scale + 0.5f);
+    }
+
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        if (mUpAnimSet != null){
+            mUpAnimSet.cancel();
+        }
+        if (mDownAnimSet != null){
+            mDownAnimSet.cancel();
+        }
+        removeCallbacks(mRunnable);
     }
 
 }
