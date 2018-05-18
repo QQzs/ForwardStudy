@@ -5,8 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.ViewParent;
 
 import com.google.gson.Gson;
 import com.zs.project.app.AppStatusManager;
@@ -103,14 +101,4 @@ public abstract class BaseActivity extends BaseRxActivity implements View.OnClic
         MyActivityManager.getActivityManager().finishActivity(this);
     }
     
-    public void clearView(ViewGroup viewGroup){
-        if (viewGroup != null){
-            ViewParent parent = viewGroup.getParent();
-            if (parent != null){
-                ((ViewGroup)parent).removeView(viewGroup);
-            }
-            viewGroup.removeAllViews();
-            viewGroup.destroyDrawingCache();
-        }
-    }
 }

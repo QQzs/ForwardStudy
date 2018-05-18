@@ -295,7 +295,6 @@ class ArticleFragment : BaseFragment() {
 
     override fun onDestroy() {
         EventBus.getDefault().unregister(this)
-        clearView(multistate_view)
         super.onDestroy()
     }
 

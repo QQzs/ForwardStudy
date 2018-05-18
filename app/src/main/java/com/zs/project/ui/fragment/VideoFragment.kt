@@ -288,9 +288,4 @@ class VideoFragment : BaseFragment(){
         JZVideoPlayer.releaseAllVideos()
     }
 
-    override fun onDestroyView() {
-        clearView(multistate_view)
-        super.onDestroyView()
-    }
-
 }

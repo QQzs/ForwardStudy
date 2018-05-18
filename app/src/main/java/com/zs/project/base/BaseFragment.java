@@ -5,7 +5,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewParent;
 
 import com.google.gson.Gson;
 import com.zs.project.app.Constant;
@@ -131,14 +130,4 @@ public class BaseFragment extends BaseRxFragment {
 		super.onPause();
 	}
 
-	public void clearView(ViewGroup viewGroup){
-		if (viewGroup != null){
-			ViewParent parent = viewGroup.getParent();
-			if (parent != null){
-				((ViewGroup)parent).removeView(viewGroup);
-			}
-			viewGroup.removeAllViews();
-			viewGroup.destroyDrawingCache();
-		}
-	}
 }

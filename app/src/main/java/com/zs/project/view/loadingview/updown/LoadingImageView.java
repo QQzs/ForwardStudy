@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.zs.project.R;
+import com.zs.project.util.LogUtil;
 
 /**
  * Created by zzz40500 on 15/4/6.
@@ -113,6 +114,8 @@ public class LoadingImageView extends FrameLayout {
         addView(view, layoutParams);
 
         postDelayed( mRunnable = new MyRunnable(), 200);
+
+//        freeFall();
     }
 
     class MyRunnable implements Runnable{
@@ -267,10 +270,16 @@ public class LoadingImageView extends FrameLayout {
     @Override
     protected void onDetachedFromWindow() {
         if (mUpAnimSet != null){
+            mUpAnimSet.removeAllListeners();
             mUpAnimSet.cancel();
+            mUpAnimSet = null;
+            LogUtil.Companion.logShowError("mUpAnimSet ========");
         }
         if (mDownAnimSet != null){
+            mDownAnimSet.removeAllListeners();
             mDownAnimSet.cancel();
+            mDownAnimSet = null;
+            LogUtil.Companion.logShowError("mDownAnimSet ========");
         }
         removeCallbacks(mRunnable);
         super.onDetachedFromWindow();

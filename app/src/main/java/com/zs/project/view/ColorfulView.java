@@ -24,6 +24,7 @@ import android.widget.ImageView;
 
 import com.zs.project.app.Constant;
 import com.zs.project.util.BezierUtil;
+import com.zs.project.util.LogUtil;
 
 import java.util.Random;
 
@@ -225,7 +226,7 @@ public class ColorfulView extends FrameLayout {
         if (mFlag == 3 || mFlag == 4){
             imageView.setImageBitmap(mBitmap);
         }else{
-            mCopyBitmap = Bitmap.createBitmap(mBitmap.getWidth(),mBitmap.getHeight(), Bitmap.Config.ARGB_8888);
+            mCopyBitmap = Bitmap.createBitmap(mBitmap.getWidth(),mBitmap.getHeight(), Bitmap.Config.ARGB_4444);
             Canvas canvas = new Canvas(mCopyBitmap);
             canvas.drawBitmap(mBitmap,0,0,mPaint);
             canvas.drawColor(mColors[mRandom.nextInt(mColors.length)], PorterDuff.Mode.SRC_IN);
@@ -244,7 +245,6 @@ public class ColorfulView extends FrameLayout {
 
     @Override
     protected void onDetachedFromWindow() {
-        super.onDetachedFromWindow();
         mHandler.removeCallbacksAndMessages(mWhat);
         if (mBitmap != null){
             mBitmap.recycle();
@@ -254,7 +254,9 @@ public class ColorfulView extends FrameLayout {
             mCopyBitmap.recycle();
             mCopyBitmap = null;
         }
-
+        removeAllViews();
+        LogUtil.Companion.logShowError("colorfull ========");
+        super.onDetachedFromWindow();
     }
 
 }

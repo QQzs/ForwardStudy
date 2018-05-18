@@ -193,7 +193,6 @@ class CollectionActivity : BaseActivity(){
         super.onDestroy()
         // 通知文章列表刷新
         EventBus.getDefault().post(RefreshEvent("article" , true))
-        clearView(multistate_view)
     }
 
 }

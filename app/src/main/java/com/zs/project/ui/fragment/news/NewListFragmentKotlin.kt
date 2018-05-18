@@ -269,10 +269,5 @@ class NewListFragmentKotlin : LazyFragmentKotlin(), View.OnClickListener, ItemCl
         }
     }
 
-    override fun onDestroy() {
-        clearView(multistate_view)
-        super.onDestroy()
-    }
-
 
 }

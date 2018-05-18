@@ -6,7 +6,6 @@ import com.zs.project.R
 import com.zs.project.base.BaseActivity
 import com.zs.project.ui.fragment.CollectionFragment
 import com.zs.project.util.PublicFieldUtil
-import kotlinx.android.synthetic.main.public_list_layout.*
 import kotlinx.android.synthetic.main.public_title_layout.*
 
 /**
@@ -64,8 +63,4 @@ class CollectionLocalActivity : BaseActivity(){
 
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        clearView(multistate_view)
-    }
 }

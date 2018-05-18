@@ -115,9 +115,4 @@ class CollectionFragment : BaseFragment() , ItemClickListener , ItemLongClickLis
         return GreenDaoManager.getInstance().session.movieDataDao
     }
 
-    override fun onDestroyView() {
-        clearView(multistate_view)
-        super.onDestroyView()
-    }
-
 }
