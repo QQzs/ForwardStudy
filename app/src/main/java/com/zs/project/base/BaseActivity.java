@@ -107,7 +107,7 @@ public abstract class BaseActivity extends BaseRxActivity implements View.OnClic
         if (viewGroup != null){
             ViewParent parent = viewGroup.getParent();
             if (parent != null){
-                ((ViewGroup)parent).removeAllViews();
+                ((ViewGroup)parent).removeView(viewGroup);
             }
             viewGroup.removeAllViews();
             viewGroup.destroyDrawingCache();

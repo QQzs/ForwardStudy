@@ -266,7 +266,6 @@ public class LoadingImageView extends FrameLayout {
 
     @Override
     protected void onDetachedFromWindow() {
-        super.onDetachedFromWindow();
         if (mUpAnimSet != null){
             mUpAnimSet.cancel();
         }
@@ -274,6 +273,7 @@ public class LoadingImageView extends FrameLayout {
             mDownAnimSet.cancel();
         }
         removeCallbacks(mRunnable);
+        super.onDetachedFromWindow();
     }
 
 }

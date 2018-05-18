@@ -247,4 +247,9 @@ class DouBanFragment : BaseFragment() , ItemClickListener, ItemLongClickListener
 
         }
     }
+
+    override fun onDestroyView() {
+        clearView(multistate_view)
+        super.onDestroyView()
+    }
 }

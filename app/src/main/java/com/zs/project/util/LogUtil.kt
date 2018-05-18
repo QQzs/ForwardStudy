@@ -16,9 +16,14 @@ class LogUtil{
     companion object{
 
         val LOG_TAG = "My_Log"
+        val LOG_TAG_ERROE = "My_Log_Error"
 
         fun logShow(content : String){
             Log.d(LOG_TAG,content)
+        }
+
+        fun logShowError(content : String){
+            Log.e(LOG_TAG_ERROE,content)
         }
 
     }

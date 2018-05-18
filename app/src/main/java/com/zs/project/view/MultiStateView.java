@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 import com.zs.project.R;
+import com.zs.project.util.LogUtil;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -216,7 +217,9 @@ public class MultiStateView extends FrameLayout {
 
             case VIEW_STATE_LOADING:
                 if (mLoadingView == null) {
-                    throw new NullPointerException("Loading View");
+                    LogUtil.Companion.logShowError("Loading View");
+                    break;
+//                    throw new NullPointerException("Loading View");
                 }
 
                 mLoadingView.setVisibility(View.VISIBLE);
@@ -228,7 +231,9 @@ public class MultiStateView extends FrameLayout {
 
             case VIEW_STATE_EMPTY:
                 if (mEmptyView == null) {
-                    throw new NullPointerException("Empty View");
+                    LogUtil.Companion.logShowError("Empty View");
+                    break;
+//                    throw new NullPointerException("Empty View");
                 }
 
                 mEmptyView.setVisibility(View.VISIBLE);
@@ -240,7 +245,9 @@ public class MultiStateView extends FrameLayout {
 
             case VIEW_STATE_ERROR:
                 if (mErrorView == null) {
-                    throw new NullPointerException("Error View");
+                    LogUtil.Companion.logShowError("Error View");
+                    break;
+//                    throw new NullPointerException("Error View");
                 }
 
                 mErrorView.setVisibility(View.VISIBLE);
@@ -255,8 +262,10 @@ public class MultiStateView extends FrameLayout {
 
             default:
                 if (mContentView == null) {
+                    LogUtil.Companion.logShowError("Content View");
+                    break;
                     // Should never happen, the view should throw an exception if no content view is present upon creation
-                    throw new NullPointerException("Content View");
+//                    throw new NullPointerException("Content View");
                 }
 
                 mContentView.setVisibility(View.VISIBLE);
@@ -267,7 +276,9 @@ public class MultiStateView extends FrameLayout {
                 break;
             case VIEW_STATE_CENTER:
                 if (mCenterView == null) {
-                    throw new NullPointerException("center View");
+                    LogUtil.Companion.logShowError("center View");
+                    break;
+//                    throw new NullPointerException("center View");
                 }
                 mCenterView.setVisibility(View.VISIBLE);
                 if (mContentView != null) mContentView.setVisibility(View.GONE);
