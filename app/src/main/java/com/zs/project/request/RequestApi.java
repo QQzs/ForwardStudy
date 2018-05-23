@@ -33,6 +33,8 @@ public class RequestApi {
     public static final String BASE_DOUBAN_URL = "https://api.douban.com/";
     public static final String BASE_WAN_ANDROID = "http://www.wanandroid.com/";
 
+    public static final String BASE_TEST_URL = "http://test01rms.eamapp.cn/";
+
     public static final int REQUEST_DOUBAN = 1001;
     public static final int REQUEST_SHOW = 1002;
     public static final int REQUEST_NEWS = 1003;
@@ -61,7 +63,7 @@ public class RequestApi {
     public Retrofit getRetrofit(String baseurl){
 
         if (TextUtils.isEmpty(baseurl)) {
-            baseurl = BASE_DOUBAN_URL;
+            baseurl = BASE_TEST_URL;
         }
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(baseurl)
@@ -93,7 +95,7 @@ public class RequestApi {
                 baseUrl = BASE_WAN_ANDROID;
                 break;
             default:
-                baseUrl = BASE_DOUBAN_URL;
+                baseUrl = BASE_TEST_URL;
         }
         return getRetrofit(baseUrl).create(RequestService.class);
     }

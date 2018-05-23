@@ -162,4 +162,13 @@ public interface RequestService {
     @GET("福利/10/1")
     Observable<BaseResponse> getRJData();
 
+    @POST("api/uaa/oauth/token")
+    Call<ResponseBody> getToken(@Query("username") String username,
+                                @Query("password") String password,
+                                @Query("grant_type") String grant_type,
+                                @Query("prod") String prod);
+
+    @GET("api/uas/open/personandusers/getInfo")
+    Call<ResponseBody> getUser(@Query("loginName") String loginName);
+
 }

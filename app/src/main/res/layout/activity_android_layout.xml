@@ -5,65 +5,11 @@
     android:layout_height="match_parent"
     >
 
-    <LinearLayout
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/test_recycker_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_margin="10dp">
+        android:layout_height="match_parent">
 
-        <Button
-            android:id="@+id/btn_1"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="40dp"
-            android:background="@color/app_main_color"
-            android:text="登录"
-            android:textColor="@color/white"/>
-
-        <Button
-            android:id="@+id/btn_2"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="40dp"
-            android:background="@color/app_main_color"
-            android:text="退出"
-            android:textColor="@color/white"
-            android:layout_marginLeft="10dp"/>
-
-        <Button
-            android:id="@+id/btn_3"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="40dp"
-            android:background="@color/app_main_color"
-            android:text="收藏列表"
-            android:textColor="@color/white"
-            android:layout_marginLeft="10dp"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp">
-        <Button
-            android:id="@+id/btn_4"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="40dp"
-            android:background="@color/app_main_color"
-            android:text="文章"
-            android:textColor="@color/white"
-            />
-        <Button
-            android:id="@+id/btn_5"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="40dp"
-            android:background="@color/app_main_color"
-            android:text="收藏"
-            android:textColor="@color/white"
-            android:layout_marginLeft="10dp"/>
-    </LinearLayout>
+    </android.support.v7.widget.RecyclerView>
 
 </LinearLayout>

@@ -21,6 +21,7 @@ import com.zs.project.request.bean.BaseResponseAndroid
 import com.zs.project.request.cookie.DefaultObserverAndroid
 import com.zs.project.ui.activity.LoginActivity
 import com.zs.project.ui.activity.WebViewActivity
+import com.zs.project.ui.activity.test.TestAndroidActivity
 import com.zs.project.util.RecyclerViewUtil
 import com.zs.project.util.StringUtils
 import com.zs.project.util.transform.DepthPageTransformer
@@ -112,8 +113,8 @@ class ArticleFragment : BaseFragment() {
                 }
 
                 viewHolder?.setOnClickListener(R.id.card_article_view) {
-                    activity?.startActivity<WebViewActivity>("url" to data?.link)
-//                    activity?.startActivity<TestAndroidActivity>()
+//                    activity?.startActivity<WebViewActivity>("url" to data?.link)
+                    activity?.startActivity<TestAndroidActivity>()
                 }
 
             }
