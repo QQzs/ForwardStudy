@@ -168,7 +168,15 @@ public interface RequestService {
                                 @Query("grant_type") String grant_type,
                                 @Query("prod") String prod);
 
+    @POST("api/uaa/leave")
+    Call<ResponseBody> leaveApp();
+
     @GET("api/uas/open/personandusers/getInfo")
     Call<ResponseBody> getUser(@Query("loginName") String loginName);
+
+    @GET("api/uas/open/resources/findByLoginNameAndProductCode")
+    Call<ResponseBody> findProduct(@Query("hasSuperResource") String hasSuperResource,
+                                   @Query("loginName") String loginName,
+                                   @Query("productCode") String productCode);
 
 }

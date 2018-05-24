@@ -29,7 +29,7 @@ public class RequestApi {
     private final static int READ_TIMEOUT = 10;
 
     public static final String BASE_NEW_URL = "https://way.jd.com/";
-    public static final String BASE_SHOW_URL="http://route.showapi.com/";
+    public static final String BASE_SHOW_URL = "http://route.showapi.com/";
     public static final String BASE_DOUBAN_URL = "https://api.douban.com/";
     public static final String BASE_WAN_ANDROID = "http://www.wanandroid.com/";
 
@@ -44,7 +44,7 @@ public class RequestApi {
     private static RequestApi mRetrofitApi;
     private HttpLoggingInterceptor mLoggingInterceptor;
 
-    public RequestApi(){
+    public RequestApi() {
 
     }
 
@@ -57,10 +57,11 @@ public class RequestApi {
 
     /**
      * retrofit
+     *
      * @param baseurl
      * @return
      */
-    public Retrofit getRetrofit(String baseurl){
+    public Retrofit getRetrofit(String baseurl) {
 
         if (TextUtils.isEmpty(baseurl)) {
             baseurl = BASE_TEST_URL;
@@ -76,12 +77,13 @@ public class RequestApi {
 
     /**
      * 请求不同的基地址
+     *
      * @param type
      * @return
      */
     public RequestService getRequestService(int type) {
         String baseUrl;
-        switch (type){
+        switch (type) {
             case REQUEST_DOUBAN:
                 baseUrl = BASE_DOUBAN_URL;
                 break;
@@ -102,6 +104,7 @@ public class RequestApi {
 
     /**
      * 请求默认的基地址
+     *
      * @return
      */
     public RequestService getBaseService() {
@@ -110,30 +113,31 @@ public class RequestApi {
 
     /**
      * OKHttp
+     *
      * @return
      */
     private OkHttpClient getOkHttpClient() {
-//        if (mOkHttpClient == null) {
-//            OkHttpClient.Builder builder = new OkHttpClient.Builder()
-//                    .retryOnConnectionFailure(true)//连接失败后是否重新连接
-//                    .connectTimeout(CONNECT_TIMEOUT, TimeUnit.SECONDS)//超时时间
-//                    .readTimeout(READ_TIMEOUT, TimeUnit.SECONDS)
-//                    .writeTimeout(READ_TIMEOUT, TimeUnit.SECONDS)
-//                    .cookieJar(new CookieJarImpl(new SPCookieStore(MyApp.getAppContext())));
-//            mOkHttpClient = builder.build();
-//        }
-//        return mOkHttpClient;
-
-        if (mLoggingInterceptor == null){
+        if (mLoggingInterceptor == null) {
             mLoggingInterceptor = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
                 @Override
                 public void log(String message) {
                     //打印retrofit日志
-                    Log.i("RetrofitLog","retrofitBack = "+message);
+                    Log.i("RetrofitLog", "retrofitBack = " + message);
                 }
             });
             mLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         }
+
+//        Interceptor newInterceptor = new Interceptor() {
+//            @Override
+//            public Response intercept(Chain chain) throws IOException {
+//                Request request = chain.request()
+//                        .newBuilder()
+//                        .addHeader("Authorization", Constant.TOKEN)
+//                        .build();
+//                return chain.proceed(request);
+//            }
+//        };
 
         OkHttpClient.Builder builder = new OkHttpClient.Builder()
                 .retryOnConnectionFailure(true)//连接失败后是否重新连接
@@ -141,6 +145,7 @@ public class RequestApi {
                 .readTimeout(READ_TIMEOUT, TimeUnit.SECONDS)
                 .writeTimeout(READ_TIMEOUT, TimeUnit.SECONDS)
                 .addInterceptor(mLoggingInterceptor)
+//                .addInterceptor(newInterceptor)
                 .cookieJar(new CookieJarImpl(new SPCookieStore(MyApp.getAppContext())));
         return builder.build();
     }

@@ -6,12 +6,15 @@ import android.view.View
 import com.mcxtzhang.commonadapter.rv.CommonAdapter
 import com.mcxtzhang.commonadapter.rv.ViewHolder
 import com.zs.project.R
+import com.zs.project.app.Constant
 import com.zs.project.base.BaseActivity
 import com.zs.project.request.RequestApi
 import com.zs.project.util.RecyclerViewUtil
 import com.zs.project.util.SpUtil
+import com.zs.project.util.StringUtils
 import kotlinx.android.synthetic.main.activity_android_layout.*
 import okhttp3.ResponseBody
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -49,6 +52,8 @@ class TestAndroidActivity : BaseActivity(){
         mData.add("收藏")
         mData.add("EY——Login")
         mData.add("EY--User")
+        mData.add("EY--Leave")
+        mData.add("EY--Product")
 
         mAdapter = object : CommonAdapter<String>(this,mData,R.layout.item_test_layout){
             override fun convert(viewHolder: ViewHolder?, item: String?) {
@@ -121,6 +126,27 @@ class TestAndroidActivity : BaseActivity(){
                             token.enqueue(object : Callback<ResponseBody> {
                                 override fun onFailure(call: Call<ResponseBody>?, t: Throwable?) {
                                     Log.d("My_Log","error")
+
+                                }
+
+                                override fun onResponse(call: Call<ResponseBody>?, response: Response<ResponseBody>?) {
+                                    var back : String? = response?.body()?.string()
+                                    Log.d("My_Log", "back = $back")
+                                    if (!StringUtils.isEmpty(back)){
+                                        var obj = JSONObject(back)
+                                        var token = obj.getString("access_token")
+                                        Constant.TOKEN = "Bearer $token"
+                                    }
+
+                                }
+
+                            })
+                        }
+                        6 ->{
+                            var user = mRequestApi.getRequestService(0).getUser("lawyer2")
+                            user.enqueue(object : Callback<ResponseBody> {
+                                override fun onFailure(call: Call<ResponseBody>?, t: Throwable?) {
+                                    Log.d("My_Log","error")
                                 }
 
                                 override fun onResponse(call: Call<ResponseBody>?, response: Response<ResponseBody>?) {
@@ -129,9 +155,22 @@ class TestAndroidActivity : BaseActivity(){
 
                             })
                         }
-                        6 ->{
-                            var user = mRequestApi.getRequestService(0).getUser("lawyer2")
-                            user.enqueue(object : Callback<ResponseBody> {
+                        7 ->{
+                            var leave = mRequestApi.getRequestService(0).leaveApp()
+                            leave.enqueue(object : Callback<ResponseBody> {
+                                override fun onFailure(call: Call<ResponseBody>?, t: Throwable?) {
+                                    Log.d("My_Log","error")
+                                }
+
+                                override fun onResponse(call: Call<ResponseBody>?, response: Response<ResponseBody>?) {
+                                    Log.d("My_Log","back = " + response?.body()?.string())
+                                }
+
+                            })
+                        }
+                        8 ->{
+                            var product = mRequestApi.getRequestService(0).findProduct("true","lawyer2","RMS")
+                            product.enqueue(object : Callback<ResponseBody> {
                                 override fun onFailure(call: Call<ResponseBody>?, t: Throwable?) {
                                     Log.d("My_Log","error")
                                 }

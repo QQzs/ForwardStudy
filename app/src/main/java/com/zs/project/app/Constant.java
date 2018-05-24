@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.os.Environment;
 
 import com.zs.project.R;
+import com.zs.project.util.BtoAAtoB;
 import com.zs.project.util.FileUtils;
 
 public class Constant {
@@ -41,5 +42,7 @@ public class Constant {
     public static final String MOVIE_THEATERS = "in_theaters";
     public static final String MOVIE_COMING = "coming_soon";
     public static final String MOVIE_TOP = "top250";
+
+    public static String TOKEN = "Basic " + BtoAAtoB.btoa("ecclient:ecclientsecret");
 
 }
