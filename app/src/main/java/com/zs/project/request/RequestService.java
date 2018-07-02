@@ -6,7 +6,6 @@ import com.zs.project.bean.android.ArticleList;
 import com.zs.project.bean.movie.MovieListData;
 import com.zs.project.bean.news.NewListData;
 import com.zs.project.bean.video.VideoData;
-import com.zs.project.request.bean.BaseResponse;
 import com.zs.project.request.bean.BaseResponseAndroid;
 
 import java.util.List;
@@ -159,8 +158,6 @@ public interface RequestService {
     Call<ResponseBody> getMovieDetailData(@Path("movieId") String movieId);
 
 
-    @GET("福利/10/1")
-    Observable<BaseResponse> getRJData();
 
     @POST("api/uaa/oauth/token")
     Call<ResponseBody> getToken(@Query("username") String username,
