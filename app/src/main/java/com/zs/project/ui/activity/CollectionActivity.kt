@@ -11,10 +11,9 @@ import com.zs.project.base.BaseActivity
 import com.zs.project.bean.android.Article
 import com.zs.project.bean.android.ArticleList
 import com.zs.project.event.RefreshEvent
+import com.zs.project.request.DefaultObserverAndroid
 import com.zs.project.request.RequestApi
-import com.zs.project.request.RequestHelper
 import com.zs.project.request.bean.BaseResponseAndroid
-import com.zs.project.request.cookie.DefaultObserverAndroid
 import com.zs.project.util.RecyclerViewUtil
 import com.zs.project.view.MultiStateView
 import io.reactivex.Observable
@@ -120,7 +119,8 @@ class CollectionActivity : BaseActivity(){
      * 取消收藏文章
      */
     private fun unCollectArticle(id : Int , originId : Int){
-        requestData(mRequestApi.getRequestService(RequestApi.REQUEST_ANDROID).unCollectArticleList(id,originId),ARTICLE_COLLECT_ANDROID)
+        requestData(mRequestApi.getRequestService(RequestApi.REQUEST_ANDROID)
+                .unCollectArticleList(id,originId),ARTICLE_COLLECT_ANDROID)
     }
 
     override fun onClick(view: View?) {
@@ -133,10 +133,10 @@ class CollectionActivity : BaseActivity(){
 
     override fun requestData(request: Observable<*>?, type: Int) {
         super.requestData(request, type)
-        var observable = RequestHelper.getObservable(request)
+//        var observable = RequestHelper.getObservable(request)
         when(type){
             ARTICLE_COLLECT_LIST ->{
-                observable.subscribe(object : DefaultObserverAndroid<BaseResponseAndroid<ArticleList>>(this){
+                mObservable.subscribe(object : DefaultObserverAndroid<BaseResponseAndroid<ArticleList>>(this){
                     override fun onSuccess(response: BaseResponseAndroid<ArticleList>?) {
                         var articleList = response?.data?.datas
                         if (articleList != null && articleList.size > 0){
@@ -175,7 +175,7 @@ class CollectionActivity : BaseActivity(){
                 })
             }
             ARTICLE_COLLECT_ANDROID ->{
-                observable.subscribe(object : DefaultObserverAndroid<BaseResponseAndroid<Object>>(this){
+                mObservable.subscribe(object : DefaultObserverAndroid<BaseResponseAndroid<Object>>(this){
                     override fun onSuccess(response: BaseResponseAndroid<Object>?) {
                         mAdapter?.remove(mCollectPosition)
                         mCollectPosition = -1

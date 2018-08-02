@@ -1,11 +1,10 @@
-package com.zs.project.request.cookie;
+package com.zs.project.request;
 
 import android.text.TextUtils;
 import android.widget.Toast;
 
 import com.google.gson.JsonParseException;
 import com.zs.project.R;
-import com.zs.project.request.BaseImpl;
 import com.zs.project.request.bean.BaseResponseAndroid;
 import com.zs.project.util.ToastUtils;
 

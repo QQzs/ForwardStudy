@@ -11,6 +11,7 @@ import com.zs.project.app.AppStatusManager;
 import com.zs.project.app.Constant;
 import com.zs.project.app.MyActivityManager;
 import com.zs.project.request.RequestApi;
+import com.zs.project.request.RequestHelper;
 import com.zs.project.ui.activity.MainActivity;
 import com.zs.project.util.DialogUtil;
 import com.zs.project.util.SpUtil;
@@ -32,6 +33,7 @@ public abstract class BaseActivity extends BaseRxActivity implements View.OnClic
     protected Gson mGson = new Gson();
     protected String mUserId , mUserName;
     protected DialogUtil mDialogUtil;
+    protected Observable mObservable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,7 +79,7 @@ public abstract class BaseActivity extends BaseRxActivity implements View.OnClic
      * @param type
      */
     protected void requestData(Observable request, int type){
-
+        mObservable = RequestHelper.getObservable(request);
     }
 
     protected void restartApp() {

@@ -18,7 +18,7 @@ import com.zs.project.event.RefreshEvent
 import com.zs.project.request.RequestApi
 import com.zs.project.request.RequestHelper
 import com.zs.project.request.bean.BaseResponseAndroid
-import com.zs.project.request.cookie.DefaultObserverAndroid
+import com.zs.project.request.DefaultObserverAndroid
 import com.zs.project.ui.activity.LoginActivity
 import com.zs.project.ui.activity.WebViewActivity
 import com.zs.project.ui.activity.test.TestAndroidActivity
