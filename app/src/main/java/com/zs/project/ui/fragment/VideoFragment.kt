@@ -212,9 +212,9 @@ class VideoFragment : BaseFragment(){
         observable.subscribe(object : DefaultObserver<VideoData>(mFragment){
             override fun onSuccess(response: VideoData?) {
 
-                mData = response?.showapi_res_body?.pagebean?.contentlist!!
-//                mAdapter?.datas = mData
-//                Log.d("My_Log","d = " + mData.toString())
+                if (response?.showapi_res_body?.pagebean != null){
+                    mData = response?.showapi_res_body?.pagebean?.contentlist!!
+                }
                 LogUtil.logShow("size  == " + mData.size)
 
                 if (mData.size == 0) {
