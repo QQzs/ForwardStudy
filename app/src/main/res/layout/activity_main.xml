@@ -43,7 +43,8 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:visibility="gone">
 
                     <com.zs.project.view.SwitchColorView
                         android:id="@+id/iv_home_article"

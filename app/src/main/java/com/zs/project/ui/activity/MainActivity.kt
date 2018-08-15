@@ -50,7 +50,7 @@ class MainActivity : BaseActivity() {
         mFragments?.add(DouBanFragment())
         mFragments?.add(MeFragment())
 
-        changePage(0)
+        changePage(1)
 
         fragment_article?.setOnClickListener(this)
         fragment_news?.setOnClickListener(this)
