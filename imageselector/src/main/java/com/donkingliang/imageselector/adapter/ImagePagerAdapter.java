@@ -79,8 +79,10 @@ public class ImagePagerAdapter extends PagerAdapter {
             public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
                 int bw = resource.getWidth();
                 int bh = resource.getHeight();
-                if (bw > 8192 || bh > 8192) {
-                    Bitmap bitmap = ImageUtil.zoomBitmap(resource, 8192, 8192);
+                int size = 8192;
+//                size = 4096;
+                if (bw > size || bh > size) {
+                    Bitmap bitmap = ImageUtil.zoomBitmap(resource, size, size);
                     setBitmap(currentView, bitmap);
                 } else {
                     setBitmap(currentView, resource);
