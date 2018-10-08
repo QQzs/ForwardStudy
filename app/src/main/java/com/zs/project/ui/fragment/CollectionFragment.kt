@@ -68,6 +68,7 @@ class CollectionFragment : BaseFragment() , ItemClickListener , ItemLongClickLis
 
         }else{
             mMovieData = getMovieDao().loadAll()
+//            mMovieData = getMovieDao().queryBuilder().where(MovieDataDao.Properties.Average.ge(6.0)).list()
             if (mMovieData == null || mMovieData!!.size == 0){
                 multistate_view?.viewState = MultiStateView.VIEW_STATE_EMPTY
             }else{

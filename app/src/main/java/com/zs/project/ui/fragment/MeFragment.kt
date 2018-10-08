@@ -142,7 +142,7 @@ class MeFragment : BaseFragment() , View.OnClickListener , KotlinItemClickListen
      * 设置头像
      */
     private fun setUserAvatar(){
-        mDialogUtil?.showAvatarDialog()
+        mDialogUtil?.showAvatarDialog(context)
         mDialogUtil?.setDialogBackListener(object : DialogUtil.DialogBackListener{
             override fun onComfirmClick(dialog: Dialog) {
                 dialog.dismiss()

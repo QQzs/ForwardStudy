@@ -56,7 +56,7 @@ public abstract class BaseActivity extends BaseRxActivity implements View.OnClic
         mActivity = this;
         mUserId = SpUtil.getString(Constant.APP_USER_ID,"");
         mUserName = SpUtil.getString(Constant.APP_USER_NAME,"");
-        mDialogUtil = DialogUtil.Companion.getInstance(this);
+        mDialogUtil = DialogUtil.Companion.getInstance();
         MyActivityManager.getActivityManager().addActivity(this);
         /**
          * 初始化一些UI

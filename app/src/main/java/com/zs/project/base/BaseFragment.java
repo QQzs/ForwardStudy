@@ -38,7 +38,7 @@ public class BaseFragment extends BaseRxFragment {
 		this.inflater = inflater;
 		this.container = container;
 		mRequestApi = RequestApi.getInstance();
-		mDialogUtil = DialogUtil.Companion.getInstance(getContext());
+		mDialogUtil = DialogUtil.Companion.getInstance();
 		mUserId = SpUtil.getString(Constant.APP_USER_ID,"");
 		mUserName = SpUtil.getString(Constant.APP_USER_NAME,"");
 		onCreateView(savedInstanceState);
