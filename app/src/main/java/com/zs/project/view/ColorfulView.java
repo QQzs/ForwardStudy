@@ -18,6 +18,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -26,6 +27,8 @@ import com.zs.project.app.Constant;
 import com.zs.project.util.BezierUtil;
 import com.zs.project.util.LogUtil;
 
+import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -56,6 +59,12 @@ public class ColorfulView extends FrameLayout {
     private int mScreenHeight;
 
     /**
+     * 动画
+     */
+    private ArrayList<ValueAnimator> mValueAnimators = new ArrayList<>();
+    private AnimatorSet mAnimatorSet;
+
+    /**
      * 起始位置  结束位置 中间点1 中间点2
      */
     private Point mStartPoint;
@@ -72,19 +81,41 @@ public class ColorfulView extends FrameLayout {
      */
     private int[] mColors = {Color.BLUE, Color.CYAN, Color.GREEN, Color.RED, Color.MAGENTA, Color.YELLOW};
 
-    /**
-     * handler
-     **/
-    private Handler mHandler = new Handler() {
+//    /**
+//     * handler
+//     **/
+//    private Handler mHandler = new Handler() {
+//        @Override
+//        public void handleMessage(Message msg) {
+//            if (msg.what == mWhat){
+//                addMyView();
+//                mHandler.sendEmptyMessageDelayed(mWhat,mDuration);
+//            }
+//            super.handleMessage(msg);
+//        }
+//    };
+
+    private LeakHandler mHandler;
+    public static class LeakHandler extends Handler{
+
+        private WeakReference<View> weakReference;
+
+        private LeakHandler(View view) {
+            this.weakReference = new WeakReference<>(view);
+        }
+
         @Override
         public void handleMessage(Message msg) {
-            if (msg.what == mWhat){
-                addMyView();
-                mHandler.sendEmptyMessageDelayed(mWhat,mDuration);
-            }
             super.handleMessage(msg);
+            ColorfulView view = (ColorfulView) weakReference.get();
+            if (view != null && view.getContext() != null){
+                if (msg.what == mWhat){
+                    view.addMyView();
+                    view.mHandler.sendEmptyMessageDelayed(mWhat,mDuration);
+                }
+            }
         }
-    };
+    }
 
     /**
      * 添加view间隔时间
@@ -102,6 +133,7 @@ public class ColorfulView extends FrameLayout {
 
     public ColorfulView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        mHandler = new LeakHandler(this);
         initView();
     }
 
@@ -167,6 +199,7 @@ public class ColorfulView extends FrameLayout {
         Point endPoint = this.mEndPoint;
 
         ValueAnimator valueAnimator = ValueAnimator.ofObject(new MyTypeEvaluator(conOnePoint,conTwoPoint),startPoint,endPoint);
+        mValueAnimators.add(valueAnimator);
         valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
@@ -180,15 +213,17 @@ public class ColorfulView extends FrameLayout {
             @Override
             public void onAnimationEnd(Animator animation) {
                 super.onAnimationEnd(animation);
-                ColorfulView.this.removeView(imageView);
+                removeView(imageView);
             }
         });
 
         ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(imageView,"alpha",1.0f,0);
-        AnimatorSet animatorSet = new AnimatorSet();
-        animatorSet.setDuration(6000);
-        animatorSet.play(valueAnimator).with(objectAnimator);
-        animatorSet.start();
+        mValueAnimators.add(valueAnimator);
+
+        mAnimatorSet = new AnimatorSet();
+        mAnimatorSet.setDuration(6000);
+        mAnimatorSet.play(valueAnimator).with(objectAnimator);
+        mAnimatorSet.start();
 
     }
 
@@ -245,7 +280,7 @@ public class ColorfulView extends FrameLayout {
 
     @Override
     protected void onDetachedFromWindow() {
-        mHandler.removeCallbacksAndMessages(mWhat);
+        mHandler.removeCallbacksAndMessages(null);
         if (mBitmap != null){
             mBitmap.recycle();
             mBitmap = null;
@@ -254,6 +289,14 @@ public class ColorfulView extends FrameLayout {
             mCopyBitmap.recycle();
             mCopyBitmap = null;
         }
+        for (int i = 0 ; i < mValueAnimators.size() ; i++){
+            if (mValueAnimators.get(i) != null){
+                mValueAnimators.get(i).removeAllUpdateListeners();
+                mValueAnimators.get(i).cancel();
+            }
+        }
+        mValueAnimators.clear();
+        mValueAnimators = null;
         removeAllViews();
         LogUtil.Companion.logShowError("colorfull ========");
         super.onDetachedFromWindow();

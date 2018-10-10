@@ -145,5 +145,10 @@ class NewsFragment : BaseFragment() , View.OnClickListener{
 
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        EventBus.getDefault().unregister(this)
+    }
+
 
 }
