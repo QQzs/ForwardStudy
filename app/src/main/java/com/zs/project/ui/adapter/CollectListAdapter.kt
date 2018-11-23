@@ -27,7 +27,7 @@ class CollectListAdapter(var mType : String , var mItemClickListener : ItemClick
     private var mNewData :MutableList<NewData> = arrayListOf()
     private var mMovieData :MutableList<MovieData> = arrayListOf()
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
         var itemView : View ?= null
         when(mType){
@@ -46,7 +46,7 @@ class CollectListAdapter(var mType : String , var mItemClickListener : ItemClick
 
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (mType) {
             "news" -> {
                 (holder as NewListHoler).bindData(position)

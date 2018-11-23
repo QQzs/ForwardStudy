@@ -25,12 +25,12 @@ About:
 class NewListAdapter(var mViewClickListener : ItemClickListener, var mItemLongClickListener : ItemLongClickListener): RecyclerView.Adapter<NewListAdapter.NewListHoler>(){
 
     private var mData :MutableList<NewData> = mutableListOf()
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): NewListHoler {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewListHoler {
         var itemView = LayoutInflater.from(parent?.context)?.inflate(R.layout.new_list_item_layout,null)
         return NewListHoler(itemView)
     }
 
-    override fun onBindViewHolder(holder: NewListHoler?, position: Int) {
+    override fun onBindViewHolder(holder: NewListHoler, position: Int) {
         holder?.bindData(position)
     }
 

@@ -20,7 +20,7 @@ About:
  */
 class MeItemAdapter(private var mFragment : MeFragment , private var mData : MutableList<ItemBean> , var mItemClickListener: KotlinItemClickListener) : RecyclerView.Adapter<MeItemAdapter.MeViewHolder>(){
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): MeViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MeViewHolder {
         var view = View.inflate(parent?.context, R.layout.item_me_layout, null)
         return MeViewHolder(view)
     }
@@ -29,7 +29,7 @@ class MeItemAdapter(private var mFragment : MeFragment , private var mData : Mut
         return mData.size
     }
 
-    override fun onBindViewHolder(holder: MeViewHolder?, position: Int) {
+    override fun onBindViewHolder(holder: MeViewHolder, position: Int) {
         holder?.bindData(position)
     }
 

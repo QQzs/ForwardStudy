@@ -24,11 +24,11 @@ About:
  */
 class DouBanAdapter(private var mData : MutableList<MovieDetailData>, var mItemClickListener: ItemClickListener, var mItemLongClickListener: ItemLongClickListener) : RecyclerView.Adapter<DouBanAdapter.DouBanHolder>() {
 
-    override fun onBindViewHolder(holder: DouBanHolder?, position: Int) {
+    override fun onBindViewHolder(holder: DouBanHolder, position: Int) {
         holder?.bindData(position)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): DouBanHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DouBanHolder {
 
         var view = LayoutInflater.from(parent?.context).inflate(R.layout.item_movie_layout,parent,false)
         return DouBanHolder(view)

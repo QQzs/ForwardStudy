@@ -17,7 +17,7 @@ About:
  */
 class MeAdapter(private var mData : MutableList<String>) : RecyclerView.Adapter<MeAdapter.MeViewHolder>(){
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): MeViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MeViewHolder {
         var view = View.inflate(parent?.context, R.layout.item_me_layout,null)
         return MeViewHolder(view)
     }
@@ -37,7 +37,7 @@ class MeAdapter(private var mData : MutableList<String>) : RecyclerView.Adapter<
         notifyDataSetChanged()
     }
 
-    override fun onBindViewHolder(holder: MeViewHolder?, position: Int) {
+    override fun onBindViewHolder(holder: MeViewHolder, position: Int) {
         holder?.bindData(position)
     }
 

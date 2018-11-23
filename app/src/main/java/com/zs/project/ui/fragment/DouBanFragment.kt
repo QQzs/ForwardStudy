@@ -1,8 +1,10 @@
 package com.zs.project.ui.fragment
 
 import android.os.Bundle
+import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
 import android.view.View
+import com.jaeger.library.StatusBarUtil
 import com.jcodecraeer.xrecyclerview.ProgressStyle
 import com.jcodecraeer.xrecyclerview.XRecyclerView
 import com.zs.project.R
@@ -65,6 +67,20 @@ class DouBanFragment : BaseFragment() , ItemClickListener, ItemLongClickListener
     override fun onCreateView(savedInstanceState: Bundle?) {
         super.onCreateView(savedInstanceState)
         setContentView(R.layout.fragment_home_layout)
+        setStatusBar(false)
+    }
+
+    override fun onHiddenChanged(hidden: Boolean) {
+        super.onHiddenChanged(hidden)
+        setStatusBar(hidden)
+    }
+
+    fun setStatusBar(hidden: Boolean){
+        activity?.run {
+            if (!hidden){
+                StatusBarUtil.setColorNoTranslucent(activity , ContextCompat.getColor(this , R.color.colorPrimary))
+            }
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -77,7 +93,6 @@ class DouBanFragment : BaseFragment() , ItemClickListener, ItemLongClickListener
     override fun initView() {
         super.initView()
         mHeadView = View.inflate(activity,R.layout.dou_header_view_layout,null)
-
     }
 
     override fun initData() {

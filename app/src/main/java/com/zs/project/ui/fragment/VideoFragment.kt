@@ -3,6 +3,7 @@ package com.zs.project.ui.fragment
 import android.graphics.Bitmap
 import android.media.MediaMetadataRetriever
 import android.os.Bundle
+import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.util.TypedValue
@@ -12,6 +13,7 @@ import android.widget.ImageView
 import cn.jzvd.JZUserAction
 import cn.jzvd.JZVideoPlayer
 import cn.jzvd.JZVideoPlayerStandard
+import com.jaeger.library.StatusBarUtil
 import com.jcodecraeer.xrecyclerview.ProgressStyle
 import com.jcodecraeer.xrecyclerview.XRecyclerView
 import com.mcxtzhang.commonadapter.rv.CommonAdapter
@@ -63,6 +65,20 @@ class VideoFragment : BaseFragment(){
     override fun onCreateView(savedInstanceState: Bundle?) {
         super.onCreateView(savedInstanceState)
         setContentView(R.layout.fragment_video_layout)
+        setStatusBar(false)
+    }
+
+    override fun onHiddenChanged(hidden: Boolean) {
+        super.onHiddenChanged(hidden)
+        setStatusBar(hidden)
+    }
+
+    fun setStatusBar(hidden: Boolean){
+        activity?.run {
+            if (!hidden){
+                StatusBarUtil.setColorNoTranslucent(activity , ContextCompat.getColor(this , R.color.colorPrimary))
+            }
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

@@ -3,12 +3,14 @@ package com.zs.project.ui.fragment
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
+import android.support.v4.content.ContextCompat
 import android.support.v4.view.PagerAdapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.google.gson.reflect.TypeToken
+import com.jaeger.library.StatusBarUtil
 import com.zs.project.R
 import com.zs.project.base.BaseFragment
 import com.zs.project.bean.Channel
@@ -47,12 +49,27 @@ class NewsFragment : BaseFragment() , View.OnClickListener{
         super.onCreateView(savedInstanceState)
         setContentView(R.layout.fragment_news_layout)
         EventBus.getDefault().register(this)
+        setStatusBar(false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initData()
     }
+
+    override fun onHiddenChanged(hidden: Boolean) {
+        super.onHiddenChanged(hidden)
+        setStatusBar(hidden)
+    }
+
+    fun setStatusBar(hidden: Boolean){
+        activity?.run {
+            if (!hidden){
+                StatusBarUtil.setColorNoTranslucent(activity , ContextCompat.getColor(this , R.color.colorPrimary))
+            }
+        }
+    }
+
 
     override fun initData() {
         super.initData()
