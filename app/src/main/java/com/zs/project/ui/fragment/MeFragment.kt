@@ -10,7 +10,6 @@ import android.view.View
 import com.donkingliang.imageselector.ClipImageActivity.SELECT_IMAGE
 import com.donkingliang.imageselector.ClipImageActivity.TAKE_PHOTO
 import com.donkingliang.imageselector.utils.ImageSelectorUtils
-import com.jaeger.library.StatusBarUtil
 import com.tbruyelle.rxpermissions2.RxPermissions
 import com.zs.project.R
 import com.zs.project.app.Constant
@@ -105,16 +104,6 @@ class MeFragment : BaseFragment() , View.OnClickListener , KotlinItemClickListen
         ImageLoaderUtil.displayBlurImage(R.drawable.head_bg_img,mZoomHeader?.iv_zoom_img)
 
         mZoomHeader?.iv_me_avator?.setOnClickListener(this)
-        StatusBarUtil.setTranslucentForImageViewInFragment(activity , 0 , mZoomHeader?.iv_me_avator)
-    }
-
-    override fun onHiddenChanged(hidden: Boolean) {
-        super.onHiddenChanged(hidden)
-        activity?.run {
-            if (!hidden){
-                StatusBarUtil.setTranslucentForImageViewInFragment(activity , 0 , mZoomHeader?.iv_me_avator)
-            }
-        }
     }
 
     override fun initData() {

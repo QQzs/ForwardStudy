@@ -6,9 +6,11 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentTransaction
+import android.support.v4.content.ContextCompat
 import android.view.KeyEvent
 import android.view.View
 import android.widget.ImageView
+import com.jaeger.library.StatusBarUtil
 import com.zs.project.R
 import com.zs.project.app.AppStatusManager
 import com.zs.project.base.BaseActivity
@@ -95,44 +97,6 @@ class MainActivity : BaseActivity() {
         }
     }
 
-//    private fun changeTab1(index : Int){
-//        // ContextCompat.getColor(activity!!,R.color.app_main_color)
-//
-//        dynamicAddView(tv_article, "textColor", R.color.main_color_gray)
-//        dynamicAddView(tv_news, "textColor", R.color.main_color_gray)
-//        dynamicAddView(tv_video, "textColor", R.color.main_color_gray)
-//        dynamicAddView(tv_product, "textColor", R.color.main_color_gray)
-//        dynamicAddView(tv_me, "textColor", R.color.main_color_gray)
-//
-//        dynamicAddView(iv_home_article, "src", R.mipmap.home_bar_article_nor)
-//        dynamicAddView(iv_home_news, "src", R.mipmap.home_bar_news_nor)
-//        dynamicAddView(iv_home_video, "src", R.mipmap.home_bar_video_nor)
-//        dynamicAddView(iv_home_product, "src", R.mipmap.home_bar_dou_nor)
-//        dynamicAddView(iv_home_me, "src", R.mipmap.home_bar_user_nor)
-//
-//        when(index){
-//            0 ->{
-//                dynamicAddView(tv_article, "textColor", R.color.app_main_color)
-//                dynamicAddView(iv_home_article, "src", R.mipmap.home_bar_article_sel)
-//            }
-//            1 ->{
-//                dynamicAddView(tv_news, "textColor", R.color.app_main_color)
-//                dynamicAddView(iv_home_news, "src", R.mipmap.home_bar_news_sel)
-//            }
-//            2 ->{
-//                dynamicAddView(tv_video, "textColor", R.color.app_main_color)
-//                dynamicAddView(iv_home_video, "src", R.mipmap.home_bar_video_sel)
-//            }
-//            3 ->{
-//                dynamicAddView(tv_product, "textColor", R.color.app_main_color)
-//                dynamicAddView(iv_home_product, "src", R.mipmap.home_bar_dou_sel)
-//            }
-//            4 ->{
-//                dynamicAddView(tv_me, "textColor",R.color.app_main_color)
-//                dynamicAddView(iv_home_me, "src", R.mipmap.home_bar_user_sel)
-//            }
-//        }
-//    }
 
     private fun changeTab(index : Int){
         // ContextCompat.getColor(activity!!,R.color.app_main_color)
@@ -152,22 +116,27 @@ class MainActivity : BaseActivity() {
             0 ->{
                 dynamicAddView(tv_article, "textColor", R.color.app_main_color)
                 dynamicAddView(iv_home_article, "switchColor", R.color.app_main_color)
+                StatusBarUtil.setColorNoTranslucent(this , ContextCompat.getColor(this , R.color.colorPrimary))
             }
             1 ->{
                 dynamicAddView(tv_news, "textColor", R.color.app_main_color)
                 dynamicAddView(iv_home_news, "switchColor", R.color.app_main_color)
+                StatusBarUtil.setColorNoTranslucent(this , ContextCompat.getColor(this , R.color.colorPrimary))
             }
             2 ->{
                 dynamicAddView(tv_video, "textColor", R.color.app_main_color)
                 dynamicAddView(iv_home_video, "switchColor", R.color.app_main_color)
+                StatusBarUtil.setColorNoTranslucent(this , ContextCompat.getColor(this , R.color.colorPrimary))
             }
             3 ->{
                 dynamicAddView(tv_product, "textColor", R.color.app_main_color)
                 dynamicAddView(iv_home_product, "switchColor", R.color.app_main_color)
+                StatusBarUtil.setTranslucentForImageViewInFragment(this , 0 , null)
             }
             4 ->{
                 dynamicAddView(tv_me, "textColor",R.color.app_main_color)
                 dynamicAddView(iv_home_me, "switchColor", R.color.app_main_color)
+                StatusBarUtil.setTranslucentForImageViewInFragment(this , 0 , null)
             }
         }
     }
