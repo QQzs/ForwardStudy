@@ -32,9 +32,11 @@ public class RequestApi {
     public static final String BASE_SHOW_URL = "http://route.showapi.com/";
     public static final String BASE_DOUBAN_URL = "https://api.douban.com/";
     public static final String BASE_WAN_ANDROID = "http://www.wanandroid.com/";
+    public static final String BASE_WANG_YI = "https://3g.163.com/";
 
     public static final String BASE_TEST_URL = "http://test01rms.eamapp.cn/";
 
+    public static final int REQUEST_WANGYI = 1000;
     public static final int REQUEST_DOUBAN = 1001;
     public static final int REQUEST_SHOW = 1002;
     public static final int REQUEST_NEWS = 1003;
@@ -84,6 +86,8 @@ public class RequestApi {
     public RequestService getRequestService(int type) {
         String baseUrl;
         switch (type) {
+            case REQUEST_WANGYI:
+                baseUrl = BASE_WANG_YI;
             case REQUEST_DOUBAN:
                 baseUrl = BASE_DOUBAN_URL;
                 break;
