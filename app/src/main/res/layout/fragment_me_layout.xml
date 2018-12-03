@@ -10,10 +10,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:zoom_headerView="@layout/zoom_header_layout"
-        app:zoom_header_height="180dp"
+        app:zoom_header_height="200dp"
         >
 
     </com.zs.project.view.PullZoomRecyclerView>
-
 
 </RelativeLayout>

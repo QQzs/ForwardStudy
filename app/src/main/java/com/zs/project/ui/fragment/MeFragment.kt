@@ -94,6 +94,7 @@ class MeFragment : BaseFragment() , View.OnClickListener , KotlinItemClickListen
 
         mZoomHeader = View.inflate(activity,R.layout.zoom_header_layout,null)
         recycler_view_me?.addZoomHeaderView(mZoomHeader, ScreenUtil.dp2px(200f))
+//        recycler_view_me?.addHeaderView(mZoomHeader)
         if (StringUtils.isNullOrEmpty(mUserId)){
             ImageLoaderUtil.loadAvatarImage(R.mipmap.default_img,mZoomHeader?.iv_me_avator)
             mZoomHeader?.tv_me_name?.text = "未登录"
@@ -101,7 +102,8 @@ class MeFragment : BaseFragment() , View.OnClickListener , KotlinItemClickListen
             ImageLoaderUtil.loadAvatarImage(R.mipmap.ic_default_avatar,mZoomHeader?.iv_me_avator)
             mZoomHeader?.tv_me_name?.text = mUserName
         }
-        ImageLoaderUtil.displayBlurImage(R.drawable.head_bg_img,mZoomHeader?.iv_zoom_img)
+//        ImageLoaderUtil.displayLocalImage(R.drawable.header_bg_img,mZoomHeader?.iv_zoom_img)
+//        ImageLoaderUtil.displayBlurImage(R.drawable.bg_monkey,mZoomHeader?.iv_zoom_img)
 
         mZoomHeader?.iv_me_avator?.setOnClickListener(this)
     }
