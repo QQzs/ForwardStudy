@@ -88,6 +88,7 @@ public class RequestApi {
         switch (type) {
             case REQUEST_WANGYI:
                 baseUrl = BASE_WANG_YI;
+                break;
             case REQUEST_DOUBAN:
                 baseUrl = BASE_DOUBAN_URL;
                 break;

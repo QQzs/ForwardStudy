@@ -49,6 +49,19 @@ public interface RequestService {
     @GET("255-1")
     Observable<VideoData> getVideoListData(@QueryMap Map<String, String> params);
 
+
+    /**
+     * 网易新闻
+     * @param path
+     * @param index
+     * @param number
+     * @return
+     */
+    @GET("/touch/reconstruct/article/list/{path}/{index}-{number}.html")
+    Call<ResponseBody> getWangYI(@Path("path") String path , @Path("index") int index , @Path("number") int number);
+
+
+
     /**
      * 豆瓣电影列表
      * @param path

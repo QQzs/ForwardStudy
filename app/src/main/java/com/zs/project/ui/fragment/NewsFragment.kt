@@ -14,7 +14,7 @@ import com.zs.project.base.BaseFragment
 import com.zs.project.bean.Channel
 import com.zs.project.event.RefreshEvent
 import com.zs.project.ui.activity.news.ChooseTagActivity
-import com.zs.project.ui.fragment.news.NewListFragmentKotlin
+import com.zs.project.ui.fragment.news.WangYiFragment
 import com.zs.project.util.PublicFieldUtil
 import com.zs.project.util.SpUtil
 import com.zs.project.util.StringUtils
@@ -82,8 +82,8 @@ class NewsFragment : BaseFragment() , View.OnClickListener{
     private fun initTitleData(){
         val selectTitle = SpUtil.getString(PublicFieldUtil.TITLE_SELECTED, "")
         if (StringUtils.isNullOrEmpty(selectTitle)) {
-            var titleName = resources.getStringArray(R.array.category_name)
-            var titleCode = resources.getStringArray(R.array.category_type)
+            var titleName = resources.getStringArray(R.array.news_title)
+            var titleCode = resources.getStringArray(R.array.news_code)
             for (i in titleCode.indices){
                 mSelectTitles.add(Channel(titleName[i],titleCode[i]))
             }
@@ -135,7 +135,9 @@ class NewsFragment : BaseFragment() , View.OnClickListener{
         override fun getFragmentForPage(position: Int): Fragment {
 
             var title = mSelectTitles[position]
-            return NewListFragmentKotlin.getInstance(position.toString(),title.titleName,title.titleCode)
+//            return NewListFragmentKotlin.getInstance(position.toString(),title.titleName,title.titleCode)
+            return WangYiFragment.getInstance(title.titleName,title.titleCode)
+
 
         }
 

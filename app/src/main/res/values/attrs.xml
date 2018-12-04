@@ -157,4 +157,38 @@
         <item>news_game</item>
         <item>news_travel</item>
     </string-array>
+
+    <string-array name="news_title">
+        <item>新闻</item>
+        <item>娱乐</item>
+        <item>体育</item>
+        <item>财经</item>
+        <item>军事</item>
+        <item>科技</item>
+        <item>手机</item>
+        <item>数码</item>
+        <item>时尚</item>
+        <item>游戏</item>
+        <item>教育</item>
+        <item>健康</item>
+        <item>旅游</item>
+
+    </string-array>
+
+    <string-array name="news_code">
+        <item>BBM54PGAwangning</item>
+        <item>BA10TA81wangning</item>
+        <item>BA8E6OEOwangning</item>
+        <item>BA8EE5GMwangning</item>
+        <item>BAI67OGGwangning</item>
+        <item>BA8D4A3Rwangning</item>
+        <item>BAI6I0O5wangning</item>
+        <item>BAI6JOD9wangning</item>
+        <item>BA8F6ICNwangning</item>
+        <item>BAI6RHDKwangning</item>
+        <item>BA8FF5PRwangning</item>
+        <item>BDC4QSV3wangning</item>
+        <item>BEO4GINLwangning</item>
+    </string-array>
+
 </resources>

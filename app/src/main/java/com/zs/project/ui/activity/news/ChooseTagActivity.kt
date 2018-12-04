@@ -74,8 +74,8 @@ class ChooseTagActivity : BaseActivity() , OnTagChangeListener{
         val selectTitle = SpUtil.getString(PublicFieldUtil.TITLE_SELECTED, "")
         val unselectTitle = SpUtil.getString(PublicFieldUtil.TITLE_UNSELECTED, "")
         if (StringUtils.isNullOrEmpty(selectTitle) || StringUtils.isNullOrEmpty(unselectTitle)) {
-            var titleName = resources.getStringArray(R.array.category_name)
-            var titleCode = resources.getStringArray(R.array.category_type)
+            var titleName = resources.getStringArray(R.array.news_title)
+            var titleCode = resources.getStringArray(R.array.news_code)
             for (i in titleCode.indices){
                 mSelectTitles.add(Channel(titleName[i],titleCode[i],Channel.TYPE_MY_CHANNEL))
             }
