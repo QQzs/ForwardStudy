@@ -10,28 +10,25 @@ import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.View
 import android.widget.RelativeLayout
-import android.widget.TextView
+import com.google.gson.reflect.TypeToken
 import com.jcodecraeer.xrecyclerview.ProgressStyle
 import com.jcodecraeer.xrecyclerview.XRecyclerView
 import com.zs.project.R
 import com.zs.project.base.LazyFragmentKotlin
-import com.zs.project.bean.news.NewListData
+import com.zs.project.bean.wangyi.Article
 import com.zs.project.event.RefreshEvent
 import com.zs.project.greendao.GreenDaoManager
 import com.zs.project.greendao.NewData
 import com.zs.project.listener.ItemClickListener
 import com.zs.project.listener.ItemLongClickListener
-import com.zs.project.request.DefaultObserver
 import com.zs.project.request.RequestApi
-import com.zs.project.request.RequestHelper
 import com.zs.project.ui.activity.ImageShowActivity
 import com.zs.project.ui.activity.WebViewActivity
-import com.zs.project.ui.adapter.NewListAdapter
+import com.zs.project.ui.adapter.ArticleAdapter
 import com.zs.project.util.PublicFieldUtil
 import com.zs.project.util.RecyclerViewUtil
 import com.zs.project.util.SnackbarUtils
 import com.zs.project.view.MultiStateView
-import io.reactivex.Observable
 import okhttp3.ResponseBody
 import org.greenrobot.eventbus.EventBus
 import org.jetbrains.anko.startActivity
@@ -61,14 +58,12 @@ class WangYiFragment : LazyFragmentKotlin(), View.OnClickListener, ItemClickList
     var mCurrentPosition = 0
 
     var mFragment: WangYiFragment? = null
-    var mAdapter: NewListAdapter? = null
+    var mAdapter: ArticleAdapter? = null
+    var mArticleData: MutableList<Article>? = null
 
     var multistate_view: MultiStateView? = null
     var recycler_view: XRecyclerView? = null
     var loading_page_fail: RelativeLayout? = null
-    var tv_float_time: TextView? = null
-
-    var Get_LIST: Int = 111
 
     companion object {
         fun getInstance(vararg arg: String): WangYiFragment {
@@ -101,7 +96,7 @@ class WangYiFragment : LazyFragmentKotlin(), View.OnClickListener, ItemClickList
         mTitleCode = arguments?.getString("code")
 
         loading_page_fail?.setOnClickListener(mFragment)
-        mAdapter = NewListAdapter(this, this)
+        mAdapter = ArticleAdapter(context , this)
         recycler_view?.setLoadingMoreProgressStyle(ProgressStyle.BallRotate)
         recycler_view?.setRefreshProgressStyle(ProgressStyle.BallSpinFadeLoader)
         RecyclerViewUtil.init(activity, recycler_view, mAdapter)
@@ -134,7 +129,6 @@ class WangYiFragment : LazyFragmentKotlin(), View.OnClickListener, ItemClickList
                 //判断是否需要更新悬浮条
                 if (mCurrentPosition != linearLayoutManager.findFirstVisibleItemPosition()){
                     mCurrentPosition = linearLayoutManager.findFirstVisibleItemPosition()
-                    tv_float_time?.text = mAdapter?.getItemData(mCurrentPosition)
 
                 }
             }
@@ -149,7 +143,6 @@ class WangYiFragment : LazyFragmentKotlin(), View.OnClickListener, ItemClickList
         multistate_view = findViewById(R.id.multistate_view)
         recycler_view = findViewById(R.id.recycler_view)
         loading_page_fail = findViewById(R.id.loading_page_fail)
-        tv_float_time = findViewById(R.id.tv_float_time)
 
     }
 
@@ -158,7 +151,7 @@ class WangYiFragment : LazyFragmentKotlin(), View.OnClickListener, ItemClickList
         val wangYI = mRequestApi.getRequestService(RequestApi.REQUEST_WANGYI).getWangYI(mTitleCode, mStartNum, 10)
         wangYI.enqueue(object : Callback<ResponseBody>{
             override fun onFailure(call: Call<ResponseBody>?, t: Throwable?) {
-
+                setError()
             }
 
             override fun onResponse(call: Call<ResponseBody>?, response: Response<ResponseBody>?) {
@@ -167,11 +160,30 @@ class WangYiFragment : LazyFragmentKotlin(), View.OnClickListener, ItemClickList
                 try {
                     var obj = JSONObject(back)
                     var array = obj.getJSONArray(mTitleCode)
-
-
-
+                    mArticleData = mGson.fromJson<MutableList<Article>>(array.toString() , object : TypeToken<MutableList<Article>>(){}.type)
+                    if (mArticleData == null || mArticleData?.size == 0) {
+                        if (mStartNum == 0) {
+                            recycler_view?.refreshComplete()
+                        } else {
+                            recycler_view?.setNoMore(true)
+                            recycler_view?.loadMoreComplete()
+                        }
+                    } else {
+                        if (mStartNum == 0) {
+                            mAdapter?.updateData(mArticleData!!)
+                            recycler_view?.refreshComplete()
+                        } else {
+                            mAdapter?.appendData(mArticleData!!)
+                            recycler_view?.loadMoreComplete()
+                        }
+                    }
+                    if (mAdapter?.itemCount == 0) {
+                        multistate_view?.viewState = MultiStateView.VIEW_STATE_EMPTY
+                    } else {
+                        multistate_view?.viewState = MultiStateView.VIEW_STATE_CONTENT
+                    }
                 } catch (e: Exception) {
-
+                    setError()
                 }
 
             }
@@ -192,30 +204,20 @@ class WangYiFragment : LazyFragmentKotlin(), View.OnClickListener, ItemClickList
     override fun onItemClick(position: Int, data: Any, view: View) {
 
         when (view.id) {
-            R.id.iv_new_list_item -> {
+            R.id.iv_article_img -> {
                 val intent = Intent(activity, ImageShowActivity::class.java)
-                intent.putExtra(PublicFieldUtil.URL_FIELD, (data as NewData).pic)
+                intent.putExtra(PublicFieldUtil.URL_FIELD, (data as Article).imgsrc)
 //                startActivity(intent)
                 val optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(
                         activity as Activity,
-                        view.findViewById(R.id.iv_new_list_item),
+                        view.findViewById(R.id.iv_article_img),
                         getString(R.string.transition_image)
                 )
                 ActivityCompat.startActivity(activity as Activity, intent, optionsCompat.toBundle())
             }
-
             R.id.rl_item_view -> {
-                var url = (data as NewData).url
-                activity!!.startActivity<WebViewActivity>("url" to url)
-//                activity?.startActivity<TestAndroidActivity>()
-//                activity?.startActivity<TestActivity>()
-//                activity?.startActivity<TestScrollActivity>()
-
-//        Snackbar.make(multistate_view!!,"dddd",Snackbar.LENGTH_SHORT).show()
-//        val imageView = ImageView(context)
-//        imageView.setImageResource(R.mipmap.default_img)
-//        SnackbarUtils.Short(multistate_view!!,"ffffff")
-//                .show()
+                var url = (data as Article).url
+                activity?.startActivity<WebViewActivity>("url" to url)
             }
         }
 
@@ -230,53 +232,11 @@ class WangYiFragment : LazyFragmentKotlin(), View.OnClickListener, ItemClickList
 
     }
 
-    override fun requestData(request: Observable<*>?, type: Int) {
-        super.requestData(request, type)
-        var observable = RequestHelper.getObservable(request)
-        when (type) {
-            Get_LIST -> {
-                observable.subscribe(object : DefaultObserver<NewListData>(mFragment) {
-                    override fun onSuccess(response: NewListData?) {
-                        Log.d("My_Log", response.toString())
-                        var listData: MutableList<NewData>? = response?.result?.result?.list
-                        if (listData == null || listData.size == 0) {
-                            if (mStartNum == 0) {
-                                recycler_view?.refreshComplete()
-                            } else {
-                                recycler_view?.setNoMore(true)
-                                recycler_view?.loadMoreComplete()
-                            }
-                        } else {
-                            if (mStartNum == 0) {
-                                mAdapter?.updateData(listData)
-                                recycler_view?.refreshComplete()
-                                tv_float_time?.text = mAdapter?.getItemData(mCurrentPosition)
-                            } else {
-                                mAdapter?.appendData(listData)
-                                recycler_view?.loadMoreComplete()
-                            }
-                        }
-
-                        if (mAdapter?.itemCount == 0) {
-                            multistate_view?.viewState = MultiStateView.VIEW_STATE_EMPTY
-                            tv_float_time?.visibility = View.GONE
-                        } else {
-                            multistate_view?.viewState = MultiStateView.VIEW_STATE_CONTENT
-                            tv_float_time?.visibility = View.VISIBLE
-                        }
-                    }
-
-                    override fun onError(e: Throwable) {
-                        super.onError(e)
-                        if (mAdapter?.itemCount!! > 0) {
-                            recycler_view?.reset()
-                        } else {
-                            multistate_view?.viewState = MultiStateView.VIEW_STATE_ERROR
-                            tv_float_time?.visibility = View.GONE
-                        }
-                    }
-                })
-            }
+    fun setError(){
+        if (mAdapter?.itemCount!! > 0) {
+            recycler_view?.reset()
+        } else {
+            multistate_view?.viewState = MultiStateView.VIEW_STATE_ERROR
         }
     }
 

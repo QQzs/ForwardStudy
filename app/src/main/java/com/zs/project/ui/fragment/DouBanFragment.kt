@@ -64,7 +64,7 @@ class DouBanFragment : BaseFragment() , ItemClickListener, ItemLongClickListener
      */
     override fun onCreateView(savedInstanceState: Bundle?) {
         super.onCreateView(savedInstanceState)
-        setContentView(R.layout.fragment_home_layout)
+        setContentView(R.layout.public_list_layout)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

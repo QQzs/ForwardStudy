@@ -13,7 +13,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:transitionName="@string/transition_image"
-            android:scaleType="centerCrop"/>
+            android:scaleType="centerInside"/>
         
         <!--<com.bm.library.PhotoView-->
             <!--android:id="@+id/iv_show_img"-->

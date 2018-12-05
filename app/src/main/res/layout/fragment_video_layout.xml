@@ -5,11 +5,18 @@
     android:fitsSystemWindows="true"
     android:background="@color/white">
 
+    <View
+        android:id="@+id/view_status_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/status_bar_height"
+        android:background="@color/colorPrimary"
+        android:visibility="visible"/>
+
     <include
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         layout="@layout/public_list_layout"
-        >
+        android:layout_below="@+id/view_status_bar">
     </include>
 
 </RelativeLayout>

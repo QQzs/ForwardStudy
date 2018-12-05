@@ -6,7 +6,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentTransaction
-import android.support.v4.content.ContextCompat
 import android.view.KeyEvent
 import android.view.View
 import android.widget.ImageView
@@ -52,8 +51,6 @@ class MainActivity : BaseActivity() {
         mFragments?.add(DouBanFragment())
         mFragments?.add(MeFragment())
 
-        changePage(1)
-
         fragment_article?.setOnClickListener(this)
         fragment_news?.setOnClickListener(this)
         fragment_video?.setOnClickListener(this)
@@ -62,6 +59,8 @@ class MainActivity : BaseActivity() {
 
         colorfull_bg_view?.changeImg(SpUtil.getInt("color_view",0))
 //        colorfull_bg_view?.switchAnim(false)
+        changePage(1)
+        StatusBarUtil.setTranslucentForImageViewInFragment(this , 0 , null)
     }
 
     override fun initData() {
@@ -99,7 +98,6 @@ class MainActivity : BaseActivity() {
 
 
     private fun changeTab(index : Int){
-        // ContextCompat.getColor(activity!!,R.color.app_main_color)
         dynamicAddView(tv_article, "textColor", R.color.main_color_gray)
         dynamicAddView(tv_news, "textColor", R.color.main_color_gray)
         dynamicAddView(tv_video, "textColor", R.color.main_color_gray)
@@ -116,27 +114,22 @@ class MainActivity : BaseActivity() {
             0 ->{
                 dynamicAddView(tv_article, "textColor", R.color.app_main_color)
                 dynamicAddView(iv_home_article, "switchColor", R.color.app_main_color)
-                StatusBarUtil.setColorNoTranslucent(this , ContextCompat.getColor(this , R.color.colorPrimary))
             }
             1 ->{
                 dynamicAddView(tv_news, "textColor", R.color.app_main_color)
                 dynamicAddView(iv_home_news, "switchColor", R.color.app_main_color)
-                StatusBarUtil.setColorNoTranslucent(this , ContextCompat.getColor(this , R.color.colorPrimary))
             }
             2 ->{
                 dynamicAddView(tv_video, "textColor", R.color.app_main_color)
                 dynamicAddView(iv_home_video, "switchColor", R.color.app_main_color)
-                StatusBarUtil.setColorNoTranslucent(this , ContextCompat.getColor(this , R.color.colorPrimary))
             }
             3 ->{
                 dynamicAddView(tv_product, "textColor", R.color.app_main_color)
                 dynamicAddView(iv_home_product, "switchColor", R.color.app_main_color)
-                StatusBarUtil.setTranslucentForImageViewInFragment(this , 0 , null)
             }
             4 ->{
                 dynamicAddView(tv_me, "textColor",R.color.app_main_color)
                 dynamicAddView(iv_home_me, "switchColor", R.color.app_main_color)
-                StatusBarUtil.setTranslucentForImageViewInFragment(this , 0 , null)
             }
         }
     }

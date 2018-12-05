@@ -31,8 +31,6 @@ import java.math.BigDecimal;
 
 public class ImageLoaderUtil {
 
-    private static Context mContext;
-
     public static RequestOptions mOptions = new RequestOptions()
             .placeholder(R.mipmap.default_img)
             .error(R.mipmap.default_img)
@@ -55,11 +53,7 @@ public class ImageLoaderUtil {
             .diskCacheStrategy(DiskCacheStrategy.RESOURCE);
 
     public static void displayImage(String url, ImageView img) {
-        mContext = MyApp.getAppContext();
-        if (mContext == null){
-          return;
-        }
-        if (NetworkUtil.isAvailable(mContext)) {
+        if (NetworkUtil.isAvailable(MyApp.getAppContext())) {
             loadNormal(url, img);
         } else {
             loadCache(url, img);
@@ -68,14 +62,14 @@ public class ImageLoaderUtil {
     }
 
     private static void loadNormal(String url, ImageView img) {  //placeholder占位符。错误占位符：.error()
-        GlideApp.with(mContext)
+        GlideApp.with(MyApp.getAppContext())
                 .load(url)
                 .apply(mOptions)
                 .into(img);
     }
 
     private static void loadCache(String url, ImageView img) {
-        GlideApp.with(mContext)
+        GlideApp.with(MyApp.getAppContext())
                 .load(url)
                 .apply(mOptions)
                 .into(img);
@@ -111,7 +105,7 @@ public class ImageLoaderUtil {
      * @param imageView
      */
     public static void loadLocalImageMatch(int resourceId, final ImageView imageView) {
-        GlideApp.with(mContext)
+        GlideApp.with(MyApp.getAppContext())
                 .load(resourceId)
                 .apply(mOptions)
                 .into(new SimpleTarget<Drawable>() {
@@ -146,7 +140,6 @@ public class ImageLoaderUtil {
      * @param img
      */
     public static void loadAvatarImage(int resourceId, ImageView img) {
-//        Context context = img.getContext();
         GlideApp.with(MyApp.getAppContext())
                 .load(resourceId)
                 .apply(mOptions)
@@ -160,7 +153,6 @@ public class ImageLoaderUtil {
      * @param img
      */
     public static void loadAvatarImage(String imagePath, ImageView img) {
-//        Context context = img.getContext();
         GlideApp.with(MyApp.getAppContext())
                 .load(imagePath)
                 .apply(mOptionsNoCache)
@@ -175,16 +167,17 @@ public class ImageLoaderUtil {
      * @param round
      */
     private static void loadRoundImage(String url, ImageView img , int round) {
-        GlideApp.with(mContext)
+        GlideApp.with(MyApp.getAppContext())
                 .load(url)
                 .apply(mOptions)
-                .transform(new RoundTransform(mContext,round))
+                .transform(new RoundTransform(MyApp.getAppContext(),round))
                 .into(img);
     }
 
-    public static void showImage(String url, ImageView imageView) {
+    public static void loadImage(String url, ImageView imageView) {
         GlideApp.with(MyApp.getAppContext())
                 .load(url)
+                .fitCenter()
                 .apply(mOptionsNoPlace)
                 .into(imageView);
     }
@@ -194,8 +187,8 @@ public class ImageLoaderUtil {
      * @param url
      * @param imageView
      */
-    public static void loadImage(String url, final ImageView imageView) {
-        GlideApp.with(mContext)
+    public static void loadImageHW(String url, final ImageView imageView) {
+        GlideApp.with(MyApp.getAppContext())
                 .load(url)
                 .apply(mOptions)
                 .into(new SimpleTarget<Drawable>() {
@@ -220,7 +213,7 @@ public class ImageLoaderUtil {
      */
     public static Bitmap load(String url) {
         try {
-            return GlideApp.with(mContext)
+            return GlideApp.with(MyApp.getAppContext())
                     .asBitmap()
                     .load(url)
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
@@ -240,7 +233,7 @@ public class ImageLoaderUtil {
      * @param height
      */
     public static void displayImage(String url, ImageView imageView, int width, int height) {
-        GlideApp.with(mContext)
+        GlideApp.with(MyApp.getAppContext())
                 .load(url)
                 .override(width, height)
                 .apply(mOptions)
@@ -267,10 +260,10 @@ public class ImageLoaderUtil {
      * @param img
      */
     public static void displaythumbImage(String thumb,String url, ImageView img) {  //placeholder占位符。错误占位符：.error()
-        GlideApp.with(mContext)
+        GlideApp.with(MyApp.getAppContext())
                 .load(url)
                 .apply(mOptions)
-                .thumbnail(GlideApp.with(mContext).load(thumb))
+                .thumbnail(GlideApp.with(MyApp.getAppContext()).load(thumb))
                 .into(img);
     }
 
@@ -284,11 +277,11 @@ public class ImageLoaderUtil {
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        GlideApp.get(mContext).clearDiskCache();
+                        GlideApp.get(MyApp.getAppContext()).clearDiskCache();
                     }
                 }).start();
             } else {
-                GlideApp.get(mContext).clearDiskCache();
+                GlideApp.get(MyApp.getAppContext()).clearDiskCache();
             }
             return true;
         } catch (Exception e) {
@@ -301,7 +294,7 @@ public class ImageLoaderUtil {
     public static boolean clearCacheMemory() {
         try {
             if (Looper.myLooper() == Looper.getMainLooper()) { //只能在主线程执行
-                GlideApp.get(mContext).clearMemory();
+                GlideApp.get(MyApp.getAppContext()).clearMemory();
                 return true;
             }
         } catch (Exception e) {

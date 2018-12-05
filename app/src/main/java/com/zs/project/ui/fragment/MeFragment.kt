@@ -102,7 +102,7 @@ class MeFragment : BaseFragment() , View.OnClickListener , KotlinItemClickListen
             ImageLoaderUtil.loadAvatarImage(R.mipmap.ic_default_avatar,mZoomHeader?.iv_me_avator)
             mZoomHeader?.tv_me_name?.text = mUserName
         }
-//        ImageLoaderUtil.displayLocalImage(R.drawable.header_bg_img,mZoomHeader?.iv_zoom_img)
+        ImageLoaderUtil.displayLocalImage(R.drawable.header_bg_img,mZoomHeader?.iv_zoom_img)
 //        ImageLoaderUtil.displayBlurImage(R.drawable.bg_monkey,mZoomHeader?.iv_zoom_img)
 
         mZoomHeader?.iv_me_avator?.setOnClickListener(this)
@@ -178,20 +178,6 @@ class MeFragment : BaseFragment() , View.OnClickListener , KotlinItemClickListen
 
         })
 
-//        rxPermissions
-//                        .requestEach(
-//                                Manifest.permission.CAMERA)
-//                        .subscribe({
-//
-//                            if (it.granted){
-//                                activity?.toast("ok")
-//                            }else if (it.shouldShowRequestPermissionRationale){
-//                                activity?.toast("拒绝")
-//                            }else{
-//                                activity?.toast("记住拒绝")
-//                            }
-//
-//                        })
     }
 
 
