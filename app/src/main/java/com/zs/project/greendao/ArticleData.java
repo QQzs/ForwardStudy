@@ -1,5 +1,6 @@
 package com.zs.project.greendao;
 
+import com.zs.project.bean.news.Imgextra;
 import com.zs.project.greendao.convert.ImgextraConvert;
 
 import org.greenrobot.greendao.annotation.Convert;

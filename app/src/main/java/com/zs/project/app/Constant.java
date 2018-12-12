@@ -8,9 +8,6 @@ public class Constant {
 
     public static final String APP_USER_ID="app_user_id";
     public static final String APP_USER_NAME="app_user_name";
-    public static final String jcloudKey="6d119cf4202fec65d699ebb68d1d6e5f";
-    public static final String showapi_sign="f255043723fe40839e61f6a40a6b0741";
-    public static final String showapi_appid="44640";
 
     public static String PATH_DATA = FileUtils.createRootPath(MyApp.getAppContext()) + "/cache";
     public static String PATH_TXT = PATH_DATA + "/mengm/";

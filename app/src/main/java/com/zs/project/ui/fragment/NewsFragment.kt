@@ -62,10 +62,6 @@ class NewsFragment : BaseFragment() , View.OnClickListener{
         initTitleData()
         indicator_layout?.isSplitAuto = false
         indicator_layout?.setPinnedTabView(false)
-//        var colorBar = ColorBar(activity, ContextCompat.getColor(activity!!,R.color.app_main_color), activity!!.dip(2f), ScrollBar.Gravity.BOTTOM)
-//        indicator_layout?.setScrollBar(colorBar)
-//        indicator_layout?.onTransitionListener = OnTransitionTextListener().setColor(ContextCompat.getColor(activity!!,R.color.app_main_color)
-//        , ContextCompat.getColor(activity!!,R.color.font_default))
         dynamicAddView(indicator_layout,"colorBar",R.color.app_main_color)
         dynamicAddView(indicator_layout,"scrollIndicator",R.color.app_main_color)
 
@@ -135,9 +131,7 @@ class NewsFragment : BaseFragment() , View.OnClickListener{
         override fun getFragmentForPage(position: Int): Fragment {
 
             var title = mSelectTitles[position]
-//            return NewListFragmentKotlin.getInstance(position.toString(),title.titleName,title.titleCode)
             return WangYiFragment.getInstance(title.titleName,title.titleCode)
-
 
         }
 

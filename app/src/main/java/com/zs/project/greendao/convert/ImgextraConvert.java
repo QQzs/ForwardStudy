@@ -2,7 +2,7 @@ package com.zs.project.greendao.convert;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.zs.project.greendao.Imgextra;
+import com.zs.project.bean.news.Imgextra;
 
 import org.greenrobot.greendao.converter.PropertyConverter;
 

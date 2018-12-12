@@ -1,4 +1,4 @@
-package com.zs.project.greendao;
+package com.zs.project.bean.news;
 
 /**
  * Created by zs

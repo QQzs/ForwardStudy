@@ -10,7 +10,7 @@ import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.View
 import android.widget.RelativeLayout
-import com.google.gson.reflect.TypeToken
+import com.alibaba.fastjson.JSON
 import com.jcodecraeer.xrecyclerview.ProgressStyle
 import com.jcodecraeer.xrecyclerview.XRecyclerView
 import com.zs.project.R
@@ -158,7 +158,8 @@ class WangYiFragment : LazyFragmentKotlin(), View.OnClickListener, ItemClickList
                 try {
                     var obj = JSONObject(back)
                     var array = obj.getJSONArray(mTitleCode)
-                    mArticleData = mGson.fromJson<MutableList<ArticleData>>(array.toString() , object : TypeToken<MutableList<ArticleData>>(){}.type)
+//                    mArticleData = mGson.fromJson<MutableList<ArticleData>>(array.toString() , object : TypeToken<MutableList<ArticleData>>(){}.type)
+                    mArticleData = JSON.parseArray(array.toString() , ArticleData::class.java)
                     if (mArticleData == null || mArticleData?.size == 0) {
                         if (mStartNum == 0) {
                             recycler_view?.refreshComplete()

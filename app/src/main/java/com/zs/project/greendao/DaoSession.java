@@ -8,13 +8,9 @@ import org.greenrobot.greendao.database.Database;
 import org.greenrobot.greendao.identityscope.IdentityScopeType;
 import org.greenrobot.greendao.internal.DaoConfig;
 
-import com.zs.project.greendao.MovieData;
-import com.zs.project.greendao.NewData;
 import com.zs.project.greendao.ArticleData;
 import com.zs.project.greendao.MovieDetailData;
 
-import com.zs.project.greendao.MovieDataDao;
-import com.zs.project.greendao.NewDataDao;
 import com.zs.project.greendao.ArticleDataDao;
 import com.zs.project.greendao.MovieDetailDataDao;
 
@@ -27,13 +23,9 @@ import com.zs.project.greendao.MovieDetailDataDao;
  */
 public class DaoSession extends AbstractDaoSession {
 
-    private final DaoConfig movieDataDaoConfig;
-    private final DaoConfig newDataDaoConfig;
     private final DaoConfig articleDataDaoConfig;
     private final DaoConfig movieDetailDataDaoConfig;
 
-    private final MovieDataDao movieDataDao;
-    private final NewDataDao newDataDao;
     private final ArticleDataDao articleDataDao;
     private final MovieDetailDataDao movieDetailDataDao;
 
@@ -41,42 +33,22 @@ public class DaoSession extends AbstractDaoSession {
             daoConfigMap) {
         super(db);
 
-        movieDataDaoConfig = daoConfigMap.get(MovieDataDao.class).clone();
-        movieDataDaoConfig.initIdentityScope(type);
-
-        newDataDaoConfig = daoConfigMap.get(NewDataDao.class).clone();
-        newDataDaoConfig.initIdentityScope(type);
-
         articleDataDaoConfig = daoConfigMap.get(ArticleDataDao.class).clone();
         articleDataDaoConfig.initIdentityScope(type);
 
         movieDetailDataDaoConfig = daoConfigMap.get(MovieDetailDataDao.class).clone();
         movieDetailDataDaoConfig.initIdentityScope(type);
 
-        movieDataDao = new MovieDataDao(movieDataDaoConfig, this);
-        newDataDao = new NewDataDao(newDataDaoConfig, this);
         articleDataDao = new ArticleDataDao(articleDataDaoConfig, this);
         movieDetailDataDao = new MovieDetailDataDao(movieDetailDataDaoConfig, this);
 
-        registerDao(MovieData.class, movieDataDao);
-        registerDao(NewData.class, newDataDao);
         registerDao(ArticleData.class, articleDataDao);
         registerDao(MovieDetailData.class, movieDetailDataDao);
     }
     
     public void clear() {
-        movieDataDaoConfig.clearIdentityScope();
-        newDataDaoConfig.clearIdentityScope();
         articleDataDaoConfig.clearIdentityScope();
         movieDetailDataDaoConfig.clearIdentityScope();
-    }
-
-    public MovieDataDao getMovieDataDao() {
-        return movieDataDao;
-    }
-
-    public NewDataDao getNewDataDao() {
-        return newDataDao;
     }
 
     public ArticleDataDao getArticleDataDao() {

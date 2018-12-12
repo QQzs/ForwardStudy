@@ -4,11 +4,9 @@ import com.zs.project.bean.LoginBean;
 import com.zs.project.bean.android.ArticleBanner;
 import com.zs.project.bean.android.ArticleList;
 import com.zs.project.bean.movie.MovieListData;
-import com.zs.project.bean.news.NewListData;
 import com.zs.project.request.bean.BaseResponseAndroid;
 
 import java.util.List;
-import java.util.Map;
 
 import io.reactivex.Observable;
 import okhttp3.ResponseBody;
@@ -19,7 +17,6 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
-import retrofit2.http.QueryMap;
 
 /**
  * Created by zs
@@ -31,14 +28,6 @@ import retrofit2.http.QueryMap;
  */
 
 public interface RequestService {
-
-    /**
-     * 资讯列表
-     * @param params
-     * @return
-     */
-    @GET("jisuapi/get")
-    Observable<NewListData> newListDataRxjava(@QueryMap Map<String, Object> params);
 
     /**
      * 网易新闻
