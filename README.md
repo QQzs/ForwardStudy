@@ -2,21 +2,25 @@
 ## Android开发代码集锦
 
 ### 效果图
+![1544598170563.gif](https://upload-images.jianshu.io/upload_images/3183047-408164f7764507a0.gif?imageMogr2/auto-orient/strip)
 
-![](https://github.com/QQzs/Image/blob/master/ForwardStudy/android_show2.gif)<br><br>
-  这个项目是我在学习和工作过程中积累的一些好用的和流行的代码，主要是用到的框架是Retrofit + RXJava + OKHttp,后续准备再添加MVP模式，项目主要包括五部分，文章、资讯、视频、豆瓣、我的，除了部分代码用的Java语言，其他大部分都是用的Kotlin语言，所用的接口有玩Android API、豆瓣API等网上开源的API<br>
-  <br>用到的第三方库有<br>
-  
-  ### skinlibrary 换肤机制<br>
-  ### jiaozivideoplayer 视频播放<br>
-  ### glide 图片加载<br>
-  ### EventBus 分发事件<br>
-  ### GreenDao 数据库操作<br>
-  ### Cardview Android5.0新特性卡片形式<br>
-  ### XRecyclerView 自定义可添加header、footer的RecycerView <br>
-  ### bannerview 循环播放广告页展示<br>
- 
-  
-  后面我会不断的更新版本，添加更多有用的内容，发布出去，希望广大Android开发者们能够相互借鉴，有什么不对的地方也希望  能够指出，大家相互学习，共同进步。  
-    
+### 技术要点
+1、Retrofit + RXJava + OKHttp
+2、skinlibrary 换肤机制
+3、jiaozivideoplayer 视频播放
+4、glide 图片加载
+5、EventBus 分发事件
+6、GreenDao 数据库存储
+7、XRecyclerView 自定义可添加header、footer的RecycerView
+8、bannerview 循环播放广告页展示
+9、rxpermissions 6.0权限申请库
+10、statusbarutil 沉浸式状态栏适配
+11、all-base-adapter 通用adapter
+12、imageselector 选择和裁剪图片库
+
+### 总结
+这个项目是我在学习和工作过程中积累的一些常用的库，主要是用到的框架是Retrofit + RXJava + OKHttp,后续准备再添加MVP模式，项目主要包括四部分，资讯、视频、豆瓣、我的，除了部分代码用的Java语言，其他大部分都是用的Kotlin语言，所用的接口有网易测试API、豆瓣API等网上开源的API，因为采用了多个开源api，请求逻辑可能不太统一。有什么问题，希望大家交流分享。
+### 简书地址
+https://www.jianshu.com/p/9a3d85be49c1
+
   
