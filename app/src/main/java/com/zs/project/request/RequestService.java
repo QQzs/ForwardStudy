@@ -5,7 +5,6 @@ import com.zs.project.bean.android.ArticleBanner;
 import com.zs.project.bean.android.ArticleList;
 import com.zs.project.bean.movie.MovieListData;
 import com.zs.project.bean.news.NewListData;
-import com.zs.project.bean.video.VideoData;
 import com.zs.project.request.bean.BaseResponseAndroid;
 
 import java.util.List;
@@ -42,15 +41,6 @@ public interface RequestService {
     Observable<NewListData> newListDataRxjava(@QueryMap Map<String, Object> params);
 
     /**
-     * 视频列表
-     * @param params
-     * @return
-     */
-    @GET("255-1")
-    Observable<VideoData> getVideoListData(@QueryMap Map<String, String> params);
-
-
-    /**
      * 网易新闻
      * @param path
      * @param index
@@ -60,6 +50,14 @@ public interface RequestService {
     @GET("/touch/reconstruct/article/list/{path}/{index}-{number}.html")
     Call<ResponseBody> getWangYI(@Path("path") String path , @Path("index") int index , @Path("number") int number);
 
+    /**
+     * 网易视频
+     * @param index
+     * @param number
+     * @return
+     */
+    @GET("/touch/nc/api/video/recommend/{path}/{index}-{number}.do?callback=videoList")
+    Call<ResponseBody> getWangYIVideo(@Path("path") String path , @Path("index") int index , @Path("number") int number);
 
 
     /**

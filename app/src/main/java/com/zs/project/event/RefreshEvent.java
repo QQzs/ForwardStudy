@@ -16,6 +16,10 @@ public class RefreshEvent {
     private int refresh_int;
     private String refresh_string;
 
+    public RefreshEvent(String mFlag) {
+        this.mFlag = mFlag;
+    }
+
     public RefreshEvent(String mFlag, boolean refresh) {
         this.mFlag = mFlag;
         this.refresh = refresh;

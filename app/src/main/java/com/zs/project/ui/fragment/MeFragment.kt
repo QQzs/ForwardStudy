@@ -81,7 +81,7 @@ class MeFragment : BaseFragment() , View.OnClickListener , KotlinItemClickListen
 
     override fun initView() {
         super.initView()
-        mData?.add(ItemBean(R.mipmap.home_bar_article_nor,"我的文章",0))
+//        mData?.add(ItemBean(R.mipmap.home_bar_article_nor,"我的文章",0))
         mData?.add(ItemBean(R.mipmap.home_bar_news_nor,"我的资讯",1))
         mData?.add(ItemBean(R.mipmap.home_bar_video_nor,"我的电影",2))
         mData?.add(ItemBean(R.mipmap.ic_me_setting,"设置",3))

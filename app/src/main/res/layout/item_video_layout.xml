@@ -18,25 +18,6 @@
         android:textColor="@color/white"
         android:layout_margin="10dp"/>
 
-
-    <com.zs.project.view.BorderTextView
-        android:id="@+id/tv_video_time"
-        android:layout_width="wrap_content"
-        android:layout_height="20dp"
-        android:textColor="@color/white"
-        android:textSize="@dimen/fontsize12"
-        android:text="timetime"
-        android:layout_above="@+id/rl_video_detail"
-        android:layout_alignParentRight="true"
-        android:layout_margin="10dp"
-        android:paddingLeft="8dp"
-        android:paddingRight="8dp"
-        android:includeFontPadding="false"
-        android:gravity="center"
-        app:strokeWidth="1px"
-        app:followTextColor="true"
-        app:cornerRadius="10dp"/>
-
     <RelativeLayout
         android:id="@+id/rl_video_detail"
         android:layout_width="match_parent"
@@ -55,31 +36,42 @@
             android:layout_marginLeft="10dp"/>
 
         <TextView
-            android:id="@+id/tv_voice_like"
+            android:id="@+id/tv_video_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/font_default"
+            android:textSize="@dimen/fontsize12"
+            android:text="timetime"
+            android:layout_toRightOf="@+id/tv_voice_author"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"/>
+
+        <TextView
+            android:id="@+id/tv_player_num"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:textColor="@color/font_gray"
             android:textSize="@dimen/fontsize13"
-            android:text="喜欢"
+            android:text="播放"
             android:layout_centerVertical="true"
-            android:layout_toLeftOf="@+id/tv_video_follow"
+            android:layout_toLeftOf="@+id/tv_video_length"
             android:layout_marginRight="10dp"
-            android:drawableLeft="@mipmap/ic_like_img"
+            android:drawableLeft="@mipmap/player_num"
             android:drawablePadding="4dp"/>
 
         <TextView
-            android:id="@+id/tv_video_follow"
+            android:id="@+id/tv_video_length"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:textColor="@color/font_gray"
             android:textSize="@dimen/fontsize13"
-            android:text="关注"
+            android:text="时长"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
             android:layout_marginRight="10dp"
-            android:drawableLeft="@mipmap/ic_follow_img"
+            android:drawableLeft="@mipmap/video_length"
             android:drawablePadding="4dp"/>
 
     </RelativeLayout>
@@ -91,6 +83,7 @@
         android:layout_above="@+id/rl_video_detail"
         android:layout_marginBottom="-6dp"
         android:layout_marginLeft="10dp"
-        android:src="@mipmap/default_img"/>
+        android:src="@mipmap/ic_default_avatar"
+        android:visibility="gone"/>
 
 </RelativeLayout>

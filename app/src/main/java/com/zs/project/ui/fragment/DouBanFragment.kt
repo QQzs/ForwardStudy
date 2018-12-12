@@ -9,11 +9,10 @@ import com.zs.project.R
 import com.zs.project.app.Constant
 import com.zs.project.base.BaseFragment
 import com.zs.project.bean.MovieBannerEntry
-import com.zs.project.bean.movie.MovieDetailData
 import com.zs.project.bean.movie.MovieListData
 import com.zs.project.event.RefreshEvent
 import com.zs.project.greendao.GreenDaoManager
-import com.zs.project.greendao.MovieData
+import com.zs.project.greendao.MovieDetailData
 import com.zs.project.listener.ItemClickListener
 import com.zs.project.listener.ItemLongClickListener
 import com.zs.project.request.DefaultObserver
@@ -46,7 +45,6 @@ class DouBanFragment : BaseFragment() , ItemClickListener, ItemLongClickListener
 
     var mTheaterMovie : MutableList<MovieDetailData> ?= null
     var mComingMovie : MutableList<MovieDetailData> ?= null
-    var mTopMovie : MutableList<MovieDetailData> ?= null
 
     var mFragment : DouBanFragment ?= null
     var mAdapter : DouBanAdapter ?= null
@@ -95,7 +93,7 @@ class DouBanFragment : BaseFragment() , ItemClickListener, ItemLongClickListener
     }
 
     override fun onItemLongClick(position: Int, data: Any, view: View) {
-        GreenDaoManager.getInstance().session.movieDataDao.insertOrReplace(data as MovieData)
+        GreenDaoManager.getInstance().session.movieDetailDataDao.insertOrReplace(data as MovieDetailData)
         dynamicAddView(multistate_view,"snackBar",R.color.app_main_color)
         SnackbarUtils.Short(multistate_view,"收藏成功~")
                 .show()
@@ -153,7 +151,7 @@ class DouBanFragment : BaseFragment() , ItemClickListener, ItemLongClickListener
      */
     private fun getbannerData(data : List<MovieDetailData>) : MutableList<MovieBannerEntry>{
         var items = ArrayList<MovieBannerEntry>()
-        data.mapTo(items) { MovieBannerEntry(it.title, it.id, it.images.large,it.alt) }
+        data.mapTo(items) { MovieBannerEntry(it.title, it.id.toString(), it.images.large,it.alt) }
         return items
     }
 
@@ -197,7 +195,7 @@ class DouBanFragment : BaseFragment() , ItemClickListener, ItemLongClickListener
 
                         }else{
                             if (mStartNum == 0){
-                                mAdapter?.refreshData(mTheaterMovie!!)
+                                mAdapter?.updateData(mTheaterMovie!!)
                                 recycler_view?.refreshComplete()
                             }else{
                                 mAdapter?.appendData(mTheaterMovie!!)

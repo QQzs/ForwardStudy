@@ -180,10 +180,11 @@ class MainActivity : BaseActivity() {
         }
         if ("scroll" == event.flag){
             setVoicePlayerAnim(event.isRefresh)
-        }else if ("colorview" == event.flag){
+        } else if ("colorview" == event.flag){
             colorfull_bg_view?.changeImg(event.refresh_int)
+        } else if ("screen" == event.flag){
+            StatusBarUtil.setTranslucentForImageViewInFragment(this , 0 , null)
         }
-
     }
 
     override fun onClick(view: View) {

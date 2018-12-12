@@ -1,5 +1,6 @@
 package com.zs.project.bean.movie;
 
+import com.zs.project.greendao.MovieDetailData;
 import com.zs.project.request.bean.BaseResponse;
 
 import java.util.List;

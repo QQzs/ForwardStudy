@@ -1,15 +1,21 @@
 package com.zs.project.ui.fragment
 
+import android.app.Activity
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.support.v4.app.ActivityCompat
+import android.support.v4.app.ActivityOptionsCompat
 import android.view.View
 import com.zs.project.R
 import com.zs.project.base.BaseFragment
 import com.zs.project.greendao.*
 import com.zs.project.listener.ItemClickListener
 import com.zs.project.listener.ItemLongClickListener
+import com.zs.project.ui.activity.ImageShowActivity
 import com.zs.project.ui.activity.WebViewActivity
-import com.zs.project.ui.adapter.CollectListAdapter
+import com.zs.project.ui.adapter.ArticleAdapter
+import com.zs.project.ui.adapter.DouBanAdapter
 import com.zs.project.util.PublicFieldUtil
 import com.zs.project.util.RecyclerViewUtil
 import com.zs.project.util.SnackbarUtils
@@ -30,9 +36,11 @@ About: 我的收藏
 class CollectionFragment : BaseFragment() , ItemClickListener , ItemLongClickListener{
 
     var mType : String ?= null
-    private var mNewData :MutableList<NewData> = arrayListOf()
-    private var mMovieData :MutableList<MovieData> = arrayListOf()
-    private var mAdapter : CollectListAdapter ?= null
+    private var mNewData :MutableList<ArticleData> = arrayListOf()
+    private var mMovieData :MutableList<MovieDetailData> = arrayListOf()
+//    private var mAdapter : CollectListAdapter ?= null
+    private var mNewAdapter : ArticleAdapter ?= null
+    private var mMovieAdapter : DouBanAdapter ?= null
 
     override fun onCreateView(savedInstanceState: Bundle?) {
         super.onCreateView(savedInstanceState)
@@ -41,15 +49,8 @@ class CollectionFragment : BaseFragment() , ItemClickListener , ItemLongClickLis
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         mType = arguments?.getString(PublicFieldUtil.TYPE)
-        initView()
         initData()
-
-    }
-
-    override fun initView() {
-        super.initView()
     }
 
     override fun initData() {
@@ -60,22 +61,19 @@ class CollectionFragment : BaseFragment() , ItemClickListener , ItemLongClickLis
                 multistate_view?.viewState = MultiStateView.VIEW_STATE_EMPTY
             }else{
                 multistate_view?.viewState = MultiStateView.VIEW_STATE_CONTENT
-                mAdapter = CollectListAdapter("news",this,this)
-                RecyclerViewUtil.init(activity,recycler_view,mAdapter)
-                mAdapter?.updateNewData(mNewData)
-
+                mNewAdapter = ArticleAdapter(context, this , this)
+                RecyclerViewUtil.init(activity,recycler_view,mNewAdapter)
+                mNewAdapter?.updateData(mNewData)
             }
 
-        }else{
+        }else if("movies" == mType){
             mMovieData = getMovieDao().loadAll()
-//            mMovieData = getMovieDao().queryBuilder().where(MovieDataDao.Properties.Average.ge(6.0)).list()
             if (mMovieData == null || mMovieData!!.size == 0){
                 multistate_view?.viewState = MultiStateView.VIEW_STATE_EMPTY
             }else{
                 multistate_view?.viewState = MultiStateView.VIEW_STATE_CONTENT
-                mAdapter = CollectListAdapter("movies",this,this)
-                RecyclerViewUtil.initNoDecoration(activity,recycler_view,mAdapter)
-                mAdapter?.updateMovieData(mMovieData)
+                mMovieAdapter = DouBanAdapter(mMovieData , this , this)
+                RecyclerViewUtil.init(activity,recycler_view,mMovieAdapter)
             }
         }
         recycler_view?.setPullRefreshEnabled(false)
@@ -84,10 +82,20 @@ class CollectionFragment : BaseFragment() , ItemClickListener , ItemLongClickLis
 
     override fun onItemClick(position: Int, data: Any, view: View) {
         if ("news" == mType){
-            var url = (data as NewData).weburl
-            activity!!.startActivity<WebViewActivity>("url" to url)
-        }else{
-            var url = (data as MovieData).url
+            when (view.id) {
+                R.id.iv_article_img , R.id.cl_image_item ->{
+                    val intent = Intent(activity, ImageShowActivity::class.java)
+                    intent.putExtra(PublicFieldUtil.URL_FIELD, data as String)
+                    val optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                            activity as Activity,
+                            view.findViewById(view.id),
+                            getString(R.string.transition_image)
+                    )
+                    ActivityCompat.startActivity(activity as Activity, intent, optionsCompat.toBundle())
+                }
+            }
+        } else if("movies" == mType){
+            var url = (data as MovieDetailData).alt
             activity?.startActivity<WebViewActivity>("url" to url)
         }
     }
@@ -96,11 +104,12 @@ class CollectionFragment : BaseFragment() , ItemClickListener , ItemLongClickLis
         SnackbarUtils.Long(multistate_view!!,"删除收藏~")
                 .setAction("确定", View.OnClickListener {
                     if ("news" == mType){
-                        getNewDao().delete(data as NewData)
+                        getNewDao().delete(data as ArticleData)
+                        mNewAdapter?.deleteData(position)
                     }else{
-                        getMovieDao().delete(data as MovieData)
+                        getMovieDao().delete(data as MovieDetailData)
+                        mMovieAdapter?.deleteData(position)
                     }
-                    mAdapter?.deleteData(position)
                     activity?.toast("删除成功")
                 })
                 .actionColor(Color.parseColor("#ffffff"))
@@ -108,12 +117,12 @@ class CollectionFragment : BaseFragment() , ItemClickListener , ItemLongClickLis
                 .show()
     }
 
-    private fun getNewDao() : NewDataDao{
-        return GreenDaoManager.getInstance().session.newDataDao
+    private fun getNewDao() : ArticleDataDao{
+        return GreenDaoManager.getInstance().session.articleDataDao
     }
 
-    private fun getMovieDao() : MovieDataDao{
-        return GreenDaoManager.getInstance().session.movieDataDao
+    private fun getMovieDao() : MovieDetailDataDao{
+        return GreenDaoManager.getInstance().session.movieDetailDataDao
     }
 
 }

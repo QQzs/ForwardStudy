@@ -5,8 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.zs.project.R
-import com.zs.project.bean.movie.MovieDetailData
-import com.zs.project.greendao.MovieData
+import com.zs.project.greendao.MovieDetailData
 import com.zs.project.listener.ItemClickListener
 import com.zs.project.listener.ItemLongClickListener
 import com.zs.project.util.ImageLoaderUtil
@@ -39,7 +38,7 @@ class DouBanAdapter(private var mData : MutableList<MovieDetailData>, var mItemC
         return mData.size
     }
 
-    fun refreshData(data : MutableList<MovieDetailData>){
+    fun updateData(data : MutableList<MovieDetailData>){
         this.mData.clear()
         this.mData = data
         notifyDataSetChanged()
@@ -47,6 +46,11 @@ class DouBanAdapter(private var mData : MutableList<MovieDetailData>, var mItemC
 
     fun appendData(data : MutableList<MovieDetailData>){
         this.mData.addAll(data)
+    }
+
+    fun deleteData(position: Int){
+        mData.removeAt(position)
+        notifyDataSetChanged()
     }
 
     inner class DouBanHolder(itemView : View) : RecyclerView.ViewHolder(itemView){
@@ -66,10 +70,8 @@ class DouBanAdapter(private var mData : MutableList<MovieDetailData>, var mItemC
             }
 
             itemView.setOnLongClickListener {
-                var movie = MovieData(detail.id.toLong(),detail.images.small,itemView.tv_movie_title.text.toString(),itemView.tv_movie_casts.text.toString(),itemView.tv_movie_genres.text.toString(),detail.alt,detail.rating.average)
-                mItemLongClickListener.onItemLongClick(position,movie,itemView.rl_movie_item)
+                mItemLongClickListener.onItemLongClick(position,detail,itemView.rl_movie_item)
                 true
-
             }
 
         }

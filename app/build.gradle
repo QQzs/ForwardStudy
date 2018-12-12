@@ -11,7 +11,7 @@ android {
         minSdkVersion 16
         targetSdkVersion 27
         versionCode 2
-        versionName "2.0.0"
+        versionName "3.0.0"
         multiDexEnabled = true // 引入包重复
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
@@ -27,7 +27,7 @@ android {
     }
 
     greendao{
-        schemaVersion 1
+        schemaVersion 2
         daoPackage 'com.zs.project.greendao'
         targetGenDir 'src/main/java'
     }
@@ -50,8 +50,9 @@ dependencies {
     implementation 'io.reactivex.rxjava2:rxjava:2.1.3'
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
     implementation 'com.squareup.retrofit2:retrofit:2.3.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
+    implementation 'com.alibaba:fastjson:1.1.60.android'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.4.1'
     implementation 'com.android.support:appcompat-v7:27.1.0'
     implementation 'com.android.support:recyclerview-v7:27.1.0'

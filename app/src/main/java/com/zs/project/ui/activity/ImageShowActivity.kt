@@ -45,7 +45,7 @@ class ImageShowActivity : BaseActivity(){
 
         mImageUrl = intent.getStringExtra(PublicFieldUtil.URL_FIELD)
 //        ImageLoaderUtil.displayImage(mImageUrl,iv_show_img)
-        ImageLoaderUtil.loadImage(mImageUrl,iv_show_img)
+        ImageLoaderUtil.loadImageFitCenter(mImageUrl,iv_show_img)
     }
 
     override fun onClick(p0: View?) {

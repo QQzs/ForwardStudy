@@ -35,6 +35,7 @@ public class ImageLoaderUtil {
             .placeholder(R.mipmap.default_img)
             .error(R.mipmap.default_img)
             .fallback(R.mipmap.default_img)
+            .centerCrop()
             .dontAnimate()//去掉动画
             .diskCacheStrategy(DiskCacheStrategy.RESOURCE);
 
@@ -42,6 +43,7 @@ public class ImageLoaderUtil {
             .placeholder(R.mipmap.default_img)
             .error(R.mipmap.default_img)
             .fallback(R.mipmap.default_img)
+            .centerCrop()
             .dontAnimate()//去掉动画
             .diskCacheStrategy(DiskCacheStrategy.NONE);
 
@@ -49,6 +51,7 @@ public class ImageLoaderUtil {
             .placeholder(R.mipmap.img_empty)
             .error(R.mipmap.img_empty)
             .fallback(R.mipmap.img_empty)
+            .centerCrop()
             .dontAnimate()//去掉动画
             .diskCacheStrategy(DiskCacheStrategy.RESOURCE);
 
@@ -177,8 +180,15 @@ public class ImageLoaderUtil {
     public static void loadImage(String url, ImageView imageView) {
         GlideApp.with(MyApp.getAppContext())
                 .load(url)
-                .fitCenter()
                 .apply(mOptionsNoPlace)
+                .into(imageView);
+    }
+
+    public static void loadImageFitCenter(String url, ImageView imageView) {
+        GlideApp.with(MyApp.getAppContext())
+                .load(url)
+                .apply(mOptionsNoPlace)
+                .fitCenter()
                 .into(imageView);
     }
 

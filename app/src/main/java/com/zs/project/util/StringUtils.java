@@ -848,4 +848,10 @@ public class StringUtils {
             return builder.toString().substring(0,builder.length() - 1);
         }
     }
+
+    public static String getVideoLength(long length){
+        long minute = length / 60;
+        long second = length % 60;
+        return minute + "'" + second + "\"";
+    }
 }

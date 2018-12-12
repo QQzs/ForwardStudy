@@ -72,6 +72,23 @@ public class RecyclerViewUtil {
     }
 
     /**
+     * 当 RecyclerView 外围嵌套 ScrollView 时，将滚动事件交予上层处理
+     * @param context
+     * @param recyclerView
+     * @param adapter
+     * @param i
+     */
+    public static  void initGridScroll(Context context, RecyclerView recyclerView, RecyclerView.Adapter adapter,int i) {
+        GridLayoutManager layoutManager = new GridLayoutManager(context,i);
+        layoutManager.setSmoothScrollbarEnabled(true);
+        layoutManager.setAutoMeasureEnabled(true);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setNestedScrollingEnabled(false);
+    }
+
+    /**
      * GridLayout布局
      * @param context
      * @param recyclerView

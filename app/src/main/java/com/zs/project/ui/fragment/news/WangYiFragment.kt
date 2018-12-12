@@ -15,15 +15,13 @@ import com.jcodecraeer.xrecyclerview.ProgressStyle
 import com.jcodecraeer.xrecyclerview.XRecyclerView
 import com.zs.project.R
 import com.zs.project.base.LazyFragmentKotlin
-import com.zs.project.bean.wangyi.Article
 import com.zs.project.event.RefreshEvent
+import com.zs.project.greendao.ArticleData
 import com.zs.project.greendao.GreenDaoManager
-import com.zs.project.greendao.NewData
 import com.zs.project.listener.ItemClickListener
 import com.zs.project.listener.ItemLongClickListener
 import com.zs.project.request.RequestApi
 import com.zs.project.ui.activity.ImageShowActivity
-import com.zs.project.ui.activity.WebViewActivity
 import com.zs.project.ui.adapter.ArticleAdapter
 import com.zs.project.util.PublicFieldUtil
 import com.zs.project.util.RecyclerViewUtil
@@ -31,7 +29,6 @@ import com.zs.project.util.SnackbarUtils
 import com.zs.project.view.MultiStateView
 import okhttp3.ResponseBody
 import org.greenrobot.eventbus.EventBus
-import org.jetbrains.anko.startActivity
 import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
@@ -59,7 +56,7 @@ class WangYiFragment : LazyFragmentKotlin(), View.OnClickListener, ItemClickList
 
     var mFragment: WangYiFragment? = null
     var mAdapter: ArticleAdapter? = null
-    var mArticleData: MutableList<Article>? = null
+    var mArticleData: MutableList<ArticleData>? = null
 
     var multistate_view: MultiStateView? = null
     var recycler_view: XRecyclerView? = null
@@ -96,7 +93,7 @@ class WangYiFragment : LazyFragmentKotlin(), View.OnClickListener, ItemClickList
         mTitleCode = arguments?.getString("code")
 
         loading_page_fail?.setOnClickListener(mFragment)
-        mAdapter = ArticleAdapter(context , this)
+        mAdapter = ArticleAdapter(context , this , this)
         recycler_view?.setLoadingMoreProgressStyle(ProgressStyle.BallRotate)
         recycler_view?.setRefreshProgressStyle(ProgressStyle.BallSpinFadeLoader)
         RecyclerViewUtil.init(activity, recycler_view, mAdapter)
@@ -148,8 +145,9 @@ class WangYiFragment : LazyFragmentKotlin(), View.OnClickListener, ItemClickList
 
     override fun getData() {
         super.getData()
-        val wangYI = mRequestApi.getRequestService(RequestApi.REQUEST_WANGYI).getWangYI(mTitleCode, mStartNum, 10)
-        wangYI.enqueue(object : Callback<ResponseBody>{
+        mRequestApi.getRequestService(RequestApi.REQUEST_WANGYI)
+                .getWangYI(mTitleCode, mStartNum, 10)
+                .enqueue(object : Callback<ResponseBody>{
             override fun onFailure(call: Call<ResponseBody>?, t: Throwable?) {
                 setError()
             }
@@ -160,7 +158,7 @@ class WangYiFragment : LazyFragmentKotlin(), View.OnClickListener, ItemClickList
                 try {
                     var obj = JSONObject(back)
                     var array = obj.getJSONArray(mTitleCode)
-                    mArticleData = mGson.fromJson<MutableList<Article>>(array.toString() , object : TypeToken<MutableList<Article>>(){}.type)
+                    mArticleData = mGson.fromJson<MutableList<ArticleData>>(array.toString() , object : TypeToken<MutableList<ArticleData>>(){}.type)
                     if (mArticleData == null || mArticleData?.size == 0) {
                         if (mStartNum == 0) {
                             recycler_view?.refreshComplete()
@@ -202,22 +200,16 @@ class WangYiFragment : LazyFragmentKotlin(), View.OnClickListener, ItemClickList
     }
 
     override fun onItemClick(position: Int, data: Any, view: View) {
-
         when (view.id) {
-            R.id.iv_article_img -> {
+            R.id.iv_article_img , R.id.cl_image_item ->{
                 val intent = Intent(activity, ImageShowActivity::class.java)
-                intent.putExtra(PublicFieldUtil.URL_FIELD, (data as Article).imgsrc)
-//                startActivity(intent)
+                intent.putExtra(PublicFieldUtil.URL_FIELD, data as String)
                 val optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(
                         activity as Activity,
-                        view.findViewById(R.id.iv_article_img),
+                        view.findViewById(view.id),
                         getString(R.string.transition_image)
                 )
                 ActivityCompat.startActivity(activity as Activity, intent, optionsCompat.toBundle())
-            }
-            R.id.rl_item_view -> {
-                var url = (data as Article).url
-                activity?.startActivity<WebViewActivity>("url" to url)
             }
         }
 
@@ -225,7 +217,7 @@ class WangYiFragment : LazyFragmentKotlin(), View.OnClickListener, ItemClickList
 
     override fun onItemLongClick(position: Int, data: Any, view: View) {
 
-        GreenDaoManager.getInstance().session.newDataDao.insertOrReplace(data as NewData)
+        GreenDaoManager.getInstance().session.articleDataDao.insertOrReplace(data as ArticleData)
         dynamicAddView(multistate_view,"snackBar",R.color.app_main_color)
         SnackbarUtils.Short(multistate_view, "收藏成功~")
                 .show()
