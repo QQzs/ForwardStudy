@@ -6,47 +6,55 @@
 
     <android.support.v7.widget.CardView
         android:id="@+id/cv_color_item"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
         android:layout_margin="4dp"
         android:foreground="?android:selectableItemBackground"
-        >
+        android:layout_centerInParent="true">
 
-        <RelativeLayout
-            android:id="@+id/rl_color_item"
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/cl_color_item"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:paddingLeft="@dimen/padding_size"
-            android:paddingRight="@dimen/padding_size">
+            android:layout_height="match_parent"
+            >
 
             <ImageView
                 android:id="@+id/iv_icon_img"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_centerVertical="true"
-                android:src="@mipmap/ic_snow_img" />
-
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_centerInParent="true"
+                android:src="@mipmap/ic_snow_img"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/tv_icon_name"
+                app:layout_constraintVertical_chainStyle="packed"/>
 
             <TextView
                 android:id="@+id/tv_icon_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="10dp"
-                android:layout_toRightOf="@+id/iv_icon_img"
                 android:text="雪花"
                 android:textColor="@color/font_default"
-                android:textSize="@dimen/fontsize15" />
+                android:textSize="@dimen/fontsize15"
+                android:layout_marginTop="16dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/iv_icon_img"
+                app:layout_constraintBottom_toBottomOf="parent"/>
 
             <ImageView
                 android:id="@+id/iv_choose_check"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:src="@mipmap/item_choose_sel" />
+                android:src="@mipmap/item_choose_sel"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_margin="20dp"/>
 
-        </RelativeLayout>
+        </android.support.constraint.ConstraintLayout>
 
     </android.support.v7.widget.CardView>
 
