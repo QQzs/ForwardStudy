@@ -1,1 +1,1 @@
-include ':app', ':skingreen', ':skinlibrary', ':skinblue', ':imageselector', ':jiaozivideoplayer'
+include ':app', ':skingreen', ':skinlibrary', ':skinblue', ':imageselector', ':jiaozivideoplayer', ':commonlib'
