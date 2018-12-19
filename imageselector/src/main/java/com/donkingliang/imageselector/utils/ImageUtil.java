@@ -7,8 +7,10 @@ import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.media.ExifInterface;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.v4.content.FileProvider;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.widget.Toast;
@@ -27,6 +29,8 @@ public class ImageUtil {
 
     // TODO 图片存放路径
     public static final String IMAGE_FILE = Environment.getExternalStorageDirectory()+"/AndroidStudy/Images";
+    public static final String AVATAR_FILE = "avatar_img";
+    public static final String AVATAR_CROP_FILE = "avatar_crop";
 
     private static final int ICON_SIZE = 450;
     public static final int CAMERA_WITH_DATA = 1000;
@@ -172,13 +176,24 @@ public class ImageUtil {
             if(!file.exists()){
                 file.mkdirs();
             }
+            File avatarFile = new File(IMAGE_FILE, AVATAR_FILE);
+            if (!avatarFile.exists()){
+                avatarFile.createNewFile();
+            }
+            Uri uri = null;
             Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE, null);
-            Uri uri = Uri.fromFile(new File(IMAGE_FILE, "avatar_test"));
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
+                uri = FileProvider.getUriForFile(activity, "com.zs.project.FileProvider", avatarFile);
+                intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+            }else{
+                uri = Uri.fromFile(avatarFile);
+            }
             intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
             activity.startActivityForResult(intent, CAMERA_WITH_DATA);
             return uri;
         } catch (Exception e) {
-            Toast.makeText(activity, "打开相机失败", Toast.LENGTH_LONG).show();
+            Toast.makeText(activity, "打开相机失败", Toast.LENGTH_SHORT).show();
         }
         return null;
 
@@ -194,7 +209,7 @@ public class ImageUtil {
         if(!file.exists()){
             file.mkdirs();
         }
-        Uri imageUri = Uri.fromFile(new File(IMAGE_FILE ,"avatar_crop"));
+        Uri imageUri = Uri.fromFile(new File(IMAGE_FILE ,AVATAR_CROP_FILE));
         Intent intent = new Intent("com.android.camera.action.CROP");
         intent.setDataAndType(uri, "image/*");
         intent.putExtra("crop", "true");

@@ -129,7 +129,7 @@ class MeFragment : BaseFragment() , View.OnClickListener , KotlinItemClickListen
         mDialogUtil?.setDialogBackListener(object : DialogUtil.DialogBackListener{
             override fun onComfirmClick(dialog: Dialog) {
                 dialog.dismiss()
-                mPermissions?.request(Manifest.permission.CAMERA)
+                mPermissions?.request(Manifest.permission.CAMERA , Manifest.permission.READ_EXTERNAL_STORAGE , Manifest.permission.WRITE_EXTERNAL_STORAGE)
                         ?.subscribe({
                             if (it){
                                 ImageSelectorUtils.openCameraAndClip(activity,TAKE_PHOTO)

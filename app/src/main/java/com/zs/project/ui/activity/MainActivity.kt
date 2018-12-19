@@ -9,6 +9,8 @@ import android.support.v4.app.FragmentTransaction
 import android.view.KeyEvent
 import android.view.View
 import android.widget.ImageView
+import com.donkingliang.imageselector.ClipImageActivity.SELECT_IMAGE
+import com.donkingliang.imageselector.ClipImageActivity.TAKE_PHOTO
 import com.jaeger.library.StatusBarUtil
 import com.zs.project.R
 import com.zs.project.app.AppStatusManager
@@ -259,7 +261,12 @@ class MainActivity : BaseActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (data != null && resultCode == RESULT_OK){
-            mFragments[4].onActivityResult(requestCode, resultCode, data)
+            when(requestCode){
+                TAKE_PHOTO , SELECT_IMAGE->{
+                    mFragments[4].onActivityResult(requestCode, resultCode, data)
+                }
+            }
+
         }
     }
 

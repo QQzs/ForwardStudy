@@ -21,6 +21,8 @@ import com.donkingliang.imageselector.view.ClipImageView;
 import java.io.File;
 import java.util.ArrayList;
 
+import static com.donkingliang.imageselector.utils.ImageUtil.AVATAR_CROP_FILE;
+import static com.donkingliang.imageselector.utils.ImageUtil.AVATAR_FILE;
 import static com.donkingliang.imageselector.utils.ImageUtil.CAMERA_WITH_DATA;
 import static com.donkingliang.imageselector.utils.ImageUtil.IMAGE_FILE;
 import static com.donkingliang.imageselector.utils.ImageUtil.PHOTO_CROP_RESOULT;
@@ -102,10 +104,10 @@ public class ClipImageActivity extends Activity {
                     finish();
                 }
             }else if (requestCode == CAMERA_WITH_DATA){
-                ImageUtil.startPhotoZoom(this,ImageUtil.getImageUri(this,mImageUri,"avatar_test"));
+                ImageUtil.startPhotoZoom(this,ImageUtil.getImageUri(this,mImageUri,AVATAR_FILE));
             }else if (requestCode == PHOTO_CROP_RESOULT){
                 Intent intent = new Intent();
-                intent.putExtra(ImageSelectorUtils.SELECT_RESULT,IMAGE_FILE+ "/avatar_crop");
+                intent.putExtra(ImageSelectorUtils.SELECT_RESULT,IMAGE_FILE+ "/" + AVATAR_CROP_FILE);
                 setResult(RESULT_OK,intent);
                 finish();
             }else{

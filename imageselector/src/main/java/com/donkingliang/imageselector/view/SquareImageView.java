@@ -1,5 +1,6 @@
 package com.donkingliang.imageselector.view;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.ImageView;
@@ -7,6 +8,7 @@ import android.widget.ImageView;
 /**
  * 正方形的ImageView
  */
+@SuppressLint("AppCompatCustomView")
 public class SquareImageView extends ImageView {
 
     public SquareImageView(Context context) {
