@@ -5,19 +5,17 @@ import android.app.Activity.RESULT_OK
 import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import com.donkingliang.imageselector.ClipImageActivity.SELECT_IMAGE
 import com.donkingliang.imageselector.ClipImageActivity.TAKE_PHOTO
 import com.donkingliang.imageselector.utils.ImageSelectorUtils
+import com.jaeger.library.StatusBarUtil
 import com.tbruyelle.rxpermissions2.RxPermissions
 import com.zs.project.R
-import com.zs.project.app.Constant
 import com.zs.project.base.BaseFragment
 import com.zs.project.bean.ItemBean
 import com.zs.project.event.LoginEvent
 import com.zs.project.listener.KotlinItemClickListener
-import com.zs.project.request.RequestApi
 import com.zs.project.ui.activity.AboutActivity
 import com.zs.project.ui.activity.CollectionActivity
 import com.zs.project.ui.activity.CollectionLocalActivity
@@ -28,15 +26,11 @@ import com.zs.project.ui.adapter.MeItemAdapter
 import com.zs.project.util.*
 import kotlinx.android.synthetic.main.fragment_me_layout.*
 import kotlinx.android.synthetic.main.zoom_header_layout.view.*
-import okhttp3.ResponseBody
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 
 /**
@@ -73,6 +67,11 @@ class MeFragment : BaseFragment() , View.OnClickListener , KotlinItemClickListen
         EventBus.getDefault().register(this)
     }
 
+    override fun onResume() {
+        super.onResume()
+        StatusBarUtil.setTranslucentForImageViewInFragment(activity , 0 , null)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView()
@@ -106,23 +105,6 @@ class MeFragment : BaseFragment() , View.OnClickListener , KotlinItemClickListen
 //        ImageLoaderUtil.displayBlurImage(R.drawable.bg_monkey,mZoomHeader?.iv_zoom_img)
 
         mZoomHeader?.iv_me_avator?.setOnClickListener(this)
-    }
-
-    override fun initData() {
-        super.initData()
-
-        var listDataCall = mRequestApi.getRequestService(RequestApi.REQUEST_DOUBAN).getTestData(Constant.MOVIE_THEATERS,0,1)
-        listDataCall.enqueue(object : Callback<ResponseBody> {
-            override fun onFailure(call: Call<ResponseBody>?, t: Throwable?) {
-                Log.d("My_Log","error")
-            }
-
-            override fun onResponse(call: Call<ResponseBody>?, response: Response<ResponseBody>?) {
-                Log.d("My_Log",response?.body()?.string())
-            }
-
-        })
-
     }
 
     override fun onClick(view: View?) {

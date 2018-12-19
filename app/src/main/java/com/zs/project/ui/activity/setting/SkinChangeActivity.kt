@@ -8,11 +8,9 @@ import com.mcxtzhang.commonadapter.rv.ViewHolder
 import com.zs.project.R
 import com.zs.project.base.BaseActivity
 import com.zs.project.bean.SkinBean
-import com.zs.project.event.RefreshEvent
 import com.zs.project.util.RecyclerViewUtil
 import kotlinx.android.synthetic.main.public_list_layout.*
 import kotlinx.android.synthetic.main.public_title_layout.*
-import org.greenrobot.eventbus.EventBus
 import solid.ren.skinlibrary.SkinLoaderListener
 import solid.ren.skinlibrary.loader.SkinManager
 
@@ -80,7 +78,6 @@ class SkinChangeActivity : BaseActivity(){
 
                     override fun onSuccess() {
                         Log.i("SkinLoaderListener", "切换成功")
-                        EventBus.getDefault().post(RefreshEvent("screen"))
                     }
 
                     override fun onFailed(errMsg: String) {
@@ -96,7 +93,6 @@ class SkinChangeActivity : BaseActivity(){
         )
 
     }
-
 
     override fun onClick(view: View?) {
         when(view?.id){

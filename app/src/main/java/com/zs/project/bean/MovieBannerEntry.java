@@ -40,7 +40,7 @@ public class MovieBannerEntry implements BannerEntry<String> {
     public View onCreateView(ViewGroup parent) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.banner_movie_item_layout, parent, false);
         ImageView imageView = view.findViewById(R.id.iv_image);
-        ImageLoaderUtil.displayImage(imgUrl,imageView);
+        ImageLoaderUtil.loadImage(imgUrl,imageView);
         return view;
     }
 
