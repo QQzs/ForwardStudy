@@ -10,7 +10,7 @@ import org.greenrobot.greendao.converter.PropertyConverter;
  * Date：2018年 12月 10日
  * Time：17:05
  * —————————————————————————————————————
- * About:
+ * About: 评分
  * —————————————————————————————————————
  */
 public class MovieRatingConvert implements PropertyConverter<MovieRating, String>{

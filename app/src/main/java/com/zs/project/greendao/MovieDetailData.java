@@ -26,6 +26,78 @@ import java.util.List;
 @Entity
 public class MovieDetailData{
 
+    /**
+     * {
+     rating: {
+     max: 10,
+     average: 7.9,
+     stars: "40",
+     min: 0
+     },
+     genres: [
+     "动作",
+     "奇幻",
+     "冒险"
+     ],
+     title: "海王",
+     casts: [
+     {
+     alt: "https://movie.douban.com/celebrity/1022614/",
+     avatars: {
+     small: "http://img1.doubanio.com/view/celebrity/s_ratio_celebrity/public/p32853.webp",
+     large: "http://img1.doubanio.com/view/celebrity/s_ratio_celebrity/public/p32853.webp",
+     medium: "http://img1.doubanio.com/view/celebrity/s_ratio_celebrity/public/p32853.webp"
+     },
+     name: "杰森·莫玛",
+     id: "1022614"
+     },
+     {
+     alt: "https://movie.douban.com/celebrity/1044702/",
+     avatars: {
+     small: "http://img3.doubanio.com/view/celebrity/s_ratio_celebrity/public/p34697.webp",
+     large: "http://img3.doubanio.com/view/celebrity/s_ratio_celebrity/public/p34697.webp",
+     medium: "http://img3.doubanio.com/view/celebrity/s_ratio_celebrity/public/p34697.webp"
+     },
+     name: "艾梅柏·希尔德",
+     id: "1044702"
+     },
+     {
+     alt: "https://movie.douban.com/celebrity/1010539/",
+     avatars: {
+     small: "http://img3.doubanio.com/view/celebrity/s_ratio_celebrity/public/p9206.webp",
+     large: "http://img3.doubanio.com/view/celebrity/s_ratio_celebrity/public/p9206.webp",
+     medium: "http://img3.doubanio.com/view/celebrity/s_ratio_celebrity/public/p9206.webp"
+     },
+     name: "威廉·达福",
+     id: "1010539"
+     }
+     ],
+     collect_count: 397576,
+     original_title: "Aquaman",
+     subtype: "movie",
+     directors: [
+     {
+     alt: "https://movie.douban.com/celebrity/1032122/",
+     avatars: {
+     small: "http://img3.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1509950363.8.webp",
+     large: "http://img3.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1509950363.8.webp",
+     medium: "http://img3.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1509950363.8.webp"
+     },
+     name: "温子仁",
+     id: "1032122"
+     }
+     ],
+     year: "2018",
+     images: {
+     small: "http://img3.doubanio.com/view/photo/s_ratio_poster/public/p2541280047.webp",
+     large: "http://img3.doubanio.com/view/photo/s_ratio_poster/public/p2541280047.webp",
+     medium: "http://img3.doubanio.com/view/photo/s_ratio_poster/public/p2541280047.webp"
+     },
+     alt: "https://movie.douban.com/subject/3878007/",
+     id: "3878007"
+     }
+     */
+
     @Id(autoincrement = true)
     private Long id;
     private String title;

@@ -7,7 +7,7 @@ import java.io.Serializable;
  * Date：2018年 01月 17日
  * Time：15:20
  * —————————————————————————————————————
- * About: 电影评价
+ * About: 电影评分
  * —————————————————————————————————————
  */
 public class MovieRating implements Serializable {
