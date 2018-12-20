@@ -198,7 +198,10 @@ class MeFragment : BaseFragment() , View.OnClickListener , KotlinItemClickListen
                     ImageLoaderUtil.loadAvatarImage(path,mZoomHeader?.iv_me_avator)
                 }
                 SELECT_IMAGE ->{
-                    var path = data?.getStringArrayListExtra(ImageSelectorUtils.SELECT_RESULT)[0]
+                    // 需要剪切是单张，返回String
+                    // 选多张，返回 ArrayList
+//                    var path = data?.getStringArrayListExtra(ImageSelectorUtils.SELECT_RESULT)
+                    var path = data?.getStringExtra(ImageSelectorUtils.SELECT_RESULT)
                     ImageLoaderUtil.loadAvatarImage(path,mZoomHeader?.iv_me_avator)
                 }
             }

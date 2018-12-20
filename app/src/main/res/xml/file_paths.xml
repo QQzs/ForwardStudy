@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <paths>
-    <external-path name="file_path" path="."/>
+    <!--<external-path-->
+        <!--name="files_root"-->
+        <!--path="Android/data/com.zs.project/" />-->
+    <external-path
+        name="external_storage_root"
+        path="."/>
 </paths>

@@ -28,9 +28,10 @@ import java.util.Locale;
 public class ImageUtil {
 
     // TODO 图片存放路径
-    public static final String IMAGE_FILE = Environment.getExternalStorageDirectory()+"/AndroidStudy/Images";
+    public static final String IMAGE_FILE = Environment.getExternalStorageDirectory().getAbsolutePath()+"/AndroidStudy/Images/";
     public static final String AVATAR_FILE = "avatar_img";
     public static final String AVATAR_CROP_FILE = "avatar_crop";
+    public static final String PROVIDER_AUTHORITY = "com.zs.project.FileProvider";
 
     private static final int ICON_SIZE = 450;
     public static final int CAMERA_WITH_DATA = 1000;
@@ -177,13 +178,11 @@ public class ImageUtil {
                 file.mkdirs();
             }
             File avatarFile = new File(IMAGE_FILE, AVATAR_FILE);
-            if (!avatarFile.exists()){
-                avatarFile.createNewFile();
-            }
-            Uri uri = null;
-            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE, null);
+            Uri uri;
+            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
-                uri = FileProvider.getUriForFile(activity, "com.zs.project.FileProvider", avatarFile);
+                // 7.0 打开相机
+                uri = FileProvider.getUriForFile(activity, PROVIDER_AUTHORITY, avatarFile);
                 intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                 intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
             }else{
@@ -211,11 +210,18 @@ public class ImageUtil {
         }
         Uri imageUri = Uri.fromFile(new File(IMAGE_FILE ,AVATAR_CROP_FILE));
         Intent intent = new Intent("com.android.camera.action.CROP");
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
+            // 7.0 Permission Denial: opening provider android.support.v4.content.FileProvider
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+        }
         intent.setDataAndType(uri, "image/*");
         intent.putExtra("crop", "true");
         intent.putExtra("circleCrop", "true");
+        // aspectX aspectY 是宽高的比例
         intent.putExtra("aspectX", 1);
         intent.putExtra("aspectY", 1);
+        // outputX outputY 是裁剪图片宽高
         intent.putExtra("outputX", ICON_SIZE);
         intent.putExtra("outputY", ICON_SIZE);
         intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);//图像输出
@@ -231,17 +237,40 @@ public class ImageUtil {
     /**
      * 获取uri
      * @param context
+     * @param path
+     * @return
+     */
+    public static Uri getImageUri(Activity context , String path){
+        File file = new File(path);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
+            // 7.0 Uri
+            return FileProvider.getUriForFile(context, PROVIDER_AUTHORITY, file);
+        }else{
+            return Uri.fromFile(file);
+        }
+
+    }
+
+
+    /**
+     * 获取uri
+     * @param context
      * @param uri
      * @return
      */
     public static Uri getImageUri(Activity context, Uri uri, String filename){
-        Bitmap photoBitmap = readBitmapFromPath(context,IMAGE_FILE + "/" + filename);
+        Bitmap photoBitmap = readBitmapFromPath(context,IMAGE_FILE + filename);
         // 判断是否有旋转度
-        int degree = getExifOrientation(IMAGE_FILE + "/" + filename);
+        int degree = getExifOrientation(IMAGE_FILE  + filename);
         if(degree != 0){
             photoBitmap = rotaingImageView(photoBitmap,degree);
             File file = saveBitmaptoSdCard(photoBitmap,context,filename);
-            return Uri.fromFile(file);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
+                // 7.0 Uri
+                return FileProvider.getUriForFile(context, PROVIDER_AUTHORITY, file);
+            }else{
+                return Uri.fromFile(file);
+            }
         }else{
             return uri;
         }

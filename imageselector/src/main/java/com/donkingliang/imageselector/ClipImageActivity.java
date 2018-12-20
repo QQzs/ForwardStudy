@@ -93,27 +93,26 @@ public class ClipImageActivity extends Activity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
-        if (data != null && resultCode == RESULT_OK){
-            if (requestCode == SELECT_IMAGE){
+        if (resultCode == RESULT_OK){
+            if (requestCode == SELECT_IMAGE && data != null){
                 ArrayList<String> images = data.getStringArrayListExtra(ImageSelectorUtils.SELECT_RESULT);
-                Bitmap bitmap = ImageUtil.decodeSampledBitmapFromFile(images.get(0), 720, 1080);
-                if (bitmap != null) {
-                    imageView.setBitmapData(bitmap);
-                } else {
-                    finish();
-                }
+//                Bitmap bitmap = ImageUtil.decodeSampledBitmapFromFile(images.get(0), 720, 1080);
+//                if (bitmap != null) {
+//                    imageView.setBitmapData(bitmap);
+//                } else {
+//                    finish();
+//                }
+                ImageUtil.startPhotoZoom(this,ImageUtil.getImageUri(this,images.get(0)));
             }else if (requestCode == CAMERA_WITH_DATA){
                 ImageUtil.startPhotoZoom(this,ImageUtil.getImageUri(this,mImageUri,AVATAR_FILE));
             }else if (requestCode == PHOTO_CROP_RESOULT){
                 Intent intent = new Intent();
-                intent.putExtra(ImageSelectorUtils.SELECT_RESULT,IMAGE_FILE+ "/" + AVATAR_CROP_FILE);
+                intent.putExtra(ImageSelectorUtils.SELECT_RESULT,IMAGE_FILE + AVATAR_CROP_FILE);
                 setResult(RESULT_OK,intent);
                 finish();
             }else{
                 finish();
             }
-
         }else{
             finish();
         }
