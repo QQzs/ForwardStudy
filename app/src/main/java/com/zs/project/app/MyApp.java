@@ -43,7 +43,6 @@ public class MyApp extends SkinBaseApplication {
         SkinConfig.addSupportAttr("snackBar" , new AttrSnackbar());
         SkinConfig.addSupportAttr("switchColor" , new AttrSwitchColorView());
         SkinConfig.addSupportAttr("contentColor" , new AttrBorderView());
-
     }
 
     public static MyApp getAppContext(){
