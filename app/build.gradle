@@ -71,6 +71,9 @@ dependencies {
     implementation 'com.jaeger.statusbarutil:library:1.5.1'
     // 通用Adapter
     implementation 'com.github.mcxtzhang:all-base-adapter:V1.8.0'
+
+    implementation 'me.jessyan:autosize:1.1.2'
+
     implementation project(':skinlibrary')
     implementation project(':jiaozivideoplayer')
     implementation project(':imageselector')
