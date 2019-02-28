@@ -46,7 +46,9 @@ class VideoFragment : BaseFragment(){
 
     var mPageNum : Int = 0
     var mHolderPosition: Int? = null
-    var mPath = "Video_Recom"
+//    var mPath = "Video_Recom"
+    var mPath = "Video_Funny"
+
 
     var mFragment: VideoFragment ?= null
     var mAdapter: CommonAdapter<VideoBean>? = null

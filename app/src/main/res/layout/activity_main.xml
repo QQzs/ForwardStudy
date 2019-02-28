@@ -80,14 +80,14 @@
                         app:switchImage="@mipmap/home_bar_news_nor"
                         app:switchColor="@color/main_color_gray"
                         skin:enable="true"
-                        tools:ignore="MissingPrefix" />
+                        tools:ignore="MissingPrefix"
+                        />
 
                     <TextView
                         android:id="@+id/tv_news"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="2dp"
-                        android:gravity="center_horizontal"
                         android:text="资讯"
                         android:textSize="10sp" />
                 </LinearLayout>
@@ -112,10 +112,9 @@
 
                     <TextView
                         android:id="@+id/tv_video"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="2dp"
-                        android:gravity="center_horizontal"
                         android:text="视频"
                         android:textSize="10sp" />
                 </LinearLayout>
@@ -139,10 +138,9 @@
 
                     <TextView
                         android:id="@+id/tv_product"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="2dp"
-                        android:gravity="center_horizontal"
                         android:text="豆瓣"
                         android:textSize="10sp" />
                 </LinearLayout>
@@ -162,14 +160,14 @@
                         app:switchImage="@mipmap/home_bar_user_nor"
                         app:switchColor="@color/main_color_gray"
                         skin:enable="true"
-                        tools:ignore="MissingPrefix"/>
+                        tools:ignore="MissingPrefix"
+                        />
 
                     <TextView
                         android:id="@+id/tv_me"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="2dp"
-                        android:gravity="center_horizontal"
                         android:text="我的"
                         android:textSize="10sp" />
                 </LinearLayout>
