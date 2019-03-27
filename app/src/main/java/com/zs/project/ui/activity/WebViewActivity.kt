@@ -66,6 +66,7 @@ class WebViewActivity : BaseActivity(){
         webSettings?.loadsImagesAutomatically = true //支持自动加载图片
         webSettings?.defaultTextEncodingName = "utf-8"//设置编码格式
 
+        // 支持 Http  Https混合网址
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
             webSettings?.mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
         }

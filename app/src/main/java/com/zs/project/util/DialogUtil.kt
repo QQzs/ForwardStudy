@@ -50,19 +50,19 @@ class DialogUtil{
         }
     }
 
-    /**
-     * 两次判空实现单例
-     */
-    fun getInstance(): DialogUtil{
-        if (mDialog == null){
-            synchronized(DialogUtil::class.java){
-                if (mDialog == null){
-                    mDialog = DialogUtil()
-                }
-            }
-        }
-        return mDialog!!
-    }
+//    /**
+//     * 两次判空实现单例
+//     */
+//    fun getInstance(): DialogUtil{
+//        if (mDialog == null){
+//            synchronized(DialogUtil::class.java){
+//                if (mDialog == null){
+//                    mDialog = DialogUtil()
+//                }
+//            }
+//        }
+//        return mDialog!!
+//    }
 
     /**
      * 提示的dialog

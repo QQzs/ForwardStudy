@@ -57,6 +57,10 @@ public class ColorfulView extends FrameLayout {
     private int mScreenHeight;
 
     /**
+     * 收集在已经落下的view ，重新添加到布局中进行复用
+     */
+    private ArrayList<ImageView> mRemoveViews = new ArrayList<>();
+    /**
      * 动画
      */
     private ArrayList<ValueAnimator> mValueAnimators = new ArrayList<>();
@@ -211,6 +215,7 @@ public class ColorfulView extends FrameLayout {
             @Override
             public void onAnimationEnd(Animator animation) {
                 super.onAnimationEnd(animation);
+                mRemoveViews.add(imageView);
                 removeView(imageView);
             }
         });
@@ -256,7 +261,13 @@ public class ColorfulView extends FrameLayout {
         mConOnePoint = new Point((int) (mScreenWidth * mRandom.nextFloat()), (int) (mScreenHeight * mRandom.nextFloat() ));
         mConTwoPoint = new Point((int) (mScreenWidth * mRandom.nextFloat()), (int) (mScreenHeight * mRandom.nextFloat() ));
 
-        final ImageView imageView = new ImageView(getContext());
+        final ImageView imageView;
+        if (mRemoveViews.size() > 0){
+            imageView = mRemoveViews.get(0);
+            mRemoveViews.remove(0);
+        }else{
+            imageView = new ImageView(getContext());
+        }
         if (mFlag == 3 || mFlag == 4){
             imageView.setImageBitmap(mBitmap);
         }else{
@@ -307,6 +318,7 @@ public class ColorfulView extends FrameLayout {
         mAnimatorSets = null;
 
         removeAllViews();
+        mRemoveViews.clear();
         LogUtil.Companion.logShowError("colorfull ========");
         super.onDetachedFromWindow();
     }
