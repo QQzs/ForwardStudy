@@ -5,6 +5,8 @@ buildscript {
     ext.anko_version = '0.10.3'
     ext.support_version = '27.1.0'
     repositories {
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+        maven { url "https://jitpack.io" }
         jcenter()
         google()
     }
@@ -22,9 +24,10 @@ buildscript {
 
 allprojects {
     repositories {
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+        maven { url "https://jitpack.io" }
         jcenter()
         google()
-        maven { url "https://jitpack.io" }
     }
 }
 

@@ -3,11 +3,15 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/ForwardStudy.iml" filepath="$PROJECT_DIR$/ForwardStudy.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Project-ForwardStudy.iml" filepath="$PROJECT_DIR$/Project-ForwardStudy.iml" group="ForwardStudy" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="ForwardStudy/app" />
+      <module fileurl="file://$PROJECT_DIR$/commonlib/commonlib.iml" filepath="$PROJECT_DIR$/commonlib/commonlib.iml" group="ForwardStudy/commonlib" />
+      <module fileurl="file://$PROJECT_DIR$/imageselector/imageselector.iml" filepath="$PROJECT_DIR$/imageselector/imageselector.iml" group="ForwardStudy/imageselector" />
+      <module fileurl="file://$PROJECT_DIR$/jiaozivideoplayer/jiaozivideoplayer.iml" filepath="$PROJECT_DIR$/jiaozivideoplayer/jiaozivideoplayer.iml" group="ForwardStudy/jiaozivideoplayer" />
       <module fileurl="file://$PROJECT_DIR$/layoutmanager/layoutmanager.iml" filepath="$PROJECT_DIR$/layoutmanager/layoutmanager.iml" />
-      <module fileurl="file://$PROJECT_DIR$/skinblue/skinblue.iml" filepath="$PROJECT_DIR$/skinblue/skinblue.iml" />
-      <module fileurl="file://$PROJECT_DIR$/skingreen/skingreen.iml" filepath="$PROJECT_DIR$/skingreen/skingreen.iml" />
-      <module fileurl="file://$PROJECT_DIR$/skinlibrary/skinlibrary.iml" filepath="$PROJECT_DIR$/skinlibrary/skinlibrary.iml" />
+      <module fileurl="file://$PROJECT_DIR$/skinblue/skinblue.iml" filepath="$PROJECT_DIR$/skinblue/skinblue.iml" group="ForwardStudy/skinblue" />
+      <module fileurl="file://$PROJECT_DIR$/skingreen/skingreen.iml" filepath="$PROJECT_DIR$/skingreen/skingreen.iml" group="ForwardStudy/skingreen" />
+      <module fileurl="file://$PROJECT_DIR$/skinlibrary/skinlibrary.iml" filepath="$PROJECT_DIR$/skinlibrary/skinlibrary.iml" group="ForwardStudy/skinlibrary" />
     </modules>
   </component>
 </project>
